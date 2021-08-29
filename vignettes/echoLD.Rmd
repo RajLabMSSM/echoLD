@@ -1,0 +1,71 @@
+---
+title: "echoLD: Getting Started" 
+author: "<h4>Author: <i>Brian M. Schilder</i></h4>" 
+date: "<h4>Most recent update: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
+output:
+  BiocStyle::html_document:
+    self_contained: yes
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    code_folding: show
+    df_print: paged
+vignette: >
+    %\VignetteIndexEntry{echoLD} 
+    %\usepackage[utf8]{inputenc}
+    %\VignetteEngine{knitr::rmarkdown} 
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup}
+library(echoLD)
+
+data("BST1"); data("locus_dir");
+
+BST1 <- BST1[seq(1,100),]
+locus_dir <- file.path(tempdir(), locus_dir)
+```
+
+
+# 1000 Genomes Phase 1
+
+```{r}
+LD_1kgp1 <- load_or_create(locus_dir = locus_dir,
+                           dat = BST1, 
+                           LD_reference = "1KGphase1")
+```
+# 1000 Genomes Phase 3
+
+```{r}
+LD_1kgp3 <- load_or_create(locus_dir = locus_dir,
+                           dat = BST1, 
+                           LD_reference = "1KGphase3")
+```
+
+
+# UK Biobank
+
+*WARNING*: Takes substantially longer than 1000 Genomes methods.
+
+```{r, eval=FALSE}
+LD_ukb <- load_or_create(locus_dir = locus_dir,
+                         dat = BST1, 
+                         LD_reference = "UKB", 
+                         download_method = "axel", 
+                         nThread = 10)
+```
+
+
+
+# Session Info 
+
+<details> 
+
+```{r Session Info}
+utils::sessionInfo()
+```
+
+</details>  
+

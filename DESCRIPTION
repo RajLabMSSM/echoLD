@@ -1,0 +1,59 @@
+Package: echoLD
+Type: Package
+Title: echoverse module: LD downloading and processing
+Version: 0.99.0
+Authors@R: 
+    c(person(given = "Brian",
+           family = "Schilder",
+           role = c("cre"),
+           email = "brian_schilder@alumni.brown.edu",
+           comment = c(ORCID = "0000-0001-5949-2191")),
+    person(given = "Jack",
+           family = "Humphrey",
+           role = c("aut"),
+           email = "Jack.Humphrey@mssm.edu",
+           comment = c(ORCID = "0000-0002-6274-6620")),
+    person(given = "Towfique",
+           family = "Raj",
+           role = c("aut"),
+           email = "towfique.raj@mssm.edu",
+           comment = c(ORCID = "0000-0002-9355-5704"))
+           ) 
+Description: echoverse module: LD downloading and processing.  
+URL: https://github.com/RajLabMSSM/echoLD
+BugReports: https://github.com/RajLabMSSM/echoLD/issues
+Encoding: UTF-8
+LazyData: false
+Depends: R (>= 3.6.0)
+SystemRequirements: Python (>= 3.7.0)
+biocViews:
+Imports: 
+    echoconda,
+    downloadR,
+    magrittr,
+    dplyr, 
+    utils,
+    parallel,
+    R.utils, 
+    BiocManager, 
+    rmarkdown,
+    data.table,  
+    reticulate,  
+    GenomeInfoDb, 
+    snpStats,
+    seqminer,
+    Rsamtools
+Suggests:
+    remotes,
+    knitr,
+    gaston,
+    Matrix,
+    LDlinkR,
+    testthat (>= 3.0.0)
+Remotes:
+    github::RajLabMSSM/echoconda,
+    github::RajLabMSSM/downloadR
+RoxygenNote: 7.1.1
+VignetteBuilder: knitr
+License: GPL (>= 3) + file LICENSE
+Config/testthat/edition: 3
