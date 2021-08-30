@@ -121,9 +121,8 @@
     </div>
 
     <pre class="usage"><span class='fu'>snpstats_get_LD</span><span class='op'>(</span>
-  <span class='va'>LD_folder</span>,
-  plink_prefix <span class='op'>=</span> <span class='st'>"plink"</span>,
-  select.snps <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>bed_bim_fam</span>,
+  select_snps <span class='op'>=</span> <span class='cn'>NULL</span>,
   stats <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"R"</span><span class='op'>)</span>,
   symmetric <span class='op'>=</span> <span class='cn'>TRUE</span>,
   depth <span class='op'>=</span> <span class='st'>"max"</span>,
@@ -134,10 +133,6 @@
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>LD_folder</th>
-      <td><p>Locus-specific LD output folder.</p></td>
-    </tr>
     <tr>
       <th>stats</th>
       <td><p>A character vector specifying the linkage disequilibrium measures to
@@ -158,6 +153,10 @@
     considered. Thus, LD statistics are calculated between <code>x[,i]</code>
     and <code>x[,j]</code> only if <code>i</code> and <code>j</code> differ by no more
     than <code>depth</code></p></td>
+    </tr>
+    <tr>
+      <th>LD_folder</th>
+      <td><p>Locus-specific LD output folder.</p></td>
     </tr>
     </table>
 
@@ -200,11 +199,6 @@
 <code><a href='translate_population.html'>translate_population</a>()</code>,
 <code><a href='vcf_to_bed.html'>vcf_to_bed</a>()</code></p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>dat</span> <span class='op'>&lt;-</span> <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/fread.html'>fread</a></span><span class='op'>(</span><span class='st'>"/pd-omics/brian/Fine_Mapping/Data/GWAS/Kunkle_2019/ABCA7/Multi-finemap/ABCA7.Kunkle_2019.1KGphase3_LD.Multi-finemap.tsv.gz"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in data.table::fread("/pd-omics/brian/Fine_Mapping/Data/GWAS/Kunkle_2019/ABCA7/Multi-finemap/ABCA7.Kunkle_2019.1KGphase3_LD.Multi-finemap.tsv.gz"): File '/pd-omics/brian/Fine_Mapping/Data/GWAS/Kunkle_2019/ABCA7/Multi-finemap/ABCA7.Kunkle_2019.1KGphase3_LD.Multi-finemap.tsv.gz' does not exist or is non-readable. getwd()=='/Users/schilder/Desktop/echoverse/echoLD/docs/reference'</span></div><div class='input'><span class='va'>LD_folder</span> <span class='op'>&lt;-</span> <span class='st'>"/pd-omics/brian/Fine_Mapping/Data/GWAS/Kunkle_2019/ABCA7/LD"</span>
-<span class='va'>LD_matrix</span> <span class='op'>&lt;-</span> <span class='fu'>snpstats_get_LD</span><span class='op'>(</span>LD_folder <span class='op'>=</span> <span class='va'>LD_folder</span>, select.snps <span class='op'>=</span> <span class='va'>dat</span><span class='op'>$</span><span class='va'>SNP</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in snpstats_get_LD(LD_folder = LD_folder, select.snps = dat$SNP): could not find function "snpstats_get_LD"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

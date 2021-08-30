@@ -124,10 +124,11 @@ See <code>dprime_table</code> for a slower (but more flexible) alternative to co
 
     <pre class="usage"><span class='fu'>run_plink_LD</span><span class='op'>(</span>
   <span class='va'>bim</span>,
-  <span class='va'>LD_folder</span>,
+  LD_folder <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"LD"</span><span class='op'>)</span>,
   plink_prefix <span class='op'>=</span> <span class='st'>"plink"</span>,
   r_format <span class='op'>=</span> <span class='st'>"r"</span>,
-  extract_file <span class='op'>=</span> <span class='cn'>NULL</span>
+  extract_file <span class='op'>=</span> <span class='cn'>NULL</span>,
+  conda_env <span class='op'>=</span> <span class='st'>"echoR"</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -182,18 +183,6 @@ See <code>dprime_table</code> for a slower (but more flexible) alternative to co
 <code><a href='translate_population.html'>translate_population</a>()</code>,
 <code><a href='vcf_to_bed.html'>vcf_to_bed</a>()</code></p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"LRRK2"</span><span class='op'>)</span>
-<span class='va'>LD_folder</span> <span class='op'>&lt;-</span> <span class='st'>"/Users/schilder/Desktop/Fine_Mapping/Data/GWAS/Nalls23andMe_2019/LRRK2/plink/saved"</span>
-<span class='va'>bim_path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>LD_folder</span>, <span class='st'>"plink.bim"</span><span class='op'>)</span>
-<span class='va'>bim</span> <span class='op'>&lt;-</span> <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/fread.html'>fread</a></span><span class='op'>(</span><span class='va'>bim_path</span>, col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"CHR"</span>, <span class='st'>"SNP"</span>, <span class='st'>"V3"</span>, <span class='st'>"POS"</span>, <span class='st'>"A1"</span>, <span class='st'>"A2"</span><span class='op'>)</span>, stringsAsFactors <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span>
-<span class='va'>bim</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>bim</span>, <span class='va'>SNP</span> <span class='op'>%in%</span> <span class='va'>LRRK2</span><span class='op'>$</span><span class='va'>SNP</span><span class='op'>)</span>
-<span class='va'>ld.bin</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>LD_folder</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"plink"</span>, <span class='st'>".ld.bin"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>SNPs</span> <span class='op'>&lt;-</span> <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/fread.html'>fread</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>LD_folder</span>, <span class='st'>"SNPs.txt"</span><span class='op'>)</span>, col.names <span class='op'>=</span> <span class='st'>"RSID"</span><span class='op'>)</span>
-<span class='va'>bin.vector</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/readBin.html'>readBin</a></span><span class='op'>(</span><span class='va'>ld.bin</span>, what <span class='op'>=</span> <span class='st'>"numeric"</span>, n <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>SNPs</span><span class='op'>$</span><span class='va'>RSID</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

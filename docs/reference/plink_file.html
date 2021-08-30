@@ -120,8 +120,20 @@
     <p>Find correct plink file</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plink_file</span><span class='op'>(</span>plink <span class='op'>=</span> <span class='st'>"plink"</span>, conda_env <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>plink_file</span><span class='op'>(</span>plink <span class='op'>=</span> <span class='cn'>NULL</span>, conda_env <span class='op'>=</span> <span class='st'>"echoR"</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>plink</th>
+      <td><p>User-provided path to plink executable.</p></td>
+    </tr>
+    <tr>
+      <th>conda_env</th>
+      <td><p>Conda environment name.</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -158,9 +170,6 @@
 <code><a href='translate_population.html'>translate_population</a>()</code>,
 <code><a href='vcf_to_bed.html'>vcf_to_bed</a>()</code></p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>plink</span> <span class='op'>&lt;-</span> <span class='fu'>plink_file</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in plink_file(): could not find function "plink_file"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

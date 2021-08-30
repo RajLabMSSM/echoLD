@@ -76,7 +76,7 @@ Author: <i>Brian M. Schilder</i>
 </h4></h4>
             
             <h4 class="date"><h4>
-Most recent update: <i>Aug-29-2021</i>
+Most recent update: <i>Aug-30-2021</i>
 </h4></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/RajLabMSSM/echoLD/blob/master/vignettes/echoLD.Rmd"><code>vignettes/echoLD.Rmd</code></a></small>
@@ -93,63 +93,37 @@ Most recent update: <i>Aug-29-2021</i>
 
 <span class="va">BST1</span> <span class="op">&lt;-</span> <span class="va">BST1</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">100</span><span class="op">)</span>,<span class="op">]</span>
 <span class="va">locus_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">locus_dir</span><span class="op">)</span></code></pre></div>
-<div id="genomes-phase-1" class="section level1">
+<div id="genomes-phase-1-or-3" class="section level1">
 <h1 class="hasAnchor">
-<a href="#genomes-phase-1" class="anchor"></a>1000 Genomes Phase 1</h1>
+<a href="#genomes-phase-1-or-3" class="anchor"></a>1000 Genomes: Phase 1 or 3</h1>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">LD_1kgp1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_or_create.html">load_or_create</a></span><span class="op">(</span>locus_dir <span class="op">=</span> <span class="va">locus_dir</span>,
-                           dat <span class="op">=</span> <span class="va">BST1</span>, 
-                           LD_reference <span class="op">=</span> <span class="st">"1KGphase1"</span><span class="op">)</span></code></pre></div>
-<pre><code>## LD:: Using 1000Genomes as LD reference panel.</code></pre>
-<pre><code>## LD Reference Panel = 1KGphase1</code></pre>
-<pre><code>## + LD:: Querying 1KG remote server.</code></pre>
-<pre><code>## + CONDA:: Identified tabix executable in echoR env.</code></pre>
-<pre><code>## LD:: Querying VCF subset</code></pre>
-<pre><code>## /opt/anaconda3/envs/echoR/bin/tabix -fh -p vcf ftp://ftp-trace.ncbi.nih.gov/1000genomes/ftp/release/20110521//ALL.chr4.phase1_release_v3.20101123.snps_indels_svs.genotypes.vcf.gz 4:14744974-16649679 &gt; /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpyxKiGn/results/GWAS/Nalls23andMe_2019/BST1/LD/BST1.1KGphase1.vcf</code></pre>
-<pre><code>## Removing 1 files.</code></pre>
-<pre><code>## Removing 0 files.</code></pre>
-<pre><code>## LD:BCFTOOLS:: Compressing vcf file...</code></pre>
-<pre><code>## LD:TABIX:: Re-indexing vcf.gz...</code></pre>
-<pre><code>## LD:BCFTOOLS:: Subsetting vcf to only include EUR individuals ( 378 / 1091 ).</code></pre>
-<pre><code>## LD:PLINK:: Converting vcf.gz to .bed/.bim/.fam</code></pre>
-<pre><code>## LD:snpStats:: Computing LD (stats = R)</code></pre>
-<pre><code>## + LD:snpStats:: 26796 rows in bim file.</code></pre>
-<pre><code>## + LD:snpStats:: 99 SNPs in select.snps.</code></pre>
-<pre><code>## LD::snpStats:: Filling `MAF` column with MAF from LD panel.</code></pre>
-<pre><code>## + LD:: Saving LD matrix ==&gt; /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpyxKiGn/results/GWAS/Nalls23andMe_2019/BST1/LD/BST1.1KGphase1_LD.RDS</code></pre>
-<pre><code>## 99 x 99 LD_matrix (sparse)</code></pre>
-</div>
-<div id="genomes-phase-3" class="section level1">
-<h1 class="hasAnchor">
-<a href="#genomes-phase-3" class="anchor"></a>1000 Genomes Phase 3</h1>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">LD_1kgp3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_or_create.html">load_or_create</a></span><span class="op">(</span>locus_dir <span class="op">=</span> <span class="va">locus_dir</span>,
                            dat <span class="op">=</span> <span class="va">BST1</span>, 
-                           LD_reference <span class="op">=</span> <span class="st">"1KGphase3"</span><span class="op">)</span></code></pre></div>
+                           LD_reference <span class="op">=</span> <span class="st">"1KGphase3"</span><span class="op">)</span> <span class="co"># 1KGphase1</span></code></pre></div>
 <pre><code>## LD:: Using 1000Genomes as LD reference panel.</code></pre>
 <pre><code>## LD Reference Panel = 1KGphase3</code></pre>
 <pre><code>## + LD:: Querying 1KG remote server.</code></pre>
 <pre><code>## + CONDA:: Identified tabix executable in echoR env.</code></pre>
 <pre><code>## LD:: Querying VCF subset</code></pre>
-<pre><code>## /opt/anaconda3/envs/echoR/bin/tabix -fh -p vcf ftp://ftp-trace.ncbi.nih.gov/1000genomes/ftp/release/20130502//ALL.chr4.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz 4:14744974-16649679 &gt; /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpyxKiGn/results/GWAS/Nalls23andMe_2019/BST1/LD/BST1.1KGphase3.vcf</code></pre>
-<pre><code>## Removing 1 files.
-## Removing 1 files.</code></pre>
+<pre><code>## /opt/anaconda3/envs/echoR/bin/tabix -fh -p vcf ftp://ftp-trace.ncbi.nih.gov/1000genomes/ftp/release/20130502//ALL.chr4.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz 4:14744974-16649679 &gt; /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpkILl4q/results/GWAS/Nalls23andMe_2019/BST1/LD/BST1.1kgphase3.vcf</code></pre>
+<pre><code>## Removing 1 files.</code></pre>
 <pre><code>## LD:BCFTOOLS:: Compressing vcf file...</code></pre>
 <pre><code>## LD:TABIX:: Re-indexing vcf.gz...</code></pre>
 <pre><code>## LD:BCFTOOLS:: Subsetting vcf to only include EUR individuals ( 503 / 2504 ).</code></pre>
+<pre><code>## + CONDA:: Identified plink executable in echoR env.</code></pre>
 <pre><code>## LD:PLINK:: Converting vcf.gz to .bed/.bim/.fam</code></pre>
 <pre><code>## LD:snpStats:: Computing LD (stats = R)</code></pre>
 <pre><code>## + LD:snpStats:: 55675 rows in bim file.</code></pre>
-<pre><code>## + LD:snpStats:: 100 SNPs in select.snps.</code></pre>
+<pre><code>## + LD:snpStats:: 100 SNPs in select_snps</code></pre>
 <pre><code>## LD::snpStats:: Filling `MAF` column with MAF from LD panel.</code></pre>
-<pre><code>## + LD:: Saving LD matrix ==&gt; /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpyxKiGn/results/GWAS/Nalls23andMe_2019/BST1/LD/BST1.1KGphase3_LD.RDS</code></pre>
+<pre><code>## + LD:: Saving LD matrix ==&gt; /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpkILl4q/results/GWAS/Nalls23andMe_2019/BST1/LD/BST1.1kgphase3_LD.RDS</code></pre>
 <pre><code>## 100 x 100 LD_matrix (sparse)</code></pre>
 </div>
 <div id="uk-biobank" class="section level1">
 <h1 class="hasAnchor">
 <a href="#uk-biobank" class="anchor"></a>UK Biobank</h1>
 <p><em>WARNING</em>: Takes substantially longer than 1000 Genomes methods.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">LD_ukb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_or_create.html">load_or_create</a></span><span class="op">(</span>locus_dir <span class="op">=</span> <span class="va">locus_dir</span>,
                          dat <span class="op">=</span> <span class="va">BST1</span>, 
                          LD_reference <span class="op">=</span> <span class="st">"UKB"</span>, 
@@ -159,7 +133,7 @@ Most recent update: <i>Aug-29-2021</i>
 <div id="session-info" class="section level1">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session Info</h1>
-<details><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<details><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## R version 4.1.0 (2021-05-18)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
@@ -179,35 +153,59 @@ Most recent update: <i>Aug-29-2021</i>
 ## [1] echoLD_0.99.0    BiocStyle_2.20.2
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] pkgload_1.2.1          sass_0.4.0             gaston_1.5.7          
-##  [4] jsonlite_1.7.2         splines_4.1.0          bslib_0.2.5.1         
-##  [7] RcppParallel_5.1.4     assertthat_0.2.1       BiocManager_1.30.16   
-## [10] stats4_4.1.0           GenomeInfoDbData_1.2.6 remotes_2.4.0         
-## [13] yaml_2.2.1             sessioninfo_1.1.1      pillar_1.6.2          
-## [16] lattice_0.20-44        glue_1.4.2             reticulate_1.20       
-## [19] digest_0.6.27          GenomicRanges_1.44.0   XVector_0.32.0        
-## [22] htmltools_0.5.2        Matrix_1.3-4           pkgconfig_2.0.3       
-## [25] devtools_2.4.2         bookdown_0.22          zlibbioc_1.38.0       
-## [28] purrr_0.3.4            processx_3.5.2         tibble_3.1.4          
-## [31] generics_0.1.0         IRanges_2.26.0         usethis_2.0.1         
-## [34] ellipsis_0.3.2         withr_2.4.2            cachem_1.0.6          
-## [37] BiocGenerics_0.38.0    cli_3.0.1              survival_3.2-11       
-## [40] magrittr_2.0.1         crayon_1.4.1           memoise_2.0.0         
-## [43] evaluate_0.14          ps_1.6.0               fs_1.5.0              
-## [46] fansi_0.5.0            pkgbuild_1.2.0         textshaping_0.3.5     
-## [49] prettyunits_1.1.1      tools_4.1.0            data.table_1.14.0     
-## [52] lifecycle_1.0.0        stringr_1.4.0          S4Vectors_0.30.0      
-## [55] snpStats_1.42.0        callr_3.7.0            compiler_4.1.0        
-## [58] pkgdown_1.6.1          jquerylib_0.1.4        GenomeInfoDb_1.28.2   
-## [61] systemfonts_1.0.2      rlang_0.4.11           grid_4.1.0            
-## [64] RCurl_1.98-1.4         rstudioapi_0.13        bitops_1.0-7          
-## [67] rmarkdown_2.10         testthat_3.0.4         DBI_1.1.1             
-## [70] R6_2.5.1               knitr_1.33             dplyr_1.0.7           
-## [73] fastmap_1.1.0          utf8_1.2.2             echoconda_0.99.0      
-## [76] rprojroot_2.0.2        ragg_1.1.3             desc_1.3.0            
-## [79] stringi_1.7.4          parallel_4.1.0         Rcpp_1.0.7            
-## [82] vctrs_0.3.8            png_0.1-7              tidyselect_1.1.1      
-## [85] xfun_0.25</code></pre>
+##   [1] matrixStats_0.60.1          bitops_1.0-7               
+##   [3] fs_1.5.0                    usethis_2.0.1              
+##   [5] devtools_2.4.2              gaston_1.5.7               
+##   [7] httr_1.4.2                  rprojroot_2.0.2            
+##   [9] GenomeInfoDb_1.28.2         tools_4.1.0                
+##  [11] bslib_0.2.5.1               utf8_1.2.2                 
+##  [13] R6_2.5.1                    DBI_1.1.1                  
+##  [15] BiocGenerics_0.38.0         withr_2.4.2                
+##  [17] tidyselect_1.1.1            prettyunits_1.1.1          
+##  [19] processx_3.5.2              compiler_4.1.0             
+##  [21] Biobase_2.52.0              textshaping_0.3.5          
+##  [23] cli_3.0.1                   DelayedArray_0.18.0        
+##  [25] desc_1.3.0                  rtracklayer_1.52.1         
+##  [27] bookdown_0.23               sass_0.4.0                 
+##  [29] callr_3.7.0                 pkgdown_1.6.1              
+##  [31] Rsamtools_2.8.0             systemfonts_1.0.2          
+##  [33] stringr_1.4.0               digest_0.6.27              
+##  [35] rmarkdown_2.10              R.utils_2.10.1             
+##  [37] XVector_0.32.0              pkgconfig_2.0.3            
+##  [39] htmltools_0.5.2             sessioninfo_1.1.1          
+##  [41] MatrixGenerics_1.4.3        fastmap_1.1.0              
+##  [43] rlang_0.4.11                rstudioapi_0.13            
+##  [45] jquerylib_0.1.4             BiocIO_1.2.0               
+##  [47] generics_0.1.0              jsonlite_1.7.2             
+##  [49] BiocParallel_1.26.2         echoconda_0.99.0           
+##  [51] dplyr_1.0.7                 R.oo_1.24.0                
+##  [53] RCurl_1.98-1.4              magrittr_2.0.1             
+##  [55] GenomeInfoDbData_1.2.6      Matrix_1.3-4               
+##  [57] Rcpp_1.0.7                  S4Vectors_0.30.0           
+##  [59] fansi_0.5.0                 reticulate_1.20            
+##  [61] lifecycle_1.0.0             R.methodsS3_1.8.1          
+##  [63] stringi_1.7.4               yaml_2.2.1                 
+##  [65] SummarizedExperiment_1.22.0 zlibbioc_1.38.0            
+##  [67] pkgbuild_1.2.0              grid_4.1.0                 
+##  [69] parallel_4.1.0              snpStats_1.42.0            
+##  [71] crayon_1.4.1                LDlinkR_1.1.2              
+##  [73] lattice_0.20-44             splines_4.1.0              
+##  [75] Biostrings_2.60.2           knitr_1.33                 
+##  [77] ps_1.6.0                    pillar_1.6.2               
+##  [79] GenomicRanges_1.44.0        rjson_0.2.20               
+##  [81] stats4_4.1.0                pkgload_1.2.1              
+##  [83] XML_3.99-0.7                glue_1.4.2                 
+##  [85] evaluate_0.14               data.table_1.14.0          
+##  [87] remotes_2.4.0               BiocManager_1.30.16        
+##  [89] RcppParallel_5.1.4          vctrs_0.3.8                
+##  [91] png_0.1-7                   testthat_3.0.4             
+##  [93] purrr_0.3.4                 assertthat_0.2.1           
+##  [95] cachem_1.0.6                xfun_0.25                  
+##  [97] restfulr_0.0.13             downloadR_0.99.0           
+##  [99] survival_3.2-13             ragg_1.1.3                 
+## [101] tibble_3.1.4                GenomicAlignments_1.28.0   
+## [103] memoise_2.0.0               IRanges_2.26.0             
+## [105] ellipsis_0.3.2</code></pre>
 </details>
 </div>
   </div>

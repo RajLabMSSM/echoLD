@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fill NAs in an LD matrix — fill_NA • echoLD</title>
+<title>Get MAF from UK Biobank. — get_UKB_MAF • echoLD</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Fill NAs in an LD matrix — fill_NA" />
-<meta property="og:description" content="Trickier than it looks." />
+<meta property="og:title" content="Get MAF from UK Biobank. — get_UKB_MAF" />
+<meta property="og:description" content="If MAF column is missing,
+download MAF from UK Biobank and use that instead." />
 
 
 
@@ -111,41 +112,81 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fill NAs in an LD matrix</h1>
-    <small class="dont-index">Source: <a href='https://github.com/RajLabMSSM/echoLD/blob/master/R/fill_NA.R'><code>R/fill_NA.R</code></a></small>
-    <div class="hidden name"><code>fill_NA.Rd</code></div>
+    <h1>Get MAF from UK Biobank.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/RajLabMSSM/echoLD/blob/master/R/get_UKB_MAF.R'><code>R/get_UKB_MAF.R</code></a></small>
+    <div class="hidden name"><code>get_UKB_MAF.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Trickier than it looks.</p>
+    <p>If <strong>MAF</strong> column is missing,
+download MAF from UK Biobank and use that instead.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fill_NA</span><span class='op'>(</span><span class='va'>LD_matrix</span>, fillNA <span class='op'>=</span> <span class='fl'>0</span>, verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_UKB_MAF</span><span class='op'>(</span>
+  <span class='va'>dat</span>,
+  output_path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"Data/Reference/UKB_MAF"</span><span class='op'>)</span>,
+  force_new_maf <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  download_method <span class='op'>=</span> <span class='st'>"axel"</span>,
+  nThread <span class='op'>=</span> <span class='fl'>1</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  conda_env <span class='op'>=</span> <span class='st'>"echoR"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>LD_matrix</th>
-      <td><p>LD matrix</p></td>
+      <th>dat</th>
+      <td><p>SNP-level data.</p></td>
     </tr>
     <tr>
-      <th>fillNA</th>
-      <td><p>Fill all NAs in the <code>LD_matrix</code> with <code>fillNA</code> value.</p></td>
+      <th>output_path</th>
+      <td><p>Path to store UKB_MAF file in.</p></td>
+    </tr>
+    <tr>
+      <th>force_new_maf</th>
+      <td><p>Download UKB_MAF file again.</p></td>
+    </tr>
+    <tr>
+      <th>download_method</th>
+      <td><ul>
+<li><p><code>"axel"</code> : Multi-threaded</p></li>
+<li><p><code>"wget"</code> : Single-threaded</p></li>
+<li><p><code>"download.file"</code> : Single-threaded</p></li>
+<li><p><code>"internal"</code> : Single-threaded 
+(passed to <a href='https://rdrr.io/r/utils/download.file.html'>download.file</a>)</p></li>
+<li><p><code>"wininet"</code> : Single-threaded 
+(passed to <a href='https://rdrr.io/r/utils/download.file.html'>download.file</a>)</p></li>
+<li><p><code>"libcurl"</code> : Single-threaded 
+(passed to <a href='https://rdrr.io/r/utils/download.file.html'>download.file</a>)</p></li>
+<li><p><code>"curl"</code> : Single-threaded 
+(passed to <a href='https://rdrr.io/r/utils/download.file.html'>download.file</a>)</p></li>
+</ul><p>or
+<code>"download.file"</code> (single-threaded) .</p></td>
+    </tr>
+    <tr>
+      <th>nThread</th>
+      <td><p>Number of threads to parallelize over.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
       <td><p>Print messages.</p></td>
     </tr>
+    <tr>
+      <th>conda_env</th>
+      <td><p>Conda environment to use.</p></td>
+    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p><code><a href='https://rdrr.io/r/utils/data.html'>
-data("BST1_LD_matrix")
-LD_matrix &lt;- fill_NA(BST1_LD_matrix) 
-</a></code></p>
+    <p><a href='http://biobank.ctsu.ox.ac.uk/showcase/field.cgi?id=22801'>UKB</a></p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"BST1"</span><span class='op'>)</span>
+<span class='va'>dat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='va'>BST1</span><span class='op'>)</span><span class='op'>[</span>, <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>BST1</span><span class='op'>)</span> <span class='op'>!=</span> <span class='st'>"MAF"</span><span class='op'>]</span>
+<span class='va'>BST1</span> <span class='op'>&lt;-</span> <span class='fu'>get_UKB_MAF</span><span class='op'>(</span>dat <span class='op'>=</span> <span class='va'>dat</span><span class='op'>)</span> 
+</div><div class='output co'>#&gt; <span class='message'>UKB MAF:: Extracting MAF from UKB reference.</span></div><div class='output co'>#&gt; <span class='message'>Downloading with axel (using 1 cores).</span></div><div class='output co'>#&gt; <span class='message'>+ CONDA:: Identified axel executable in echoR env.</span></div><div class='output co'>#&gt; <span class='message'>Time difference of 10.74835 secs</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

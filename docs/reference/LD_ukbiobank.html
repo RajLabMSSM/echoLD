@@ -40,7 +40,8 @@
 
 
 <meta property="og:title" content="Download LD matrices from UK Biobank — LD_ukbiobank" />
-<meta property="og:description" content="Download pre-computed LD matrices from UK Biobank in 3Mb windows,
+<meta property="og:description" content="Download pre-computed LD matrices from 
+UK Biobank in 3Mb windows,
 then subset to the region that overlaps with dat." />
 
 
@@ -118,7 +119,8 @@ then subset to the region that overlaps with dat." />
     </div>
 
     <div class="ref-description">
-    <p>Download pre-computed LD matrices from UK Biobank in 3Mb windows,
+    <p>Download pre-computed LD matrices from 
+<a href='https://www.ukbiobank.ac.uk'>UK Biobank</a> in 3Mb windows,
 then subset to the region that overlaps with <code>dat</code>.</p>
     </div>
 
@@ -129,10 +131,9 @@ then subset to the region that overlaps with <code>dat</code>.</p>
   chrom <span class='op'>=</span> <span class='cn'>NULL</span>,
   min_pos <span class='op'>=</span> <span class='cn'>NULL</span>,
   force_new_LD <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  chimera <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  server <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  local_storage <span class='op'>=</span> <span class='cn'>NULL</span>,
   download_full_ld <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  download_method <span class='op'>=</span> <span class='st'>"direct"</span>,
+  download_method <span class='op'>=</span> <span class='st'>"python"</span>,
   fillNA <span class='op'>=</span> <span class='fl'>0</span>,
   nThread <span class='op'>=</span> <span class='fl'>1</span>,
   return_matrix <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -142,7 +143,62 @@ then subset to the region that overlaps with <code>dat</code>.</p>
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>dat</th>
+      <td><p>GWAS summary statistics subset to query the LD panel with.</p></td>
+    </tr>
+    <tr>
+      <th>locus_dir</th>
+      <td><p>Storage directory to use.</p></td>
+    </tr>
+    <tr>
+      <th>force_new_LD</th>
+      <td><p>If LD file exists, create a new one.</p></td>
+    </tr>
+    <tr>
+      <th>local_storage</th>
+      <td><p>Path to folder with previously download LD npz files.</p></td>
+    </tr>
+    <tr>
+      <th>download_method</th>
+      <td><p>If "python" will import compressed numpy array
+directly into R using <span class="pkg">reticulate</span>. Otherwise, will be passed to
+<a href='https://rdrr.io/pkg/downloadR/man/downloader.html'>downloader</a> to download the full 3Mb-window LD matrix first.</p></td>
+    </tr>
+    <tr>
+      <th>fillNA</th>
+      <td><p>Value to fill LD matrix NAs with.</p></td>
+    </tr>
+    <tr>
+      <th>nThread</th>
+      <td><p>Number of threads to parallelize over.</p></td>
+    </tr>
+    <tr>
+      <th>as_sparse</th>
+      <td><p>Convert the LD matrix to a sparse matrix.</p></td>
+    </tr>
+    <tr>
+      <th>conda_env</th>
+      <td><p>Conda environment name.</p></td>
+    </tr>
+    <tr>
+      <th>remove_tmps</th>
+      <td><p>Remove all temporary files like VCF, npz, and plink files.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Print messages.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>LD was derived from a  British, European-decent subpopulation 
+in the UK Biobank. LD was pre-computed and stored by the Alkes Price lab
+(see <a href='https://www.biorxiv.org/content/10.1101/807792v3'>here</a>).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other LD: 

@@ -40,8 +40,9 @@
 
 
 <meta property="og:title" content="Compute LD from 1000 Genomes — LD_1KG" />
-<meta property="og:description" content="Downloads a subset vcf of the 1KG database that matches your locus coordinates.
-Then uses plink to calculate LD on the fly." />
+<meta property="og:description" content="Downloads a subset vcf of the 1KG database that matches
+ your locus coordinates. Then uses ld
+  to calculate LD on the fly." />
 
 
 
@@ -118,8 +119,9 @@ Then uses plink to calculate LD on the fly." />
     </div>
 
     <div class="ref-description">
-    <p>Downloads a subset vcf of the 1KG database that matches your locus coordinates.
-Then uses <em>plink</em> to calculate LD on the fly.</p>
+    <p>Downloads a subset vcf of the 1KG database that matches
+ your locus coordinates. Then uses <a href='https://rdrr.io/pkg/snpStats/man/ld.html'>ld</a>
+  to calculate LD on the fly.</p>
     </div>
 
     <pre class="usage"><span class='fu'>LD_1KG</span><span class='op'>(</span>
@@ -129,12 +131,10 @@ Then uses <em>plink</em> to calculate LD on the fly.</p>
   superpopulation <span class='op'>=</span> <span class='st'>"EUR"</span>,
   vcf_folder <span class='op'>=</span> <span class='cn'>NULL</span>,
   remote_LD <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  LD_block <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  LD_block_size <span class='op'>=</span> <span class='fl'>0.7</span>,
-  remove_correlates <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  LD_block_size <span class='op'>=</span> <span class='cn'>NULL</span>,
   remove_tmps <span class='op'>=</span> <span class='cn'>TRUE</span>,
   fillNA <span class='op'>=</span> <span class='fl'>0</span>,
-  download_method <span class='op'>=</span> <span class='st'>"wget"</span>,
+  download_method <span class='op'>=</span> <span class='st'>"axel"</span>,
   as_sparse <span class='op'>=</span> <span class='cn'>TRUE</span>,
   nThread <span class='op'>=</span> <span class='fl'>1</span>,
   conda_env <span class='op'>=</span> <span class='st'>"echoR"</span>,
@@ -145,73 +145,88 @@ Then uses <em>plink</em> to calculate LD on the fly.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>locus_dir</th>
+      <td><p>Storage directory to use.</p></td>
+    </tr>
+    <tr>
+      <th>dat</th>
+      <td><p>GWAS summary statistics subset to query the LD panel with.</p></td>
+    </tr>
+    <tr>
       <th>LD_reference</th>
-      <td><p>Which linkage disequilibrium reference panel do you want to use.
-Options include:</p><dl>
-<dt>"UKB"</dt><dd><p>A pre-caclulated LD reference matrix from a subset of caucasian British individuals from the UK Biobank. See <a href='https://www.biorxiv.org/content/10.1101/807792v2'>Wiessbrod et al. (2019)</a> for more details.</p></dd>
-<dt>"1KGphase1"</dt><dd><p>Download a subset of the 1000 Genomes Project Phase 1 vcf and calculate LD on the fly with plink.</p></dd>
-<dt>"1KGphase3"</dt><dd><p>Download a subset of the 1000 Genomes Project Phase 3 vcf and calculate LD on the fly with plink.</p></dd>
-<dt>"&lt;path&gt;/*.vcf" or "&lt;path&gt;/*.vcf.gz"</dt><dd><p>Alternatively, users can provide their own custom panel by supplying a list of <em>.vcf</em> file path (one per locus) which <span class="pkg">echolocatoR</span> will use to compute LD (using <em>plink</em>).</p></dd>
-
-</dl></td>
+      <td><p>LD reference to use:</p><ul>
+<li><p>"1KGphase1" : 1000 Genomes Project Phase 1</p></li>
+<li><p>"1KGphase3" : 1000 Genomes Project Phase 3</p></li>
+<li><p>"UKB" : Pre-computed LD from a British 
+European-decent subset of UK Biobank.</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>superpopulation</th>
-      <td><p>Subset your LD reference panel by superopulation.
-Setting the superpopulation is not currently possible when <code>LD_reference="UKB"</code>.
-<a href='https://www.internationalgenome.org/faq/which-populations-are-part-your-study/'>1KGphase1 options</a> include:</p><dl>
-<dt>"AFR"</dt><dd><p>African [descent]</p></dd>
-<dt>"AMR"</dt><dd><p>Ad-mixed American</p></dd>
-<dt>"EAS"</dt><dd><p>East Asian</p></dd>
-<dt>"EUR"</dt><dd><p>European</p></dd>
-<dt>"SAS"</dt><dd><p>South Asian</p></dd>
-
-</dl></td>
+      <td><p>Superpopulation to subset LD panel by
+(used only if <code>LD_reference</code> is "1KGphase1" or "1KGphase3".)</p></td>
     </tr>
     <tr>
       <th>remote_LD</th>
-      <td><p>When acquiring LD matrices,
-the default is to delete the full vcf or npz files after <span class="pkg">echolocatoR</span> has extracted the necssary subset.
-However, if you wish to keep these full files (which can be quite large) set <code>remote_LD=T</code>.</p></td>
-    </tr>
-    <tr>
-      <th>LD_block</th>
-      <td><p>Calculate LD blocks with <em>plink</em> and only include the block to which the lead SNP belongs.</p></td>
+      <td><p>Whether to pull the LD reference from remote repository, 
+or locally stored files.</p></td>
     </tr>
     <tr>
       <th>LD_block_size</th>
-      <td><p>Adjust the granularity of block sizes when <code>LD_block=T</code>.</p></td>
-    </tr>
-    <tr>
-      <th>remove_correlates</th>
-      <td><p>A named list, where the names are the RSIDs of SNPs
-whose LD correlates you wish to remove,
-and the value is the absolute r2 threshold you wish to filter at for each RSID respectively
-(e.g. <code> remove_correlates = c("rs76904798"=.2, "rs10000737"=.8)</code>).
-This will also remove the SNPs in <code>remove_correlates</code> themselves.</p></td>
+      <td><p>Block size. Passed to
+"--blocks-inform-frac" argument in <code>plink</code>. 
+Recommended default value is <code>0.7</code>.</p></td>
     </tr>
     <tr>
       <th>remove_tmps</th>
-      <td><p>Whether to remove any temporary files (e.g. FINEMAP output files) after the pipeline is done running.</p></td>
+      <td><p>Remove all temporary files like VCF, npz, and plink files.</p></td>
     </tr>
     <tr>
       <th>fillNA</th>
-      <td><p>When pairwise LD (r) between two SNPs is <code>NA</code>, replace with 0.</p></td>
+      <td><p>When pairwise LD (r) between two SNPs is <code>NA</code>, 
+replace with 0.</p></td>
+    </tr>
+    <tr>
+      <th>download_method</th>
+      <td><ul>
+<li><p><code>"axel"</code> : Multi-threaded</p></li>
+<li><p><code>"wget"</code> : Single-threaded</p></li>
+<li><p><code>"download.file"</code> : Single-threaded</p></li>
+<li><p><code>"internal"</code> : Single-threaded 
+(passed to <a href='https://rdrr.io/r/utils/download.file.html'>download.file</a>)</p></li>
+<li><p><code>"wininet"</code> : Single-threaded 
+(passed to <a href='https://rdrr.io/r/utils/download.file.html'>download.file</a>)</p></li>
+<li><p><code>"libcurl"</code> : Single-threaded 
+(passed to <a href='https://rdrr.io/r/utils/download.file.html'>download.file</a>)</p></li>
+<li><p><code>"curl"</code> : Single-threaded 
+(passed to <a href='https://rdrr.io/r/utils/download.file.html'>download.file</a>)</p></li>
+</ul><p>or
+<code>"download.file"</code> (single-threaded) .</p></td>
+    </tr>
+    <tr>
+      <th>as_sparse</th>
+      <td><p>Convert the LD matrix to a sparse matrix.</p></td>
+    </tr>
+    <tr>
+      <th>nThread</th>
+      <td><p>Number of threads to parallelize over.</p></td>
     </tr>
     <tr>
       <th>conda_env</th>
-      <td><p>The name of a conda environment to use.</p></td>
+      <td><p>Conda environment name.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>Whether <span class="pkg">echolocatoR</span> should be verbose or silent.</p></td>
+      <td><p>Print messages.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This approach is taken, because other API query tools have limitations with the window size being queried.
-This approach does not have this limitations, allowing you to fine-map loci more completely.</p>
+    <p>This approach is taken, because other API query tools have 
+limitations with the window size being queried.
+This approach does not have this limitations, 
+allowing you to fine-map loci more completely.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other LD: 
@@ -247,17 +262,6 @@ This approach does not have this limitations, allowing you to fine-map loci more
 <code><a href='translate_population.html'>translate_population</a>()</code>,
 <code><a href='vcf_to_bed.html'>vcf_to_bed</a>()</code></p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"BST1"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"locus_dir"</span><span class='op'>)</span>
-<span class='va'>BST1</span> <span class='op'>&lt;-</span> <span class='fu'>limit_SNPs</span><span class='op'>(</span>max_snps <span class='op'>=</span> <span class='fl'>500</span>, dat <span class='op'>=</span> <span class='va'>BST1</span><span class='op'>)</span>
-<span class='va'>LD_matrix</span> <span class='op'>&lt;-</span> <span class='fu'>LD_1KG</span><span class='op'>(</span>locus_dir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='st'>"~/Desktop"</span>, <span class='va'>locus_dir</span><span class='op'>)</span>, dat <span class='op'>=</span> <span class='va'>BST1</span>, LD_reference <span class='op'>=</span> <span class='st'>"1KGphase1"</span><span class='op'>)</span>
-
-<span class='co'>## Kunkle et al 2019</span>
-<span class='va'>locus_dir</span> <span class='op'>&lt;-</span> <span class='st'>"/sc/arion/projects/pd-omics/brian/Fine_Mapping/Data/GWAS/Kunkle_2019/ACE"</span>
-<span class='op'>}</span>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

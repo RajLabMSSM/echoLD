@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Calculate LD — plink_LD" />
-<meta property="og:description" content="Use plink to calculate LD from a vcf." />
+<meta property="og:description" content="Use plink to calculate LD from a VCF." />
 
 
 
@@ -117,7 +117,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Use <em>plink</em> to calculate LD from a vcf.</p>
+    <p>Use <em>plink</em> to calculate LD from a VCF.</p>
     </div>
 
     <pre class="usage"><span class='fu'>plink_LD</span><span class='op'>(</span>
@@ -137,6 +137,13 @@
 <span class='op'>)</span></pre>
 
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code><a href='https://rdrr.io/r/utils/data.html'>
+data("BST1"); data("locus_dir");
+LD_folder &lt;- file.path(locus_dir, "LD")
+ld.matrix &lt;- plink_LD(dat = BST1, LD_folder = LD_folder)
+</a></code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other LD: 
@@ -172,11 +179,6 @@
 <code><a href='translate_population.html'>translate_population</a>()</code>,
 <code><a href='vcf_to_bed.html'>vcf_to_bed</a>()</code></p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>locus_dir</span> <span class='op'>&lt;-</span> <span class='st'>"/sc/arion/projects/pd-omics/brian/Fine_Mapping/Data/GWAS/Kunkle_2019/ACE"</span>
-<span class='va'>LD_folder</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>locus_dir</span>, <span class='st'>"LD"</span><span class='op'>)</span>
-<span class='va'>ld.matrix</span> <span class='op'>&lt;-</span> <span class='fu'>plink_LD</span><span class='op'>(</span>dat <span class='op'>=</span> <span class='va'>BST1</span>, LD_folder <span class='op'>=</span> <span class='va'>LD_folder</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in plink_LD(dat = BST1, LD_folder = LD_folder): could not find function "plink_LD"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
