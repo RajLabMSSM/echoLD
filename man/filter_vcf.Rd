@@ -15,21 +15,10 @@ filter_vcf(
 \arguments{
 \item{vcf_subset}{Path to the locus subset vcf.}
 
-\item{popDat}{The metadata file listing the superpopulation
+\item{popDat}{The metadata file listing the \code{superpopulation}
 to which each sample belongs.}
 
-\item{superpopulation}{Subset your LD reference panel by superopulation.
-Setting the superpopulation is not currently possible when \code{LD_reference="UKB"}.
-\href{https://www.internationalgenome.org/faq/which-populations-are-part-your-study/}{1KGphase1 options} include:
-\describe{
-\item{"AFR"}{African [descent]}
-\item{"AMR"}{Ad-mixed American}
-\item{"EAS"}{East Asian}
-\item{"EUR"}{European}
-\item{"SAS"}{South Asian}
-}}
-
-\item{verbose}{Whether \pkg{echolocatoR} should be verbose or silent.}
+\item{superpopulation}{Superpopulation to subset.}
 }
 \description{
 Uses \emph{bcftools} to filter a vcf by min/max genomic coordinates

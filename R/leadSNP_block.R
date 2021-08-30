@@ -1,11 +1,20 @@
 #' Identify the LD block in which the lead SNP resides
+#' 
+#' @inheritParams LD_blocks
+#' @inheritParams echoconda::find_package
+#' 
 #' @family LD
 #' @keywords internal
 leadSNP_block <- function(leadSNP,
-                          LD_folder,
-                          LD_block_size = .7) {
+                          bed_bim_fam,
+                          LD_block_size = .7,
+                          verbose =  TRUE, 
+                          conda_env = "echoR") {
     messager("Returning lead SNP's block...")
-    blocks <- LD_blocks(LD_folder, LD_block_size)
+    blocks <- LD_blocks(bed_bim_fam = bed_bim_fam, 
+                        LD_block_size = LD_block_size, 
+                        conda_env = conda_env, 
+                        verbose = verbose)
     splitLists <- strsplit(blocks$SNPS, split = "[|]")
     block_snps <- lapply(splitLists,
         function(l, leadSNP) {

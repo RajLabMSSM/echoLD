@@ -9,6 +9,7 @@ calculate_LD(
   ld_window = 1000,
   ld_format = "r",
   plink_prefix = "plink",
+  conda_env = "echoR",
   verbose = TRUE
 )
 }

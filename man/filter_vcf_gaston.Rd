@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter_vcf_gaston.R
 \name{filter_vcf_gaston}
 \alias{filter_vcf_gaston}
-\title{Subset a vcf by superpopulation}
+\title{Subset a VCF file by superpopulation}
 \usage{
 filter_vcf_gaston(
   vcf_subset,
@@ -16,24 +16,13 @@ filter_vcf_gaston(
 \arguments{
 \item{vcf_subset}{Path to the locus subset vcf.}
 
-\item{superpopulation}{Subset your LD reference panel by superopulation.
-Setting the superpopulation is not currently possible when \code{LD_reference="UKB"}.
-\href{https://www.internationalgenome.org/faq/which-populations-are-part-your-study/}{1KGphase1 options} include:
-\describe{
-\item{"AFR"}{African [descent]}
-\item{"AMR"}{Ad-mixed American}
-\item{"EAS"}{East Asian}
-\item{"EUR"}{European}
-\item{"SAS"}{South Asian}
-}}
+\item{superpopulation}{Superpopulation to subset.}
 
-\item{popDat}{The metadata file listing the superpopulation
+\item{popDat}{The metadata file listing the \code{superpopulation}
 to which each sample belongs.}
-
-\item{verbose}{Whether \pkg{echolocatoR} should be verbose or silent.}
 }
 \description{
-Subset a vcf by superpopulation
+Subset a VCF file by superpopulation
 }
 \seealso{
 Other LD: 

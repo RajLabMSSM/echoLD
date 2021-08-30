@@ -1,22 +1,21 @@
-#' Compute LD from user-supplied vcf file
+#' Compute LD from user-supplied VCF file
 #'
+#'
+#' @inheritParams LD_blocks
+#' @inheritParams echoconda::find_package
+#' 
 #' @family LD
 #' @keywords internal
 #' @examples
-#' \dontrun{
-#' if (!"gaston" %in% row.names(installed.packages())) {
-#'     install.packages("gaston")
-#' }
+#' \dontrun{ 
 #' data("BST1")
 #' data("locus_dir")
 #' LD_reference <- "~/Desktop/results/Reference/custom_panel_chr4.vcf"
-#' LD_matrix <- custom_panel(LD_reference = LD_reference, dat = BST1, locus_dir = locus_dir)
-#'
-#' locus_dir <- "/sc/arion/projects/pd-omics/brian/Fine_Mapping/Data/QTL/Microglia_all_regions/BIN1"
-#' dat <- data.table::fread(file.path(locus_dir, "Multi-finemap/BIN1.Microglia_all_regions.1KGphase3_LD.Multi-finemap.tsv.gz"))
-#' LD_reference <- "/sc/hydra/projects/pd-omics/glia_omics/eQTL/post_imputation_filtering/eur/filtered_variants/AllChr.hg38.sort.filt.dbsnp.snpeff.vcf.gz"
-#' LD_matrix <- custom_panel(LD_reference = LD_reference, dat = BST1, locus_dir = locus_dir, LD_genome_build = "hg38")
+#' LD_matrix <- custom_panel(LD_reference = LD_reference, 
+#'                           dat = BST1, 
+#'                           locus_dir = locus_dir)
 #' }
+#' @importFrom dplyr %>% rename mutate
 custom_panel <- function(LD_reference,
                          fullSS_genome_build = "hg19",
                          LD_genome_build = "hg19",
@@ -26,14 +25,16 @@ custom_panel <- function(LD_reference,
                          min_r2 = FALSE,
                          # min_Dprime=F,
                          remove_correlates = FALSE,
-                         fillNA = 0,
-                         LD_block = FALSE,
-                         LD_block_size = .7,
+                         fillNA = 0, 
+                         LD_block_size = NULL,
                          remove_tmps = TRUE,
                          as_sparse = TRUE,
                          nThread = 1,
                          conda_env = "echoR",
                          verbose = TRUE) {
+    # Avoid confusing checks
+    POS <- POS.hg38 <- CHR <- NULL
+
     messager("LD:: Computing LD from local vcf file:", LD_reference)
 
     if (!toupper(LD_genome_build) %in% c("HG19", "HG37", "GRCH37")) {
@@ -49,10 +50,10 @@ custom_panel <- function(LD_reference,
             ## If the query was originally in hg19,
             # that means no liftover was done.
             # So you need to lift it over now.
-            dat <- LIFTOVER(
+            dat <- liftover(
                 dat = dat,
-                build.conversion = "hg19.to.hg38",
-                return_as_granges = FALSE,
+                build_conversion = "hg19ToHg38",
+                as_granges = FALSE,
                 verbose = verbose
             )
         }
@@ -66,7 +67,11 @@ custom_panel <- function(LD_reference,
     # Make sure your query's chr format is the same as the vcf's chr format
     has_chr <- determine_chrom_type_vcf(vcf_file = vcf_file)
     dat <- dplyr::mutate(dat,
-        CHR = if (has_chr) paste0("chr", gsub("chr", "", CHR)) else gsub("chr", "", CHR)
+        CHR = if (has_chr) {
+            paste0("chr", gsub("chr", "", CHR))
+        } else {
+            gsub("chr", "", CHR)
+        }
     )
 
     vcf_subset <- query_vcf(
@@ -91,9 +96,8 @@ custom_panel <- function(LD_reference,
     )
     # Calculate LD
     LD_matrix <- snpstats_get_LD(
-        LD_folder = file.path(locus_dir, "LD"),
-        plink_prefix = "plink",
-        select.snps = unique(dat$SNP),
+        bed_bim_fam = bed_bim_fam,
+        select_snps = unique(dat$SNP),
         stats = c("R"),
         symmetric = TRUE,
         depth = "max",
@@ -102,21 +106,23 @@ custom_panel <- function(LD_reference,
     # Get MAF (if needed)
     dat <- snpstats_get_MAF(
         dat = dat,
-        LD_folder = file.path(locus_dir, "LD"),
-        plink_prefix = "plink",
+        bed_bim_fam = bed_bim_fam,
         force_new_MAF = FALSE,
         verbose = verbose
     )
     # Filter out SNPs not in the same LD block as the lead SNP
     # Get lead SNP rsid
-    leadSNP <- subset(dat, leadSNP == T)$SNP
-    if (LD_block) {
+    leadSNP <- subset(dat, leadSNP)$SNP
+    if (!is.null(LD_block_size)) {
         block_snps <- leadSNP_block(
             leadSNP = leadSNP,
-            LD_folder = "./plink_tmp",
+            bed_bim_fam = bed_bim_fam,
             LD_block_size = LD_block_size
         )
-        LD_matrix <- LD_matrix[row.names(LD_matrix) %in% block_snps, colnames(LD_matrix) %in% block_snps]
+        LD_matrix <- LD_matrix[
+            row.names(LD_matrix) %in% block_snps,
+            colnames(LD_matrix) %in% block_snps
+        ]
         LD_matrix <- LD_matrix[block_snps, block_snps]
     }
     # IMPORTANT! Remove large data.ld file after you're done with it

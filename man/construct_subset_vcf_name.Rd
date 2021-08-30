@@ -12,9 +12,7 @@ construct_subset_vcf_name(
 )
 }
 \description{
-Construct the path to vcf subset
-}
-\examples{
+\code{
 data("locus_dir")
 data("BST1")
 vcf_subset <- construct_subset_vcf_name(
@@ -22,6 +20,7 @@ vcf_subset <- construct_subset_vcf_name(
     locus_dir = locus_dir,
     LD_reference = "1KGlocal"
 )
+}
 }
 \seealso{
 Other LD: 

@@ -4,7 +4,8 @@
 \alias{ldlinkr_ldproxy_batch}
 \title{Extract LD proxies from 1KGphase3}
 \source{
-\href{https://www.rdocumentation.org/packages/LDlinkR/versions/1.0.2}{website}
+\href{https://www.rdocumentation.org/packages/LDlinkR/versions/1.0.2}{
+website}
 }
 \usage{
 ldlinkr_ldproxy_batch(
@@ -16,14 +17,30 @@ ldlinkr_ldproxy_batch(
   verbose = TRUE
 )
 }
+\arguments{
+\item{snp}{a character string or data frame listing rsID's or chromosome coordinates (e.g. "chr7:24966446"), one per line}
+
+\item{pop}{a 1000 Genomes Project population, (e.g. YRI or CEU), multiple allowed, default = "CEU"}
+
+\item{r2d}{either "r2" for LD R2 or "d" for LD D', default = "r2"}
+
+\item{min_corr}{Minimum correlation with \code{snp}.}
+
+\item{save_dir}{Save folder.}
+
+\item{verbose}{Print messages.}
+}
 \description{
 Wrapper for \code{LDlinkR::LDproxy_batch}.
-Eeasy to use but doesn't scale up well to many SNPs (takes way too long).
+Easy to use but doesn't scale up well to many SNPs (takes way too long).
 }
-\examples{
+\details{
+\code{
 data("merged_DT")
-lead.snps <- setNames(subset(merged_DT, leadSNP)$Locus, subset(merged_DT, leadSNP)$SNP)
+lead.snps <- setNames(subset(merged_DT, leadSNP)$Locus, 
+                      subset(merged_DT, leadSNP)$SNP)
 proxies <- ldlinkr_ldproxy_batch(snp = lead.snps)
+}
 }
 \seealso{
 Other LD: 
@@ -60,3 +77,4 @@ Other LD:
 \code{\link{vcf_to_bed}()}
 }
 \concept{LD}
+\keyword{internal}

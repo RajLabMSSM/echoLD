@@ -1,14 +1,18 @@
-#' Subset a vcf by superpopulation
+#' Subset a VCF file by superpopulation
 #'
 #' @inheritParams filter_vcf
 #' @family LD
 #' @keywords internal
+#' @importFrom gaston read.vcf select.snps write.bed.matrix select.inds
 filter_vcf_gaston <- function(vcf_subset,
                               dat,
                               locus_dir,
                               superpopulation,
                               popDat,
                               verbose = TRUE) {
+    # Avoid confusing checks
+    id <- superpop <- NULL;
+    
     # Import w/ gaston and further subset
     messager("+ Importing VCF as bed file...", v = verbose)
     bed.file <- gaston::read.vcf(vcf_subset, verbose = F)

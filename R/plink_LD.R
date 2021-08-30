@@ -1,12 +1,14 @@
 #' Calculate LD
 #'
-#' Use \emph{plink} to calculate LD from a vcf.
-#' @family LD
-#' @keywords internal
-#' @examples
-#' locus_dir <- "/sc/arion/projects/pd-omics/brian/Fine_Mapping/Data/GWAS/Kunkle_2019/ACE"
+#' Use \emph{plink} to calculate LD from a VCF.
+#' 
+#' \code{
+#' data("BST1"); data("locus_dir");
 #' LD_folder <- file.path(locus_dir, "LD")
 #' ld.matrix <- plink_LD(dat = BST1, LD_folder = LD_folder)
+#' }
+#' @family LD
+#' @keywords internal 
 #' @importFrom data.table merge.data.table
 plink_LD <- function(leadSNP = NULL,
                      dat,
@@ -22,6 +24,9 @@ plink_LD <- function(leadSNP = NULL,
                      plink_prefix = "plink",
                      verbose = TRUE,
                      conda_env = NULL) {
+    # Avoid conusing checks
+    CHR <- POS <- SNP <- SNP_A <- DP <- SNP_B <- R <- NULL
+
     # Dprime ranges from -1 to 1
     start <- Sys.time()
     if (is.null(leadSNP)) leadSNP <- subset(dat, leadSNP)$SNP[1]

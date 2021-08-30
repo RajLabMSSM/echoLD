@@ -6,12 +6,20 @@
 \usage{
 fill_NA(LD_matrix, fillNA = 0, verbose = FALSE)
 }
+\arguments{
+\item{LD_matrix}{LD matrix}
+
+\item{fillNA}{Fill all NAs in the \code{LD_matrix} with \code{fillNA} value.}
+
+\item{verbose}{Print messages.}
+}
 \description{
 Trickier than it looks.
 }
-\examples{
-\dontrun{
-data("LD_matrix")
-LD_matrix <- fill_NA(LD_matrix)
+\details{
+\code{
+data("BST1_LD_matrix")
+LD_matrix <- fill_NA(BST1_LD_matrix) 
 }
 }
+\keyword{internal}

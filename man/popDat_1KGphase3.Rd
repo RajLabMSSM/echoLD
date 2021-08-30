@@ -5,20 +5,20 @@
 \alias{popDat_1KGphase3}
 \title{Population metadata: 1KGphase3}
 \format{
-An object of class \code{data.table} (inherits from \code{data.frame}) with 2504 rows and 4 columns.
+data.table
 }
-\usage{
-popDat_1KGphase3
-}
-\description{
-Population metadata: 1KGphase3
-}
-\examples{
-\dontrun{
+\source{
+\code{
 popDat_URL <- "ftp://ftp-trace.ncbi.nih.gov/1000genomes/ftp/release/20130502/integrated_call_samples_v3.20130502.ALL.panel"
 popDat_1KGphase3 <- data.table::fread(text = trimws(gsub(",\t", ",", readLines(popDat_URL))), sep = "\t", fill = T, stringsAsFactors = F, col.names = c("sample", "population", "superpop", "sex"), nThread = 4)
 usethis::use_data(popDat_1KGphase3, overwrite = T)
 }
+}
+\usage{
+data("popDat_1KGphase3")
+}
+\description{
+Individual-level metadata for 1000 Genomes Project (Phase 3).
 }
 \seealso{
 Other LD: 

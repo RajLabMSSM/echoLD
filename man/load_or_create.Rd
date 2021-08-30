@@ -8,18 +8,15 @@ load_or_create(
   locus_dir,
   dat,
   force_new_LD = FALSE,
-  LD_reference = "1KGphase1",
+  LD_reference = c("1KGphase1", "1KGphase3", "UKB"),
   LD_genome_build = "hg19",
   superpopulation = "EUR",
   remote_LD = TRUE,
-  download_method = "direct",
-  vcf_folder = NULL,
-  LD_block = FALSE,
-  LD_block_size = 0.7,
-  remove_correlates = FALSE,
+  download_method = "axel",
+  local_storage = NULL,
+  LD_block_size = NULL,
   fillNA = 0,
   verbose = TRUE,
-  server = FALSE,
   remove_tmps = TRUE,
   as_sparse = TRUE,
   conda_env = "echoR",
@@ -27,81 +24,95 @@ load_or_create(
 )
 }
 \arguments{
-\item{dat}{The locus subset of the full summary stats file.}
+\item{locus_dir}{Storage directory to use.}
 
-\item{force_new_LD}{By default, if an LD matrix file for a given locus is already present,
-then \pkg{echolocatoR} will just use the preexisting file.
-Set \code{force_new_LD=T} to override this and extract a new subset.}
+\item{dat}{GWAS summary statistics subset to query the LD panel with.}
 
-\item{LD_reference}{Which linkage disequilibrium reference panel do you want to use.
-Options include:
-\describe{
-\item{"UKB"}{A pre-caclulated LD reference matrix from a subset of caucasian British individuals from the UK Biobank. See \href{https://www.biorxiv.org/content/10.1101/807792v2}{Wiessbrod et al. (2019)} for more details.}
-\item{"1KGphase1"}{Download a subset of the 1000 Genomes Project Phase 1 vcf and calculate LD on the fly with plink.}
-\item{"1KGphase3"}{Download a subset of the 1000 Genomes Project Phase 3 vcf and calculate LD on the fly with plink.}
-\item{"<path>/*.vcf" or "<path>/*.vcf.gz"}{Alternatively, users can provide their own custom panel by supplying a list of \emph{.vcf} file path (one per locus) which \pkg{echolocatoR} will use to compute LD (using \emph{plink}).}
+\item{force_new_LD}{If LD file exists, create a new one.}
+
+\item{LD_reference}{LD reference to use:
+\itemize{
+\item{"1KGphase1" : }{1000 Genomes Project Phase 1}
+\item{"1KGphase3" : }{1000 Genomes Project Phase 3}
+\item{"UKB" : }{Pre-computed LD from a British 
+European-decent subset of UK Biobank.}
 }}
 
-\item{superpopulation}{Subset your LD reference panel by superopulation.
-Setting the superpopulation is not currently possible when \code{LD_reference="UKB"}.
-\href{https://www.internationalgenome.org/faq/which-populations-are-part-your-study/}{1KGphase1 options} include:
-\describe{
-\item{"AFR"}{African [descent]}
-\item{"AMR"}{Ad-mixed American}
-\item{"EAS"}{East Asian}
-\item{"EUR"}{European}
-\item{"SAS"}{South Asian}
-}}
+\item{LD_genome_build}{Genome build of the LD panel 
+(used only if providing custom LD panel).}
 
-\item{remote_LD}{When acquiring LD matrices,
-the default is to delete the full vcf or npz files after \pkg{echolocatoR} has extracted the necssary subset.
-However, if you wish to keep these full files (which can be quite large) set \code{remote_LD=T}.}
+\item{superpopulation}{Superpopulation to subset LD panel by
+(used only if \code{LD_reference} is "1KGphase1" or "1KGphase3".)}
 
-\item{LD_block}{Calculate LD blocks with \emph{plink} and only include the block to which the lead SNP belongs.}
+\item{remote_LD}{Whether to pull the LD reference from remote repository, 
+or locally stored files.}
 
-\item{LD_block_size}{Adjust the granularity of block sizes when \code{LD_block=T}.}
+\item{download_method}{\itemize{
+\item{\code{"axel"} : }{Multi-threaded}
+\item{\code{"wget"} : }{Single-threaded}
+\item{\code{"download.file"} : }{Single-threaded}
+\item{\code{"internal"} : }{Single-threaded 
+(passed to \link[utils]{download.file})}
+\item{\code{"wininet"} : }{Single-threaded 
+(passed to \link[utils]{download.file})}
+\item{\code{"libcurl"} : }{Single-threaded 
+(passed to \link[utils]{download.file})}
+\item{\code{"curl"} : }{Single-threaded 
+(passed to \link[utils]{download.file})}
+}
+ or
+\code{"download.file"} (single-threaded) .}
 
-\item{remove_correlates}{A named list, where the names are the RSIDs of SNPs
-whose LD correlates you wish to remove,
-and the value is the absolute r2 threshold you wish to filter at for each RSID respectively
-(e.g. \code{ remove_correlates = c("rs76904798"=.2, "rs10000737"=.8)}).
-This will also remove the SNPs in \code{remove_correlates} themselves.}
+\item{local_storage}{Storage folder for previously downloaded LD files.
+If \code{LD_reference} is "1KGphase1" or "1KGphase3",
+\code{local_storage} is where VCF files are stored.
+If \code{LD_reference} is "UKB", \code{local_storage} is where 
+LD compressed numpy array (npz) files are stored. 
+Set to \code{NULL} to download VCFs/LD npz from remote storage system.}
 
-\item{verbose}{Whether \pkg{echolocatoR} should be verbose or silent.}
+\item{LD_block_size}{Block size. Passed to
+"--blocks-inform-frac" argument in \code{plink}. 
+Recommended default value is \code{0.7}.}
 
-\item{server}{Whether \pkg{echolocatoR} is being run on a computing cluster/server or on a local machine.}
+\item{fillNA}{Value to fill LD matrix NAs with.}
 
-\item{remove_tmps}{Whether to remove any temporary files (e.g. FINEMAP output files) after the pipeline is done running.}
+\item{verbose}{Print messages.}
 
-\item{conda_env}{The name of a conda environment to use.}
+\item{remove_tmps}{Remove all temporary files like VCF, npz, and plink files.}
+
+\item{as_sparse}{Convert the LD matrix to a sparse matrix.}
+
+\item{conda_env}{Conda environment name.}
+
+\item{nThread}{Number of threads to parallelize over.}
 }
 \value{
 A symmetric LD matrix of pairwise \emph{r} values.
 }
 \description{
-Calculate and/or query linkage disequilibrium (LD) from reference panels (UK Biobank, 1000 Genomes),
-or user-supplied datasets.
+Calculate and/or query linkage disequilibrium (LD) from reference panels
+ (UK Biobank, 1000 Genomes), a user-supplied pre-computed LD matrix
 }
 \details{
 Options:
 \itemize{
-\item Download pre-computed LD matrix from UK Biobank.
-\item Download raw vcf file from 1KG and compute LD on the fly.
-\item Compute LD on the fly from a user-supplied vcf file.
-\item Use a user-supplied pre-computed LD-matrix.
+\item{Download pre-computed LD matrix from UK Biobank.}
+\item{Download raw VCF file from 1KG and compute LD on the fly.}
+\item{Compute LD on the fly from a user-supplied VCF file.}
+\item{Use a user-supplied pre-computed LD-matrix.}
 }
 }
 \examples{
-\dontrun{
 data("BST1")
 data("locus_dir")
 locus_dir <- file.path(tempdir(), locus_dir)
-BST1 <- BST1[seq(1,50),]
+BST1 <- BST1[seq(1, 50), ]
 
-LD_matrix <- load_or_create(locus_dir = locus_dir, 
-                            dat = BST1, 
-                            LD_reference = "1KGphase1") 
-}
+#LD_matrix <- load_or_create(
+#    locus_dir = locus_dir,
+#    dat = BST1,
+#    LD_reference = "1KGphase1"
+#) 
 }
 \seealso{
 Other LD: 

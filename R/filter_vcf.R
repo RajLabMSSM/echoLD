@@ -3,9 +3,9 @@
 #' Uses \emph{bcftools} to filter a vcf by min/max genomic coordinates
 #' (in basepairs).
 #' @param vcf_subset Path to the locus subset vcf.
-#' @param popDat The metadata file listing the superpopulation
+#' @param popDat The metadata file listing the \code{superpopulation}
 #' to which each sample belongs.
-#' @inheritParams echolocatoR::finemap_pipeline
+#' @param superpopulation Superpopulation to subset.
 #' @family LD
 #' @keywords internal
 filter_vcf <- function(vcf_subset,
@@ -13,6 +13,9 @@ filter_vcf <- function(vcf_subset,
                        superpopulation,
                        remove_tmp = TRUE,
                        verbose = TRUE) {
+    # Avoid confusing checks
+    leadSNP <- superpop <- NULL
+
     vcf.gz <- paste0(vcf_subset, ".gz")
     vcf.gz.subset <- gsub("_subset", "_samples_subset", vcf.gz)
     # Compress vcf

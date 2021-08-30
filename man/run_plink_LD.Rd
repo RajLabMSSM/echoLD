@@ -6,10 +6,11 @@
 \usage{
 run_plink_LD(
   bim,
-  LD_folder,
+  LD_folder = file.path(tempdir(), "LD"),
   plink_prefix = "plink",
   r_format = "r",
-  extract_file = NULL
+  extract_file = NULL,
+  conda_env = "echoR"
 )
 }
 \arguments{
@@ -22,18 +23,6 @@ run_plink_LD(
 \description{
 This appriach computes and LD matrix of r or r2 (instead of D') from a vcf.
 See \code{dprime_table} for a slower (but more flexible) alternative to computing LD.
-}
-\examples{
-\dontrun{
-data("LRRK2")
-LD_folder <- "/Users/schilder/Desktop/Fine_Mapping/Data/GWAS/Nalls23andMe_2019/LRRK2/plink/saved"
-bim_path <- file.path(LD_folder, "plink.bim")
-bim <- data.table::fread(bim_path, col.names = c("CHR", "SNP", "V3", "POS", "A1", "A2"), stringsAsFactors = F)
-bim <- subset(bim, SNP \%in\% LRRK2$SNP)
-ld.bin <- file.path(LD_folder, paste0("plink", ".ld.bin"))
-SNPs <- data.table::fread(file.path(LD_folder, "SNPs.txt"), col.names = "RSID")
-bin.vector <- readBin(ld.bin, what = "numeric", n = length(SNPs$RSID)^2)
-}
 }
 \seealso{
 Other LD: 

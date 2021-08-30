@@ -1,43 +1,55 @@
 test_that("load_or_create works", {
-    
     data("BST1")
     data("locus_dir")
     locus_dir <- file.path(tempdir(), locus_dir)
-    BST1 <- BST1[seq(1,50),]
-    
-    run_tests <- function(LD_list){
+    BST1 <- BST1[seq(1, 50), ]
+
+    run_tests <- function(LD_list) {
         testthat::expect_length(LD_list, 3)
         testthat::expect_equal(nrow(LD_list$LD), ncol(LD_list$LD))
-        testthat::expect_equal(nrow(LD_list$LD), nrow(LD_list$DT))
-        testthat::expect_gte(nrow(LD_list$LD),40)
-        testthat::expect_equal(methods::is(LD_list$RDS_path,"character"), TRUE) 
-    } 
-    
+        testthat::expect_lte(nrow(LD_list$LD), nrow(LD_list$DT)) 
+        testthat::expect_gte(nrow(LD_list$LD), 40)
+        testthat::expect_equal(methods::is(LD_list$RDS_path, "character"), TRUE)
+    }
+
     #### 1000 Genomes: Phase 1 ####
-    LD_1kgp1 <- echoLD::load_or_create(locus_dir = locus_dir,
-                                       dat = BST1, 
-                                       LD_reference = "1KGphase1")
+    LD_1kgp1 <- echoLD::load_or_create(
+        locus_dir = locus_dir,
+        dat = BST1,
+        LD_reference = "1KGphase1"
+    )
     run_tests(LD_1kgp1)
+
+    #### 1000 Genomes: Phase 1 (from storage) ####
+    LD_1kgp1 <- echoLD::load_or_create(
+        locus_dir = locus_dir,
+        dat = BST1,
+        LD_reference = "1KGphase1"
+    )
+    run_tests(LD_1kgp1)
+
     #### 1000 Genomes: Phase 3 ####
-    LD_1kgp3 <- load_or_create(locus_dir = locus_dir,
-                               dat = BST1,  
-                               LD_reference = "1KGphase3",
-                               remove_tmps = FALSE,
-                               force_new_LD = TRUE)
+    LD_1kgp3 <- load_or_create(
+        locus_dir = locus_dir,
+        dat = BST1,
+        LD_reference = "1KGphase3",
+        remove_tmps = FALSE,
+        force_new_LD = TRUE
+    )
     run_tests(LD_1kgp3)
     # UK Biobank LD
     # LD_ukb<- load_or_create(locus_dir = locus_dir,
     #                         dat = BST1,
     #                         LD_reference = "UKB")
     # run_tests(LD_ukb)
-    
+
     # # Local vcf file
     # vcf_url <- file.path(
     #     "ftp://ftp-trace.ncbi.nih.gov/1000genomes/ftp/release",
     #     "20110521/",
     #     paste0("ALL.chr",22,".phase1_release_v3.20101123",
-    #            ".snps_indels_svs.genotypes.vcf.gz")) 
-    # out_paths <- downloadR::download_vcf(vcf_url = vcf_url, 
+    #            ".snps_indels_svs.genotypes.vcf.gz"))
+    # out_paths <- downloadR::download_vcf(vcf_url = vcf_url,
     # #                                      nThread = 1)
     # LD_reference <- file.path(
     #     "/var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T/RtmpQuMo8l",
@@ -45,7 +57,7 @@ test_that("load_or_create works", {
     # LD_reference <- "var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpQuMo8l/results/GWAS/Nalls23andMe_2019/BST1/LD/BST1.1KGphase3.vcf"
     # file.exists(LD_reference)
     # LD_local <- load_or_create(locus_dir = locus_dir,
-    #                            dat = BST1, 
-    #                            LD_reference = LD_reference, 
-    #                            force_new_LD = TRUE) 
+    #                            dat = BST1,
+    #                            LD_reference = LD_reference,
+    #                            force_new_LD = TRUE)
 })

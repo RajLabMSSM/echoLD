@@ -9,9 +9,8 @@
 }
 \usage{
 snpstats_get_LD(
-  LD_folder,
-  plink_prefix = "plink",
-  select.snps = NULL,
+  bed_bim_fam,
+  select_snps = NULL,
   stats = c("R"),
   symmetric = TRUE,
   depth = "max",
@@ -20,8 +19,6 @@ snpstats_get_LD(
 )
 }
 \arguments{
-\item{LD_folder}{Locus-specific LD output folder.}
-
 \item{stats}{
     A character vector specifying the linkage disequilibrium measures to
     be calculated. This should contain one or more of the strings: \code{"LLR"},
@@ -42,14 +39,11 @@ snpstats_get_LD(
     and \code{x[,j]} only if \code{i} and \code{j} differ by no more
     than \code{depth}
   }
+
+\item{LD_folder}{Locus-specific LD output folder.}
 }
 \description{
 Get LD using \pkg{snpStats} package
-}
-\examples{
-dat <- data.table::fread("/pd-omics/brian/Fine_Mapping/Data/GWAS/Kunkle_2019/ABCA7/Multi-finemap/ABCA7.Kunkle_2019.1KGphase3_LD.Multi-finemap.tsv.gz")
-LD_folder <- "/pd-omics/brian/Fine_Mapping/Data/GWAS/Kunkle_2019/ABCA7/LD"
-LD_matrix <- snpstats_get_LD(LD_folder = LD_folder, select.snps = dat$SNP)
 }
 \seealso{
 Other LD: 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/custom_panel.R
 \name{custom_panel}
 \alias{custom_panel}
-\title{Compute LD from user-supplied vcf file}
+\title{Compute LD from user-supplied VCF file}
 \usage{
 custom_panel(
   LD_reference,
@@ -14,8 +14,7 @@ custom_panel(
   min_r2 = FALSE,
   remove_correlates = FALSE,
   fillNA = 0,
-  LD_block = FALSE,
-  LD_block_size = 0.7,
+  LD_block_size = NULL,
   remove_tmps = TRUE,
   as_sparse = TRUE,
   nThread = 1,
@@ -23,23 +22,26 @@ custom_panel(
   verbose = TRUE
 )
 }
+\arguments{
+\item{LD_block_size}{Block size. Passed to
+"--blocks-inform-frac" argument in \code{plink}. 
+Recommended default value is \code{0.7}.}
+
+\item{conda_env}{Conda environment name.}
+
+\item{verbose}{Print messages.}
+}
 \description{
-Compute LD from user-supplied vcf file
+Compute LD from user-supplied VCF file
 }
 \examples{
-\dontrun{
-if (!"gaston" \%in\% row.names(installed.packages())) {
-    install.packages("gaston")
-}
+\dontrun{ 
 data("BST1")
 data("locus_dir")
 LD_reference <- "~/Desktop/results/Reference/custom_panel_chr4.vcf"
-LD_matrix <- custom_panel(LD_reference = LD_reference, dat = BST1, locus_dir = locus_dir)
-
-locus_dir <- "/sc/arion/projects/pd-omics/brian/Fine_Mapping/Data/QTL/Microglia_all_regions/BIN1"
-dat <- data.table::fread(file.path(locus_dir, "Multi-finemap/BIN1.Microglia_all_regions.1KGphase3_LD.Multi-finemap.tsv.gz"))
-LD_reference <- "/sc/hydra/projects/pd-omics/glia_omics/eQTL/post_imputation_filtering/eur/filtered_variants/AllChr.hg38.sort.filt.dbsnp.snpeff.vcf.gz"
-LD_matrix <- custom_panel(LD_reference = LD_reference, dat = BST1, locus_dir = locus_dir, LD_genome_build = "hg38")
+LD_matrix <- custom_panel(LD_reference = LD_reference, 
+                          dat = BST1, 
+                          locus_dir = locus_dir)
 }
 }
 \seealso{

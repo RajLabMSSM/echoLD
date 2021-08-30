@@ -4,7 +4,7 @@
 \alias{subset_common_snps}
 \title{Subset LD matrix and dataframe to only their shared SNPs}
 \usage{
-subset_common_snps(LD_matrix, finemap_dat, fillNA = 0, verbose = F)
+subset_common_snps(LD_matrix, dat, fillNA = 0, verbose = F)
 }
 \value{
 data.frame
@@ -13,11 +13,13 @@ data.frame
 Find the SNPs that are shared between an LD matrix and another data.frame with a `SNP` column.
 Then remove any non-shared SNPs from both objects.
 }
-\examples{
+\details{
+\code{
 data("BST1")
-data("LD_matrix")
-finemap_dat <- BST1
-out <- subset_common_snps(LD_matrix = LD_matrix, finemap_dat = BST1)
+data("BST1_LD_matrix")
+dat <- BST1
+out <- echoLD:::subset_common_snps(LD_matrix = BST1_LD_matrix, dat = BST1)
+}
 }
 \concept{SNP filters}
 \keyword{internal}

@@ -11,10 +11,9 @@ LD_ukbiobank(
   chrom = NULL,
   min_pos = NULL,
   force_new_LD = FALSE,
-  chimera = FALSE,
-  server = TRUE,
+  local_storage = NULL,
   download_full_ld = FALSE,
-  download_method = "direct",
+  download_method = "python",
   fillNA = 0,
   nThread = 1,
   return_matrix = FALSE,
@@ -24,9 +23,40 @@ LD_ukbiobank(
   verbose = TRUE
 )
 }
+\arguments{
+\item{dat}{GWAS summary statistics subset to query the LD panel with.}
+
+\item{locus_dir}{Storage directory to use.}
+
+\item{force_new_LD}{If LD file exists, create a new one.}
+
+\item{local_storage}{Path to folder with previously download LD npz files.}
+
+\item{download_method}{If "python" will import compressed numpy array
+directly into R using \pkg{reticulate}. Otherwise, will be passed to
+\link[downloadR]{downloader} to download the full 3Mb-window LD matrix first.}
+
+\item{fillNA}{Value to fill LD matrix NAs with.}
+
+\item{nThread}{Number of threads to parallelize over.}
+
+\item{as_sparse}{Convert the LD matrix to a sparse matrix.}
+
+\item{conda_env}{Conda environment name.}
+
+\item{remove_tmps}{Remove all temporary files like VCF, npz, and plink files.}
+
+\item{verbose}{Print messages.}
+}
 \description{
-Download pre-computed LD matrices from UK Biobank in 3Mb windows,
+Download pre-computed LD matrices from 
+\href{https://www.ukbiobank.ac.uk}{UK Biobank} in 3Mb windows,
 then subset to the region that overlaps with \code{dat}.
+}
+\details{
+LD was derived from a  British, European-decent subpopulation 
+in the UK Biobank. LD was pre-computed and stored by the Alkes Price lab
+(see \href{https://www.biorxiv.org/content/10.1101/807792v3}{here}).
 }
 \seealso{
 Other LD: 

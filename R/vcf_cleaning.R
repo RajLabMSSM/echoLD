@@ -16,6 +16,8 @@ vcf_cleaning <- function(root = ".",
             files <- files[locus_names %in% select_loci]
         }
     }
-    messager("Removing", length(files), "files.", v = verbose)
-    out <- file.remove(files)
+    if(length(files)>0){
+        messager("Removing", length(files), "files.", v = verbose)
+        out <- file.remove(files)   
+    }
 }

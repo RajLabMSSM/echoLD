@@ -4,13 +4,15 @@
 \alias{plink_file}
 \title{Find correct plink file}
 \usage{
-plink_file(plink = "plink", conda_env = NULL)
+plink_file(plink = NULL, conda_env = "echoR")
+}
+\arguments{
+\item{plink}{User-provided path to plink executable.}
+
+\item{conda_env}{Conda environment name.}
 }
 \description{
 Find correct plink file
-}
-\examples{
-plink <- plink_file()
 }
 \seealso{
 Other LD: 

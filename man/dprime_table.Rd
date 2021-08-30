@@ -4,10 +4,10 @@
 \alias{dprime_table}
 \title{Calculate LD (D')}
 \usage{
-dprime_table(SNP_list, LD_folder, conda_env)
+dprime_table(SNP_list, LD_folder, conda_env = "echoR")
 }
 \description{
-This appriach computes an LD matrix of D' (instead of r or r2) from a vcf.
+This approach computes an LD matrix of D' (instead of r or r2) from a vcf.
 See \code{run_plink_LD} for a faster
 (but less flexible) alternative to computing LD.
 }

@@ -12,28 +12,14 @@ data.table
   \item{POS}{Genomic position (in basepairs)}
   \item{...}{Optional: extra columns}
 }
+
+\href{https://www.ukbiobank.ac.uk}{UK Biobank}
+\href{https://www.biorxiv.org/content/10.1101/807792v3}{Nalls 2019}
+
+matrix
 }
 \source{
-\url{https://www.ukbiobank.ac.uk}
-\url{https://www.biorxiv.org/content/10.1101/807792v3}
-}
-\usage{
-BST1_LD_matrix
-}
-\description{
-Precomputed LD within the \emph{BST1} locus
- (defined in \code{\link[=BST1]{BST1}}.
-LD derived white British subpopulation in the UK Biobank.
-Only includes a subset of all the SNPs for storage purposes
-(including the lead GWAS/QTL SNP).
-}
-\details{
-Data originally comes from \href{https://www.ukbiobank.ac.uk}{UK Biobank}.
-LD was pre-computed and stored by the Alkes Price lab
-(see \href{https://www.biorxiv.org/content/10.1101/807792v3}{here}).
-}
-\examples{
-\dontrun{
+\code{
 data("BST1")
 finemap_DT <- BST1
 # Only including a small subset of the full
@@ -44,5 +30,20 @@ BST1_LD_matrix <- readRDS("../Fine_Mapping/Data/GWAS/Nalls23andMe_2019/BST1/plin
 BST1_LD_matrix <- BST1_LD_matrix[snp_list, snp_list]
 usethis::use_data(BST1_LD_matrix, overwrite = T)
 }
+}
+\usage{
+data("BST1_LD_matrix")
+}
+\description{
+Precomputed LD within the \emph{BST1} locus
+ (defined in \code{\link[=BST1]{BST1}}.
+LD derived British, European-decent subpopulation in the UK Biobank.
+Only includes a subset of all the SNPs for storage purposes
+(including the lead GWAS/QTL SNP).
+}
+\details{
+Data originally comes from \href{https://www.ukbiobank.ac.uk}{UK Biobank}.
+LD was pre-computed and stored by the Alkes Price lab
+(see \href{https://www.biorxiv.org/content/10.1101/807792v3}{here}).
 }
 \keyword{datasets}

@@ -16,7 +16,8 @@ Extension of tryCatch function.
 }
 \seealso{
 Other general: 
-\code{\link{get_os}()}
+\code{\link{get_os}()},
+\code{\link{printer}()}
 }
 \concept{general}
 \keyword{internal}

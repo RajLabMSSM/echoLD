@@ -4,7 +4,13 @@
 \alias{vcf_to_bed}
 \title{Convert vcf file to BED file}
 \usage{
-vcf_to_bed(vcf.gz.subset, locus_dir, plink_prefix = "plink", verbose = TRUE)
+vcf_to_bed(
+  vcf.gz.subset,
+  locus_dir,
+  plink_prefix = "plink",
+  conda_env = "echoR",
+  verbose = TRUE
+)
 }
 \arguments{
 \item{vcf.gz.subset}{Path to the gzipped locus subset vcf.}

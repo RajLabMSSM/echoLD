@@ -21,12 +21,14 @@ plink_LD(
 )
 }
 \description{
-Use \emph{plink} to calculate LD from a vcf.
+Use \emph{plink} to calculate LD from a VCF.
 }
-\examples{
-locus_dir <- "/sc/arion/projects/pd-omics/brian/Fine_Mapping/Data/GWAS/Kunkle_2019/ACE"
+\details{
+\code{
+data("BST1"); data("locus_dir");
 LD_folder <- file.path(locus_dir, "LD")
 ld.matrix <- plink_LD(dat = BST1, LD_folder = LD_folder)
+}
 }
 \seealso{
 Other LD: 

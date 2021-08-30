@@ -1,8 +1,20 @@
 #' Download LD matrices from UK Biobank
 #'
-#' Download pre-computed LD matrices from UK Biobank in 3Mb windows,
+#' Download pre-computed LD matrices from 
+#' \href{https://www.ukbiobank.ac.uk}{UK Biobank} in 3Mb windows,
 #' then subset to the region that overlaps with \code{dat}.
 #'
+#' LD was derived from a  British, European-decent subpopulation 
+#' in the UK Biobank. LD was pre-computed and stored by the Alkes Price lab
+#' (see \href{https://www.biorxiv.org/content/10.1101/807792v3}{here}).
+#'
+#' @param download_method If "python" will import compressed numpy array
+#' directly into R using \pkg{reticulate}. Otherwise, will be passed to
+#' \link[downloadR]{downloader} to download the full 3Mb-window LD matrix first.
+#' @param local_storage Path to folder with previously download LD npz files.
+#' @inheritParams load_or_create 
+#' @inheritParams echoconda::find_package
+#' 
 #' @family LD
 #' @keywords internal
 #' @importFrom data.table fread data.table
@@ -13,10 +25,9 @@ LD_ukbiobank <- function(dat = NULL,
                          chrom = NULL,
                          min_pos = NULL,
                          force_new_LD = FALSE,
-                         chimera = FALSE,
-                         server = TRUE,
+                         local_storage = NULL, 
                          download_full_ld = FALSE,
-                         download_method = "direct",
+                         download_method = "python",
                          fillNA = 0,
                          nThread = 1,
                          return_matrix = FALSE,
@@ -24,27 +35,30 @@ LD_ukbiobank <- function(dat = NULL,
                          conda_env = "echoR",
                          remove_tmps = TRUE,
                          verbose = TRUE) {
+    # Avoid confusing checks
+    load_ld <- NULL;
+
     messager("LD:: Using UK Biobank LD reference panel.", v = verbose)
-    #### Prepare finemap_dat ####
+    #### Prepare dat ####
     if (!is.null(dat)) {
-        finemap_dat <- dat
+        dat <- dat
     } else if (!is.null(sumstats_path)) {
         messager("+ Assigning chrom and min_pos based on summary stats file",
             v = verbose
         )
         # sumstats_path="./example_data/BST1_Nalls23andMe_2019_subset.txt"
-        finemap_dat <- data.table::fread(
+        dat <- data.table::fread(
             input = sumstats_path,
             nThread = nThread
         )
     }
-    chrom <- unique(finemap_dat$CHR)
-    min_pos <- min(finemap_dat$POS)
+    chrom <- unique(dat$CHR)
+    min_pos <- min(dat$POS)
     LD.prefixes <- UKB_find_ld_prefix(
         chrom = chrom,
         min_pos = min_pos
     )
-    chimera.path <- "/sc/orga/projects/pd-omics/tools/polyfun/UKBB_LD"
+    # chimera.path <- "/sc/orga/projects/pd-omics/tools/polyfun/UKBB_LD"
     alkes_url <- "https://data.broadinstitute.org/alkesgroup/UKBB_LD"
     URL <- alkes_url
 
@@ -65,7 +79,7 @@ LD_ukbiobank <- function(dat = NULL,
         )
         LD_matrix <- readRDS(RDS_path)
     } else {
-        if (download_method != "direct") {
+        if (download_method != "python") {
             if (download_full_ld |
                 force_new_LD |
                 download_method %in% c("wget", "axel")) {
@@ -79,23 +93,22 @@ LD_ukbiobank <- function(dat = NULL,
                     background = FALSE,
                     force_overwrite = force_new_LD,
                     download_method = download_method
-                )
-                server <- FALSE
+                ) 
             } else {
-                if (chimera) {
+                if (!is.null(local_storage)) {
                     if (file.exists(file.path(
-                        chimera.path,
+                        local_storage,
                         paste0(LD.prefixes, ".gz")
                     )) &
                         file.exists(file.path(
-                            chimera.path,
+                            local_storage,
                             paste0(LD.prefixes, ".npz")
                         ))) {
                         messager("+ LD:: Pre-existing UKB LD",
                             "gz/npz files detected. Importing...",
                             v = verbose
                         )
-                        URL <- chimera.path
+                        URL <- local_storage
                     }
                 } else {
                     URL <- file.path(URL, LD.prefixes)

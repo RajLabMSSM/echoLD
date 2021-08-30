@@ -5,13 +5,26 @@
 \title{Find correlates of the lead GWAS/QTL SNP}
 \usage{
 get_lead_r2(
-  finemap_dat,
+  dat,
   LD_matrix = NULL,
   fillNA = 0,
   LD_format = "matrix",
   verbose = TRUE
 )
 }
+\arguments{
+\item{dat}{SNP-level data.}
+
+\item{LD_matrix}{LD matrix.}
+
+\item{fillNA}{Value to fill NAs with in r/r2 columns.}
+
+\item{LD_format}{The format of the provided \code{LD_matrix}:
+"matrix" (wide) or "df" (long).}
+
+\item{verbose}{Print messages.}
+}
 \description{
 Find correlates of the lead GWAS/QTL SNP
 }
+\keyword{internal}

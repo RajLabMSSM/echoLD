@@ -4,7 +4,22 @@
 \alias{leadSNP_block}
 \title{Identify the LD block in which the lead SNP resides}
 \usage{
-leadSNP_block(leadSNP, LD_folder, LD_block_size = 0.7)
+leadSNP_block(
+  leadSNP,
+  bed_bim_fam,
+  LD_block_size = 0.7,
+  verbose = TRUE,
+  conda_env = "echoR"
+)
+}
+\arguments{
+\item{LD_block_size}{Block size. Passed to
+"--blocks-inform-frac" argument in \code{plink}. 
+Recommended default value is \code{0.7}.}
+
+\item{verbose}{Print messages.}
+
+\item{conda_env}{Conda environment name.}
 }
 \description{
 Identify the LD block in which the lead SNP resides

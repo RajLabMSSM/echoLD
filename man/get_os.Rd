@@ -9,11 +9,9 @@ get_os()
 \description{
 Identify current operating system (OS).
 }
-\examples{
-get_os()
-}
 \seealso{
 Other general: 
+\code{\link{printer}()},
 \code{\link{tryFunc}()}
 }
 \concept{general}

@@ -9,10 +9,13 @@
 read_ld_table <- function(ld.path,
                           snp.subset = FALSE,
                           fillNA = 0,
-                          verbose = T) {
-    # dat <- data.table::fread(file.path(locus_dir,"Multi-finemap/Multi-finemap_results.txt")); snp.subset <- dat$SNP
-    ld.table <- data.table::fread(ld.path, nThread = 4)
-    if (any(snp.subset != F)) {
+                          verbose = TRUE,
+                          nThread = 1) {
+    # Avoid confusing checks
+    SNP_A <- SNP_B <- . <- NULL
+
+    ld.table <- data.table::fread(ld.path, nThread = nThread)
+    if (any(snp.subset != FALSE)) {
         messager("LD:PLINK:: Subsetting LD data...", v = verbose)
         ld.table <- subset(ld.table, SNP_A %in% snp.subset | SNP_B %in% snp.subset)
     }
@@ -21,7 +24,7 @@ read_ld_table <- function(ld.path,
         formula = SNP_B ~ SNP_A,
         value.var = "R",
         fill = 0,
-        drop = T,
+        drop = TRUE,
         fun.agg = function(x) {
             mean(x, na.rm = T)
         }

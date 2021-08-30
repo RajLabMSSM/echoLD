@@ -8,8 +8,9 @@
 vcf_to_bed <- function(vcf.gz.subset,
                        locus_dir,
                        plink_prefix = "plink",
+                       conda_env = "echoR",
                        verbose = TRUE) {
-    plink <- plink_file()
+    plink <- plink_file(conda_env = conda_env)
     messager("LD:PLINK:: Converting vcf.gz to .bed/.bim/.fam", v = verbose)
     LD_dir <- file.path(locus_dir, "LD")
     dir.create(LD_dir, recursive = TRUE, showWarnings = FALSE)

@@ -26,6 +26,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 # echoverse: echoLD 
+
+## LD downloading and processing
  
 ```{r, eval=FALSE}
 if(!"remotes" %in% rownames(installed.packages())){install.packages("remotes")}
@@ -34,6 +36,9 @@ remotes::install_github("RajLabMSSM/echoLD")
 library(echoLD)
 ```
 
+
+## [Documentation website](https://rajlabmssm.github.io/echoLD/)
+## [Vignette](https://rajlabmssm.github.io/echoLD/articles/echoLD)
 
 ## LD reference panels
 

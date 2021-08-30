@@ -1,18 +1,25 @@
 #' Fill NAs in an LD matrix
 #'
 #' Trickier than it looks.
-#' @examples
-#' \dontrun{
-#' data("LD_matrix")
-#' LD_matrix <- fill_NA(LD_matrix)
+#' 
+#' \code{
+#' data("BST1_LD_matrix")
+#' LD_matrix <- fill_NA(BST1_LD_matrix) 
 #' }
+#' 
+#' @param LD_matrix LD matrix
+#' @param fillNA Fill all NAs in the \code{LD_matrix} with \code{fillNA} value.
+#' @param verbose Print messages.
+#' 
+#' @keywords internal 
 fill_NA <- function(LD_matrix,
                     fillNA = 0,
                     verbose = FALSE) {
     messager("+ LD:: Removing unnamed rows/cols", v = verbose)
     # First, filter any rows/cols without names
-    LD_matrix <- data.frame(LD_matrix)
-    LD_matrix <- LD_matrix[rownames(LD_matrix) != ".", colnames(LD_matrix) != "."]
+    LD_matrix <- data.frame(as.matrix(LD_matrix))
+    LD_matrix <- LD_matrix[rownames(LD_matrix) != ".",
+                           colnames(LD_matrix) != "."]
     LD_matrix_orig <- LD_matrix
 
     if (!is.null(fillNA)) {

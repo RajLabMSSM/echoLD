@@ -1,45 +1,42 @@
 #' Compute LD from 1000 Genomes
 #'
-#' Downloads a subset vcf of the 1KG database that matches your locus coordinates.
-#' Then uses \emph{plink} to calculate LD on the fly.
+#' Downloads a subset vcf of the 1KG database that matches
+#'  your locus coordinates. Then uses \link[snpStats]{ld}
+#'   to calculate LD on the fly.
 #'
-#' This approach is taken, because other API query tools have limitations with the window size being queried.
-#' This approach does not have this limitations, allowing you to fine-map loci more completely.
+#' This approach is taken, because other API query tools have 
+#' limitations with the window size being queried.
+#' This approach does not have this limitations, 
+#' allowing you to fine-map loci more completely.
 #'
-#' @param fillNA When pairwise LD (r) between two SNPs is \code{NA}, replace with 0.
-#' @inheritParams echolocatoR::finemap_pipeline
+#' @param fillNA When pairwise LD (r) between two SNPs is \code{NA}, 
+#' replace with 0.
+#' @inheritParams load_or_create
+#' @inheritParams echoconda::find_package
+#' 
 #' @family LD
 #' @keywords internal
-#' @examples
-#' \dontrun{
-#' data("BST1")
-#' data("locus_dir")
-#' BST1 <- limit_SNPs(max_snps = 500, dat = BST1)
-#' LD_matrix <- LD_1KG(locus_dir = file.path("~/Desktop", locus_dir), dat = BST1, LD_reference = "1KGphase1")
-#'
-#' ## Kunkle et al 2019
-#' locus_dir <- "/sc/arion/projects/pd-omics/brian/Fine_Mapping/Data/GWAS/Kunkle_2019/ACE"
-#' }
 LD_1KG <- function(locus_dir,
                    dat,
                    LD_reference = "1KGphase1",
                    superpopulation = "EUR",
                    vcf_folder = NULL,
                    remote_LD = TRUE,
-                   # min_r2=F,
-                   LD_block = FALSE,
-                   LD_block_size = .7,
+                   # min_r2=F, 
+                   LD_block_size = NULL,
                    # min_Dprime=F,
-                   remove_correlates = FALSE,
+                   # remove_correlates = FALSE,
                    remove_tmps = TRUE,
                    fillNA = 0,
-                   download_method = "wget",
+                   download_method = "axel",
                    as_sparse = TRUE,
                    nThread = 1,
                    conda_env = "echoR",
                    verbose = TRUE) {
-    # data("BST1"); data("locus_dir"); dat=BST1; LD_reference="1KGphase1"; vcf_folder=NULL; superpopulation="EUR";
-    # min_r2=F; LD_block=F; LD_block_size=.7; min_Dprime=F;  remove_correlates=F; remote_LD=T; verbose=T; nThread=4; conda_env="echoR";
+    # data("BST1"); data("locus_dir"); dat=BST1; LD_reference="1KGphase1"; 
+    # vcf_folder=NULL; superpopulation="EUR";
+    # min_r2=F; LD_block=F; LD_block_size=.7; min_Dprime=F;  
+    # remove_correlates=F; remote_LD=T; verbose=T; nThread=4; conda_env="echoR";
     messager("LD:: Using 1000Genomes as LD reference panel.", v = verbose)
     locus <- basename(locus_dir)
     vcf_info <- LD_1KG_download_vcf(
@@ -71,9 +68,8 @@ LD_1KG <- function(locus_dir,
     )
     # Calculate LD
     LD_matrix <- snpstats_get_LD(
-        LD_folder = file.path(locus_dir, "LD"),
-        plink_prefix = "plink",
-        select.snps = unique(dat$SNP),
+        bed_bim_fam = bed_bim_fam,
+        select_snps = unique(dat$SNP),
         stats = c("R"),
         symmetric = TRUE,
         depth = "max",
@@ -82,8 +78,7 @@ LD_1KG <- function(locus_dir,
     # Get MAF (if needed)
     dat <- snpstats_get_MAF(
         dat = dat,
-        LD_folder = file.path(locus_dir, "LD"),
-        plink_prefix = "plink",
+        bed_bim_fam = bed_bim_fam,
         force_new_MAF = TRUE,
         nThread = nThread,
         verbose = verbose
@@ -91,13 +86,10 @@ LD_1KG <- function(locus_dir,
     # Get lead SNP rsid
     leadSNP <- subset(dat, leadSNP == T)$SNP
     # Filter out SNPs not in the same LD block as the lead SNP
-    if (LD_block) {
+    if (!is.null(LD_block_size)) {
         block_snps <- leadSNP_block(
             leadSNP = leadSNP,
-            LD_folder = file.path(
-                locus_dir,
-                "LD", "plink_tmp"
-            ),
+            bed_bim_fam = bed_bim_fam,
             LD_block_size = LD_block_size
         )
         LD_matrix <- LD_matrix[

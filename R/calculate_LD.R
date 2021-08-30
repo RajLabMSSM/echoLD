@@ -12,8 +12,9 @@ calculate_LD <- function(locus_dir,
                          ld_window = 1000, # 10000000
                          ld_format = "r",
                          plink_prefix = "plink",
+                         conda_env = "echoR",
                          verbose = TRUE) {
-    plink <- plink_file()
+    plink <- plink_file(conda_env = conda_env)
     messager("LD:PLINK:: Calculating LD ( r & D'-signed; LD-window =", ld_window, ")", v = verbose)
     plink_path_prefix <- file.path(locus_dir, "LD", plink_prefix)
     dir.create(file.path(locus_dir, "LD"), recursive = T, showWarnings = F)

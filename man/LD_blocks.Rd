@@ -4,7 +4,23 @@
 \alias{LD_blocks}
 \title{Calculate LD blocks.}
 \usage{
-LD_blocks(LD_folder, LD_block_size = 0.7)
+LD_blocks(
+  bed_bim_fam,
+  LD_block_size = 0.7,
+  conda_env = "echoR",
+  verbose = TRUE
+)
+}
+\arguments{
+\item{LD_block_size}{Block size. Passed to
+"--blocks-inform-frac" argument in \code{plink}. 
+Recommended default value is \code{0.7}.}
+
+\item{conda_env}{Conda environment name.}
+
+\item{verbose}{Print messages.}
+
+\item{LD_folder}{Path to save LD to.}
 }
 \description{
 Uses \emph{plink} to group highly correlated SNPs into LD blocks.

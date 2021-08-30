@@ -4,7 +4,13 @@
 \alias{read_ld_table}
 \title{Create LD matrix from plink output.}
 \usage{
-read_ld_table(ld.path, snp.subset = FALSE, fillNA = 0, verbose = T)
+read_ld_table(
+  ld.path,
+  snp.subset = FALSE,
+  fillNA = 0,
+  verbose = TRUE,
+  nThread = 1
+)
 }
 \description{
 Depending on which parameters you give \emph{plink} when calculating LD, you get different file outputs.

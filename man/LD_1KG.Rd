@@ -11,12 +11,10 @@ LD_1KG(
   superpopulation = "EUR",
   vcf_folder = NULL,
   remote_LD = TRUE,
-  LD_block = FALSE,
-  LD_block_size = 0.7,
-  remove_correlates = FALSE,
+  LD_block_size = NULL,
   remove_tmps = TRUE,
   fillNA = 0,
-  download_method = "wget",
+  download_method = "axel",
   as_sparse = TRUE,
   nThread = 1,
   conda_env = "echoR",
@@ -24,66 +22,67 @@ LD_1KG(
 )
 }
 \arguments{
-\item{LD_reference}{Which linkage disequilibrium reference panel do you want to use.
-Options include:
-\describe{
-\item{"UKB"}{A pre-caclulated LD reference matrix from a subset of caucasian British individuals from the UK Biobank. See \href{https://www.biorxiv.org/content/10.1101/807792v2}{Wiessbrod et al. (2019)} for more details.}
-\item{"1KGphase1"}{Download a subset of the 1000 Genomes Project Phase 1 vcf and calculate LD on the fly with plink.}
-\item{"1KGphase3"}{Download a subset of the 1000 Genomes Project Phase 3 vcf and calculate LD on the fly with plink.}
-\item{"<path>/*.vcf" or "<path>/*.vcf.gz"}{Alternatively, users can provide their own custom panel by supplying a list of \emph{.vcf} file path (one per locus) which \pkg{echolocatoR} will use to compute LD (using \emph{plink}).}
+\item{locus_dir}{Storage directory to use.}
+
+\item{dat}{GWAS summary statistics subset to query the LD panel with.}
+
+\item{LD_reference}{LD reference to use:
+\itemize{
+\item{"1KGphase1" : }{1000 Genomes Project Phase 1}
+\item{"1KGphase3" : }{1000 Genomes Project Phase 3}
+\item{"UKB" : }{Pre-computed LD from a British 
+European-decent subset of UK Biobank.}
 }}
 
-\item{superpopulation}{Subset your LD reference panel by superopulation.
-Setting the superpopulation is not currently possible when \code{LD_reference="UKB"}.
-\href{https://www.internationalgenome.org/faq/which-populations-are-part-your-study/}{1KGphase1 options} include:
-\describe{
-\item{"AFR"}{African [descent]}
-\item{"AMR"}{Ad-mixed American}
-\item{"EAS"}{East Asian}
-\item{"EUR"}{European}
-\item{"SAS"}{South Asian}
-}}
+\item{superpopulation}{Superpopulation to subset LD panel by
+(used only if \code{LD_reference} is "1KGphase1" or "1KGphase3".)}
 
-\item{remote_LD}{When acquiring LD matrices,
-the default is to delete the full vcf or npz files after \pkg{echolocatoR} has extracted the necssary subset.
-However, if you wish to keep these full files (which can be quite large) set \code{remote_LD=T}.}
+\item{remote_LD}{Whether to pull the LD reference from remote repository, 
+or locally stored files.}
 
-\item{LD_block}{Calculate LD blocks with \emph{plink} and only include the block to which the lead SNP belongs.}
+\item{LD_block_size}{Block size. Passed to
+"--blocks-inform-frac" argument in \code{plink}. 
+Recommended default value is \code{0.7}.}
 
-\item{LD_block_size}{Adjust the granularity of block sizes when \code{LD_block=T}.}
+\item{remove_tmps}{Remove all temporary files like VCF, npz, and plink files.}
 
-\item{remove_correlates}{A named list, where the names are the RSIDs of SNPs
-whose LD correlates you wish to remove,
-and the value is the absolute r2 threshold you wish to filter at for each RSID respectively
-(e.g. \code{ remove_correlates = c("rs76904798"=.2, "rs10000737"=.8)}).
-This will also remove the SNPs in \code{remove_correlates} themselves.}
+\item{fillNA}{When pairwise LD (r) between two SNPs is \code{NA}, 
+replace with 0.}
 
-\item{remove_tmps}{Whether to remove any temporary files (e.g. FINEMAP output files) after the pipeline is done running.}
+\item{download_method}{\itemize{
+\item{\code{"axel"} : }{Multi-threaded}
+\item{\code{"wget"} : }{Single-threaded}
+\item{\code{"download.file"} : }{Single-threaded}
+\item{\code{"internal"} : }{Single-threaded 
+(passed to \link[utils]{download.file})}
+\item{\code{"wininet"} : }{Single-threaded 
+(passed to \link[utils]{download.file})}
+\item{\code{"libcurl"} : }{Single-threaded 
+(passed to \link[utils]{download.file})}
+\item{\code{"curl"} : }{Single-threaded 
+(passed to \link[utils]{download.file})}
+}
+ or
+\code{"download.file"} (single-threaded) .}
 
-\item{fillNA}{When pairwise LD (r) between two SNPs is \code{NA}, replace with 0.}
+\item{as_sparse}{Convert the LD matrix to a sparse matrix.}
 
-\item{conda_env}{The name of a conda environment to use.}
+\item{nThread}{Number of threads to parallelize over.}
 
-\item{verbose}{Whether \pkg{echolocatoR} should be verbose or silent.}
+\item{conda_env}{Conda environment name.}
+
+\item{verbose}{Print messages.}
 }
 \description{
-Downloads a subset vcf of the 1KG database that matches your locus coordinates.
-Then uses \emph{plink} to calculate LD on the fly.
+Downloads a subset vcf of the 1KG database that matches
+ your locus coordinates. Then uses \link[snpStats]{ld}
+  to calculate LD on the fly.
 }
 \details{
-This approach is taken, because other API query tools have limitations with the window size being queried.
-This approach does not have this limitations, allowing you to fine-map loci more completely.
-}
-\examples{
-\dontrun{
-data("BST1")
-data("locus_dir")
-BST1 <- limit_SNPs(max_snps = 500, dat = BST1)
-LD_matrix <- LD_1KG(locus_dir = file.path("~/Desktop", locus_dir), dat = BST1, LD_reference = "1KGphase1")
-
-## Kunkle et al 2019
-locus_dir <- "/sc/arion/projects/pd-omics/brian/Fine_Mapping/Data/GWAS/Kunkle_2019/ACE"
-}
+This approach is taken, because other API query tools have 
+limitations with the window size being queried.
+This approach does not have this limitations, 
+allowing you to fine-map loci more completely.
 }
 \seealso{
 Other LD: 

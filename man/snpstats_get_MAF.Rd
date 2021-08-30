@@ -9,8 +9,7 @@
 \usage{
 snpstats_get_MAF(
   dat,
-  LD_folder,
-  plink_prefix = "plink",
+  bed_bim_fam,
   force_new_MAF = FALSE,
   nThread = 1,
   verbose = TRUE

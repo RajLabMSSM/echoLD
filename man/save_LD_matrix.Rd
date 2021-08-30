@@ -2,7 +2,7 @@
 % Please edit documentation in R/save_LD_matrix.R
 \name{save_LD_matrix}
 \alias{save_LD_matrix}
-\title{Save LD_matrix}
+\title{Save LD matrix}
 \usage{
 save_LD_matrix(
   LD_matrix,
@@ -16,26 +16,26 @@ save_LD_matrix(
 )
 }
 \description{
-Save LD_matrix
+Save an LD matrix after initial pre-processing.
 }
-\examples{
-data("BST1")
-data("LD_matrix")
-data("locus_dir")
+\details{
+\code{
+#data("BST1")
+#data("BST1_LD_matrix")
+#data("locus_dir")
+#locus_dir <- file.path(tempdir(),locus_dir)
+#LD_list <- save_LD_matrix(
+#    LD_matrix = BST1_LD_matrix,
+#    dat = BST1,
+#    locus_dir = locus_dir,
+#    LD_reference = "UKB")
 
-#' locus_dir <- file.path(tempdir(),locus_dir)
-LD_list <- save_LD_matrix(
-    LD_matrix = LD_matrix,
-    dat = BST1,
-    locus_dir = locus_dir,
-    LD_reference = "UKB"
-)
-LD_list <- save_LD_matrix(
-    LD_matrix = LD_matrix,
-    dat = BST1,
-    locus_dir = locus_dir,
-    LD_reference = "custom_vcf"
-)
+#LD_list <- save_LD_matrix(
+#    LD_matrix = BST1_LD_matrix,
+#    dat = BST1,
+#    locus_dir = locus_dir,
+#    LD_reference = "custom_vcf") 
+}
 }
 \seealso{
 Other LD: 

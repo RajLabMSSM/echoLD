@@ -12,7 +12,7 @@ query_vcf(
   whole_vcf = FALSE,
   force_new_vcf = FALSE,
   remove_original_vcf = FALSE,
-  download_method = "wget",
+  download_method = "download.file",
   query_by_regions = FALSE,
   nThread = 1,
   conda_env = "echoR",
@@ -21,22 +21,6 @@ query_vcf(
 }
 \description{
 Query vcf file
-}
-\examples{
-\dontrun{
-data("locus_dir")
-data("BST1")
-# Custom
-LD_reference <- "~/Desktop/results/Reference/custom_panel_chr4.vcf"
-vcf_file <- index_vcf(vcf_file = LD_reference)
-vcf_subset <- query_vcf(
-    dat = BST1,
-    locus_dir = locus_dir,
-    vcf_URL = vcf_file,
-    LD_reference = LD_reference,
-    force_new_vcf = TRUE
-)
-}
 }
 \seealso{
 Other LD: 

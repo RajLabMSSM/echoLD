@@ -1,25 +1,26 @@
-#' Save LD_matrix
+#' Save LD matrix
 #'
+#' Save an LD matrix after initial pre-processing. 
+#' 
+#'\code{
+#' #data("BST1")
+#' #data("BST1_LD_matrix")
+#' #data("locus_dir")
+#' #locus_dir <- file.path(tempdir(),locus_dir)
+#' #LD_list <- save_LD_matrix(
+#' #    LD_matrix = BST1_LD_matrix,
+#' #    dat = BST1,
+#' #    locus_dir = locus_dir,
+#' #    LD_reference = "UKB")
+#' 
+#' #LD_list <- save_LD_matrix(
+#' #    LD_matrix = BST1_LD_matrix,
+#' #    dat = BST1,
+#' #    locus_dir = locus_dir,
+#' #    LD_reference = "custom_vcf") 
+#'}
 #' @family LD
-#' @keywords internal
-#' @examples
-#' data("BST1")
-#' data("LD_matrix")
-#' data("locus_dir")
-#'
-#' #' locus_dir <- file.path(tempdir(),locus_dir)
-#' LD_list <- save_LD_matrix(
-#'     LD_matrix = LD_matrix,
-#'     dat = BST1,
-#'     locus_dir = locus_dir,
-#'     LD_reference = "UKB"
-#' )
-#' LD_list <- save_LD_matrix(
-#'     LD_matrix = LD_matrix,
-#'     dat = BST1,
-#'     locus_dir = locus_dir,
-#'     LD_reference = "custom_vcf"
-#' )
+#' @keywords internal 
 save_LD_matrix <- function(LD_matrix,
                            dat,
                            locus_dir,
@@ -37,7 +38,7 @@ save_LD_matrix <- function(LD_matrix,
         sub.out <- subset_common_snps(
             LD_matrix = LD_matrix,
             fillNA = fillNA,
-            finemap_dat = dat,
+            dat = dat,
             verbose = FALSE
         )
         LD_matrix <- sub.out$LD

@@ -5,18 +5,18 @@
 \alias{locus_dir}
 \title{Example results path for BST1 locus}
 \format{
-An object of class \code{character} of length 1.
+path string
 }
-\usage{
-locus_dir
-}
-\description{
-Example results path for BST1 locus
-}
-\examples{
-\dontrun{
+\source{
+\code{
 locus_dir <- "results/GWAS/Nalls23andMe_2019/BST1"
 usethis::use_data(locus_dir, overwrite = T)
 }
+}
+\usage{
+data("locus_dir")
+}
+\description{
+Example results path for BST1 locus
 }
 \keyword{datasets}

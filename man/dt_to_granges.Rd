@@ -4,7 +4,13 @@
 \alias{dt_to_granges}
 \title{Convert data.table to GRanges object}
 \usage{
-dt_to_granges(dat, style = "NCBI", chrom_col = "CHR", position_col = "POS")
+dt_to_granges(
+  dat,
+  style = c("NCBI", "UCSC"),
+  chrom_col = "CHR",
+  start_col = "POS",
+  end_col = "POS"
+)
 }
 \description{
 Convert data.table to GRanges object

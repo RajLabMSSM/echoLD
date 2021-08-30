@@ -6,14 +6,25 @@
 \usage{
 filter_LD(LD_list, remove_correlates = FALSE, min_r2 = 0, verbose = FALSE)
 }
-\description{
-Filter LD
+\arguments{
+\item{LD_list}{List containing SNP-level data (\code{DT}),
+and LD matrix (\code{LD}).}
+
+\item{remove_correlates}{A list of SNPs. 
+If provided, all SNPs that correlates with these SNPs (at r2>=\code{min_r2})
+will be removed from both \code{DT} and \code{LD} list items..}
+
+\item{min_r2}{Correlation threshold for \code{remove_correlates}.}
+
+\item{verbose}{Print messages.}
 }
-\examples{
+\description{
+\code{
 data("BST1")
-data("LD_matrix")
-LD_list <- list(LD = LD_matrix, DT = BST1)
-LD_list <- filter_LD(LD_list, min_r2 = .2)
+data("BST1_LD_matrix")
+LD_list <- list(LD = BST1_LD_matrix, DT = BST1)
+LD_list <- echoLD:::filter_LD(LD_list, min_r2 = .2)
+}
 }
 \seealso{
 Other LD: 

@@ -7,34 +7,33 @@
 #' @source
 #' \href{https://www.bioconductor.org/packages/release/bioc/html/snpStats.html}{snpStats Bioconductor page}
 #' \href{https://www.bioconductor.org/packages/release/bioc/vignettes/snpStats/inst/doc/ld-vignette.pdf}{LD tutorial}
-#' @examples
-#' dat <- data.table::fread("/pd-omics/brian/Fine_Mapping/Data/GWAS/Kunkle_2019/ABCA7/Multi-finemap/ABCA7.Kunkle_2019.1KGphase3_LD.Multi-finemap.tsv.gz")
-#' LD_folder <- "/pd-omics/brian/Fine_Mapping/Data/GWAS/Kunkle_2019/ABCA7/LD"
-#' LD_matrix <- snpstats_get_LD(LD_folder = LD_folder, select.snps = dat$SNP)
 #' @importFrom snpStats read.plink ld
-snpstats_get_LD <- function(LD_folder,
-                            plink_prefix = "plink",
-                            select.snps = NULL,
+snpstats_get_LD <- function(bed_bim_fam,
+                            select_snps = NULL,
                             stats = c("R"),
                             symmetric = TRUE,
                             depth = "max",
                             nThread = 1,
                             verbose = TRUE) {
-    messager("LD:snpStats:: Computing LD", paste0("(stats = ", paste(stats, collapse = ", "), ")"), v = verbose)
-    # select.snps= arg needed bc otherwise read.plink() sometimes complains of
-    ## duplicate RSID rownames. Also need to check whether these SNPs exist in the plink files.
+    messager("LD:snpStats:: Computing LD",
+        paste0("(stats = ", paste(stats, collapse = ", "), ")"),
+        v = verbose
+    )
+    # dir.create(LD_folder, showWarnings = FALSE, recursive = TRUE)
+    # select_snps= arg needed bc otherwise read.plink() sometimes complains of
+    ## duplicate RSID rownames. Also need to check whether these
+    # SNPs exist in the plink files.
     ## (snpStats doesn't have very good error handling for these cases).
-    select.snps <- snpstats_ensure_nonduplicates(
-        select.snps = select.snps,
-        LD_folder = LD_folder,
-        plink_prefix = plink_prefix,
+    select_snps <- snpstats_ensure_nonduplicates(
+        select_snps = select_snps,
+        bim_path = bed_bim_fam$bim,
         nThread = nThread,
         verbose = verbose
     )
     # Only need to give bed path (infers bin/fam paths)
     ss <- snpStats::read.plink(
-        bed = file.path(LD_folder, plink_prefix),
-        select.snps = select.snps
+        bed = bed_bim_fam$bed,
+        select.snps = select_snps
     )
     # Compute LD from snpMatrix
     ld_list <- snpStats::ld(

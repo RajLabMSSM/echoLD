@@ -1,15 +1,17 @@
 #' Calculate LD (D')
 #'
-#' This appriach computes an LD matrix of D' (instead of r or r2) from a vcf.
+#' This approach computes an LD matrix of D' (instead of r or r2) from a vcf.
 #' See \code{run_plink_LD} for a faster
 #' (but less flexible) alternative to computing LD.
 #'
 #' @family LD
 #' @keywords internal
+#' @importFrom data.table fread
+#' @importFrom stats complete.cases
 dprime_table <- function(SNP_list,
                          LD_folder,
-                         conda_env) {
-    plink <- plink_file(conda_env)
+                         conda_env="echoR") {
+    plink <- plink_file(conda_env = conda_env)
     messager("+ Creating DPrime table")
     system(paste(
         plink, "--bfile", file.path(LD_folder, "plink"),
@@ -30,7 +32,9 @@ dprime_table <- function(SNP_list,
     #                  " && ($",col_dict["R"]," >= ",r,")) { print } }' ",file.path(LD_folder, "plink.ld"),
     #                  " > ",file.path(LD_folder, "plink.ld_filtered.txt"),  sep="")
     # system(awk_cmd)
-    plink.ld <- data.table::fread(file.path(LD_folder, "plink.ld"), select = c("SNP_A", "SNP_B", "DP", "R"), )
-    plink.ld <- plink.ld[complete.cases(plink.ld)]
+    plink.ld <- data.table::fread(file.path(LD_folder, "plink.ld"),
+        select = c("SNP_A", "SNP_B", "DP", "R"),
+    )
+    plink.ld <- plink.ld[stats::complete.cases(plink.ld)]
     return(plink.ld)
 }

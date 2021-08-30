@@ -1,8 +1,7 @@
 #' Construct the path to vcf subset
 #'
-#' @family LD
-#' @keywords internal
-#' @examples
+#'
+#'\code{
 #' data("locus_dir")
 #' data("BST1")
 #' vcf_subset <- construct_subset_vcf_name(
@@ -10,6 +9,9 @@
 #'     locus_dir = locus_dir,
 #'     LD_reference = "1KGlocal"
 #' )
+#'}
+#' @family LD
+#' @keywords internal
 construct_subset_vcf_name <- function(dat,
                                       LD_reference = NULL,
                                       locus_dir,

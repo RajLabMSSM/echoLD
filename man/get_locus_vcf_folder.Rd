@@ -9,10 +9,6 @@ get_locus_vcf_folder(locus_dir = NULL)
 \description{
 Get VCF storage folder
 }
-\examples{
-data("locus_dir")
-vcf_folder <- get_locus_vcf_folder(locus_dir = locus_dir)
-}
 \seealso{
 Other LD: 
 \code{\link{LD_1KG_download_vcf}()},

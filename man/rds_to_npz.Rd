@@ -4,16 +4,10 @@
 \alias{rds_to_npz}
 \title{Convert .RDS file back to .npz format}
 \usage{
-rds_to_npz(rds_path, conda_env = "echoR", verbose = T)
+rds_to_npz(rds_path, conda_env = "echoR", verbose = TRUE)
 }
 \description{
 Convert .RDS file back to .npz format
-}
-\examples{
-\dontrun{
-data("BST1")
-npz_path <- rds_to_npz(rds_path = "/Users/schilder/Desktop/Fine_Mapping/Data/GWAS/Nalls23andMe_2019/BST1/plink/UKB_LD.RDS")
-}
 }
 \seealso{
 Other LD: 
