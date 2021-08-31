@@ -1,10 +1,10 @@
 #' Download LD matrices from UK Biobank
 #'
-#' Download pre-computed LD matrices from 
+#' Download pre-computed LD matrices from
 #' \href{https://www.ukbiobank.ac.uk}{UK Biobank} in 3Mb windows,
 #' then subset to the region that overlaps with \code{dat}.
 #'
-#' LD was derived from a  British, European-decent subpopulation 
+#' LD was derived from a  British, European-decent subpopulation
 #' in the UK Biobank. LD was pre-computed and stored by the Alkes Price lab
 #' (see \href{https://www.biorxiv.org/content/10.1101/807792v3}{here}).
 #'
@@ -12,9 +12,9 @@
 #' directly into R using \pkg{reticulate}. Otherwise, will be passed to
 #' \link[downloadR]{downloader} to download the full 3Mb-window LD matrix first.
 #' @param local_storage Path to folder with previously download LD npz files.
-#' @inheritParams load_or_create 
+#' @inheritParams load_or_create
 #' @inheritParams echoconda::find_package
-#' 
+#'
 #' @family LD
 #' @keywords internal
 #' @importFrom data.table fread data.table
@@ -25,7 +25,7 @@ LD_ukbiobank <- function(dat = NULL,
                          chrom = NULL,
                          min_pos = NULL,
                          force_new_LD = FALSE,
-                         local_storage = NULL, 
+                         local_storage = NULL,
                          download_full_ld = FALSE,
                          download_method = "python",
                          fillNA = 0,
@@ -36,7 +36,7 @@ LD_ukbiobank <- function(dat = NULL,
                          remove_tmps = TRUE,
                          verbose = TRUE) {
     # Avoid confusing checks
-    load_ld <- NULL;
+    load_ld <- NULL
 
     messager("LD:: Using UK Biobank LD reference panel.", v = verbose)
     #### Prepare dat ####
@@ -93,7 +93,7 @@ LD_ukbiobank <- function(dat = NULL,
                     background = FALSE,
                     force_overwrite = force_new_LD,
                     download_method = download_method
-                ) 
+                )
             } else {
                 if (!is.null(local_storage)) {
                     if (file.exists(file.path(

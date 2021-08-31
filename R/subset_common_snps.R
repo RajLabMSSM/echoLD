@@ -2,7 +2,7 @@
 #'
 #' Find the SNPs that are shared between an LD matrix and another data.frame with a `SNP` column.
 #' Then remove any non-shared SNPs from both objects.
-#' 
+#'
 #' \code{
 #' data("BST1")
 #' data("BST1_LD_matrix")
@@ -11,7 +11,7 @@
 #' }
 #' @family SNP filters
 #' @return data.frame
-#' @keywords internal 
+#' @keywords internal
 subset_common_snps <- function(LD_matrix,
                                dat,
                                fillNA = 0,

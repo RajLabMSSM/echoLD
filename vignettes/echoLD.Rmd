@@ -50,6 +50,15 @@ LD_ukb <- load_or_create(locus_dir = locus_dir,
                          nThread = 10)
 ```
 
+# Custom VCF
+
+```{r, eval=FALSE}
+LD_reference <- system.file("exdata","BST1.1KGphase3.vcf.bgz", package = "echoLD")
+LD_custom <- load_or_create(locus_dir = locus_dir,
+                            dat = BST1, 
+                            LD_reference = LD_reference)
+```
+
 
 
 # Session Info 

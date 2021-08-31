@@ -14,7 +14,7 @@ load_or_create(
   remote_LD = TRUE,
   download_method = "axel",
   local_storage = NULL,
-  LD_block_size = NULL,
+  leadSNP_LD_block = FALSE,
   fillNA = 0,
   verbose = TRUE,
   remove_tmps = TRUE,
@@ -34,17 +34,17 @@ load_or_create(
 \itemize{
 \item{"1KGphase1" : }{1000 Genomes Project Phase 1}
 \item{"1KGphase3" : }{1000 Genomes Project Phase 3}
-\item{"UKB" : }{Pre-computed LD from a British 
+\item{"UKB" : }{Pre-computed LD from a British
 European-decent subset of UK Biobank.}
 }}
 
-\item{LD_genome_build}{Genome build of the LD panel 
+\item{LD_genome_build}{Genome build of the LD panel
 (used only if providing custom LD panel).}
 
 \item{superpopulation}{Superpopulation to subset LD panel by
 (used only if \code{LD_reference} is "1KGphase1" or "1KGphase3".)}
 
-\item{remote_LD}{Whether to pull the LD reference from remote repository, 
+\item{remote_LD}{Whether to pull the LD reference from remote repository,
 or locally stored files.}
 
 \item{download_method}{\itemize{
@@ -66,13 +66,12 @@ or locally stored files.}
 \item{local_storage}{Storage folder for previously downloaded LD files.
 If \code{LD_reference} is "1KGphase1" or "1KGphase3",
 \code{local_storage} is where VCF files are stored.
-If \code{LD_reference} is "UKB", \code{local_storage} is where 
-LD compressed numpy array (npz) files are stored. 
+If \code{LD_reference} is "UKB", \code{local_storage} is where
+LD compressed numpy array (npz) files are stored.
 Set to \code{NULL} to download VCFs/LD npz from remote storage system.}
 
-\item{LD_block_size}{Block size. Passed to
-"--blocks-inform-frac" argument in \code{plink}. 
-Recommended default value is \code{0.7}.}
+\item{leadSNP_LD_block}{Only return SNPs within the same LD block 
+as the lead SNP (the SNP with the smallest p-value).}
 
 \item{fillNA}{Value to fill LD matrix NAs with.}
 
@@ -107,35 +106,39 @@ data("BST1")
 data("locus_dir")
 locus_dir <- file.path(tempdir(), locus_dir)
 BST1 <- BST1[seq(1, 50), ]
-
-#LD_matrix <- load_or_create(
-#    locus_dir = locus_dir,
-#    dat = BST1,
-#    LD_reference = "1KGphase1"
-#) 
+\dontrun{
+LD_matrix <- load_or_create(
+    locus_dir = locus_dir,
+    dat = BST1,
+    LD_reference = "1KGphase1"
+)
+}
 }
 \seealso{
 Other LD: 
 \code{\link{LD_1KG_download_vcf}()},
 \code{\link{LD_1KG}()},
 \code{\link{LD_blocks}()},
+\code{\link{LD_custom_cli}()},
+\code{\link{LD_custom}()},
 \code{\link{LD_ukbiobank}()},
 \code{\link{calculate_LD}()},
+\code{\link{compute_LD}()},
 \code{\link{construct_subset_vcf_name}()},
-\code{\link{custom_panel}()},
 \code{\link{dprime_table}()},
 \code{\link{filter_LD}()},
+\code{\link{filter_vcf_cli}()},
 \code{\link{filter_vcf_gaston}()},
-\code{\link{filter_vcf}()},
 \code{\link{get_locus_vcf_folder}()},
-\code{\link{index_vcf}()},
+\code{\link{index_vcf_cli}()},
 \code{\link{ldlinkr_ldproxy_batch}()},
-\code{\link{leadSNP_block}()},
+\code{\link{leadsnp_block_plink}()},
 \code{\link{plink_LD}()},
 \code{\link{plink_file}()},
 \code{\link{plot_LD}()},
 \code{\link{popDat_1KGphase1}},
 \code{\link{popDat_1KGphase3}},
+\code{\link{query_vcf_cli}()},
 \code{\link{query_vcf}()},
 \code{\link{rds_to_npz}()},
 \code{\link{read_bin}()},
@@ -143,9 +146,8 @@ Other LD:
 \code{\link{run_plink_LD}()},
 \code{\link{saveSparse}()},
 \code{\link{save_LD_matrix}()},
-\code{\link{snpstats_get_LD}()},
 \code{\link{snpstats_get_MAF}()},
 \code{\link{translate_population}()},
-\code{\link{vcf_to_bed}()}
+\code{\link{vcf_to_bed_cli}()}
 }
 \concept{LD}

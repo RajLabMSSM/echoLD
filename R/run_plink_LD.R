@@ -8,7 +8,7 @@
 #' @family LD
 #' @keywords internal
 run_plink_LD <- function(bim,
-                         LD_folder=file.path(tempdir(),"LD"),
+                         LD_folder = file.path(tempdir(), "LD"),
                          plink_prefix = "plink",
                          r_format = "r",
                          extract_file = NULL,

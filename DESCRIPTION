@@ -45,11 +45,11 @@ Imports:
     GenomicRanges,
     VariantAnnotation,
     snpStats,
-    seqminer,
     Rsamtools,
     gaston,
     rtracklayer,
-    LDlinkR
+    LDlinkR,
+    adjclust
 Suggests:
     markdown,
     rmarkdown,

@@ -5,10 +5,10 @@
 #' @param fillNA Value to fill NAs with in r/r2 columns.
 #' @param LD_format The format of the provided \code{LD_matrix}:
 #' "matrix" (wide) or "df" (long).
-#' @param verbose Print messages. 
-#' 
+#' @param verbose Print messages.
+#'
 #' @keywords internal
-#' @importFrom dplyr %>% select mutate
+#' @importFrom dplyr %>% mutate
 #' @importFrom data.table as.data.table merge.data.table
 get_lead_r2 <- function(dat,
                         LD_matrix = NULL,
@@ -19,7 +19,7 @@ get_lead_r2 <- function(dat,
     r <- r2 <- leadSNP <- NULL
 
     if (any(c("r", "r2") %in% colnames(dat))) {
-        dat <- dplyr::select(dat, -c(r, r2))
+        dat <- dat[, -c("r", "r2")]
     }
     LD_SNP <- unique(subset(dat, leadSNP)$SNP)
     if (length(LD_SNP) > 1) {

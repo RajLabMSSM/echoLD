@@ -1,14 +1,14 @@
 #' Calculate LD
 #'
 #' Use \emph{plink} to calculate LD from a VCF.
-#' 
+#'
 #' \code{
 #' data("BST1"); data("locus_dir");
 #' LD_folder <- file.path(locus_dir, "LD")
 #' ld.matrix <- plink_LD(dat = BST1, LD_folder = LD_folder)
 #' }
 #' @family LD
-#' @keywords internal 
+#' @keywords internal
 #' @importFrom data.table merge.data.table
 plink_LD <- function(leadSNP = NULL,
                      dat,

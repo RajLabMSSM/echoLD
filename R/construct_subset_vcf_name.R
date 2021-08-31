@@ -1,7 +1,7 @@
 #' Construct the path to vcf subset
 #'
 #'
-#'\code{
+#' \code{
 #' data("locus_dir")
 #' data("BST1")
 #' vcf_subset <- construct_subset_vcf_name(
@@ -9,7 +9,7 @@
 #'     locus_dir = locus_dir,
 #'     LD_reference = "1KGlocal"
 #' )
-#'}
+#' }
 #' @family LD
 #' @keywords internal
 construct_subset_vcf_name <- function(dat,
@@ -30,9 +30,8 @@ construct_subset_vcf_name <- function(dat,
         }
     )
     dir.create(path = dirname(vcf_subset), recursive = T, showWarnings = F)
-    if (!(endsWith(vcf_subset, ".vcf.gz") |
-        endsWith(vcf_subset, ".vcf"))) {
-        vcf_subset <- paste0(vcf_subset, ".vcf")
+    if (!any(endsWith(vcf_subset, c(".vcf.gz", ".vcf.bgz", ".vcf")))) {
+        vcf_subset <- paste0(vcf_subset, ".vcf.bgz")
     }
     return(vcf_subset)
 }

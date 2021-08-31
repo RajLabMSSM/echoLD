@@ -7,7 +7,7 @@ test_that("load_or_create works", {
     run_tests <- function(LD_list) {
         testthat::expect_length(LD_list, 3)
         testthat::expect_equal(nrow(LD_list$LD), ncol(LD_list$LD))
-        testthat::expect_lte(nrow(LD_list$LD), nrow(LD_list$DT)) 
+        testthat::expect_lte(nrow(LD_list$LD), nrow(LD_list$DT))
         testthat::expect_gte(nrow(LD_list$LD), 40)
         testthat::expect_equal(methods::is(LD_list$RDS_path, "character"), TRUE)
     }

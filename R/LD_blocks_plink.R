@@ -4,10 +4,10 @@
 #'
 #' @param LD_folder Path to save LD to.
 #' @param LD_block_size Block size. Passed to
-#' "--blocks-inform-frac" argument in \code{plink}. 
+#' "--blocks-inform-frac" argument in \code{plink}.
 #' Recommended default value is \code{0.7}.
 #' @inheritParams echoconda::find_package
-#' 
+#'
 #' @family LD
 #' @keywords internal
 #' @importFrom data.table fread
@@ -15,18 +15,19 @@ LD_blocks <- function(bed_bim_fam,
                       LD_block_size = .7,
                       conda_env = "echoR",
                       verbose = TRUE) {
-    # Avoid confusing checks 
-    LD_folder <- NULL;
-    
+    # Avoid confusing checks
+    LD_folder <- NULL
+
     messager("++ Calculating LD blocks...",
-             v=verbose)
+        v = verbose
+    )
     # PLINK 1.07 LD: http://zzz.bwh.harvard.edu/plink/ld.shtml
     # PLINK 1.9 LD: https://www.cog-genomics.org/plink/1.9/ld
     # system("plink", "-h")
     # Identify duplicate snps
     # system("plink", "--vcf subset.vcf --list-duplicate-vars")
     # Convert vcf to plink format
-    # system("plink", "--vcf subset.vcf --exclude ./plink_tmp/plink.dupvar 
+    # system("plink", "--vcf subset.vcf --exclude ./plink_tmp/plink.dupvar
     # --make-bed --out PTK2B")
 
     # Estimate LD blocks
@@ -35,8 +36,10 @@ LD_blocks <- function(bed_bim_fam,
     # Reducing "--blocks-inform-frac" is the only parameter that seems
     # to make the block sizes larger
     dir.create(LD_folder, showWarnings = FALSE, recursive = TRUE)
-    plink <- plink_file(plink = plink,
-                        conda_env = conda_env)
+    plink <- plink_file(
+        plink = plink,
+        conda_env = conda_env
+    )
     system(paste(
         plink, "--bfile", dirname(bed_bim_fam$bim),
         "--blocks no-pheno-req no-small-max-span --blocks-max-kb 100000",

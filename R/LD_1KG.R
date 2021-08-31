@@ -4,111 +4,85 @@
 #'  your locus coordinates. Then uses \link[snpStats]{ld}
 #'   to calculate LD on the fly.
 #'
-#' This approach is taken, because other API query tools have 
+#' This approach is taken, because other API query tools have
 #' limitations with the window size being queried.
-#' This approach does not have this limitations, 
+#' This approach does not have this limitations,
 #' allowing you to fine-map loci more completely.
 #'
-#' @param fillNA When pairwise LD (r) between two SNPs is \code{NA}, 
+#' @param fillNA When pairwise LD (r) between two SNPs is \code{NA},
 #' replace with 0.
 #' @inheritParams load_or_create
-#' @inheritParams echoconda::find_package
-#' 
+#'
 #' @family LD
 #' @keywords internal
 LD_1KG <- function(locus_dir,
                    dat,
                    LD_reference = "1KGphase1",
-                   superpopulation = "EUR",
-                   vcf_folder = NULL,
-                   remote_LD = TRUE,
-                   # min_r2=F, 
-                   LD_block_size = NULL,
+                   superpopulation = NULL,
+                   samples = NULL,
+                   local_storage = NULL,
+                   leadSNP_LD_block = FALSE,
+                   force_new_vcf = FALSE,
+                   force_new_MAF = FALSE,
+                   fillNA = 0,
+                   stats = "R",
+                   # min_r2=F,
                    # min_Dprime=F,
                    # remove_correlates = FALSE,
-                   remove_tmps = TRUE,
-                   fillNA = 0,
-                   download_method = "axel",
-                   as_sparse = TRUE,
-                   nThread = 1,
-                   conda_env = "echoR",
                    verbose = TRUE) {
-    # data("BST1"); data("locus_dir"); dat=BST1; LD_reference="1KGphase1"; 
-    # vcf_folder=NULL; superpopulation="EUR";
-    # min_r2=F; LD_block=F; LD_block_size=.7; min_Dprime=F;  
-    # remove_correlates=F; remote_LD=T; verbose=T; nThread=4; conda_env="echoR";
     messager("LD:: Using 1000Genomes as LD reference panel.", v = verbose)
     locus <- basename(locus_dir)
-    vcf_info <- LD_1KG_download_vcf(
+    #### Query ####
+    vcf <- LD_1KG_download_vcf(
         dat = dat,
         locus_dir = locus_dir,
         LD_reference = LD_reference,
-        vcf_folder = vcf_folder,
-        locus = locus,
-        remote_LD = remote_LD,
-        remove_tmps = remove_tmps,
-        download_method = download_method,
-        nThread = nThread,
-        conda_env = conda_env,
-        verbose = verbose
-    )
-    vcf_subset <- vcf_info$vcf_subset
-    popDat <- vcf_info$popDat
-    vcf.gz.path <- filter_vcf(
-        vcf_subset = vcf_subset,
-        popDat = popDat,
         superpopulation = superpopulation,
-        remove_tmp = TRUE,
+        samples = samples,
+        force_new_vcf = force_new_vcf,
+        local_storage = local_storage,
         verbose = verbose
     )
-    bed_bim_fam <- vcf_to_bed(
-        vcf.gz.subset = vcf.gz.path,
-        locus_dir = locus_dir,
-        verbose = verbose
+    #### Convert to snpStats object ####
+    ss <- VariantAnnotation::genotypeToSnpMatrix(
+        x = vcf,
+        select.snps = dat$SNP
     )
-    # Calculate LD
-    LD_matrix <- snpstats_get_LD(
-        bed_bim_fam = bed_bim_fam,
-        select_snps = unique(dat$SNP),
-        stats = c("R"),
-        symmetric = TRUE,
-        depth = "max",
-        verbose = verbose
-    )
-    # Get MAF (if needed)
+    #### Get MAF (if needed) ####
     dat <- snpstats_get_MAF(
         dat = dat,
-        bed_bim_fam = bed_bim_fam,
-        force_new_MAF = TRUE,
-        nThread = nThread,
+        ss = ss,
+        force_new_MAF = force_new_MAF,
         verbose = verbose
     )
-    # Get lead SNP rsid
-    leadSNP <- subset(dat, leadSNP == T)$SNP
-    # Filter out SNPs not in the same LD block as the lead SNP
-    if (!is.null(LD_block_size)) {
-        block_snps <- leadSNP_block(
-            leadSNP = leadSNP,
-            bed_bim_fam = bed_bim_fam,
-            LD_block_size = LD_block_size
+    #### Filter out SNPs not in the same LD block as the lead SNP ####
+    if (leadSNP_LD_block) {
+        dat_LD <- get_leadsnp_block(
+            dat = dat,
+            ss = ss,
+            verbose = verbose
         )
-        LD_matrix <- LD_matrix[
-            row.names(LD_matrix) %in% block_snps,
-            colnames(LD_matrix) %in% block_snps
-        ]
-        LD_matrix <- LD_matrix[block_snps, block_snps]
+        dat <- dat_LD$dat
+        LD_r2 <- dat_LD$LD_r2
     }
-    # IMPORTANT! Remove large data.ld file after you're done with it
-    if (remove_tmps) {
-        suppressWarnings(file.remove(vcf_subset))
+    #### Get LD ####
+    if (tolower(stats) %in% c("r.squared", "r2")) {
+        # pre-computed during LD block clustering
+        LD_matrix <- LD_r2
+    } else {
+        LD_matrix <- compute_LD(
+            ss = ss,
+            select_snps = dat$SNP,
+            stats = stats,
+            verbose = verbose
+        )
     }
-    # Save LD matrix
+    #### Save LD matrix ####
     LD_list <- save_LD_matrix(
         LD_matrix = LD_matrix,
         dat = dat,
         locus_dir = locus_dir,
         subset_common = TRUE,
-        as_sparse = as_sparse,
         fillNA = fillNA,
         LD_reference = LD_reference,
         verbose = verbose

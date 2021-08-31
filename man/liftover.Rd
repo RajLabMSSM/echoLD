@@ -30,10 +30,10 @@ liftover(
 \item{end_col}{Name of the end position column
 (can be same as \code{start_col} if all data is SNP-level).}
 
-\item{build_conversion}{From which to which genome build 
+\item{build_conversion}{From which to which genome build
 to lift over \code{dat}.}
 
-\item{as_granges}{Return lifted \code{dat} as 
+\item{as_granges}{Return lifted \code{dat} as
 \link[GenomicRanges]{GenomicRanges} object.}
 
 \item{verbose}{Print messages.}
@@ -43,5 +43,5 @@ Transfer genomic coordinates from one genome build to another.
 }
 \examples{
 data("BST1")
-dat_lifted <- liftover(dat=BST1, build_conversion="hg19ToHg38")
+dat_lifted <- liftover(dat = BST1, build_conversion = "hg19ToHg38")
 }

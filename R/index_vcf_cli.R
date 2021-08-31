@@ -7,10 +7,10 @@
 #' LD_reference <- "~/Desktop/results/Reference/custom_panel_chr4.vcf.gz"
 #' vcf_file <- index_vcf(vcf_file = LD_reference)
 #' }
-index_vcf <- function(vcf_file,
-                      force_new_index = FALSE,
-                      conda_env = "echoR",
-                      verbose = TRUE) {
+index_vcf_cli <- function(vcf_file,
+                          force_new_index = FALSE,
+                          conda_env = "echoR",
+                          verbose = TRUE) {
     if (!endsWith(vcf_file, ".gz")) {
         messager("+ LD:: Compressing vcf with bgzip", v = verbose)
         bgzip <- echoconda::find_package(

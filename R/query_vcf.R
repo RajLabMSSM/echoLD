@@ -1,100 +1,72 @@
-#' Query vcf file
+#' Query VCF file
 #'
+#'
+#' Query a (remote) Variant Call Format (VCF) file.
+#'
+#' @param dat SNP-levle data table.
+#' @param vcf_url URL or path to VCF.
+#' @param locus_dir Directory to store LD in.
+#' @param LD_genome_build Genome build of the VCF file.
+#' @param superpopulation Ethnic subset of the population to use
+#' (only applicable for "1KGphase1" and "1KGphase3").
+#' @param samples Sample names to subset the VCF by before computing LD.
+#' @param force_new_vcf Force the creation of a new LD file even if one exists.
+#' @param verbose Print messages.
+#' @inheritParams load_or_create
+#'
+#' @return a \link[VariantAnnotation]{VCF} object.
+#' 
 #' @family LD
-#' @keywords internal
+#' @keywords export
 #' @importFrom echoconda find_package
 #' @importFrom downloadR downloader
 #' @importFrom data.table fwrite
+#' @importFrom VariantAnnotation readVcf
 query_vcf <- function(dat,
-                      vcf_URL,
+                      vcf_url,
                       locus_dir,
-                      LD_reference,
-                      whole_vcf = FALSE,
+                      LD_reference = "1KGphase3",
+                      LD_genome_build = "GRCh37",
+                      superpopulation = NULL,
+                      samples = NULL,
                       force_new_vcf = FALSE,
-                      remove_original_vcf = FALSE,
-                      download_method = "download.file",
-                      query_by_regions = FALSE,
-                      nThread = 1,
-                      conda_env = "echoR",
                       verbose = TRUE) {
-    # vcf_subset <- "/pd-omics/brian/Fine_Mapping/Data/GWAS/Nalls23andMe_2019/BRIP1/LD/BRIP1.1KGphase3.vcf.gz"
     vcf_subset <- construct_subset_vcf_name(
         dat = dat,
         locus_dir = locus_dir,
-        LD_reference = LD_reference,
-        whole_vcf = whole_vcf
+        LD_reference = LD_reference
     )
     # CHECK FOR EMPTY VCF FILES!
     ## These can be created if you stop the query early, or if the url fails.
-    if (file.exists(vcf_subset)) {
-        if (file.size(vcf_subset) < 100) { # Less than 100 bytes
-            messager("+ LD:: Removing empty vcf file and its index", v = verbose)
-            file.remove(paste0(vcf_subset, "*")) # Remove both
-        }
-    }
-    tabix <- echoconda::find_package(
-        package = "tabix",
-        conda_env = conda_env,
+    remove_empty_vcf(
+        f = vcf_subset,
         verbose = verbose
     )
+    #### Import existing file or create new one ####
     if ((!file.exists(vcf_subset)) | force_new_vcf) {
-        messager("LD:: Querying VCF subset", v = verbose)
-        if (whole_vcf) {
-            region <- ""
-            locus <- ""
-            out.file <- downloadR::downloader(
-                input_url = vcf_URL,
-                output_path = dirname(vcf_subset),
-                download_method = download_method,
-                nThread = nThread,
-                conda_env = conda_env
-            )
-        } else {
-            # Download tabix subset
-            if (query_by_regions) {
-                ### Using region file (-R flag)
-                regions.bed <- file.path(locus_dir, "LD", "regions.tsv")
-                data.table::fwrite(list(paste0(dat$CHR), sort(dat$POS)),
-                    file = regions.bed, sep = "\t"
-                )
-                regions <- paste("-R", regions.bed)
-                tabix_cmd <- paste(
-                    tabix,
-                    "-fh",
-                    "-p vcf",
-                    vcf_URL,
-                    gsub("\\./", "", regions),
-                    ">",
-                    gsub("\\./", "", vcf_subset)
-                )
-                messager(tabix_cmd)
-                system(tabix_cmd)
-            } else {
-                ### Using coordinates range (MUCH faster!)
-                coord_range <- paste0(
-                    unique(dat$CHR)[1], ":",
-                    min(dat$POS), "-", max(dat$POS)
-                )
-                tabix_cmd <- paste(
-                    tabix,
-                    "-fh",
-                    "-p vcf",
-                    vcf_URL,
-                    coord_range,
-                    ">",
-                    gsub("\\./", "", vcf_subset)
-                )
-                messager(tabix_cmd)
-                system(tabix_cmd)
-            }
-        }
-
-        if (remove_original_vcf) {
-            vcf_name <- paste0(basename(vcf_URL), ".tbi")
-            out <- suppressWarnings(file.remove(vcf_name))
-        }
+        samples <- select_vcf_samples(
+            samples = samples,
+            superpopulation = superpopulation,
+            LD_reference = LD_reference,
+            verbose = verbose
+        )
+        vcf <- query_vcf_variantannotation(
+            vcf_url = vcf_url,
+            dat = dat,
+            samples = samples,
+            genome = LD_genome_build,
+            save_path = vcf_subset
+        )
     } else {
-        messager("+ Identified existing VCF subset file. Importing...", vcf_subset, v = verbose)
+        messager("+ Identified existing VCF subset file. Importing...",
+            vcf_subset,
+            v = verbose
+        )
+        vcf <- VariantAnnotation::readVcf(vcf_subset)
     }
-    return(vcf_subset)
+    messager("Returning VCF with", formatC(nrow(vcf), big.mark = ","), "SNPs",
+        "across", formatC(ncol(vcf), big.mark = ","), "samples.",
+        v = verbose
+    )
+    return(vcf)
 }

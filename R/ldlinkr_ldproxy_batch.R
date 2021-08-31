@@ -2,23 +2,23 @@
 #'
 #' Wrapper for \code{LDlinkR::LDproxy_batch}.
 #' Easy to use but doesn't scale up well to many SNPs (takes way too long).
-#' 
+#'
 #' \code{
 #' data("merged_DT")
-#' lead.snps <- setNames(subset(merged_DT, leadSNP)$Locus, 
+#' lead.snps <- setNames(subset(merged_DT, leadSNP)$Locus,
 #'                       subset(merged_DT, leadSNP)$SNP)
 #' proxies <- ldlinkr_ldproxy_batch(snp = lead.snps)
 #' }
-#' 
+#'
 #' @param min_corr Minimum correlation with \code{snp}.
 #' @param save_dir Save folder.
 #' @param verbose Print messages.
 #' @inheritParams LDlinkR::LDproxy_batch
-#' 
+#'
 #' @family LD
 #' @source
 #' \href{https://www.rdocumentation.org/packages/LDlinkR/versions/1.0.2}{
-#' website} 
+#' website}
 #' @keywords internal
 #' @importFrom LDlinkR LDproxy_batch
 ldlinkr_ldproxy_batch <- function(snp,
@@ -50,10 +50,10 @@ ldlinkr_ldproxy_batch <- function(snp,
     }
     proxy_files <- "combined_query_snp_list.txt" # Automatically named
     if (!is.null(save_dir)) {
-        # LDproxy_batch() saves all results  as individual 
-        #.txt files in the cwd by default.
-        ## It's pretty dumb that they don't let you control if 
-        #and where these are saved,
+        # LDproxy_batch() saves all results  as individual
+        # .txt files in the cwd by default.
+        ## It's pretty dumb that they don't let you control if
+        # and where these are saved,
         ## so we have to do this manually afterwards.
         # local_dir <- "~/Desktop"
         # proxy_files <- list.files(path= "./",

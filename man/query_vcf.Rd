@@ -2,59 +2,87 @@
 % Please edit documentation in R/query_vcf.R
 \name{query_vcf}
 \alias{query_vcf}
-\title{Query vcf file}
+\title{Query VCF file}
 \usage{
 query_vcf(
   dat,
-  vcf_URL,
+  vcf_url,
   locus_dir,
-  LD_reference,
-  whole_vcf = FALSE,
+  LD_reference = "1KGphase3",
+  LD_genome_build = "GRCh37",
+  superpopulation = NULL,
+  samples = NULL,
   force_new_vcf = FALSE,
-  remove_original_vcf = FALSE,
-  download_method = "download.file",
-  query_by_regions = FALSE,
-  nThread = 1,
-  conda_env = "echoR",
   verbose = TRUE
 )
 }
+\arguments{
+\item{dat}{SNP-levle data table.}
+
+\item{vcf_url}{URL or path to VCF.}
+
+\item{locus_dir}{Directory to store LD in.}
+
+\item{LD_reference}{LD reference to use:
+\itemize{
+\item{"1KGphase1" : }{1000 Genomes Project Phase 1}
+\item{"1KGphase3" : }{1000 Genomes Project Phase 3}
+\item{"UKB" : }{Pre-computed LD from a British
+European-decent subset of UK Biobank.}
+}}
+
+\item{LD_genome_build}{Genome build of the VCF file.}
+
+\item{superpopulation}{Ethnic subset of the population to use
+(only applicable for "1KGphase1" and "1KGphase3").}
+
+\item{samples}{Sample names to subset the VCF by before computing LD.}
+
+\item{force_new_vcf}{Force the creation of a new LD file even if one exists.}
+
+\item{verbose}{Print messages.}
+}
+\value{
+a \link[VariantAnnotation]{VCF} object.
+}
 \description{
-Query vcf file
+Query a (remote) Variant Call Format (VCF) file.
 }
 \seealso{
 Other LD: 
 \code{\link{LD_1KG_download_vcf}()},
 \code{\link{LD_1KG}()},
 \code{\link{LD_blocks}()},
+\code{\link{LD_custom_cli}()},
+\code{\link{LD_custom}()},
 \code{\link{LD_ukbiobank}()},
 \code{\link{calculate_LD}()},
+\code{\link{compute_LD}()},
 \code{\link{construct_subset_vcf_name}()},
-\code{\link{custom_panel}()},
 \code{\link{dprime_table}()},
 \code{\link{filter_LD}()},
+\code{\link{filter_vcf_cli}()},
 \code{\link{filter_vcf_gaston}()},
-\code{\link{filter_vcf}()},
 \code{\link{get_locus_vcf_folder}()},
-\code{\link{index_vcf}()},
+\code{\link{index_vcf_cli}()},
 \code{\link{ldlinkr_ldproxy_batch}()},
-\code{\link{leadSNP_block}()},
+\code{\link{leadsnp_block_plink}()},
 \code{\link{load_or_create}()},
 \code{\link{plink_LD}()},
 \code{\link{plink_file}()},
 \code{\link{plot_LD}()},
 \code{\link{popDat_1KGphase1}},
 \code{\link{popDat_1KGphase3}},
+\code{\link{query_vcf_cli}()},
 \code{\link{rds_to_npz}()},
 \code{\link{read_bin}()},
 \code{\link{read_ld_table}()},
 \code{\link{run_plink_LD}()},
 \code{\link{saveSparse}()},
 \code{\link{save_LD_matrix}()},
-\code{\link{snpstats_get_LD}()},
 \code{\link{snpstats_get_MAF}()},
 \code{\link{translate_population}()},
-\code{\link{vcf_to_bed}()}
+\code{\link{vcf_to_bed_cli}()}
 }
 \concept{LD}
-\keyword{internal}
+\keyword{export}

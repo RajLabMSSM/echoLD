@@ -5,7 +5,7 @@
 #' @importFrom reticulate use_condaenv import
 rds_to_npz <- function(rds_path,
                        conda_env = "echoR",
-                       verbose = TRUE) { 
+                       verbose = TRUE) {
     messager("POLYFUN:: Converting LD .RDS to .npz:", rds_path, v = verbose)
     LD_matrix <- readRDS(rds_path)
     reticulate::use_condaenv(condaenv = conda_env)

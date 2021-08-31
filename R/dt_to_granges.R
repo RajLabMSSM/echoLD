@@ -12,7 +12,7 @@ dt_to_granges <- function(dat,
     gr.snp <- GenomicRanges::makeGRangesFromDataFrame(dat,
         seqnames.field = "SEQnames",
         start.field = start_col,
-        end.field = end_col, 
+        end.field = end_col,
         keep.extra.columns = TRUE
     )
     suppressMessages(suppressWarnings(

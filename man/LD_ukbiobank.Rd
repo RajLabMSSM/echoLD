@@ -49,12 +49,12 @@ directly into R using \pkg{reticulate}. Otherwise, will be passed to
 \item{verbose}{Print messages.}
 }
 \description{
-Download pre-computed LD matrices from 
+Download pre-computed LD matrices from
 \href{https://www.ukbiobank.ac.uk}{UK Biobank} in 3Mb windows,
 then subset to the region that overlaps with \code{dat}.
 }
 \details{
-LD was derived from a  British, European-decent subpopulation 
+LD was derived from a  British, European-decent subpopulation
 in the UK Biobank. LD was pre-computed and stored by the Alkes Price lab
 (see \href{https://www.biorxiv.org/content/10.1101/807792v3}{here}).
 }
@@ -63,23 +63,26 @@ Other LD:
 \code{\link{LD_1KG_download_vcf}()},
 \code{\link{LD_1KG}()},
 \code{\link{LD_blocks}()},
+\code{\link{LD_custom_cli}()},
+\code{\link{LD_custom}()},
 \code{\link{calculate_LD}()},
+\code{\link{compute_LD}()},
 \code{\link{construct_subset_vcf_name}()},
-\code{\link{custom_panel}()},
 \code{\link{dprime_table}()},
 \code{\link{filter_LD}()},
+\code{\link{filter_vcf_cli}()},
 \code{\link{filter_vcf_gaston}()},
-\code{\link{filter_vcf}()},
 \code{\link{get_locus_vcf_folder}()},
-\code{\link{index_vcf}()},
+\code{\link{index_vcf_cli}()},
 \code{\link{ldlinkr_ldproxy_batch}()},
-\code{\link{leadSNP_block}()},
+\code{\link{leadsnp_block_plink}()},
 \code{\link{load_or_create}()},
 \code{\link{plink_LD}()},
 \code{\link{plink_file}()},
 \code{\link{plot_LD}()},
 \code{\link{popDat_1KGphase1}},
 \code{\link{popDat_1KGphase3}},
+\code{\link{query_vcf_cli}()},
 \code{\link{query_vcf}()},
 \code{\link{rds_to_npz}()},
 \code{\link{read_bin}()},
@@ -87,10 +90,9 @@ Other LD:
 \code{\link{run_plink_LD}()},
 \code{\link{saveSparse}()},
 \code{\link{save_LD_matrix}()},
-\code{\link{snpstats_get_LD}()},
 \code{\link{snpstats_get_MAF}()},
 \code{\link{translate_population}()},
-\code{\link{vcf_to_bed}()}
+\code{\link{vcf_to_bed_cli}()}
 }
 \concept{LD}
 \keyword{internal}

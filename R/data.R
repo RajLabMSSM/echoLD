@@ -14,7 +14,7 @@
 #'   \item{...}{Optional: extra columns}
 #' }
 #' \href{https://www.biorxiv.org/content/10.1101/388165v3}{Nalls2019}
-#' 
+#'
 #' @source
 #' \code{
 #' root_dir <- "~/Desktop/Fine_Mapping/Data/GWAS/Nalls23andMe_2019/BST1/Multi-finemap"
@@ -26,10 +26,10 @@
 #' @format data.table
 #' @usage data("BST1")
 "BST1"
- 
+
 
 #' Example results path for BST1 locus
-#' 
+#'
 #' @source
 #' \code{
 #' locus_dir <- "results/GWAS/Nalls23andMe_2019/BST1"
@@ -59,10 +59,10 @@
 #'   \item{POS}{Genomic position (in basepairs)}
 #'   \item{...}{Optional: extra columns}
 #' }
-#' 
+#'
 #' \href{https://www.ukbiobank.ac.uk}{UK Biobank}
 #' \href{https://www.biorxiv.org/content/10.1101/807792v3}{Nalls 2019}
-#' 
+#'
 #' @source
 #' \code{
 #' data("BST1")
@@ -99,7 +99,7 @@
 #' Population metadata: 1KGphase3
 #'
 #' Individual-level metadata for 1000 Genomes Project (Phase 3).
-#' 
+#'
 #' @family LD
 #' @source
 #' \code{

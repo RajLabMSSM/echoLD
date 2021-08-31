@@ -10,7 +10,8 @@ snpstats_ensure_nonduplicates <- function(bim_path,
             nThread = nThread
         )
         messager("+ LD:snpStats::", nrow(bim), "rows in bim file.",
-                 v = verbose)
+            v = verbose
+        )
         bim <- bim[!duplicated(bim$SNP), ]
         select_snps <- select_snps[select_snps %in% unique(bim$SNP)]
         messager("+ LD:snpStats::", length(select_snps),

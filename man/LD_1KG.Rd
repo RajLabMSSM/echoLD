@@ -8,16 +8,14 @@ LD_1KG(
   locus_dir,
   dat,
   LD_reference = "1KGphase1",
-  superpopulation = "EUR",
-  vcf_folder = NULL,
-  remote_LD = TRUE,
-  LD_block_size = NULL,
-  remove_tmps = TRUE,
+  superpopulation = NULL,
+  samples = NULL,
+  local_storage = NULL,
+  leadSNP_LD_block = FALSE,
+  force_new_vcf = FALSE,
+  force_new_MAF = FALSE,
   fillNA = 0,
-  download_method = "axel",
-  as_sparse = TRUE,
-  nThread = 1,
-  conda_env = "echoR",
+  stats = "R",
   verbose = TRUE
 )
 }
@@ -30,46 +28,25 @@ LD_1KG(
 \itemize{
 \item{"1KGphase1" : }{1000 Genomes Project Phase 1}
 \item{"1KGphase3" : }{1000 Genomes Project Phase 3}
-\item{"UKB" : }{Pre-computed LD from a British 
+\item{"UKB" : }{Pre-computed LD from a British
 European-decent subset of UK Biobank.}
 }}
 
 \item{superpopulation}{Superpopulation to subset LD panel by
 (used only if \code{LD_reference} is "1KGphase1" or "1KGphase3".)}
 
-\item{remote_LD}{Whether to pull the LD reference from remote repository, 
-or locally stored files.}
+\item{local_storage}{Storage folder for previously downloaded LD files.
+If \code{LD_reference} is "1KGphase1" or "1KGphase3",
+\code{local_storage} is where VCF files are stored.
+If \code{LD_reference} is "UKB", \code{local_storage} is where
+LD compressed numpy array (npz) files are stored.
+Set to \code{NULL} to download VCFs/LD npz from remote storage system.}
 
-\item{LD_block_size}{Block size. Passed to
-"--blocks-inform-frac" argument in \code{plink}. 
-Recommended default value is \code{0.7}.}
+\item{leadSNP_LD_block}{Only return SNPs within the same LD block 
+as the lead SNP (the SNP with the smallest p-value).}
 
-\item{remove_tmps}{Remove all temporary files like VCF, npz, and plink files.}
-
-\item{fillNA}{When pairwise LD (r) between two SNPs is \code{NA}, 
+\item{fillNA}{When pairwise LD (r) between two SNPs is \code{NA},
 replace with 0.}
-
-\item{download_method}{\itemize{
-\item{\code{"axel"} : }{Multi-threaded}
-\item{\code{"wget"} : }{Single-threaded}
-\item{\code{"download.file"} : }{Single-threaded}
-\item{\code{"internal"} : }{Single-threaded 
-(passed to \link[utils]{download.file})}
-\item{\code{"wininet"} : }{Single-threaded 
-(passed to \link[utils]{download.file})}
-\item{\code{"libcurl"} : }{Single-threaded 
-(passed to \link[utils]{download.file})}
-\item{\code{"curl"} : }{Single-threaded 
-(passed to \link[utils]{download.file})}
-}
- or
-\code{"download.file"} (single-threaded) .}
-
-\item{as_sparse}{Convert the LD matrix to a sparse matrix.}
-
-\item{nThread}{Number of threads to parallelize over.}
-
-\item{conda_env}{Conda environment name.}
 
 \item{verbose}{Print messages.}
 }
@@ -79,33 +56,36 @@ Downloads a subset vcf of the 1KG database that matches
   to calculate LD on the fly.
 }
 \details{
-This approach is taken, because other API query tools have 
+This approach is taken, because other API query tools have
 limitations with the window size being queried.
-This approach does not have this limitations, 
+This approach does not have this limitations,
 allowing you to fine-map loci more completely.
 }
 \seealso{
 Other LD: 
 \code{\link{LD_1KG_download_vcf}()},
 \code{\link{LD_blocks}()},
+\code{\link{LD_custom_cli}()},
+\code{\link{LD_custom}()},
 \code{\link{LD_ukbiobank}()},
 \code{\link{calculate_LD}()},
+\code{\link{compute_LD}()},
 \code{\link{construct_subset_vcf_name}()},
-\code{\link{custom_panel}()},
 \code{\link{dprime_table}()},
 \code{\link{filter_LD}()},
+\code{\link{filter_vcf_cli}()},
 \code{\link{filter_vcf_gaston}()},
-\code{\link{filter_vcf}()},
 \code{\link{get_locus_vcf_folder}()},
-\code{\link{index_vcf}()},
+\code{\link{index_vcf_cli}()},
 \code{\link{ldlinkr_ldproxy_batch}()},
-\code{\link{leadSNP_block}()},
+\code{\link{leadsnp_block_plink}()},
 \code{\link{load_or_create}()},
 \code{\link{plink_LD}()},
 \code{\link{plink_file}()},
 \code{\link{plot_LD}()},
 \code{\link{popDat_1KGphase1}},
 \code{\link{popDat_1KGphase3}},
+\code{\link{query_vcf_cli}()},
 \code{\link{query_vcf}()},
 \code{\link{rds_to_npz}()},
 \code{\link{read_bin}()},
@@ -113,10 +93,9 @@ Other LD:
 \code{\link{run_plink_LD}()},
 \code{\link{saveSparse}()},
 \code{\link{save_LD_matrix}()},
-\code{\link{snpstats_get_LD}()},
 \code{\link{snpstats_get_MAF}()},
 \code{\link{translate_population}()},
-\code{\link{vcf_to_bed}()}
+\code{\link{vcf_to_bed_cli}()}
 }
 \concept{LD}
 \keyword{internal}

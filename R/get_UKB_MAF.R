@@ -2,18 +2,18 @@
 #'
 #' If \strong{MAF} column is missing,
 #' download MAF from UK Biobank and use that instead.
-#' 
+#'
 #' @param dat SNP-level data.
 #' @param output_path Path to store UKB_MAF file in.
 #' @param force_new_maf Download UKB_MAF file again.
 #' @param verbose Print messages.
-#' @inheritParams downloadR::downloader 
-#'  
+#' @inheritParams downloadR::downloader
+#'
 #' @family standardizing functions
-#' @examples 
+#' @examples
 #' data("BST1")
 #' dat <- data.frame(BST1)[, colnames(BST1) != "MAF"]
-#' BST1 <- get_UKB_MAF(dat = dat) 
+#' BST1 <- get_UKB_MAF(dat = dat)
 #' @source \href{http://biobank.ctsu.ox.ac.uk/showcase/field.cgi?id=22801}{UKB}
 #' @export
 #' @importFrom data.table fread merge.data.table data.table
@@ -29,8 +29,8 @@ get_UKB_MAF <- function(dat,
                         verbose = TRUE,
                         conda_env = "echoR") {
     # Avoid confusing checks
-    POS <- MAF <- SNP <- NULL;
-    
+    POS <- MAF <- SNP <- NULL
+
     messager("UKB MAF:: Extracting MAF from UKB reference.", v = verbose)
     chrom <- unique(dat$CHR)
     input_url <- paste0(

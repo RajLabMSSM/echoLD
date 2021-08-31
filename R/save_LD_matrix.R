@@ -1,8 +1,8 @@
 #' Save LD matrix
 #'
-#' Save an LD matrix after initial pre-processing. 
-#' 
-#'\code{
+#' Save an LD matrix after initial pre-processing.
+#'
+#' \code{
 #' #data("BST1")
 #' #data("BST1_LD_matrix")
 #' #data("locus_dir")
@@ -12,15 +12,15 @@
 #' #    dat = BST1,
 #' #    locus_dir = locus_dir,
 #' #    LD_reference = "UKB")
-#' 
+#'
 #' #LD_list <- save_LD_matrix(
 #' #    LD_matrix = BST1_LD_matrix,
 #' #    dat = BST1,
 #' #    locus_dir = locus_dir,
-#' #    LD_reference = "custom_vcf") 
-#'}
+#' #    LD_reference = "custom_vcf")
+#' }
 #' @family LD
-#' @keywords internal 
+#' @keywords internal
 save_LD_matrix <- function(LD_matrix,
                            dat,
                            locus_dir,

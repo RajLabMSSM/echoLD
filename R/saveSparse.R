@@ -12,6 +12,6 @@ saveSparse <- function(LD_matrix,
     # print(object.size(LD_matrix),units="auto")
     # printer("Sparse size:")
     # print(object.size(LD_sparse),units="auto")
-    printer("LD:: Saving LD as sparse matrix ==>", LD_path, v = verbose)
+    messager("LD:: Saving LD as sparse matrix ==>", LD_path, v = verbose)
     saveRDS(LD_sparse, LD_path)
 }

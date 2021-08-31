@@ -9,25 +9,16 @@
 #' @importFrom snpStats read.plink col.summary
 #' @importFrom data.table merge.data.table
 snpstats_get_MAF <- function(dat,
-                             bed_bim_fam,
+                             ss,
                              force_new_MAF = FALSE,
-                             nThread = 1,
                              verbose = TRUE) {
     # Avoid confusing checks
     MAF <- NULL
 
     if (!"MAF" %in% colnames(dat) | force_new_MAF) {
         messager("LD::snpStats:: Filling `MAF` column with MAF from LD panel.",
-                 v = verbose)
-        select.snps <- snpstats_ensure_nonduplicates(
-            select_snps = dat$SNP,
-            bim_path = bed_bim_fam$bim,
-            nThread = nThread,
-            verbose = FALSE)
-        ss <- snpStats::read.plink(
-            bed = bed_bim_fam$bed,
-            select.snps = select.snps
-        ) 
+            v = verbose
+        )
         MAF_df <- data.frame(
             SNP = row.names(snpStats::col.summary(ss$genotypes)),
             MAF = snpStats::col.summary(ss$genotypes)$MAF

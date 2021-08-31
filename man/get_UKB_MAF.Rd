@@ -53,6 +53,6 @@ download MAF from UK Biobank and use that instead.
 \examples{
 data("BST1")
 dat <- data.frame(BST1)[, colnames(BST1) != "MAF"]
-BST1 <- get_UKB_MAF(dat = dat) 
+BST1 <- get_UKB_MAF(dat = dat)
 }
 \concept{standardizing functions}

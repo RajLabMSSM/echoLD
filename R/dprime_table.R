@@ -10,7 +10,7 @@
 #' @importFrom stats complete.cases
 dprime_table <- function(SNP_list,
                          LD_folder,
-                         conda_env="echoR") {
+                         conda_env = "echoR") {
     plink <- plink_file(conda_env = conda_env)
     messager("+ Creating DPrime table")
     system(paste(

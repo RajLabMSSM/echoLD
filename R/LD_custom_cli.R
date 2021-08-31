@@ -3,37 +3,42 @@
 #'
 #' @inheritParams LD_blocks
 #' @inheritParams echoconda::find_package
-#' 
+#'
 #' @family LD
 #' @keywords internal
 #' @examples
-#' \dontrun{ 
+#' \dontrun{
 #' data("BST1")
 #' data("locus_dir")
-#' LD_reference <- "~/Desktop/results/Reference/custom_panel_chr4.vcf"
-#' LD_matrix <- custom_panel(LD_reference = LD_reference, 
-#'                           dat = BST1, 
-#'                           locus_dir = locus_dir)
+#' LD_reference <- system.file("exdata", "BST1.1KGphase3.vcf.bgz",
+#'     package = "echoLD"
+#' )
+#' LD_matrix <- LD_custom_cli(
+#'     LD_reference = LD_reference,
+#'     dat = BST1,
+#'     locus_dir = locus_dir
+#' )
 #' }
 #' @importFrom dplyr %>% rename mutate
-custom_panel <- function(LD_reference,
-                         fullSS_genome_build = "hg19",
-                         LD_genome_build = "hg19",
-                         dat,
-                         locus_dir,
-                         force_new_LD = FALSE,
-                         min_r2 = FALSE,
-                         # min_Dprime=F,
-                         remove_correlates = FALSE,
-                         fillNA = 0, 
-                         LD_block_size = NULL,
-                         remove_tmps = TRUE,
-                         as_sparse = TRUE,
-                         nThread = 1,
-                         conda_env = "echoR",
-                         verbose = TRUE) {
+LD_custom_cli <- function(LD_reference,
+                          superpopulation = NULL,
+                          fullSS_genome_build = "hg19",
+                          LD_genome_build = "hg19",
+                          dat,
+                          locus_dir,
+                          force_new_LD = FALSE,
+                          min_r2 = FALSE,
+                          # min_Dprime=F,
+                          remove_correlates = FALSE,
+                          fillNA = 0,
+                          LD_block_size = NULL,
+                          remove_tmps = TRUE,
+                          as_sparse = TRUE,
+                          nThread = 1,
+                          conda_env = "echoR",
+                          verbose = TRUE) {
     # Avoid confusing checks
-    POS <- POS.hg38 <- CHR <- NULL
+    POS <- POS.hg38 <- CHR  <- NULL
 
     messager("LD:: Computing LD from local vcf file:", LD_reference)
 
@@ -58,7 +63,7 @@ custom_panel <- function(LD_reference,
             )
         }
     }
-    vcf_file <- index_vcf(
+    vcf_file <- index_vcf_cli(
         vcf_file = LD_reference,
         force_new_index = FALSE,
         conda_env = conda_env,
@@ -74,11 +79,11 @@ custom_panel <- function(LD_reference,
         }
     )
 
-    vcf_subset <- query_vcf(
+    vcf_subset <- query_vcf_cli(
         dat = dat,
         locus_dir = locus_dir,
         LD_reference = LD_reference,
-        vcf_URL = LD_reference,
+        vcf_url = LD_reference,
         whole_vcf = FALSE,
         remove_original_vcf = FALSE,
         force_new_vcf = force_new_LD,
@@ -88,25 +93,34 @@ custom_panel <- function(LD_reference,
         verbose = verbose
     )
 
-    bed_bim_fam <- vcf_to_bed(
+    bed_bim_fam <- vcf_to_bed_cli(
         vcf.gz.subset = vcf_subset,
         locus_dir = locus_dir,
         plink_prefix = "plink",
         verbose = verbose
     )
-    # Calculate LD
-    LD_matrix <- snpstats_get_LD(
-        bed_bim_fam = bed_bim_fam,
+    #### Convert to snpStats
+    ss <- plink_to_snpstats(
+        vcf_subset = vcf_subset, 
+        superpopulation  = superpopulation,
+        select_snps = unique(dat$SNP),
+        locus_dir = locus_dir,
+        nThread = nThread,
+        verbose = verbose
+    )
+    #### Compute LD ####
+    LD_matrix <- compute_LD(
+        ss = ss, 
         select_snps = unique(dat$SNP),
         stats = c("R"),
         symmetric = TRUE,
         depth = "max",
         verbose = verbose
     )
-    # Get MAF (if needed)
+    #### Get MAF  ####
     dat <- snpstats_get_MAF(
         dat = dat,
-        bed_bim_fam = bed_bim_fam,
+        ss = ss,
         force_new_MAF = FALSE,
         verbose = verbose
     )
@@ -114,7 +128,7 @@ custom_panel <- function(LD_reference,
     # Get lead SNP rsid
     leadSNP <- subset(dat, leadSNP)$SNP
     if (!is.null(LD_block_size)) {
-        block_snps <- leadSNP_block(
+        block_snps <- leadsnp_block_plink(
             leadSNP = leadSNP,
             bed_bim_fam = bed_bim_fam,
             LD_block_size = LD_block_size
