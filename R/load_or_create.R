@@ -21,12 +21,10 @@
 #' \item{"UKB" : }{Pre-computed LD from a British
 #' European-decent subset of UK Biobank.}
 #' }
-#' @param LD_genome_build Genome build of the LD panel
+#' @param ref_genome Genome build of the LD panel
 #' (used only if providing custom LD panel).
 #' @param superpopulation Superpopulation to subset LD panel by
 #'  (used only if \code{LD_reference} is "1KGphase1" or "1KGphase3".)
-#' @param remote_LD Whether to pull the LD reference from remote repository,
-#' or locally stored files.
 #' @param local_storage Storage folder for previously downloaded LD files.
 #' If \code{LD_reference} is "1KGphase1" or "1KGphase3",
 #' \code{local_storage} is where VCF files are stored.
@@ -34,15 +32,14 @@
 #' LD compressed numpy array (npz) files are stored.
 #' Set to \code{NULL} to download VCFs/LD npz from remote storage system.
 #' @param fillNA Value to fill LD matrix NAs with.
-#' @param remove_tmps Remove all intermediate files 
+#' @param remove_tmps Remove all intermediate files
 #' like VCF, npz, and plink files.
 #' @param as_sparse Convert the LD matrix to a sparse matrix.
-#' @param leadSNP_LD_block Only return SNPs within the same LD block 
-#' as the lead SNP (the SNP with the smallest p-value). 
-#' 
-#' @inheritParams query_vcf
+#' @param leadSNP_LD_block Only return SNPs within the same LD block
+#' as the lead SNP (the SNP with the smallest p-value).
+#'
+#' @inheritParams echotabix::query_vcf
 #' @inheritParams downloadR::downloader
-#' @inheritParams echoconda::find_package
 #'
 #' @return A symmetric LD matrix of pairwise SNP correlations.
 #'
@@ -64,10 +61,9 @@ load_or_create <- function(locus_dir,
                            dat,
                            force_new_LD = FALSE,
                            LD_reference = c("1KGphase1", "1KGphase3", "UKB"),
-                           LD_genome_build = "hg19",
+                           ref_genome = "hg19",
                            samples = NULL,
                            superpopulation = NULL,
-                           remote_LD = TRUE, 
                            local_storage = NULL,
                            leadSNP_LD_block = FALSE,
                            fillNA = 0,
@@ -75,7 +71,7 @@ load_or_create <- function(locus_dir,
                            remove_tmps = TRUE,
                            as_sparse = TRUE,
                            download_method = "axel",
-                           conda_env = "echoR",
+                           # conda_env = "echoR",
                            nThread = 1) {
     LD_reference <- LD_reference[1]
     RDS_path <- get_rds_path(
@@ -110,7 +106,7 @@ load_or_create <- function(locus_dir,
             nThread = nThread,
             return_matrix = TRUE,
             as_sparse = TRUE,
-            conda_env = conda_env,
+            # conda_env = conda_env,
             remove_tmps = remove_tmps
         )
     } else if (tolower(LD_reference) %in% c("1kgphase1", "1kgphase3")) {
@@ -120,7 +116,7 @@ load_or_create <- function(locus_dir,
             dat = dat,
             local_storage = local_storage,
             LD_reference = LD_reference,
-            samples =  samples,
+            samples = samples,
             superpopulation = superpopulation,
             leadSNP_LD_block = leadSNP_LD_block,
             fillNA = fillNA,
@@ -136,8 +132,8 @@ load_or_create <- function(locus_dir,
             dat = dat,
             local_storage = local_storage,
             LD_reference = LD_reference,
-            LD_genome_build = LD_genome_build,
-            samples =  samples,
+            ref_genome = ref_genome,
+            samples = samples,
             superpopulation = superpopulation,
             leadSNP_LD_block = leadSNP_LD_block,
             fillNA = fillNA,
@@ -145,7 +141,7 @@ load_or_create <- function(locus_dir,
         )
     } else {
         msg <- paste0(
-            "LD:: LD_reference input not recognized.", " Must both one of:\n",
+            "echoLD:: LD_reference input not recognized.", " Must both one of:\n",
             paste0(" - ",
                 c(
                     "1KGphase1", "1KGphase3", "UKB",

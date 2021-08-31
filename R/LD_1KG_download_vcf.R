@@ -12,11 +12,12 @@
 #'     locus_dir = file.path(tempdir(), locus_dir)
 #' )
 #' }
-#' @family LD
-#' @keywords internal
 #'
 #' @inheritParams load_or_create
-#' @inheritParams query_vcf
+#' @inheritParams echotabix::query_vcf
+#' @family LD
+#' @keywords internal
+#' @importFrom echotabix query_vcf
 LD_1KG_download_vcf <- function(dat,
                                 LD_reference = "1KGphase1",
                                 superpopulation = NULL,
@@ -36,14 +37,20 @@ LD_1KG_download_vcf <- function(dat,
         chrom = gsub("chr", "", dat$CHR[1]),
         local_storage = local_storage
     )
+    #### Select samples ####
+    samples <- select_vcf_samples(
+        samples = samples,
+        superpopulation = superpopulation,
+        LD_reference = LD_reference,
+        verbose = verbose
+    )
     #### Query ####
-    vcf <- query_vcf(
+    vcf <- echotabix::query_vcf(
         dat = dat,
         vcf_url = vcf_url,
         locus_dir = locus_dir,
-        LD_reference = LD_reference,
-        LD_genome_build = "GRCh37",
-        superpopulation = superpopulation,
+        vcf_name = LD_reference,
+        ref_genome = "GRCh37",
         samples = samples,
         force_new_vcf = force_new_vcf,
         verbose = verbose

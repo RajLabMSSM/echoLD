@@ -53,7 +53,7 @@ LD_ukb <- load_or_create(locus_dir = locus_dir,
 # Custom VCF
 
 ```{r, eval=FALSE}
-LD_reference <- system.file("exdata","BST1.1KGphase3.vcf.bgz", package = "echoLD")
+LD_reference <- system.file("extdata","BST1.1KGphase3.vcf.bgz", package = "echoLD")
 LD_custom <- load_or_create(locus_dir = locus_dir,
                             dat = BST1, 
                             LD_reference = LD_reference)

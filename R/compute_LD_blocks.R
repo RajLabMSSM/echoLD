@@ -25,12 +25,12 @@ compute_LD_blocks <- function(x,
     } else {
         x <- x$genotypes
     }
-    messager("LD:: Computing adjacency matrix.", v = verbose)
+    messager("echoLD:: Computing adjacency matrix.", v = verbose)
     fit <- adjclust::snpClust(
         x = x,
         stats = stats
     )
-    messager("LD:: Clustering LD blocks using the", type, "method.", v = verbose)
+    messager("echoLD:: Clustering LD blocks using the", type, "method.", v = verbose)
     clusters <- adjclust::select(
         x = fit,
         type = tolower(type[1]),
@@ -42,7 +42,7 @@ compute_LD_blocks <- function(x,
     )
     #### Explicitly set k ####
     # adjclust::cutree_chac(fit, k = 10)
-    report_time(start = startLDB, v = verbose) 
+    report_time(start = startLDB, v = verbose)
     return(list(
         fit = fit,
         clusters = clusters

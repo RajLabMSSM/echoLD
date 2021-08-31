@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Download LD matrices from UK Biobank — LD_ukbiobank" />
-<meta property="og:description" content="Download pre-computed LD matrices from 
+<meta property="og:description" content="Download pre-computed LD matrices from
 UK Biobank in 3Mb windows,
 then subset to the region that overlaps with dat." />
 
@@ -119,7 +119,7 @@ then subset to the region that overlaps with dat." />
     </div>
 
     <div class="ref-description">
-    <p>Download pre-computed LD matrices from 
+    <p>Download pre-computed LD matrices from
 <a href='https://www.ukbiobank.ac.uk'>UK Biobank</a> in 3Mb windows,
 then subset to the region that overlaps with <code>dat</code>.</p>
     </div>
@@ -138,7 +138,6 @@ then subset to the region that overlaps with <code>dat</code>.</p>
   nThread <span class='op'>=</span> <span class='fl'>1</span>,
   return_matrix <span class='op'>=</span> <span class='cn'>FALSE</span>,
   as_sparse <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  conda_env <span class='op'>=</span> <span class='st'>"echoR"</span>,
   remove_tmps <span class='op'>=</span> <span class='cn'>TRUE</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
@@ -181,12 +180,9 @@ directly into R using <span class="pkg">reticulate</span>. Otherwise, will be pa
       <td><p>Convert the LD matrix to a sparse matrix.</p></td>
     </tr>
     <tr>
-      <th>conda_env</th>
-      <td><p>Conda environment name.</p></td>
-    </tr>
-    <tr>
       <th>remove_tmps</th>
-      <td><p>Remove all temporary files like VCF, npz, and plink files.</p></td>
+      <td><p>Remove all intermediate files
+like VCF, npz, and plink files.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -196,7 +192,7 @@ directly into R using <span class="pkg">reticulate</span>. Otherwise, will be pa
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>LD was derived from a  British, European-decent subpopulation 
+    <p>LD was derived from a  British, European-decent subpopulation
 in the UK Biobank. LD was pre-computed and stored by the Alkes Price lab
 (see <a href='https://www.biorxiv.org/content/10.1101/807792v3'>here</a>).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -204,35 +200,20 @@ in the UK Biobank. LD was pre-computed and stored by the Alkes Price lab
     <div class='dont-index'><p>Other LD: 
 <code><a href='LD_1KG_download_vcf.html'>LD_1KG_download_vcf</a>()</code>,
 <code><a href='LD_1KG.html'>LD_1KG</a>()</code>,
-<code><a href='LD_blocks.html'>LD_blocks</a>()</code>,
-<code><a href='calculate_LD.html'>calculate_LD</a>()</code>,
-<code><a href='construct_subset_vcf_name.html'>construct_subset_vcf_name</a>()</code>,
-<code><a href='custom_panel.html'>custom_panel</a>()</code>,
-<code><a href='dprime_table.html'>dprime_table</a>()</code>,
+<code><a href='LD_custom.html'>LD_custom</a>()</code>,
+<code><a href='compute_LD.html'>compute_LD</a>()</code>,
 <code><a href='filter_LD.html'>filter_LD</a>()</code>,
-<code><a href='filter_vcf_gaston.html'>filter_vcf_gaston</a>()</code>,
-<code><a href='filter_vcf.html'>filter_vcf</a>()</code>,
 <code><a href='get_locus_vcf_folder.html'>get_locus_vcf_folder</a>()</code>,
-<code><a href='index_vcf.html'>index_vcf</a>()</code>,
 <code><a href='ldlinkr_ldproxy_batch.html'>ldlinkr_ldproxy_batch</a>()</code>,
-<code><a href='leadSNP_block.html'>leadSNP_block</a>()</code>,
 <code><a href='load_or_create.html'>load_or_create</a>()</code>,
-<code><a href='plink_LD.html'>plink_LD</a>()</code>,
-<code><a href='plink_file.html'>plink_file</a>()</code>,
 <code><a href='plot_LD.html'>plot_LD</a>()</code>,
 <code><a href='popDat_1KGphase1.html'>popDat_1KGphase1</a></code>,
 <code><a href='popDat_1KGphase3.html'>popDat_1KGphase3</a></code>,
-<code><a href='query_vcf.html'>query_vcf</a>()</code>,
 <code><a href='rds_to_npz.html'>rds_to_npz</a>()</code>,
-<code><a href='read_bin.html'>read_bin</a>()</code>,
-<code><a href='read_ld_table.html'>read_ld_table</a>()</code>,
-<code><a href='run_plink_LD.html'>run_plink_LD</a>()</code>,
 <code><a href='saveSparse.html'>saveSparse</a>()</code>,
 <code><a href='save_LD_matrix.html'>save_LD_matrix</a>()</code>,
-<code><a href='snpstats_get_LD.html'>snpstats_get_LD</a>()</code>,
 <code><a href='snpstats_get_MAF.html'>snpstats_get_MAF</a>()</code>,
-<code><a href='translate_population.html'>translate_population</a>()</code>,
-<code><a href='vcf_to_bed.html'>vcf_to_bed</a>()</code></p></div>
+<code><a href='translate_population.html'>translate_population</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

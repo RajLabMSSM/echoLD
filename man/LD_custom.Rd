@@ -8,7 +8,7 @@ LD_custom(
   locus_dir = tempdir(),
   dat,
   LD_reference,
-  LD_genome_build = "GRCh37",
+  ref_genome = "GRCh37",
   superpopulation = NULL,
   samples = NULL,
   local_storage = NULL,
@@ -33,7 +33,7 @@ LD_custom(
 European-decent subset of UK Biobank.}
 }}
 
-\item{LD_genome_build}{Genome build of the LD panel
+\item{ref_genome}{Genome build of the LD panel
 (used only if providing custom LD panel).}
 
 \item{superpopulation}{Superpopulation to subset LD panel by
@@ -48,8 +48,10 @@ If \code{LD_reference} is "UKB", \code{local_storage} is where
 LD compressed numpy array (npz) files are stored.
 Set to \code{NULL} to download VCFs/LD npz from remote storage system.}
 
-\item{leadSNP_LD_block}{Only return SNPs within the same LD block 
+\item{leadSNP_LD_block}{Only return SNPs within the same LD block
 as the lead SNP (the SNP with the smallest p-value).}
+
+\item{force_new_vcf}{Force the creation of a new LD file even if one exists.}
 
 \item{fillNA}{When pairwise LD (r) between two SNPs is \code{NA},
 replace with 0.}
@@ -73,7 +75,7 @@ data("BST1")
 data("locus_dir")
 locus_dir <- file.path(tempdir(), locus_dir)
 dat <- BST1[seq(1, 50), ]
-LD_reference <- system.file("exdata", "BST1.1KGphase3.vcf.bgz",
+LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",
     package = "echoLD"
 )
 LD_list <- LD_custom(
@@ -87,37 +89,20 @@ LD_list <- LD_custom(
 Other LD: 
 \code{\link{LD_1KG_download_vcf}()},
 \code{\link{LD_1KG}()},
-\code{\link{LD_blocks_cli}()},
-\code{\link{LD_custom_cli}()},
 \code{\link{LD_ukbiobank}()},
-\code{\link{calculate_LD}()},
 \code{\link{compute_LD}()},
-\code{\link{construct_subset_vcf_name}()},
-\code{\link{dprime_table}()},
 \code{\link{filter_LD}()},
-\code{\link{filter_vcf_cli}()},
-\code{\link{filter_vcf_gaston}()},
 \code{\link{get_locus_vcf_folder}()},
-\code{\link{index_vcf_cli}()},
 \code{\link{ldlinkr_ldproxy_batch}()},
-\code{\link{leadsnp_block_plink}()},
 \code{\link{load_or_create}()},
-\code{\link{plink_LD}()},
-\code{\link{plink_file}()},
 \code{\link{plot_LD}()},
 \code{\link{popDat_1KGphase1}},
 \code{\link{popDat_1KGphase3}},
-\code{\link{query_vcf_cli}()},
-\code{\link{query_vcf}()},
 \code{\link{rds_to_npz}()},
-\code{\link{read_bin}()},
-\code{\link{read_ld_table}()},
-\code{\link{run_plink_LD}()},
 \code{\link{saveSparse}()},
 \code{\link{save_LD_matrix}()},
 \code{\link{snpstats_get_MAF}()},
-\code{\link{translate_population}()},
-\code{\link{vcf_to_bed_cli}()}
+\code{\link{translate_population}()}
 }
 \concept{LD}
 \keyword{internal}

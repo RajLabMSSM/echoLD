@@ -18,7 +18,6 @@ LD_ukbiobank(
   nThread = 1,
   return_matrix = FALSE,
   as_sparse = TRUE,
-  conda_env = "echoR",
   remove_tmps = TRUE,
   verbose = TRUE
 )
@@ -42,9 +41,7 @@ directly into R using \pkg{reticulate}. Otherwise, will be passed to
 
 \item{as_sparse}{Convert the LD matrix to a sparse matrix.}
 
-\item{conda_env}{Conda environment to use.}
-
-\item{remove_tmps}{Remove all intermediate files 
+\item{remove_tmps}{Remove all intermediate files
 like VCF, npz, and plink files.}
 
 \item{verbose}{Print messages.}
@@ -63,37 +60,20 @@ in the UK Biobank. LD was pre-computed and stored by the Alkes Price lab
 Other LD: 
 \code{\link{LD_1KG_download_vcf}()},
 \code{\link{LD_1KG}()},
-\code{\link{LD_blocks_cli}()},
-\code{\link{LD_custom_cli}()},
 \code{\link{LD_custom}()},
-\code{\link{calculate_LD}()},
 \code{\link{compute_LD}()},
-\code{\link{construct_subset_vcf_name}()},
-\code{\link{dprime_table}()},
 \code{\link{filter_LD}()},
-\code{\link{filter_vcf_cli}()},
-\code{\link{filter_vcf_gaston}()},
 \code{\link{get_locus_vcf_folder}()},
-\code{\link{index_vcf_cli}()},
 \code{\link{ldlinkr_ldproxy_batch}()},
-\code{\link{leadsnp_block_plink}()},
 \code{\link{load_or_create}()},
-\code{\link{plink_LD}()},
-\code{\link{plink_file}()},
 \code{\link{plot_LD}()},
 \code{\link{popDat_1KGphase1}},
 \code{\link{popDat_1KGphase3}},
-\code{\link{query_vcf_cli}()},
-\code{\link{query_vcf}()},
 \code{\link{rds_to_npz}()},
-\code{\link{read_bin}()},
-\code{\link{read_ld_table}()},
-\code{\link{run_plink_LD}()},
 \code{\link{saveSparse}()},
 \code{\link{save_LD_matrix}()},
 \code{\link{snpstats_get_MAF}()},
-\code{\link{translate_population}()},
-\code{\link{vcf_to_bed_cli}()}
+\code{\link{translate_population}()}
 }
 \concept{LD}
 \keyword{internal}

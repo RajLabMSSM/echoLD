@@ -30,7 +30,7 @@ LD_1KG <- function(locus_dir,
                    # min_Dprime=F,
                    # remove_correlates = FALSE,
                    verbose = TRUE) {
-    messager("LD:: Using 1000Genomes as LD reference panel.", v = verbose)
+    messager("echoLD:: Using 1000Genomes as LD reference panel.", v = verbose)
     locus <- basename(locus_dir)
     #### Query ####
     vcf <- LD_1KG_download_vcf(

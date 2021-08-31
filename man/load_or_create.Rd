@@ -9,10 +9,9 @@ load_or_create(
   dat,
   force_new_LD = FALSE,
   LD_reference = c("1KGphase1", "1KGphase3", "UKB"),
-  LD_genome_build = "hg19",
+  ref_genome = "hg19",
   samples = NULL,
   superpopulation = NULL,
-  remote_LD = TRUE,
   local_storage = NULL,
   leadSNP_LD_block = FALSE,
   fillNA = 0,
@@ -20,7 +19,6 @@ load_or_create(
   remove_tmps = TRUE,
   as_sparse = TRUE,
   download_method = "axel",
-  conda_env = "echoR",
   nThread = 1
 )
 }
@@ -39,16 +37,13 @@ load_or_create(
 European-decent subset of UK Biobank.}
 }}
 
-\item{LD_genome_build}{Genome build of the LD panel
+\item{ref_genome}{Genome build of the LD panel
 (used only if providing custom LD panel).}
 
 \item{samples}{Sample names to subset the VCF by before computing LD.}
 
 \item{superpopulation}{Superpopulation to subset LD panel by
 (used only if \code{LD_reference} is "1KGphase1" or "1KGphase3".)}
-
-\item{remote_LD}{Whether to pull the LD reference from remote repository,
-or locally stored files.}
 
 \item{local_storage}{Storage folder for previously downloaded LD files.
 If \code{LD_reference} is "1KGphase1" or "1KGphase3",
@@ -57,14 +52,14 @@ If \code{LD_reference} is "UKB", \code{local_storage} is where
 LD compressed numpy array (npz) files are stored.
 Set to \code{NULL} to download VCFs/LD npz from remote storage system.}
 
-\item{leadSNP_LD_block}{Only return SNPs within the same LD block 
+\item{leadSNP_LD_block}{Only return SNPs within the same LD block
 as the lead SNP (the SNP with the smallest p-value).}
 
 \item{fillNA}{Value to fill LD matrix NAs with.}
 
 \item{verbose}{Print messages.}
 
-\item{remove_tmps}{Remove all intermediate files 
+\item{remove_tmps}{Remove all intermediate files
 like VCF, npz, and plink files.}
 
 \item{as_sparse}{Convert the LD matrix to a sparse matrix.}
@@ -84,8 +79,6 @@ like VCF, npz, and plink files.}
 }
  or
 \code{"download.file"} (single-threaded) .}
-
-\item{conda_env}{Conda environment to use.}
 
 \item{nThread}{Number of threads to parallelize over.}
 }
@@ -122,36 +115,19 @@ LD_matrix <- load_or_create(
 Other LD: 
 \code{\link{LD_1KG_download_vcf}()},
 \code{\link{LD_1KG}()},
-\code{\link{LD_blocks_cli}()},
-\code{\link{LD_custom_cli}()},
 \code{\link{LD_custom}()},
 \code{\link{LD_ukbiobank}()},
-\code{\link{calculate_LD}()},
 \code{\link{compute_LD}()},
-\code{\link{construct_subset_vcf_name}()},
-\code{\link{dprime_table}()},
 \code{\link{filter_LD}()},
-\code{\link{filter_vcf_cli}()},
-\code{\link{filter_vcf_gaston}()},
 \code{\link{get_locus_vcf_folder}()},
-\code{\link{index_vcf_cli}()},
 \code{\link{ldlinkr_ldproxy_batch}()},
-\code{\link{leadsnp_block_plink}()},
-\code{\link{plink_LD}()},
-\code{\link{plink_file}()},
 \code{\link{plot_LD}()},
 \code{\link{popDat_1KGphase1}},
 \code{\link{popDat_1KGphase3}},
-\code{\link{query_vcf_cli}()},
-\code{\link{query_vcf}()},
 \code{\link{rds_to_npz}()},
-\code{\link{read_bin}()},
-\code{\link{read_ld_table}()},
-\code{\link{run_plink_LD}()},
 \code{\link{saveSparse}()},
 \code{\link{save_LD_matrix}()},
 \code{\link{snpstats_get_MAF}()},
-\code{\link{translate_population}()},
-\code{\link{vcf_to_bed_cli}()}
+\code{\link{translate_population}()}
 }
 \concept{LD}

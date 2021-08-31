@@ -16,7 +16,7 @@ snpstats_get_MAF <- function(dat,
     MAF <- NULL
 
     if (!"MAF" %in% colnames(dat) | force_new_MAF) {
-        messager("LD::snpStats:: Filling `MAF` column with MAF from LD panel.",
+        messager("echoLD::snpStats:: Filling `MAF` column with MAF from LD panel.",
             v = verbose
         )
         MAF_df <- data.frame(
@@ -31,7 +31,7 @@ snpstats_get_MAF <- function(dat,
         )
         return(subset_merge)
     } else {
-        messager("LD::snpStats:: `MAF` column already present.", v = verbose)
+        messager("echoLD::snpStats:: `MAF` column already present.", v = verbose)
         return(dat)
     }
 }

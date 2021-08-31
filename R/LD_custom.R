@@ -12,6 +12,7 @@
 #' @param fillNA When pairwise LD (r) between two SNPs is \code{NA},
 #' replace with 0.
 #' @inheritParams load_or_create
+#' @inheritParams echotabix::query_vcf
 #'
 #' @examples
 #' \dontrun{
@@ -19,7 +20,7 @@
 #' data("locus_dir")
 #' locus_dir <- file.path(tempdir(), locus_dir)
 #' dat <- BST1[seq(1, 50), ]
-#' LD_reference <- system.file("exdata", "BST1.1KGphase3.vcf.bgz",
+#' LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",
 #'     package = "echoLD"
 #' )
 #' LD_list <- LD_custom(
@@ -30,10 +31,11 @@
 #' }
 #' @family LD
 #' @keywords internal
+#' @importFrom echotabix query_vcf
 LD_custom <- function(locus_dir = tempdir(),
                       dat,
                       LD_reference,
-                      LD_genome_build = "GRCh37",
+                      ref_genome = "GRCh37",
                       superpopulation = NULL,
                       samples = NULL,
                       local_storage = NULL,
@@ -46,17 +48,16 @@ LD_custom <- function(locus_dir = tempdir(),
                       # min_Dprime=F,
                       # remove_correlates = FALSE,
                       verbose = TRUE) {
-    messager("LD:: Using custom VCF as LD reference panel.", v = verbose)
+    messager("echoLD:: Using custom VCF as LD reference panel.", v = verbose)
     locus <- basename(locus_dir)
     vcf_url <- LD_reference
     #### Query ####
-    vcf <- query_vcf(
+    vcf <- echotabix::query_vcf(
         dat = dat,
         vcf_url = vcf_url,
         locus_dir = locus_dir,
-        LD_reference = LD_reference,
-        LD_genome_build = LD_genome_build,
-        superpopulation = superpopulation,
+        vcf_name = LD_reference,
+        ref_genome = ref_genome,
         samples = samples,
         force_new_vcf = force_new_vcf,
         verbose = verbose

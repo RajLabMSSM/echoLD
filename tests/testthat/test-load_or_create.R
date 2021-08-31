@@ -37,15 +37,17 @@ test_that("load_or_create works", {
         force_new_LD = TRUE
     )
     run_tests(LD_1kgp3)
-    
-    
+
+
     #### Custom VCF ####
-    LD_reference <- system.file("extdata","BST1.1KGphase3.vcf.bgz", package = "echoLD")
-    LD_custom <- load_or_create(locus_dir = locus_dir,
-                                dat = BST1, 
-                                LD_reference = LD_reference)
+    LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz", package = "echoLD")
+    LD_custom <- load_or_create(
+        locus_dir = locus_dir,
+        dat = BST1,
+        LD_reference = LD_reference
+    )
     run_tests(LD_custom)
-    
+
     # UK Biobank LD
     # LD_ukb<- load_or_create(locus_dir = locus_dir,
     #                         dat = BST1,

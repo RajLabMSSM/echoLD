@@ -12,18 +12,7 @@ select_vcf_samples(
 )
 }
 \arguments{
-\item{superpopulation}{Ethnic subset of the population to use
-(only applicable for "1KGphase1" and "1KGphase3").}
-
 \item{samples}{Sample names to subset the VCF by before computing LD.}
-
-\item{LD_reference}{LD reference to use:
-\itemize{
-\item{"1KGphase1" : }{1000 Genomes Project Phase 1}
-\item{"1KGphase3" : }{1000 Genomes Project Phase 3}
-\item{"UKB" : }{Pre-computed LD from a British
-European-decent subset of UK Biobank.}
-}}
 
 \item{verbose}{Print messages.}
 }

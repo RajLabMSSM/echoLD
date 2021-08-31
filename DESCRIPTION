@@ -28,7 +28,7 @@ Depends: R (>= 3.6.0)
 SystemRequirements: Python (>= 3.7.0)
 biocViews:
 Imports: 
-    echoconda,
+    echotabix,
     downloadR,
     magrittr,
     dplyr,
@@ -41,12 +41,10 @@ Imports:
     BiocManager,  
     data.table,  
     reticulate,  
-    GenomeInfoDb, 
-    IRanges,
+    GenomeInfoDb,  
     GenomicRanges,
     VariantAnnotation,
     snpStats,
-    Rsamtools,
     gaston,
     rtracklayer,
     LDlinkR,
@@ -60,7 +58,7 @@ Suggests:
     covr,
     testthat (>= 3.0.0)
 Remotes:
-    github::RajLabMSSM/echoconda,
+    github::RajLabMSSM/echotabix,
     github::RajLabMSSM/downloadR
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr

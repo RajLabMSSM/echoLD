@@ -11,7 +11,6 @@ Identify current operating system (OS).
 }
 \seealso{
 Other general: 
-\code{\link{printer}()},
 \code{\link{tryFunc}()}
 }
 \concept{general}

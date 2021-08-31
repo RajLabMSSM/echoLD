@@ -41,11 +41,11 @@ get_lead_r2 <- function(dat,
 
     if (LD_format == "matrix") {
         if (is.null(LD_matrix)) {
-            messager("+ LD:: No LD_matrix detected. Setting r2=NA", v = verbose)
+            messager("+ echoLD:: No LD_matrix detected. Setting r2=NA", v = verbose)
             dat <- dat
             dat$r2 <- NA
         } else {
-            messager("+ LD:: LD_matrix detected.",
+            messager("+ echoLD:: LD_matrix detected.",
                 "Coloring SNPs by LD with lead SNP.",
                 v = verbose
             )
@@ -74,7 +74,7 @@ get_lead_r2 <- function(dat,
     }
 
     if ((fillNA != FALSE) & (sum(is.na(LD_matrix)) > 0)) {
-        messager("+ LD:: Filling r/r2 NAs with", fillNA, v = verbose)
+        messager("+ echoLD:: Filling r/r2 NAs with", fillNA, v = verbose)
         dat$r[is.na(dat$r)] <- fillNA
         dat$r2[is.na(dat$r2)] <- fillNA
     }

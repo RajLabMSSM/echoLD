@@ -37,7 +37,7 @@ compute_LD <- function(ss,
         stats = stats,
         symmetric = symmetric
     )
-    report_time(start = startLD, v = verbose) 
+    report_time(start = startLD, v = verbose)
     if (length(stats) != 1) {
         LD_matrix <- LD_matrix$R
     }
