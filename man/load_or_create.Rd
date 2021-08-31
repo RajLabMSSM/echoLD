@@ -10,15 +10,16 @@ load_or_create(
   force_new_LD = FALSE,
   LD_reference = c("1KGphase1", "1KGphase3", "UKB"),
   LD_genome_build = "hg19",
-  superpopulation = "EUR",
+  samples = NULL,
+  superpopulation = NULL,
   remote_LD = TRUE,
-  download_method = "axel",
   local_storage = NULL,
   leadSNP_LD_block = FALSE,
   fillNA = 0,
   verbose = TRUE,
   remove_tmps = TRUE,
   as_sparse = TRUE,
+  download_method = "axel",
   conda_env = "echoR",
   nThread = 1
 )
@@ -41,11 +42,32 @@ European-decent subset of UK Biobank.}
 \item{LD_genome_build}{Genome build of the LD panel
 (used only if providing custom LD panel).}
 
+\item{samples}{Sample names to subset the VCF by before computing LD.}
+
 \item{superpopulation}{Superpopulation to subset LD panel by
 (used only if \code{LD_reference} is "1KGphase1" or "1KGphase3".)}
 
 \item{remote_LD}{Whether to pull the LD reference from remote repository,
 or locally stored files.}
+
+\item{local_storage}{Storage folder for previously downloaded LD files.
+If \code{LD_reference} is "1KGphase1" or "1KGphase3",
+\code{local_storage} is where VCF files are stored.
+If \code{LD_reference} is "UKB", \code{local_storage} is where
+LD compressed numpy array (npz) files are stored.
+Set to \code{NULL} to download VCFs/LD npz from remote storage system.}
+
+\item{leadSNP_LD_block}{Only return SNPs within the same LD block 
+as the lead SNP (the SNP with the smallest p-value).}
+
+\item{fillNA}{Value to fill LD matrix NAs with.}
+
+\item{verbose}{Print messages.}
+
+\item{remove_tmps}{Remove all intermediate files 
+like VCF, npz, and plink files.}
+
+\item{as_sparse}{Convert the LD matrix to a sparse matrix.}
 
 \item{download_method}{\itemize{
 \item{\code{"axel"} : }{Multi-threaded}
@@ -63,30 +85,12 @@ or locally stored files.}
  or
 \code{"download.file"} (single-threaded) .}
 
-\item{local_storage}{Storage folder for previously downloaded LD files.
-If \code{LD_reference} is "1KGphase1" or "1KGphase3",
-\code{local_storage} is where VCF files are stored.
-If \code{LD_reference} is "UKB", \code{local_storage} is where
-LD compressed numpy array (npz) files are stored.
-Set to \code{NULL} to download VCFs/LD npz from remote storage system.}
-
-\item{leadSNP_LD_block}{Only return SNPs within the same LD block 
-as the lead SNP (the SNP with the smallest p-value).}
-
-\item{fillNA}{Value to fill LD matrix NAs with.}
-
-\item{verbose}{Print messages.}
-
-\item{remove_tmps}{Remove all temporary files like VCF, npz, and plink files.}
-
-\item{as_sparse}{Convert the LD matrix to a sparse matrix.}
-
-\item{conda_env}{Conda environment name.}
+\item{conda_env}{Conda environment to use.}
 
 \item{nThread}{Number of threads to parallelize over.}
 }
 \value{
-A symmetric LD matrix of pairwise \emph{r} values.
+A symmetric LD matrix of pairwise SNP correlations.
 }
 \description{
 Calculate and/or query linkage disequilibrium (LD) from reference panels
@@ -118,7 +122,7 @@ LD_matrix <- load_or_create(
 Other LD: 
 \code{\link{LD_1KG_download_vcf}()},
 \code{\link{LD_1KG}()},
-\code{\link{LD_blocks}()},
+\code{\link{LD_blocks_cli}()},
 \code{\link{LD_custom_cli}()},
 \code{\link{LD_custom}()},
 \code{\link{LD_ukbiobank}()},

@@ -12,7 +12,7 @@ plink_to_snpstats <- function(vcf_subset,
         remove_tmp = TRUE,
         verbose = verbose
     )
-    bed_bim_fam <- vcf_to_bed(
+    bed_bim_fam <- vcf_to_bed_cli(
         vcf.gz.subset = vcf.gz.path,
         locus_dir = locus_dir,
         verbose = verbose

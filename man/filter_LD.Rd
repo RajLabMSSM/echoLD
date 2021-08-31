@@ -30,7 +30,7 @@ LD_list <- echoLD:::filter_LD(LD_list, min_r2 = .2)
 Other LD: 
 \code{\link{LD_1KG_download_vcf}()},
 \code{\link{LD_1KG}()},
-\code{\link{LD_blocks}()},
+\code{\link{LD_blocks_cli}()},
 \code{\link{LD_custom_cli}()},
 \code{\link{LD_custom}()},
 \code{\link{LD_ukbiobank}()},

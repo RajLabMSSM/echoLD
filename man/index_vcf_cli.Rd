@@ -14,17 +14,11 @@ index_vcf_cli(
 \description{
 Index vcf file if it hasn't been already
 }
-\examples{
-\dontrun{
-LD_reference <- "~/Desktop/results/Reference/custom_panel_chr4.vcf.gz"
-vcf_file <- index_vcf(vcf_file = LD_reference)
-}
-}
 \seealso{
 Other LD: 
 \code{\link{LD_1KG_download_vcf}()},
 \code{\link{LD_1KG}()},
-\code{\link{LD_blocks}()},
+\code{\link{LD_blocks_cli}()},
 \code{\link{LD_custom_cli}()},
 \code{\link{LD_custom}()},
 \code{\link{LD_ukbiobank}()},

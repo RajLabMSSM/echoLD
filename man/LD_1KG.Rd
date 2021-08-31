@@ -35,6 +35,8 @@ European-decent subset of UK Biobank.}
 \item{superpopulation}{Superpopulation to subset LD panel by
 (used only if \code{LD_reference} is "1KGphase1" or "1KGphase3".)}
 
+\item{samples}{Sample names to subset the VCF by before computing LD.}
+
 \item{local_storage}{Storage folder for previously downloaded LD files.
 If \code{LD_reference} is "1KGphase1" or "1KGphase3",
 \code{local_storage} is where VCF files are stored.
@@ -64,7 +66,7 @@ allowing you to fine-map loci more completely.
 \seealso{
 Other LD: 
 \code{\link{LD_1KG_download_vcf}()},
-\code{\link{LD_blocks}()},
+\code{\link{LD_blocks_cli}()},
 \code{\link{LD_custom_cli}()},
 \code{\link{LD_custom}()},
 \code{\link{LD_ukbiobank}()},

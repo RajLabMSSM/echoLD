@@ -11,10 +11,10 @@
 #' @family LD
 #' @keywords internal
 #' @importFrom data.table fread
-LD_blocks <- function(bed_bim_fam,
-                      LD_block_size = .7,
-                      conda_env = "echoR",
-                      verbose = TRUE) {
+LD_blocks_cli <- function(bed_bim_fam,
+                              LD_block_size = .7,
+                              conda_env = "echoR",
+                              verbose = TRUE) {
     # Avoid confusing checks
     LD_folder <- NULL
 

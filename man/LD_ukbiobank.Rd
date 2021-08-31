@@ -42,9 +42,10 @@ directly into R using \pkg{reticulate}. Otherwise, will be passed to
 
 \item{as_sparse}{Convert the LD matrix to a sparse matrix.}
 
-\item{conda_env}{Conda environment name.}
+\item{conda_env}{Conda environment to use.}
 
-\item{remove_tmps}{Remove all temporary files like VCF, npz, and plink files.}
+\item{remove_tmps}{Remove all intermediate files 
+like VCF, npz, and plink files.}
 
 \item{verbose}{Print messages.}
 }
@@ -62,7 +63,7 @@ in the UK Biobank. LD was pre-computed and stored by the Alkes Price lab
 Other LD: 
 \code{\link{LD_1KG_download_vcf}()},
 \code{\link{LD_1KG}()},
-\code{\link{LD_blocks}()},
+\code{\link{LD_blocks_cli}()},
 \code{\link{LD_custom_cli}()},
 \code{\link{LD_custom}()},
 \code{\link{calculate_LD}()},

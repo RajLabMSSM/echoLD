@@ -1,6 +1,6 @@
 #' Identify the LD block in which the lead SNP resides
 #'
-#' @inheritParams LD_blocks
+#' @inheritParams LD_blocks_cli
 #' @inheritParams echoconda::find_package
 #'
 #' @family LD
@@ -11,7 +11,7 @@ leadsnp_block_plink <- function(leadSNP,
                                 verbose = TRUE,
                                 conda_env = "echoR") {
     messager("Returning lead SNP's block...")
-    blocks <- LD_blocks_plink(
+    blocks <- LD_blocks_cli(
         bed_bim_fam = bed_bim_fam,
         LD_block_size = LD_block_size,
         conda_env = conda_env,

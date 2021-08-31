@@ -34,15 +34,17 @@
 #' LD compressed numpy array (npz) files are stored.
 #' Set to \code{NULL} to download VCFs/LD npz from remote storage system.
 #' @param fillNA Value to fill LD matrix NAs with.
-#' @param remove_tmps Remove all temporary files like VCF, npz, and plink files.
+#' @param remove_tmps Remove all intermediate files 
+#' like VCF, npz, and plink files.
 #' @param as_sparse Convert the LD matrix to a sparse matrix.
 #' @param leadSNP_LD_block Only return SNPs within the same LD block 
 #' as the lead SNP (the SNP with the smallest p-value). 
-#' @inheritParams LD_blocks
+#' 
+#' @inheritParams query_vcf
 #' @inheritParams downloadR::downloader
 #' @inheritParams echoconda::find_package
 #'
-#' @return A symmetric LD matrix of pairwise \emph{r} values.
+#' @return A symmetric LD matrix of pairwise SNP correlations.
 #'
 #' @family LD
 #' @examples
@@ -63,15 +65,16 @@ load_or_create <- function(locus_dir,
                            force_new_LD = FALSE,
                            LD_reference = c("1KGphase1", "1KGphase3", "UKB"),
                            LD_genome_build = "hg19",
-                           superpopulation = "EUR",
-                           remote_LD = TRUE,
-                           download_method = "axel",
+                           samples = NULL,
+                           superpopulation = NULL,
+                           remote_LD = TRUE, 
                            local_storage = NULL,
                            leadSNP_LD_block = FALSE,
                            fillNA = 0,
                            verbose = TRUE,
                            remove_tmps = TRUE,
                            as_sparse = TRUE,
+                           download_method = "axel",
                            conda_env = "echoR",
                            nThread = 1) {
     LD_reference <- LD_reference[1]
@@ -117,26 +120,27 @@ load_or_create <- function(locus_dir,
             dat = dat,
             local_storage = local_storage,
             LD_reference = LD_reference,
+            samples =  samples,
             superpopulation = superpopulation,
             leadSNP_LD_block = leadSNP_LD_block,
-            fillNA = fillNA
+            fillNA = fillNA,
+            verbose = verbose
         )
     } else if (any(endsWith(
         tolower(LD_reference),
         c(".vcf", ".vcf.gz", ".vcf.bgz")
     ))) {
         #### Custom vcf ####
-        LD_list <- custom_panel(
+        LD_list <- LD_custom(
+            locus_dir = locus_dir,
+            dat = dat,
+            local_storage = local_storage,
             LD_reference = LD_reference,
             LD_genome_build = LD_genome_build,
-            dat = dat,
-            locus_dir = locus_dir,
-            force_new_LD = force_new_LD,
+            samples =  samples,
+            superpopulation = superpopulation,
+            leadSNP_LD_block = leadSNP_LD_block,
             fillNA = fillNA,
-            LD_block_size = LD_block_size,
-            remove_tmps = remove_tmps,
-            nThread = nThread,
-            conda_env = conda_env,
             verbose = verbose
         )
     } else {

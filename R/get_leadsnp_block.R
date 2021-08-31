@@ -13,6 +13,9 @@ get_leadsnp_block <- function(dat,
                               ss,
                               pct = 0.15,
                               verbose = TRUE) {
+    # Avoid confusing checks 
+    leadSNP <- LDblock <- NULL;
+    
     dat_LD <- get_LD_blocks(
         dat = dat,
         ss = ss,

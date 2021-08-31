@@ -6,6 +6,9 @@ select_vcf_samples <- function(superpopulation = NULL,
                                samples = NULL,
                                LD_reference = "1KGphase1",
                                verbose = TRUE) {
+    # Avoid confusing checks
+    superpop <- NULL;
+    
     if (is.null(superpopulation)) {
         return(character())
     }
@@ -13,13 +16,11 @@ select_vcf_samples <- function(superpopulation = NULL,
         return(samples)
     }
     LD_reference <- tolower(LD_reference[1])
-    if (LD_reference == "1kgphase1") {
-        data("popDat_1KGphase1")
-        popDat <- popDat_1KGphase1
+    if (LD_reference == "1kgphase1") { 
+        popDat <- echoLD::popDat_1KGphase1
     }
-    if (LD_reference == "1kgphase3") {
-        data("popDat_1KGphase3")
-        popDat <- popDat_1KGphase3
+    if (LD_reference == "1kgphase3") { 
+        popDat <- echoLD::popDat_1KGphase3
     }
     superpopulation <- translate_population(superpopulation = superpopulation)
     selectedInds <- unique(subset(popDat, superpop == superpopulation)$sample)

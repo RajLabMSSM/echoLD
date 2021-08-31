@@ -1,7 +1,7 @@
 #' Compute LD from user-supplied VCF file
 #'
 #'
-#' @inheritParams LD_blocks
+#' @inheritParams LD_blocks_cli
 #' @inheritParams echoconda::find_package
 #'
 #' @family LD

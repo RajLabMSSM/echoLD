@@ -53,7 +53,7 @@ LD_matrix <- LD_custom_cli(
 Other LD: 
 \code{\link{LD_1KG_download_vcf}()},
 \code{\link{LD_1KG}()},
-\code{\link{LD_blocks}()},
+\code{\link{LD_blocks_cli}()},
 \code{\link{LD_custom}()},
 \code{\link{LD_ukbiobank}()},
 \code{\link{calculate_LD}()},
