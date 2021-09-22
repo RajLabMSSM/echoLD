@@ -60,7 +60,13 @@ Suggests:
 Remotes:
     github::RajLabMSSM/echotabix,
     github::RajLabMSSM/downloadR
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 VignetteBuilder: knitr
-License: GPL (>= 3) + file LICENSE
+License: GPL (>= 3)
 Config/testthat/edition: 3
+Config/reticulate:
+  list(
+    packages = list(
+      list(package = "pandas")
+    )
+  )
