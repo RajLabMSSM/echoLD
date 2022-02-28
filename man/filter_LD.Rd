@@ -19,12 +19,13 @@ will be removed from both \code{DT} and \code{LD} list items..}
 \item{verbose}{Print messages.}
 }
 \description{
-\code{
-data("BST1")
-data("BST1_LD_matrix")
-LD_list <- list(LD = BST1_LD_matrix, DT = BST1)
-LD_list <- echoLD:::filter_LD(LD_list, min_r2 = .2)
+Filter LD
 }
+\examples{
+BST1 <- echodata::BST1
+BST1_LD_matrix <- echodata::BST1_LD_matrix 
+LD_list <- list(LD = BST1_LD_matrix, DT = BST1)
+LD_list <- echoLD::filter_LD(LD_list, min_r2 = .2)
 }
 \seealso{
 Other LD: 
@@ -46,4 +47,3 @@ Other LD:
 \code{\link{translate_population}()}
 }
 \concept{LD}
-\keyword{internal}

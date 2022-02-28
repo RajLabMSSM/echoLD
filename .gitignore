@@ -11,6 +11,7 @@
 .Ruserdata
 # .DS_Store
 # find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch
+.DS_Store
 ./.DS_Store
 ./**/.DS_Store
 ./**/**/.DS_Store
@@ -39,4 +40,4 @@ vignettes/*.R
 *.utf8.md
 *.knit.md
 # R Environment Variables
-.Renviron
+.Renviron 

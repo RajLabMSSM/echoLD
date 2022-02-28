@@ -36,7 +36,7 @@ Easy to use but doesn't scale up well to many SNPs (takes way too long).
 }
 \details{
 \code{
-data("merged_DT")
+merged_DT <- echodata::get_Nalls2019_merged()
 lead.snps <- setNames(subset(merged_DT, leadSNP)$Locus,
                       subset(merged_DT, leadSNP)$SNP)
 proxies <- ldlinkr_ldproxy_batch(snp = lead.snps)

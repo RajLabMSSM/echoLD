@@ -11,7 +11,7 @@ data.table
 \code{
 popDat_URL <- "ftp://ftp-trace.ncbi.nih.gov/1000genomes/ftp/release/20110521/phase1_integrated_calls.20101123.ALL.panel"
 popDat_1KGphase1 <- data.table::fread(text = trimws(gsub(",\t", ",", readLines(popDat_URL))), sep = "\t", fill = T, stringsAsFactors = F, col.names = c("sample", "population", "superpop", "sex"), nThread = 4)
-usethis::use_data(popDat_1KGphase1, overwrite = T)
+usethis::use_data(popDat_1KGphase1, overwrite  =  TRUE)
 }
 }
 \usage{

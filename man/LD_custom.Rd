@@ -17,6 +17,7 @@ LD_custom(
   force_new_MAF = FALSE,
   fillNA = 0,
   stats = "R",
+  as_sparse = TRUE,
   verbose = TRUE
 )
 }
@@ -56,6 +57,8 @@ as the lead SNP (the SNP with the smallest p-value).}
 \item{fillNA}{When pairwise LD (r) between two SNPs is \code{NA},
 replace with 0.}
 
+\item{as_sparse}{Convert the LD matrix to a sparse matrix.}
+
 \item{verbose}{Print messages.}
 }
 \description{
@@ -71,8 +74,8 @@ allowing you to fine-map loci more completely.
 }
 \examples{
 \dontrun{
-data("BST1")
-data("locus_dir")
+BST1 <- echodata::BST1
+locus_dir <- echodata::locus_dir
 locus_dir <- file.path(tempdir(), locus_dir)
 dat <- BST1[seq(1, 50), ]
 LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",

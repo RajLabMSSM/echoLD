@@ -9,7 +9,7 @@
 \usage{
 get_UKB_MAF(
   dat,
-  output_path = file.path(tempdir(), "Data/Reference/UKB_MAF"),
+  output_path = tools::R_user_dir(package = "echoLD", which = "cache"),
   force_new_maf = FALSE,
   download_method = "axel",
   nThread = 1,
@@ -51,8 +51,8 @@ If \strong{MAF} column is missing,
 download MAF from UK Biobank and use that instead.
 }
 \examples{
-data("BST1")
-dat <- data.frame(BST1)[, colnames(BST1) != "MAF"]
-BST1 <- get_UKB_MAF(dat = dat)
+dat <- echodata::BST1
+dat$MAF <- NULL
+dat2 <- echoLD::get_UKB_MAF(dat = dat)
 }
 \concept{standardizing functions}

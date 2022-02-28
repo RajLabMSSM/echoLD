@@ -4,7 +4,7 @@
 #' Easy to use but doesn't scale up well to many SNPs (takes way too long).
 #'
 #' \code{
-#' data("merged_DT")
+#' merged_DT <- echodata::get_Nalls2019_merged()
 #' lead.snps <- setNames(subset(merged_DT, leadSNP)$Locus,
 #'                       subset(merged_DT, leadSNP)$SNP)
 #' proxies <- ldlinkr_ldproxy_batch(snp = lead.snps)
@@ -20,13 +20,13 @@
 #' \href{https://www.rdocumentation.org/packages/LDlinkR/versions/1.0.2}{
 #' website}
 #' @keywords internal
-#' @importFrom LDlinkR LDproxy_batch
 ldlinkr_ldproxy_batch <- function(snp,
                                   pop = "CEU",
                                   r2d = "r2",
                                   min_corr = FALSE,
                                   save_dir = NULL,
                                   verbose = TRUE) {
+    requireNamespace("LDlinkR")
     messager("LD:LDlinkR:: Retrieving proxies of", length(snp), "SNPs",
         v = verbose
     )
@@ -57,7 +57,7 @@ ldlinkr_ldproxy_batch <- function(snp,
         ## so we have to do this manually afterwards.
         # local_dir <- "~/Desktop"
         # proxy_files <- list.files(path= "./",
-        #                           pattern = "^rs.*\\.txt$", full.names = T)
+        #                           pattern = "^rs.*\\.txt$", full.names  =  TRUE)
         new_path <- file.path(save_dir, basename(proxy_files))
         out <- file.rename(proxy_files, new_path)
         return(new_path)

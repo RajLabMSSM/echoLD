@@ -16,6 +16,7 @@ LD_1KG(
   force_new_MAF = FALSE,
   fillNA = 0,
   stats = "R",
+  as_sparse = TRUE,
   verbose = TRUE
 )
 }
@@ -49,6 +50,8 @@ as the lead SNP (the SNP with the smallest p-value).}
 
 \item{fillNA}{When pairwise LD (r) between two SNPs is \code{NA},
 replace with 0.}
+
+\item{as_sparse}{Save/return LD matrix as a sparse matrix.}
 
 \item{verbose}{Print messages.}
 }

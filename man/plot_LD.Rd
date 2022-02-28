@@ -4,22 +4,29 @@
 \alias{plot_LD}
 \title{Plot a subset of the LD matrix}
 \usage{
-plot_LD(LD_matrix, dat, span = 10, method = c("gaston", "heatmap", "image"))
+plot_LD(
+  LD_matrix,
+  dat,
+  span = 10,
+  method = c("stats", "gaston", "graphics"),
+  ...
+)
 }
 \arguments{
 \item{span}{This is very computationally intensive,
 so you need to limit the number of SNPs with span.
-If \code{span=10}, only 10 SNPs upstream and 10 SNPs downstream of the lead SNP will be plotted.}
+If \code{span=10}, only 10 SNPs upstream and 10 SNPs downstream of the
+ lead SNP will be plotted.}
+
+\item{...}{Additional arguments passed to plotting function.}
 }
 \description{
 Uses \code{gaston} to plot a SNP-annotated LD matrix.
 }
 \examples{
-\dontrun{
-data("BST1")
-data("BST1_LD")
-plot_LD(LD_matrix = LD_matrix, dat = BST1)
-}
+dat <- echodata::BST1
+LD_matrix <- echodata::BST1_LD_matrix
+echoLD::plot_LD(LD_matrix = LD_matrix, dat = dat)  
 }
 \seealso{
 Other LD: 

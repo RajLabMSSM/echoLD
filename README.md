@@ -1,21 +1,44 @@
-<!-- badges: start -->
-<!-- badger::badge_codecov() -->
-<!-- badger::badge_last_commit()  -->
-<!-- badger::badge_license() -->
-
-[![](https://codecov.io/gh/RajLabMSSM/echoLD/branch/main/graph/badge.svg)](https://codecov.io/gh/RajLabMSSM/echoLD)
-[![R-CMD-check](https://github.com/RajLabMSSM/echoLD/workflows/R-full/badge.svg)](https://github.com/RajLabMSSM/echoLD/actions)
+<img src='https://github.com/RajLabMSSM/echoLD/raw/main/inst/hex/hex.png' height='300'><br><br>
+[![](https://img.shields.io/badge/devel%20version-0.99.1-black.svg)](https://github.com/RajLabMSSM/echoLD)
+[![R build
+status](https://github.com/RajLabMSSM/echoLD/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/RajLabMSSM/echoLD/actions)
 [![](https://img.shields.io/github/last-commit/RajLabMSSM/echoLD.svg)](https://github.com/RajLabMSSM/echoLD/commits/main)
-<!-- badges: end -->
+[![](https://codecov.io/gh/RajLabMSSM/echoLD/branch/main/graph/badge.svg)](https://codecov.io/gh/RajLabMSSM/echoLD)
+[![License: GPL (>=
+3)](https://img.shields.io/badge/license-GPL%20(%3E=%203)-blue.svg)](https://cran.r-project.org/web/licenses/GPL%20(%3E=%203))
+<h5>
+Author: <i>Brian M. Schilder</i>
+</h5>
+<h5>
+README updated: <i>Feb-28-2022</i>
+</h5>
 
-# echoverse: echoLD
+## `echoLD`: LD downloading and processing.
+
+This R package is part of the *echoverse* suite that supports
+[`echolocatoR`](https://github.com/RajLabMSSM/echolocatoR): an automated
+genomic fine-mapping pipeline.
+
+If you use `echoLD`, please cite:
+
+> Jack Humphrey and Towfique Raj (NA). echoLD: echoverse module: LD
+> downloading and processing. R package version 0.99.1.
+> <https://github.com/RajLabMSSM/echoLD>
+
+## Installation
 
 ``` r
-if(!"remotes" %in% rownames(installed.packages())){install.packages("remotes")}
+if(!require("remotes")) install.packages("remotes")
 
 remotes::install_github("RajLabMSSM/echoLD")
 library(echoLD)
 ```
+
+## Documentation
+
+### [Website](https://rajlabmssm.github.io/echoLD)
+
+### [Getting started](https://rajlabmssm.github.io/echoLD/articles/echoLD)
 
 ## LD reference panels
 
@@ -27,7 +50,7 @@ library(echoLD)
 
 <hr>
 
-## Creator
+## Contact
 
 <a href="https://bschilder.github.io/BMSchilder/" target="_blank">Brian
 M. Schilder, Bioinformatician II</a>  

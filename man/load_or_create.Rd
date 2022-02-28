@@ -99,17 +99,14 @@ Options:
 }
 }
 \examples{
-data("BST1")
-data("locus_dir")
-locus_dir <- file.path(tempdir(), locus_dir)
-BST1 <- BST1[seq(1, 50), ]
-\dontrun{
-LD_matrix <- load_or_create(
+BST1 <- echodata::BST1 
+locus_dir <- file.path(tempdir(), echodata::locus_dir)
+BST1 <- BST1[seq(1, 50), ] 
+LD_list <- echoLD::load_or_create(
     locus_dir = locus_dir,
     dat = BST1,
     LD_reference = "1KGphase1"
-)
-}
+) 
 }
 \seealso{
 Other LD: 

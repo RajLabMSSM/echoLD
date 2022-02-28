@@ -45,17 +45,14 @@
 #'
 #' @family LD
 #' @examples
-#' data("BST1")
-#' data("locus_dir")
-#' locus_dir <- file.path(tempdir(), locus_dir)
-#' BST1 <- BST1[seq(1, 50), ]
-#' \dontrun{
-#' LD_matrix <- load_or_create(
+#' BST1 <- echodata::BST1 
+#' locus_dir <- file.path(tempdir(), echodata::locus_dir)
+#' BST1 <- BST1[seq(1, 50), ] 
+#' LD_list <- echoLD::load_or_create(
 #'     locus_dir = locus_dir,
 #'     dat = BST1,
 #'     LD_reference = "1KGphase1"
-#' )
-#' }
+#' ) 
 #' @export
 load_or_create <- function(locus_dir,
                            dat,
@@ -105,7 +102,7 @@ load_or_create <- function(locus_dir,
             fillNA = fillNA,
             nThread = nThread,
             return_matrix = TRUE,
-            as_sparse = TRUE,
+            as_sparse = as_sparse,
             # conda_env = conda_env,
             remove_tmps = remove_tmps
         )
@@ -120,6 +117,7 @@ load_or_create <- function(locus_dir,
             superpopulation = superpopulation,
             leadSNP_LD_block = leadSNP_LD_block,
             fillNA = fillNA,
+            as_sparse = as_sparse,
             verbose = verbose
         )
     } else if (any(endsWith(
@@ -141,7 +139,8 @@ load_or_create <- function(locus_dir,
         )
     } else {
         msg <- paste0(
-            "echoLD:: LD_reference input not recognized.", " Must both one of:\n",
+            "echoLD:: LD_reference input not recognized.", 
+            " Must both one of:\n",
             paste0(" - ",
                 c(
                     "1KGphase1", "1KGphase3", "UKB",

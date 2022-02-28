@@ -1,7 +1,7 @@
 Package: echoLD
 Type: Package
 Title: echoverse module: LD downloading and processing
-Version: 0.99.0
+Version: 0.99.1
 Authors@R: 
     c(person(given = "Brian",
            family = "Schilder",
@@ -30,6 +30,7 @@ biocViews:
 Imports: 
     echotabix,
     downloadR,
+    echodata,
     magrittr,
     dplyr,
     utils,
@@ -44,11 +45,9 @@ Imports:
     GenomeInfoDb,  
     GenomicRanges,
     VariantAnnotation,
-    snpStats,
-    gaston,
-    rtracklayer,
-    LDlinkR,
-    adjclust
+    snpStats, 
+    rtracklayer, 
+    tools
 Suggests:
     markdown,
     rmarkdown,
@@ -56,10 +55,15 @@ Suggests:
     knitr,
     BiocStyle,
     covr,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    gaston,
+    graphics,
+    LDlinkR,
+    adjclust
 Remotes:
     github::RajLabMSSM/echotabix,
-    github::RajLabMSSM/downloadR
+    github::RajLabMSSM/downloadR,
+    github::RajLabMSSM/echodata
 RoxygenNote: 7.1.2
 VignetteBuilder: knitr
 License: GPL (>= 3)

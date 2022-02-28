@@ -1,28 +1,20 @@
 ---
-title: "echoLD: Getting Started" 
-author: "<h4>Author: <i>Brian M. Schilder</i></h4>" 
-date: "<h4>Most recent update: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
+title: "Getting Started" 
+author: "<h4>Authors: <i>`r auths <- eval(parse(text = gsub('person','c',read.dcf('../DESCRIPTION', fields = 'Authors@R'))));paste(auths[names(auths)=='given'],auths[names(auths)=='family'], collapse = ', ')`</i></h4>" 
+date: "<h4>Vignette updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
 output:
-  BiocStyle::html_document:
-    self_contained: yes
-    toc: true
-    toc_float: true
-    toc_depth: 3
-    code_folding: show
-    df_print: paged
+  BiocStyle::html_document
 vignette: >
-    %\VignetteIndexEntry{echoLD} 
+    %\VignetteIndexEntry{templateR} 
     %\usepackage[utf8]{inputenc}
-    %\VignetteEngine{knitr::rmarkdown} 
-editor_options: 
-  markdown: 
-    wrap: 72
+    %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r setup}
 library(echoLD)
 
-data("BST1"); data("locus_dir");
+BST1 <- echodata::BST1
+locus_dir <- echodata::locus_dir
 
 BST1 <- BST1[seq(1,100),]
 locus_dir <- file.path(tempdir(), locus_dir)
@@ -35,6 +27,14 @@ locus_dir <- file.path(tempdir(), locus_dir)
 LD_1kgp3 <- load_or_create(locus_dir = locus_dir,
                            dat = BST1, 
                            LD_reference = "1KGphase3") # 1KGphase1
+```
+
+## Plot
+
+```{r}
+plot_LD(LD_matrix = LD_1kgp3$LD, 
+        dat = LD_1kgp3$DT,
+        span = 20)
 ```
 
 
@@ -53,12 +53,12 @@ LD_ukb <- load_or_create(locus_dir = locus_dir,
 # Custom VCF
 
 ```{r, eval=FALSE}
-LD_reference <- system.file("extdata","BST1.1KGphase3.vcf.bgz", package = "echoLD")
+LD_reference <- system.file("extdata","BST1.1KGphase3.vcf.bgz", 
+                            package = "echoLD")
 LD_custom <- load_or_create(locus_dir = locus_dir,
                             dat = BST1, 
                             LD_reference = LD_reference)
 ```
-
 
 
 # Session Info 
@@ -71,3 +71,4 @@ utils::sessionInfo()
 
 </details>  
 
+<br>

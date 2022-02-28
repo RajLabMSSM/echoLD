@@ -1,4 +1,7 @@
-#' Find correlates of the lead GWAS/QTL SNP
+#' Get LD with lead SNP
+#' 
+#' Add new columns r and r2 containing the degree of LD in each SNP (row)
+#'  with the lead GWAS/QTL SNP. 
 #'
 #' @param dat SNP-level data.
 #' @param LD_matrix LD matrix.
@@ -7,16 +10,23 @@
 #' "matrix" (wide) or "df" (long).
 #' @param verbose Print messages.
 #'
-#' @keywords internal
+#' @returns \link[data.table]{data.table} with the columns r and r2.
+#'
+#' @export
 #' @importFrom dplyr %>% mutate
 #' @importFrom data.table as.data.table merge.data.table
+#' 
+#' @examples 
+#' dat <- echodata::BST1
+#' LD_matrix <- echodata::BST1_LD_matrix
+#' dat2 <- echoLD::get_lead_r2(dat = dat, LD_matrix = LD_matrix)
 get_lead_r2 <- function(dat,
                         LD_matrix = NULL,
                         fillNA = 0,
                         LD_format = "matrix",
                         verbose = TRUE) {
     # Avoid confusing checks
-    r <- r2 <- leadSNP <- NULL
+    r <- leadSNP <- NULL;
 
     if (any(c("r", "r2") %in% colnames(dat))) {
         dat <- dat[, -c("r", "r2")]
@@ -41,7 +51,8 @@ get_lead_r2 <- function(dat,
 
     if (LD_format == "matrix") {
         if (is.null(LD_matrix)) {
-            messager("+ echoLD:: No LD_matrix detected. Setting r2=NA", v = verbose)
+            messager("+ echoLD:: No LD_matrix detected. Setting r2=NA",
+                     v = verbose)
             dat <- dat
             dat$r2 <- NA
         } else {
@@ -52,7 +63,7 @@ get_lead_r2 <- function(dat,
             LD_sub <- LD_matrix[, LD_SNP] %>%
                 # subset(LD_matrix, select=LD_SNP) %>%
                 # subset(select = -c(r,r2)) %>%
-                data.table::as.data.table(keep.rownames = T) %>%
+                data.table::as.data.table(keep.rownames  =  TRUE) %>%
                 `colnames<-`(c("SNP", "r")) %>%
                 dplyr::mutate(r2 = r^2) %>%
                 data.table::as.data.table()

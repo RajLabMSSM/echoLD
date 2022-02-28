@@ -11,13 +11,14 @@
 #'
 #' @source \href{https://github.com/pneuvial/adjclust}{adjclust GitHub}
 #' @export
-#' @importFrom adjclust snpClust select
 #' @importFrom Matrix forceSymmetric
 get_LD_blocks <- function(dat,
                           ss,
                           stats = c("R.squared", "D.prime"),
                           pct = 0.15,
                           verbose = TRUE) {
+    requireNamespace("adjclust")
+    
     fit_clust <- compute_LD_blocks(
         x = ss,
         stats = stats,

@@ -1,13 +1,6 @@
 #' Filter LD
 #'
-#'
-#' \code{
-#' data("BST1")
-#' data("BST1_LD_matrix")
-#' LD_list <- list(LD = BST1_LD_matrix, DT = BST1)
-#' LD_list <- echoLD:::filter_LD(LD_list, min_r2 = .2)
-#' }
-#'
+#' Filter LD
 #' @param LD_list List containing SNP-level data (\code{DT}),
 #' and LD matrix (\code{LD}).
 #' @param remove_correlates A list of SNPs.
@@ -17,7 +10,12 @@
 #' @param verbose Print messages.
 #'
 #' @family LD
-#' @keywords internal
+#' @export
+#' @examples 
+#' BST1 <- echodata::BST1
+#' BST1_LD_matrix <- echodata::BST1_LD_matrix 
+#' LD_list <- list(LD = BST1_LD_matrix, DT = BST1)
+#' LD_list <- echoLD::filter_LD(LD_list, min_r2 = .2)
 filter_LD <- function(LD_list,
                       remove_correlates = FALSE,
                       min_r2 = 0,

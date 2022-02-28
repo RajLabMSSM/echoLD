@@ -4,7 +4,7 @@
 \alias{saveSparse}
 \title{Save LD matrix as a sparse matrix}
 \usage{
-saveSparse(LD_matrix, LD_path, verbose = T)
+saveSparse(LD_matrix, LD_path, verbose = TRUE)
 }
 \description{
 Converting LD matrices to sparse format reduces file size by half.

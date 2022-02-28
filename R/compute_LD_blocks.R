@@ -8,7 +8,6 @@
 #'
 #' @source \href{https://github.com/pneuvial/adjclust}{adjclust GitHub}
 #' @keywords internal
-#' @importFrom adjclust snpClust select
 #' @importFrom Matrix forceSymmetric
 compute_LD_blocks <- function(x,
                               stats = c("R.squared", "D.prime"),
@@ -16,6 +15,8 @@ compute_LD_blocks <- function(x,
                               k.max = NULL,
                               pct = 0.15,
                               verbose = TRUE) {
+    requireNamespace("adjclust")
+    
     startLDB <- Sys.time()
     type <- tolower(type[1])
     stats <- stats[1]

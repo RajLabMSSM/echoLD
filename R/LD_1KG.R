@@ -11,7 +11,8 @@
 #'
 #' @param fillNA When pairwise LD (r) between two SNPs is \code{NA},
 #' replace with 0.
-#' @inheritParams load_or_create
+#' @param as_sparse Save/return LD matrix as a sparse matrix. 
+#' @inheritParams load_or_create 
 #'
 #' @family LD
 #' @keywords internal
@@ -26,6 +27,7 @@ LD_1KG <- function(locus_dir,
                    force_new_MAF = FALSE,
                    fillNA = 0,
                    stats = "R",
+                   as_sparse = TRUE,
                    # min_r2=F,
                    # min_Dprime=F,
                    # remove_correlates = FALSE,
@@ -77,7 +79,12 @@ LD_1KG <- function(locus_dir,
             verbose = verbose
         )
     }
-    #### Save LD matrix ####
+    #### Convert to sparse ####
+    if(as_sparse){
+        LD_matrix <- to_sparse(X = LD_matrix,
+                               verbose = verbose)
+    }
+    #### Save LD matrix #### 
     LD_list <- save_LD_matrix(
         LD_matrix = LD_matrix,
         dat = dat,
@@ -85,6 +92,7 @@ LD_1KG <- function(locus_dir,
         subset_common = TRUE,
         fillNA = fillNA,
         LD_reference = LD_reference,
+        as_sparse = as_sparse,
         verbose = verbose
     )
     return(LD_list)

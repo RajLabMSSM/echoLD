@@ -4,22 +4,28 @@
 \alias{subset_common_snps}
 \title{Subset LD matrix and dataframe to only their shared SNPs}
 \usage{
-subset_common_snps(LD_matrix, dat, fillNA = 0, verbose = F)
+subset_common_snps(LD_matrix, dat, fillNA = 0, verbose = FALSE)
+}
+\arguments{
+\item{LD_matrix}{LD matrix.}
+
+\item{dat}{GWAS summary statistics subset to query the LD panel with.}
+
+\item{fillNA}{Value to fill LD matrix NAs with.}
+
+\item{verbose}{Print messages.}
 }
 \value{
 data.frame
 }
 \description{
-Find the SNPs that are shared between an LD matrix and another data.frame with a `SNP` column.
-Then remove any non-shared SNPs from both objects.
+Find the SNPs that are shared between an LD matrix and another data.frame 
+with a `SNP` column. Then remove any non-shared SNPs from both objects.
 }
-\details{
-\code{
-data("BST1")
-data("BST1_LD_matrix")
+\examples{
+BST1 <- echodata::BST1
+BST1_LD_matrix <- echodata::BST1_LD_matrix
 dat <- BST1
-out <- echoLD:::subset_common_snps(LD_matrix = BST1_LD_matrix, dat = BST1)
-}
+out <- echoLD::subset_common_snps(LD_matrix = BST1_LD_matrix, dat = BST1)
 }
 \concept{SNP filters}
-\keyword{internal}

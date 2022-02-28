@@ -1,20 +1,20 @@
-#' Identify the LD block in which the lead SNP resides
-#'
-#'
+#' Get lead SNP block
+#' 
+#' Identify the LD block in which the lead SNP resides.
 #' @param verbose Print messages.
 #' @inheritParams adjclust::snpClust
 #' @inheritParams adjclust::select
 #'
 #' @source \href{https://github.com/pneuvial/adjclust}{adjclust GitHub}
 #' @keywords internal
-#' @importFrom adjclust snpClust select
 #' @importFrom Matrix forceSymmetric
 get_leadsnp_block <- function(dat,
                               ss,
                               pct = 0.15,
                               verbose = TRUE) {
     # Avoid confusing checks
-    leadSNP <- LDblock <- NULL
+    leadSNP <- LDblock <- NULL;
+    requireNamespace("adjclust")
 
     dat_LD <- get_LD_blocks(
         dat = dat,

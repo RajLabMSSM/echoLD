@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_lead_r2.R
 \name{get_lead_r2}
 \alias{get_lead_r2}
-\title{Find correlates of the lead GWAS/QTL SNP}
+\title{Get LD with lead SNP}
 \usage{
 get_lead_r2(
   dat,
@@ -24,7 +24,15 @@ get_lead_r2(
 
 \item{verbose}{Print messages.}
 }
-\description{
-Find correlates of the lead GWAS/QTL SNP
+\value{
+\link[data.table]{data.table} with the columns r and r2.
 }
-\keyword{internal}
+\description{
+Add new columns r and r2 containing the degree of LD in each SNP (row)
+ with the lead GWAS/QTL SNP.
+}
+\examples{
+dat <- echodata::BST1
+LD_matrix <- echodata::BST1_LD_matrix
+dat2 <- echoLD::get_lead_r2(dat = dat, LD_matrix = LD_matrix)
+}

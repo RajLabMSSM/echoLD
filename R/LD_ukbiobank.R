@@ -169,7 +169,11 @@ LD_ukbiobank <- function(dat = NULL,
                 verbose = verbose
             )
         }
-        # Save LD matrix as RDS
+        #### Convert to sparse ####
+        if(as_sparse){
+            ld_R <- to_sparse(X = ld_R,
+                              verbose = verbose)
+        }
         RDS_path <- save_LD_matrix(
             LD_matrix = ld_R,
             dat = dat,

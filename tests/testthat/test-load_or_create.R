@@ -1,6 +1,7 @@
 test_that("load_or_create works", {
-    data("BST1")
-    data("locus_dir")
+    
+    BST1 <- echodata::BST1
+    locus_dir <- echodata::locus_dir
     locus_dir <- file.path(tempdir(), locus_dir)
     BST1 <- BST1[seq(1, 50), ]
 
@@ -9,7 +10,8 @@ test_that("load_or_create works", {
         testthat::expect_equal(nrow(LD_list$LD), ncol(LD_list$LD))
         testthat::expect_lte(nrow(LD_list$LD), nrow(LD_list$DT))
         testthat::expect_gte(nrow(LD_list$LD), 40)
-        testthat::expect_equal(methods::is(LD_list$RDS_path, "character"), TRUE)
+        testthat::expect_true(methods::is(LD_list$RDS_path, "character"))
+        testthat::expect_true(file.exists(LD_list$RDS_path))
     }
 
     #### 1000 Genomes: Phase 1 ####
@@ -40,7 +42,8 @@ test_that("load_or_create works", {
 
 
     #### Custom VCF ####
-    LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz", package = "echoLD")
+    LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",
+                                package = "echoLD")
     LD_custom <- load_or_create(
         locus_dir = locus_dir,
         dat = BST1,

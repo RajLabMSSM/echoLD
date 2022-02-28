@@ -16,8 +16,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' data("BST1")
-#' data("locus_dir")
+#' BST1 <- echodata::BST1
+#' locus_dir <- echodata::locus_dir
 #' locus_dir <- file.path(tempdir(), locus_dir)
 #' dat <- BST1[seq(1, 50), ]
 #' LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",
@@ -44,6 +44,7 @@ LD_custom <- function(locus_dir = tempdir(),
                       force_new_MAF = FALSE,
                       fillNA = 0,
                       stats = "R",
+                      as_sparse = TRUE,
                       # min_r2=F,
                       # min_Dprime=F,
                       # remove_correlates = FALSE,
@@ -95,6 +96,11 @@ LD_custom <- function(locus_dir = tempdir(),
             stats = stats,
             verbose = verbose
         )
+    }
+    #### Convert to sparse ####
+    if(as_sparse){
+        LD_matrix <- to_sparse(X = LD_matrix,
+                          verbose = verbose)
     }
     #### Save LD matrix ####
     LD_list <- save_LD_matrix(

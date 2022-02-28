@@ -18,8 +18,8 @@ Trickier than it looks.
 }
 \details{
 \code{
-data("BST1_LD_matrix")
-LD_matrix <- fill_NA(BST1_LD_matrix)
+BST1_LD_matrix <- echodata::BST1_LD_matrix
+LD_matrix <- echodata:::fill_NA(BST1_LD_matrix)
 }
 }
 \keyword{internal}

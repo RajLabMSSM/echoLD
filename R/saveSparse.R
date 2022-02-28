@@ -5,9 +5,10 @@
 #' @keywords internal
 saveSparse <- function(LD_matrix,
                        LD_path,
-                       verbose = T) {
+                       verbose = TRUE) {
     # https://cmdlinetips.com/2019/05/introduction-to-sparse-matrices-in-r/
-    LD_sparse <- Matrix::Matrix(as.matrix(LD_matrix), sparse = T)
+    # LD_sparse <- Matrix::Matrix(as.matrix(LD_matrix), sparse = TRUE)
+    LD_sparse <- to_sparse(X = LD_matrix, verbose = verbose)
     # messager("Dense size:")
     # print(object.size(LD_matrix),units="auto")
     # messager("Sparse size:")

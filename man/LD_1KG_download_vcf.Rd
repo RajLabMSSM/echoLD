@@ -50,7 +50,7 @@ files.
 }
 \details{
 \code{
-data("BST1")
+BST1 <- echodata::BST1
 vcf_subset.popDat <- LD_1KG_download_vcf(
     dat = BST1,
     LD_reference = "1KGphase1",

@@ -11,25 +11,24 @@
 #'
 #' @family standardizing functions
 #' @examples
-#' data("BST1")
-#' dat <- data.frame(BST1)[, colnames(BST1) != "MAF"]
-#' BST1 <- get_UKB_MAF(dat = dat)
+#' dat <- echodata::BST1
+#' dat$MAF <- NULL
+#' dat2 <- echoLD::get_UKB_MAF(dat = dat)
 #' @source \href{http://biobank.ctsu.ox.ac.uk/showcase/field.cgi?id=22801}{UKB}
 #' @export
 #' @importFrom data.table fread merge.data.table data.table
 #' @importFrom dplyr %>% group_by slice rename
+#' @importFrom tools R_user_dir
 get_UKB_MAF <- function(dat,
-                        output_path = file.path(
-                            tempdir(),
-                            "Data/Reference/UKB_MAF"
-                        ),
+                        output_path = tools::R_user_dir(package = "echoLD",
+                                                        which = "cache"),
                         force_new_maf = FALSE,
                         download_method = "axel",
                         nThread = 1,
                         verbose = TRUE,
                         conda_env = "echoR") {
     # Avoid confusing checks
-    POS <- MAF <- SNP <- NULL
+    POS <- MAF <- SNP <- NULL;
 
     messager("UKB MAF:: Extracting MAF from UKB reference.", v = verbose)
     chrom <- unique(dat$CHR)

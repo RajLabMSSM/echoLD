@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_leadsnp_block.R
 \name{get_leadsnp_block}
 \alias{get_leadsnp_block}
-\title{Identify the LD block in which the lead SNP resides}
+\title{Get lead SNP block}
 \source{
 \href{https://github.com/pneuvial/adjclust}{adjclust GitHub}
 }
@@ -16,6 +16,6 @@ capushe selection. See \code{\link[capushe]{DDSE}} for further details}
 \item{verbose}{Print messages.}
 }
 \description{
-Identify the LD block in which the lead SNP resides
+Identify the LD block in which the lead SNP resides.
 }
 \keyword{internal}
