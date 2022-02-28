@@ -20,6 +20,7 @@
 * Update README to use autofill. 
 * Add hex sticker. 
 * Remove *docs/*
+* Updated GHA with latest ``templateR` workflow. 
 
 # echoLD 0.99.0
 
