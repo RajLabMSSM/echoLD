@@ -68,7 +68,7 @@ load_or_create <- function(locus_dir,
                            remove_tmps = TRUE,
                            as_sparse = TRUE,
                            download_method = "axel",
-                           # conda_env = "echoR",
+                           conda_env = "echoR",
                            nThread = 1) {
     LD_reference <- LD_reference[1]
     RDS_path <- get_rds_path(
@@ -103,7 +103,7 @@ load_or_create <- function(locus_dir,
             nThread = nThread,
             return_matrix = TRUE,
             as_sparse = as_sparse,
-            # conda_env = conda_env,
+            conda_env = conda_env,
             remove_tmps = remove_tmps
         )
     } else if (tolower(LD_reference) %in% c("1kgphase1", "1kgphase3")) {

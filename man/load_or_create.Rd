@@ -19,6 +19,7 @@ load_or_create(
   remove_tmps = TRUE,
   as_sparse = TRUE,
   download_method = "axel",
+  conda_env = "echoR",
   nThread = 1
 )
 }
@@ -79,6 +80,8 @@ like VCF, npz, and plink files.}
 }
  or
 \code{"download.file"} (single-threaded) .}
+
+\item{conda_env}{Conda environment to use.}
 
 \item{nThread}{Number of threads to parallelize over.}
 }

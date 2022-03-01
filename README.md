@@ -21,9 +21,10 @@ genomic fine-mapping pipeline.
 
 If you use `echoLD`, please cite:
 
-> Jack Humphrey and Towfique Raj (NA). echoLD: echoverse module: LD
-> downloading and processing. R package version 0.99.1.
-> <https://github.com/RajLabMSSM/echoLD>
+> Brian M Schilder, Jack Humphrey, Towfique Raj (2021) echolocatoR: an
+> automated end-to-end statistical and functional genomic fine-mapping
+> pipeline, *Bioinformatics*; btab658,
+> <https://doi.org/10.1093/bioinformatics/btab658>
 
 ## Installation
 

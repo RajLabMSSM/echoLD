@@ -59,7 +59,8 @@ Suggests:
     gaston,
     graphics,
     LDlinkR,
-    adjclust
+    adjclust,
+    badger
 Remotes:
     github::RajLabMSSM/echotabix,
     github::RajLabMSSM/downloadR,

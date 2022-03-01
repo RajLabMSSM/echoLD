@@ -1,20 +1,28 @@
 #' Plot a subset of the LD matrix
 #'
-#' Uses \code{gaston} to plot a SNP-annotated LD matrix.
-#' @inheritParams echolocatoR::finemap_pipeline
-#' @family LD
-#' @keywords internal
+#' Plot a heatmap of pairwise LD between SNPs.
+#' 
+#' @param LD_matrix LD matrix.
 #' @param span This is very computationally intensive,
 #' so you need to limit the number of SNPs with span.
 #' If \code{span=10}, only 10 SNPs upstream and 10 SNPs downstream of the
 #'  lead SNP will be plotted.
+#' @param method Method to use for plotting:
+#' \itemize{
+#' \item{"stats" : }\link[stats]{heatmap}
+#' \item{"gaston" : }\link[gaston]{LD.plot}
+#' \item{"graphics" : }\link[graphics]{image}
+#' }
 #' @param ... Additional arguments passed to plotting function. 
-#' @examples 
+#' @inheritParams load_or_create
+#' @family LD
+#' 
+#' @export
+#' @importFrom stats heatmap
+#' @examples
 #' dat <- echodata::BST1
 #' LD_matrix <- echodata::BST1_LD_matrix
 #' echoLD::plot_LD(LD_matrix = LD_matrix, dat = dat)  
-#' @importFrom stats heatmap
-#' @export
 plot_LD <- function(LD_matrix,
                     dat,
                     span = 10,

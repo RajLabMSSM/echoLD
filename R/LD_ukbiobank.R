@@ -31,7 +31,7 @@ LD_ukbiobank <- function(dat = NULL,
                          nThread = 1,
                          return_matrix = FALSE,
                          as_sparse = TRUE,
-                         # conda_env = "echoR",
+                         conda_env = "echoR",
                          remove_tmps = TRUE,
                          verbose = TRUE) {
     # Avoid confusing checks
@@ -71,7 +71,7 @@ LD_ukbiobank <- function(dat = NULL,
         LD_reference = "UKB"
     )
 
-    if (file.exists(RDS_path) & force_new_LD == F) {
+    if (file.exists(RDS_path) & force_new_LD == FALSE) {
         messager("+ echoLD:: Pre-existing UKB_LD.RDS file detected. Importing",
             RDS_path,
             v = verbose
@@ -91,6 +91,7 @@ LD_ukbiobank <- function(dat = NULL,
                     locus_dir = locus_dir,
                     background = FALSE,
                     force_overwrite = force_new_LD,
+                    conda_env = conda_env,
                     download_method = download_method
                 )
             } else {
@@ -128,7 +129,7 @@ LD_ukbiobank <- function(dat = NULL,
         # echoconda::activate_env(conda_env = conda_env,
         #                    verbose = verbose)
         reticulate::source_python(system.file("tools", "load_ld.py",
-            package = "echolocatoR"
+            package = "echodata"
         ))
         messager("+ echoLD:: load_ld() python function input:",
             URL,

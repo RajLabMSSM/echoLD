@@ -18,6 +18,7 @@ LD_ukbiobank(
   nThread = 1,
   return_matrix = FALSE,
   as_sparse = TRUE,
+  conda_env = "echoR",
   remove_tmps = TRUE,
   verbose = TRUE
 )
@@ -40,6 +41,8 @@ directly into R using \pkg{reticulate}. Otherwise, will be passed to
 \item{nThread}{Number of threads to parallelize over.}
 
 \item{as_sparse}{Convert the LD matrix to a sparse matrix.}
+
+\item{conda_env}{Conda environment to use.}
 
 \item{remove_tmps}{Remove all intermediate files
 like VCF, npz, and plink files.}

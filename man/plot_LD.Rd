@@ -13,15 +13,26 @@ plot_LD(
 )
 }
 \arguments{
+\item{LD_matrix}{LD matrix.}
+
+\item{dat}{GWAS summary statistics subset to query the LD panel with.}
+
 \item{span}{This is very computationally intensive,
 so you need to limit the number of SNPs with span.
 If \code{span=10}, only 10 SNPs upstream and 10 SNPs downstream of the
  lead SNP will be plotted.}
 
+\item{method}{Method to use for plotting:
+\itemize{
+\item{"stats" : }\link[stats]{heatmap}
+\item{"gaston" : }\link[gaston]{LD.plot}
+\item{"graphics" : }\link[graphics]{image}
+}}
+
 \item{...}{Additional arguments passed to plotting function.}
 }
 \description{
-Uses \code{gaston} to plot a SNP-annotated LD matrix.
+Plot a heatmap of pairwise LD between SNPs.
 }
 \examples{
 dat <- echodata::BST1
@@ -48,4 +59,3 @@ Other LD:
 \code{\link{translate_population}()}
 }
 \concept{LD}
-\keyword{internal}
