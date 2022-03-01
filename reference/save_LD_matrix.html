@@ -68,22 +68,21 @@
 <span class="op">)</span></code></pre></div>
     </div>
 
-    <div id="details">
-    <h2>Details</h2>
+    <div id="source">
+    <h2>Source</h2>
     <p><code>
-#data("BST1")
-#data("BST1_LD_matrix")
-#data("locus_dir")
-#locus_dir &lt;- file.path(tempdir(),locus_dir)
-#LD_list &lt;- save_LD_matrix(
-#    LD_matrix = BST1_LD_matrix,
-#    dat = BST1,
-#    locus_dir = locus_dir,
-#    LD_reference = "UKB")#LD_list &lt;- save_LD_matrix(
-#    LD_matrix = BST1_LD_matrix,
-#    dat = BST1,
-#    locus_dir = locus_dir,
-#    LD_reference = "custom_vcf")
+dat &lt;- echodata::BST1
+LD_matrix &lt;- echodata::BST1_LD_matrix 
+locus_dir &lt;- file.path(tempdir(),echodata::locus_dir)LD_list &lt;- echoLD:::save_LD_matrix(
+    LD_matrix = LD_matrix,
+    dat = dat,
+    locus_dir = locus_dir,
+    LD_reference = "UKB")
+LD_list &lt;- echoLD:::save_LD_matrix(
+    LD_matrix = LD_matrix,
+    dat = dat,
+    locus_dir = locus_dir,
+    LD_reference = "custom_vcf")
 </code></p>
     </div>
     <div id="see-also">
