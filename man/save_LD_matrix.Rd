@@ -3,6 +3,24 @@
 \name{save_LD_matrix}
 \alias{save_LD_matrix}
 \title{Save LD matrix}
+\source{
+\code{
+dat <- echodata::BST1
+LD_matrix <- echodata::BST1_LD_matrix 
+locus_dir <- file.path(tempdir(),echodata::locus_dir)
+
+LD_list <- echoLD:::save_LD_matrix(
+    LD_matrix = LD_matrix,
+    dat = dat,
+    locus_dir = locus_dir,
+    LD_reference = "UKB")
+LD_list <- echoLD:::save_LD_matrix(
+    LD_matrix = LD_matrix,
+    dat = dat,
+    locus_dir = locus_dir,
+    LD_reference = "custom_vcf")
+}
+}
 \usage{
 save_LD_matrix(
   LD_matrix,
@@ -17,25 +35,6 @@ save_LD_matrix(
 }
 \description{
 Save an LD matrix after initial pre-processing.
-}
-\details{
-\code{
-#data("BST1")
-#data("BST1_LD_matrix")
-#data("locus_dir")
-#locus_dir <- file.path(tempdir(),locus_dir)
-#LD_list <- save_LD_matrix(
-#    LD_matrix = BST1_LD_matrix,
-#    dat = BST1,
-#    locus_dir = locus_dir,
-#    LD_reference = "UKB")
-
-#LD_list <- save_LD_matrix(
-#    LD_matrix = BST1_LD_matrix,
-#    dat = BST1,
-#    locus_dir = locus_dir,
-#    LD_reference = "custom_vcf")
-}
 }
 \seealso{
 Other LD: 

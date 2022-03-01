@@ -31,7 +31,7 @@ test_that("load_or_create works", {
     run_tests(LD_1kgp1)
 
     #### 1000 Genomes: Phase 3 ####
-    LD_1kgp3 <- load_or_create(
+    LD_1kgp3 <- echoLD::load_or_create(
         locus_dir = locus_dir,
         dat = BST1,
         LD_reference = "1KGphase3",
@@ -40,11 +40,10 @@ test_that("load_or_create works", {
     )
     run_tests(LD_1kgp3)
 
-
     #### Custom VCF ####
     LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",
                                 package = "echoLD")
-    LD_custom <- load_or_create(
+    LD_custom <- echoLD::load_or_create(
         locus_dir = locus_dir,
         dat = BST1,
         LD_reference = LD_reference
