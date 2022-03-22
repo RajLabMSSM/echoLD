@@ -5,7 +5,7 @@
 #' #' @keywords internal
 #' #' @importFrom gaston read.vcf select.snps write.bed.matrix select.inds
 #' filter_vcf_gaston <- function(vcf_subset,
-#'                               dat,
+#'                               query_dat
 #'                               locus_dir,
 #'                               superpopulation,
 #'                               popDat,

@@ -8,7 +8,7 @@
 #' @source \href{https://github.com/pneuvial/adjclust}{adjclust GitHub}
 #' @keywords internal
 #' @importFrom Matrix forceSymmetric
-get_leadsnp_block <- function(dat,
+get_leadsnp_block <- function(query_dat,
                               ss,
                               pct = 0.15,
                               verbose = TRUE) {
@@ -17,29 +17,29 @@ get_leadsnp_block <- function(dat,
     requireNamespace("adjclust")
 
     dat_LD <- get_LD_blocks(
-        dat = dat,
+        query_dat = query_dat,
         ss = ss,
         pct = pct,
         verbose = verbose
     )
-    dat <- dat_LD$dat
+    query_dat <- dat_LD$query_dat
     LD_r2 <- dat_LD$LD_r2
 
     # Get lead SNP rsid
-    if ("leadSNP" %in% colnames(dat)) {
+    if ("leadSNP" %in% colnames(query_dat)) {
         messager(
             "Returning only SNPs within the same LD block as the lead SNP.",
             v = verbose
         )
-        lead_block <- subset(dat, leadSNP == TRUE)$LDblock[1]
-        dat <- subset(dat, LDblock == lead_block)
+        lead_block <- subset(query_dat, leadSNP == TRUE)$LDblock[1]
+        query_dat <- subset(query_dat, LDblock == lead_block)
     } else {
         messager("leadSNP column not present. Returning all SNPs.",
             v = verbose
         )
     }
     return(list(
-        dat = dat,
+        query_dat = query_dat,
         LD_r2 = LD_r2
     ))
 }

@@ -6,10 +6,10 @@
 \usage{
 load_or_create(
   locus_dir,
-  dat,
+  query_dat,
   force_new_LD = FALSE,
   LD_reference = c("1KGphase1", "1KGphase3", "UKB"),
-  ref_genome = "hg19",
+  target_genome = "hg19",
   samples = NULL,
   superpopulation = NULL,
   local_storage = NULL,
@@ -26,7 +26,7 @@ load_or_create(
 \arguments{
 \item{locus_dir}{Storage directory to use.}
 
-\item{dat}{GWAS summary statistics subset to query the LD panel with.}
+\item{query_dat}{GWAS summary statistics subset to query the LD panel with.}
 
 \item{force_new_LD}{If LD file exists, create a new one.}
 
@@ -38,10 +38,13 @@ load_or_create(
 European-decent subset of UK Biobank.}
 }}
 
-\item{ref_genome}{Genome build of the LD panel
+\item{target_genome}{Genome build of the LD panel
 (used only if providing custom LD panel).}
 
-\item{samples}{Sample names to subset the VCF by before computing LD.}
+\item{samples}{[Optional] Sample names to subset the VCF by. 
+If this option is used, the \link[GenomicRanges]{GRanges} object will be
+converted to a \link[VariantAnnotation]{ScanVcfParam} for usage by 
+\link[VariantAnnotation]{readVcf}.}
 
 \item{superpopulation}{Superpopulation to subset LD panel by
 (used only if \code{LD_reference} is "1KGphase1" or "1KGphase3".)}
@@ -107,7 +110,7 @@ locus_dir <- file.path(tempdir(), echodata::locus_dir)
 BST1 <- BST1[seq(1, 50), ] 
 LD_list <- echoLD::load_or_create(
     locus_dir = locus_dir,
-    dat = BST1,
+    query_dat = BST1,
     LD_reference = "1KGphase1"
 ) 
 }
@@ -117,6 +120,7 @@ Other LD:
 \code{\link{LD_1KG}()},
 \code{\link{LD_custom}()},
 \code{\link{LD_ukbiobank}()},
+\code{\link{check_population_1kg}()},
 \code{\link{compute_LD}()},
 \code{\link{filter_LD}()},
 \code{\link{get_locus_vcf_folder}()},
@@ -127,7 +131,6 @@ Other LD:
 \code{\link{rds_to_npz}()},
 \code{\link{saveSparse}()},
 \code{\link{save_LD_matrix}()},
-\code{\link{snpstats_get_MAF}()},
-\code{\link{translate_population}()}
+\code{\link{snpstats_get_MAF}()}
 }
 \concept{LD}

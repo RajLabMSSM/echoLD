@@ -6,14 +6,14 @@
 \usage{
 LD_custom(
   locus_dir = tempdir(),
-  dat,
+  query_dat,
   LD_reference,
-  ref_genome = "GRCh37",
+  target_genome = "GRCh37",
   superpopulation = NULL,
   samples = NULL,
   local_storage = NULL,
   leadSNP_LD_block = FALSE,
-  force_new_vcf = FALSE,
+  force_new = FALSE,
   force_new_MAF = FALSE,
   fillNA = 0,
   stats = "R",
@@ -24,7 +24,7 @@ LD_custom(
 \arguments{
 \item{locus_dir}{Storage directory to use.}
 
-\item{dat}{GWAS summary statistics subset to query the LD panel with.}
+\item{query_dat}{GWAS summary statistics subset to query the LD panel with.}
 
 \item{LD_reference}{LD reference to use:
 \itemize{
@@ -34,13 +34,16 @@ LD_custom(
 European-decent subset of UK Biobank.}
 }}
 
-\item{ref_genome}{Genome build of the LD panel
+\item{target_genome}{Genome build of the LD panel
 (used only if providing custom LD panel).}
 
 \item{superpopulation}{Superpopulation to subset LD panel by
 (used only if \code{LD_reference} is "1KGphase1" or "1KGphase3".)}
 
-\item{samples}{Sample names to subset the VCF by before computing LD.}
+\item{samples}{[Optional] Sample names to subset the VCF by. 
+If this option is used, the \link[GenomicRanges]{GRanges} object will be
+converted to a \link[VariantAnnotation]{ScanVcfParam} for usage by 
+\link[VariantAnnotation]{readVcf}.}
 
 \item{local_storage}{Storage folder for previously downloaded LD files.
 If \code{LD_reference} is "1KGphase1" or "1KGphase3",
@@ -52,7 +55,8 @@ Set to \code{NULL} to download VCFs/LD npz from remote storage system.}
 \item{leadSNP_LD_block}{Only return SNPs within the same LD block
 as the lead SNP (the SNP with the smallest p-value).}
 
-\item{force_new_vcf}{Force the creation of a new LD file even if one exists.}
+\item{force_new}{Force the creation of a new VCF subset file
+even if one exists.}
 
 \item{fillNA}{When pairwise LD (r) between two SNPs is \code{NA},
 replace with 0.}
@@ -74,16 +78,15 @@ allowing you to fine-map loci more completely.
 }
 \examples{
 \dontrun{
-BST1 <- echodata::BST1
+query_dat <-  echodata::BST1[seq(1, 50), ]
 locus_dir <- echodata::locus_dir
-locus_dir <- file.path(tempdir(), locus_dir)
-dat <- BST1[seq(1, 50), ]
+locus_dir <- file.path(tempdir(), locus_dir) 
 LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",
     package = "echoLD"
 )
 LD_list <- LD_custom(
     locus_dir = locus_dir,
-    dat = dat,
+    query_dat = query_dat
     LD_reference = LD_reference
 )
 }
@@ -93,6 +96,7 @@ Other LD:
 \code{\link{LD_1KG_download_vcf}()},
 \code{\link{LD_1KG}()},
 \code{\link{LD_ukbiobank}()},
+\code{\link{check_population_1kg}()},
 \code{\link{compute_LD}()},
 \code{\link{filter_LD}()},
 \code{\link{get_locus_vcf_folder}()},
@@ -104,8 +108,7 @@ Other LD:
 \code{\link{rds_to_npz}()},
 \code{\link{saveSparse}()},
 \code{\link{save_LD_matrix}()},
-\code{\link{snpstats_get_MAF}()},
-\code{\link{translate_population}()}
+\code{\link{snpstats_get_MAF}()}
 }
 \concept{LD}
 \keyword{internal}

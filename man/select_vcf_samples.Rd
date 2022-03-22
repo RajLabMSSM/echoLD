@@ -12,11 +12,13 @@ select_vcf_samples(
 )
 }
 \arguments{
-\item{samples}{Sample names to subset the VCF by before computing LD.}
+\item{samples}{[Optional] Sample names to subset the VCF by. 
+If this option is used, the \link[GenomicRanges]{GRanges} object will be
+converted to a \link[VariantAnnotation]{ScanVcfParam} for usage by 
+\link[VariantAnnotation]{readVcf}.}
 
 \item{verbose}{Print messages.}
 }
 \description{
-Subset VCF samples
+Subsrt VCF samples by superpopulation.
 }
-\keyword{internal}

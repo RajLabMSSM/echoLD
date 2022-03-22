@@ -3,7 +3,7 @@
 #'
 #' @return A list with the input data and LD matrix (r^2),
 #'
-#' @param dat SNP-level data table.
+#' @param query_dat SNP-level data table.
 #' @param ss \pkg{snpStats} object or LD matrix (containing r or r^2 values).
 #' @param verbose Print messages.
 #' @inheritParams adjclust::snpClust
@@ -12,7 +12,7 @@
 #' @source \href{https://github.com/pneuvial/adjclust}{adjclust GitHub}
 #' @export
 #' @importFrom Matrix forceSymmetric
-get_LD_blocks <- function(dat,
+get_LD_blocks <- function(query_dat,
                           ss,
                           stats = c("R.squared", "D.prime"),
                           pct = 0.15,
@@ -27,9 +27,9 @@ get_LD_blocks <- function(dat,
     )
     #### Assign clusters ####
     clusters <- fit_clust$clusters
-    dat$LDblock <- clusters[dat$SNP]
+    query_dat$LDblock <- clusters[query_dat$SNP]
     return(list(
-        dat = dat,
+        query_dat= query_dat,
         LD_r2 = fit_clust$fit$data
     ))
 }

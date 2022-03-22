@@ -11,7 +11,7 @@
 #' @keywords internal
 #' @importFrom data.table merge.data.table
 plink_LD <- function(leadSNP = NULL,
-                     dat,
+                     query_dat
                      bim_path = NULL,
                      remove_excess_snps = TRUE,
                      # IMPORTANT! keep this F
@@ -29,7 +29,7 @@ plink_LD <- function(leadSNP = NULL,
 
     # Dprime ranges from -1 to 1
     start <- Sys.time()
-    if (is.null(leadSNP)) leadSNP <- subset(dat, leadSNP)$SNP[1]
+    if (is.null(leadSNP)) leadSNP <- subset(query_dat leadSNP)$SNP[1]
     # Calculate LD
     messager("++ Reading in BIM file...", v = verbose)
     if (is.null(bim_path)) bim_path <- file.path(LD_folder, "plink.bim")
@@ -41,7 +41,7 @@ plink_LD <- function(leadSNP = NULL,
         orig_n <- nrow(bim)
         if (merge_by_RSID) {
             bim.merged <- data.table::merge.data.table(bim,
-                dat,
+                query_dat
                 by = c("SNP")
             )
         } else {
@@ -50,7 +50,7 @@ plink_LD <- function(leadSNP = NULL,
                 CHR = as.integer(gsub("chr", "", CHR)),
                 POS = as.integer(POS)
             ),
-            dplyr::mutate(dat,
+            dplyr::mutate(query_dat
                 CHR = as.integer(gsub("chr", "", CHR)),
                 POS = as.integer(POS)
             ),

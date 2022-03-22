@@ -12,7 +12,7 @@
 #' }
 #'
 #' @param locus_dir Storage directory to use.
-#' @param dat GWAS summary statistics subset to query the LD panel with.
+#' @param query_dat GWAS summary statistics subset to query the LD panel with.
 #' @param force_new_LD If LD file exists, create a new one.
 #' @param LD_reference LD reference to use:
 #' \itemize{
@@ -21,7 +21,7 @@
 #' \item{"UKB" : }{Pre-computed LD from a British
 #' European-decent subset of UK Biobank.}
 #' }
-#' @param ref_genome Genome build of the LD panel
+#' @param target_genome Genome build of the LD panel
 #' (used only if providing custom LD panel).
 #' @param superpopulation Superpopulation to subset LD panel by
 #'  (used only if \code{LD_reference} is "1KGphase1" or "1KGphase3".)
@@ -50,15 +50,15 @@
 #' BST1 <- BST1[seq(1, 50), ] 
 #' LD_list <- echoLD::load_or_create(
 #'     locus_dir = locus_dir,
-#'     dat = BST1,
+#'     query_dat = BST1,
 #'     LD_reference = "1KGphase1"
 #' ) 
 #' @export
 load_or_create <- function(locus_dir,
-                           dat,
+                           query_dat,
                            force_new_LD = FALSE,
                            LD_reference = c("1KGphase1", "1KGphase3", "UKB"),
-                           ref_genome = "hg19",
+                           target_genome = "hg19",
                            samples = NULL,
                            superpopulation = NULL,
                            local_storage = NULL,
@@ -87,14 +87,14 @@ load_or_create <- function(locus_dir,
             convert_to_df = FALSE
         )
         LD_list <- list(
-            DT = dat,
+            query_dat = query_dat,
             LD = LD_matrix,
             RDS_path = RDS_path
         )
     } else if (tolower(LD_reference) == "ukb") {
         #### UK Biobank ####
         LD_list <- LD_ukbiobank(
-            dat = dat,
+            query_dat = query_dat,
             locus_dir = locus_dir,
             force_new_LD = force_new_LD,
             local_storage = local_storage,
@@ -110,7 +110,7 @@ load_or_create <- function(locus_dir,
         #### 1000 Genomes ####
         LD_list <- LD_1KG(
             locus_dir = locus_dir,
-            dat = dat,
+            query_dat = query_dat,
             local_storage = local_storage,
             LD_reference = LD_reference,
             samples = samples,
@@ -127,10 +127,10 @@ load_or_create <- function(locus_dir,
         #### Custom vcf ####
         LD_list <- LD_custom(
             locus_dir = locus_dir,
-            dat = dat,
+            query_dat = query_dat,
             local_storage = local_storage,
             LD_reference = LD_reference,
-            ref_genome = ref_genome,
+            target_genome = target_genome,
             samples = samples,
             superpopulation = superpopulation,
             leadSNP_LD_block = leadSNP_LD_block,

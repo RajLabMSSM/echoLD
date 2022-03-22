@@ -6,12 +6,12 @@
 #' #' @importFrom echoconda find_package
 #' #' @importFrom downloadR downloader
 #' #' @importFrom data.table fwrite
-#' query_vcf_cli <- function(dat,
+#' query_vcf_cli <- function(query_dat
 #'                           vcf_url,
 #'                           locus_dir,
 #'                           LD_reference,
 #'                           whole_vcf = FALSE,
-#'                           force_new_vcf = FALSE,
+#'                           force_new = FALSE,
 #'                           remove_original_vcf = FALSE,
 #'                           download_method = "download.file",
 #'                           query_by_regions = FALSE,
@@ -20,7 +20,7 @@
 #'                           verbose = TRUE) {
 #'     # vcf_subset <- "/pd-omics/brian/Fine_Mapping/Data/GWAS/Nalls23andMe_2019/BRIP1/LD/BRIP1.1KGphase3.vcf.gz"
 #'     vcf_subset <- construct_subset_vcf_name(
-#'         dat = dat,
+#'        query_dat= query_dat
 #'         locus_dir = locus_dir,
 #'         vcf_name = LD_reference,
 #'         whole_vcf = whole_vcf
@@ -38,7 +38,7 @@
 #'         conda_env = conda_env,
 #'         verbose = verbose
 #'     )
-#'     if ((!file.exists(vcf_subset)) | force_new_vcf) {
+#'     if ((!file.exists(vcf_subset)) | force_new) {
 #'         messager("LD:: Querying VCF subset", v = verbose)
 #'         if (whole_vcf) {
 #'             region <- ""

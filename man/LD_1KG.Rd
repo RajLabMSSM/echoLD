@@ -6,13 +6,13 @@
 \usage{
 LD_1KG(
   locus_dir,
-  dat,
+  query_dat,
   LD_reference = "1KGphase1",
   superpopulation = NULL,
   samples = NULL,
   local_storage = NULL,
   leadSNP_LD_block = FALSE,
-  force_new_vcf = FALSE,
+  force_new = FALSE,
   force_new_MAF = FALSE,
   fillNA = 0,
   stats = "R",
@@ -23,7 +23,7 @@ LD_1KG(
 \arguments{
 \item{locus_dir}{Storage directory to use.}
 
-\item{dat}{GWAS summary statistics subset to query the LD panel with.}
+\item{query_dat}{GWAS summary statistics subset to query the LD panel with.}
 
 \item{LD_reference}{LD reference to use:
 \itemize{
@@ -36,7 +36,10 @@ European-decent subset of UK Biobank.}
 \item{superpopulation}{Superpopulation to subset LD panel by
 (used only if \code{LD_reference} is "1KGphase1" or "1KGphase3".)}
 
-\item{samples}{Sample names to subset the VCF by before computing LD.}
+\item{samples}{[Optional] Sample names to subset the VCF by. 
+If this option is used, the \link[GenomicRanges]{GRanges} object will be
+converted to a \link[VariantAnnotation]{ScanVcfParam} for usage by 
+\link[VariantAnnotation]{readVcf}.}
 
 \item{local_storage}{Storage folder for previously downloaded LD files.
 If \code{LD_reference} is "1KGphase1" or "1KGphase3",
@@ -71,6 +74,7 @@ Other LD:
 \code{\link{LD_1KG_download_vcf}()},
 \code{\link{LD_custom}()},
 \code{\link{LD_ukbiobank}()},
+\code{\link{check_population_1kg}()},
 \code{\link{compute_LD}()},
 \code{\link{filter_LD}()},
 \code{\link{get_locus_vcf_folder}()},
@@ -82,8 +86,7 @@ Other LD:
 \code{\link{rds_to_npz}()},
 \code{\link{saveSparse}()},
 \code{\link{save_LD_matrix}()},
-\code{\link{snpstats_get_MAF}()},
-\code{\link{translate_population}()}
+\code{\link{snpstats_get_MAF}()}
 }
 \concept{LD}
 \keyword{internal}

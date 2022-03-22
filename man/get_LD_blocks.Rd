@@ -8,7 +8,7 @@
 }
 \usage{
 get_LD_blocks(
-  dat,
+  query_dat,
   ss,
   stats = c("R.squared", "D.prime"),
   pct = 0.15,
@@ -16,7 +16,7 @@ get_LD_blocks(
 )
 }
 \arguments{
-\item{dat}{SNP-level data table.}
+\item{query_dat}{SNP-level data table.}
 
 \item{ss}{\pkg{snpStats} object or LD matrix (containing r or r^2 values).}
 

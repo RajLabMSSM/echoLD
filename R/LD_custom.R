@@ -16,16 +16,15 @@
 #'
 #' @examples
 #' \dontrun{
-#' BST1 <- echodata::BST1
+#' query_dat <-  echodata::BST1[seq(1, 50), ]
 #' locus_dir <- echodata::locus_dir
-#' locus_dir <- file.path(tempdir(), locus_dir)
-#' dat <- BST1[seq(1, 50), ]
+#' locus_dir <- file.path(tempdir(), locus_dir) 
 #' LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",
 #'     package = "echoLD"
 #' )
 #' LD_list <- LD_custom(
 #'     locus_dir = locus_dir,
-#'     dat = dat,
+#'     query_dat = query_dat
 #'     LD_reference = LD_reference
 #' )
 #' }
@@ -33,44 +32,42 @@
 #' @keywords internal
 #' @importFrom echotabix query_vcf
 LD_custom <- function(locus_dir = tempdir(),
-                      dat,
+                      query_dat,
                       LD_reference,
-                      ref_genome = "GRCh37",
+                      target_genome = "GRCh37",
                       superpopulation = NULL,
                       samples = NULL,
                       local_storage = NULL,
                       leadSNP_LD_block = FALSE,
-                      force_new_vcf = FALSE,
+                      force_new = FALSE,
                       force_new_MAF = FALSE,
                       fillNA = 0,
                       stats = "R",
                       as_sparse = TRUE,
-                      # min_r2=F,
-                      # min_Dprime=F,
+                      # min_r2=FALSE,
+                      # min_Dprime=FALSE,
                       # remove_correlates = FALSE,
                       verbose = TRUE) {
-    messager("echoLD:: Using custom VCF as LD reference panel.", v = verbose)
-    locus <- basename(locus_dir)
-    vcf_url <- LD_reference
+    
+    messager("echoLD:: Using custom VCF as LD reference panel.", v = verbose) 
+    target_path <- LD_reference
     #### Query ####
     vcf <- echotabix::query_vcf(
-        dat = dat,
-        vcf_url = vcf_url,
-        locus_dir = locus_dir,
-        vcf_name = LD_reference,
-        ref_genome = ref_genome,
+        query_dat = query_dat,
+        target_path = target_path, 
+        target_genome = target_genome,
         samples = samples,
-        force_new_vcf = force_new_vcf,
+        force_new = force_new,
         verbose = verbose
     )
     #### Convert to snpStats object ####
     ss <- VariantAnnotation::genotypeToSnpMatrix(
         x = vcf,
-        select.snps = dat$SNP
+        select.snps = query_dat$SNP
     )
     #### Get MAF (if needed) ####
-    dat <- snpstats_get_MAF(
-        dat = dat,
+    query_dat <- snpstats_get_MAF(
+        query_dat = query_dat,
         ss = ss,
         force_new_MAF = force_new_MAF,
         verbose = verbose
@@ -78,11 +75,11 @@ LD_custom <- function(locus_dir = tempdir(),
     #### Filter out SNPs not in the same LD block as the lead SNP ####
     if (leadSNP_LD_block) {
         dat_LD <- get_leadsnp_block(
-            dat = dat,
+            query_dat = query_dat,
             ss = ss,
             verbose = verbose
         )
-        dat <- dat_LD$dat
+        query_dat <- dat_LD$query_dat
         LD_r2 <- dat_LD$LD_r2
     }
     #### Get LD ####
@@ -92,7 +89,7 @@ LD_custom <- function(locus_dir = tempdir(),
     } else {
         LD_matrix <- compute_LD(
             ss = ss,
-            select_snps = dat$SNP,
+            select_snps = query_dat$SNP,
             stats = stats,
             verbose = verbose
         )
@@ -105,7 +102,7 @@ LD_custom <- function(locus_dir = tempdir(),
     #### Save LD matrix ####
     LD_list <- save_LD_matrix(
         LD_matrix = LD_matrix,
-        dat = dat,
+        query_dat = query_dat,
         locus_dir = locus_dir,
         subset_common = TRUE,
         fillNA = fillNA,

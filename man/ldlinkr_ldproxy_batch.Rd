@@ -36,9 +36,9 @@ Easy to use but doesn't scale up well to many SNPs (takes way too long).
 }
 \details{
 \code{
-merged_DT <- echodata::get_Nalls2019_merged()
-lead.snps <- setNames(subset(merged_DT, leadSNP)$Locus,
-                      subset(merged_DT, leadSNP)$SNP)
+merged_query_dat <- echodata::get_Nalls2019_merged()
+lead.snps <- setNames(subset(merged_query_dat, leadSNP)$Locus,
+                      subset(merged_query_dat, leadSNP)$SNP)
 proxies <- ldlinkr_ldproxy_batch(snp = lead.snps)
 }
 }
@@ -48,6 +48,7 @@ Other LD:
 \code{\link{LD_1KG}()},
 \code{\link{LD_custom}()},
 \code{\link{LD_ukbiobank}()},
+\code{\link{check_population_1kg}()},
 \code{\link{compute_LD}()},
 \code{\link{filter_LD}()},
 \code{\link{get_locus_vcf_folder}()},
@@ -58,8 +59,7 @@ Other LD:
 \code{\link{rds_to_npz}()},
 \code{\link{saveSparse}()},
 \code{\link{save_LD_matrix}()},
-\code{\link{snpstats_get_MAF}()},
-\code{\link{translate_population}()}
+\code{\link{snpstats_get_MAF}()}
 }
 \concept{LD}
 \keyword{internal}

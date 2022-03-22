@@ -7,7 +7,7 @@
 \href{https://github.com/pneuvial/adjclust}{adjclust GitHub}
 }
 \usage{
-get_leadsnp_block(dat, ss, pct = 0.15, verbose = TRUE)
+get_leadsnp_block(query_dat, ss, pct = 0.15, verbose = TRUE)
 }
 \arguments{
 \item{pct}{minimum percentage of points for the plateau selection in 

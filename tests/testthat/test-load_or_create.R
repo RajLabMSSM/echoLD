@@ -8,7 +8,7 @@ test_that("load_or_create works", {
     run_tests <- function(LD_list) {
         testthat::expect_length(LD_list, 3)
         testthat::expect_equal(nrow(LD_list$LD), ncol(LD_list$LD))
-        testthat::expect_lte(nrow(LD_list$LD), nrow(LD_list$DT))
+        testthat::expect_lte(nrow(LD_list$LD), nrow(LD_list$query_dat))
         testthat::expect_gte(nrow(LD_list$LD), 40)
         testthat::expect_true(methods::is(LD_list$RDS_path, "character"))
         testthat::expect_true(file.exists(LD_list$RDS_path))
@@ -17,7 +17,7 @@ test_that("load_or_create works", {
     #### 1000 Genomes: Phase 1 ####
     LD_1kgp1 <- echoLD::load_or_create(
         locus_dir = locus_dir,
-        dat = BST1,
+       query_dat= BST1,
         LD_reference = "1KGphase1"
     )
     run_tests(LD_1kgp1)
@@ -25,7 +25,7 @@ test_that("load_or_create works", {
     #### 1000 Genomes: Phase 1 (from storage) ####
     LD_1kgp1 <- echoLD::load_or_create(
         locus_dir = locus_dir,
-        dat = BST1,
+       query_dat= BST1,
         LD_reference = "1KGphase1"
     )
     run_tests(LD_1kgp1)
@@ -33,7 +33,7 @@ test_that("load_or_create works", {
     #### 1000 Genomes: Phase 3 ####
     LD_1kgp3 <- echoLD::load_or_create(
         locus_dir = locus_dir,
-        dat = BST1,
+       query_dat= BST1,
         LD_reference = "1KGphase3",
         remove_tmps = FALSE,
         force_new_LD = TRUE
@@ -45,14 +45,14 @@ test_that("load_or_create works", {
                                 package = "echoLD")
     LD_custom <- echoLD::load_or_create(
         locus_dir = locus_dir,
-        dat = BST1,
+       query_dat= BST1,
         LD_reference = LD_reference
     )
     run_tests(LD_custom)
 
     # UK Biobank LD
     # LD_ukb<- load_or_create(locus_dir = locus_dir,
-    #                         dat = BST1,
+    #                        query_dat= BST1,
     #                         LD_reference = "UKB")
     # run_tests(LD_ukb)
 
@@ -70,7 +70,7 @@ test_that("load_or_create works", {
     # LD_reference <- "var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpQuMo8l/results/GWAS/Nalls23andMe_2019/BST1/LD/BST1.1KGphase3.vcf"
     # file.exists(LD_reference)
     # LD_local <- load_or_create(locus_dir = locus_dir,
-    #                            dat = BST1,
+    #                           query_dat= BST1,
     #                            LD_reference = LD_reference,
     #                            force_new_LD = TRUE)
 })

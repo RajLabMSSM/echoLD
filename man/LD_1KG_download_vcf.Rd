@@ -3,21 +3,34 @@
 \name{LD_1KG_download_vcf}
 \alias{LD_1KG_download_vcf}
 \title{Download VCF subset from 1000 Genomes}
+\source{
+\code{
+query_dat <- echodata::BST1
+locus_dir <- file.path(tempdir(), echodata::locus_dir)
+query_granges <- echotabix::construct_query(query_dat=query_dat)
+
+vcf_subset.popDat <- echoLD:::LD_1KG_download_vcf(
+    query_granges = query_granges,
+    LD_reference = "1KGphase1",
+    locus_dir = locus_dir)
+}
+}
 \usage{
 LD_1KG_download_vcf(
-  dat,
+  query_granges,
   LD_reference = "1KGphase1",
   superpopulation = NULL,
   samples = NULL,
   local_storage = NULL,
-  locus_dir,
-  force_new_vcf = FALSE,
+  locus_dir = tempdir(),
+  save_path = echotabix::construct_vcf_path(locus_dir = locus_dir, subdir = "LD",
+    target_path = LD_reference, query_granges = query_granges),
+  query_save = TRUE,
+  force_new = FALSE,
   verbose = TRUE
 )
 }
 \arguments{
-\item{dat}{GWAS summary statistics subset to query the LD panel with.}
-
 \item{LD_reference}{LD reference to use:
 \itemize{
 \item{"1KGphase1" : }{1000 Genomes Project Phase 1}
@@ -29,7 +42,10 @@ European-decent subset of UK Biobank.}
 \item{superpopulation}{Superpopulation to subset LD panel by
 (used only if \code{LD_reference} is "1KGphase1" or "1KGphase3".)}
 
-\item{samples}{Sample names to subset the VCF by before computing LD.}
+\item{samples}{[Optional] Sample names to subset the VCF by. 
+If this option is used, the \link[GenomicRanges]{GRanges} object will be
+converted to a \link[VariantAnnotation]{ScanVcfParam} for usage by 
+\link[VariantAnnotation]{readVcf}.}
 
 \item{local_storage}{Storage folder for previously downloaded LD files.
 If \code{LD_reference} is "1KGphase1" or "1KGphase3",
@@ -40,7 +56,13 @@ Set to \code{NULL} to download VCFs/LD npz from remote storage system.}
 
 \item{locus_dir}{Storage directory to use.}
 
-\item{force_new_vcf}{Force the creation of a new LD file even if one exists.}
+\item{save_path}{Path to save VCF results in.}
+
+\item{query_save}{Whether to save the results of the query on disk. 
+\emph{Note}: Writing to disk can take some time.}
+
+\item{force_new}{Force the creation of a new VCF subset file
+even if one exists.}
 
 \item{verbose}{Print messages.}
 }
@@ -48,21 +70,12 @@ Set to \code{NULL} to download VCFs/LD npz from remote storage system.}
 Query the 1000 Genomes Project for a subset of their individual-level VCF
 files.
 }
-\details{
-\code{
-BST1 <- echodata::BST1
-vcf_subset.popDat <- LD_1KG_download_vcf(
-    dat = BST1,
-    LD_reference = "1KGphase1",
-    locus_dir = file.path(tempdir(), locus_dir)
-)
-}
-}
 \seealso{
 Other LD: 
 \code{\link{LD_1KG}()},
 \code{\link{LD_custom}()},
 \code{\link{LD_ukbiobank}()},
+\code{\link{check_population_1kg}()},
 \code{\link{compute_LD}()},
 \code{\link{filter_LD}()},
 \code{\link{get_locus_vcf_folder}()},
@@ -74,8 +87,7 @@ Other LD:
 \code{\link{rds_to_npz}()},
 \code{\link{saveSparse}()},
 \code{\link{save_LD_matrix}()},
-\code{\link{snpstats_get_MAF}()},
-\code{\link{translate_population}()}
+\code{\link{snpstats_get_MAF}()}
 }
 \concept{LD}
 \keyword{internal}

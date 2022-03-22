@@ -4,10 +4,11 @@
 \alias{snpstats_get_MAF}
 \title{Get MAF using \pkg{snpStats} package}
 \source{
-\href{https://www.bioconductor.org/packages/release/bioc/html/snpStats.html}{snpStats Bioconductor page}
+\href{https://www.bioconductor.org/packages/release/bioc/html/snpStats.html}{
+snpStats Bioconductor page}
 }
 \usage{
-snpstats_get_MAF(dat, ss, force_new_MAF = FALSE, verbose = TRUE)
+snpstats_get_MAF(query_dat, ss, force_new_MAF = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{LD_folder}{Locus-specific LD output folder.}
@@ -21,6 +22,7 @@ Other LD:
 \code{\link{LD_1KG}()},
 \code{\link{LD_custom}()},
 \code{\link{LD_ukbiobank}()},
+\code{\link{check_population_1kg}()},
 \code{\link{compute_LD}()},
 \code{\link{filter_LD}()},
 \code{\link{get_locus_vcf_folder}()},
@@ -31,8 +33,7 @@ Other LD:
 \code{\link{popDat_1KGphase3}},
 \code{\link{rds_to_npz}()},
 \code{\link{saveSparse}()},
-\code{\link{save_LD_matrix}()},
-\code{\link{translate_population}()}
+\code{\link{save_LD_matrix}()}
 }
 \concept{LD}
 \keyword{internal}

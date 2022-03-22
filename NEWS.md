@@ -1,3 +1,10 @@
+# echoLD 0.99.2
+
+## New features
+
+* Update to match changes in `echotabix`.
+
+
 # echoLD 0.99.1
 
 ## New features

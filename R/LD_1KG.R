@@ -17,42 +17,43 @@
 #' @family LD
 #' @keywords internal
 LD_1KG <- function(locus_dir,
-                   dat,
+                   query_dat,
                    LD_reference = "1KGphase1",
                    superpopulation = NULL,
                    samples = NULL,
                    local_storage = NULL,
                    leadSNP_LD_block = FALSE,
-                   force_new_vcf = FALSE,
+                   force_new = FALSE,
                    force_new_MAF = FALSE,
                    fillNA = 0,
                    stats = "R",
                    as_sparse = TRUE,
-                   # min_r2=F,
-                   # min_Dprime=F,
+                   # min_r2=FALSE,
+                   # min_Dprime=FALSE,
                    # remove_correlates = FALSE,
                    verbose = TRUE) {
+    
     messager("echoLD:: Using 1000Genomes as LD reference panel.", v = verbose)
-    locus <- basename(locus_dir)
     #### Query ####
+    query_granges <- echotabix::construct_query(query_dat=query_dat)
     vcf <- LD_1KG_download_vcf(
-        dat = dat,
+        query_granges = query_granges,
         locus_dir = locus_dir,
         LD_reference = LD_reference,
         superpopulation = superpopulation,
         samples = samples,
-        force_new_vcf = force_new_vcf,
+        force_new = force_new,
         local_storage = local_storage,
         verbose = verbose
     )
     #### Convert to snpStats object ####
     ss <- VariantAnnotation::genotypeToSnpMatrix(
         x = vcf,
-        select.snps = dat$SNP
+        select.snps = query_dat$SNP
     )
     #### Get MAF (if needed) ####
-    dat <- snpstats_get_MAF(
-        dat = dat,
+    query_dat <- snpstats_get_MAF(
+        query_dat = query_dat,
         ss = ss,
         force_new_MAF = force_new_MAF,
         verbose = verbose
@@ -60,11 +61,11 @@ LD_1KG <- function(locus_dir,
     #### Filter out SNPs not in the same LD block as the lead SNP ####
     if (leadSNP_LD_block) {
         dat_LD <- get_leadsnp_block(
-            dat = dat,
+            query_dat = query_dat,
             ss = ss,
             verbose = verbose
         )
-        dat <- dat_LD$dat
+        query_dat <- dat_LD$query_dat
         LD_r2 <- dat_LD$LD_r2
     }
     #### Get LD ####
@@ -74,7 +75,7 @@ LD_1KG <- function(locus_dir,
     } else {
         LD_matrix <- compute_LD(
             ss = ss,
-            select_snps = dat$SNP,
+            select_snps = query_dat$SNP,
             stats = stats,
             verbose = verbose
         )
@@ -87,7 +88,7 @@ LD_1KG <- function(locus_dir,
     #### Save LD matrix #### 
     LD_list <- save_LD_matrix(
         LD_matrix = LD_matrix,
-        dat = dat,
+        query_dat = query_dat,
         locus_dir = locus_dir,
         subset_common = TRUE,
         fillNA = fillNA,

@@ -15,7 +15,7 @@
 #' #' )
 #' #' LD_matrix <- LD_custom_cli(
 #' #'     LD_reference = LD_reference,
-#' #'     dat = BST1,
+#' #'    query_dat= BST1,
 #' #'     locus_dir = locus_dir
 #' #' )
 #' #' }
@@ -23,8 +23,8 @@
 #' LD_custom_cli <- function(LD_reference,
 #'                           superpopulation = NULL,
 #'                           fullSS_genome_build = "hg19",
-#'                           ref_genome = "hg19",
-#'                           dat,
+#'                           target_genome = "hg19",
+#'                           query_dat
 #'                           locus_dir,
 #'                           force_new_LD = FALSE,
 #'                           min_r2 = FALSE,
@@ -42,21 +42,21 @@
 #' 
 #'     messager("LD:: Computing LD from local vcf file:", LD_reference)
 #' 
-#'     if (!toupper(ref_genome) %in% c("HG19", "HG37", "GRCH37")) {
+#'     if (!toupper(target_genome) %in% c("HG19", "HG37", "GRCH37")) {
 #'         messager("LD:: LD panel in hg38. Handling accordingly.", v = verbose)
 #'         if (!toupper(fullSS_genome_build) %in% c("HG19", "HG37", "GRCH37")) {
 #'             ## If the query was originally in hg38,
 #'             # that means it's already been lifted over to hg19.
 #'             # So you can use the old stored POS.hg38 when the
-#'             dat <- dat %>%
+#'            query_dat<-query_dat%>%
 #'                 dplyr::rename(POS.hg19 = POS) %>%
 #'                 dplyr::rename(POS = POS.hg38)
 #'         } else {
 #'             ## If the query was originally in hg19,
 #'             # that means no liftover was done.
 #'             # So you need to lift it over now.
-#'             dat <- liftover(
-#'                 dat = dat,
+#'            query_dat<- liftover(
+#'                query_dat= query_dat
 #'                 build_conversion = "hg19ToHg38",
 #'                 as_granges = FALSE,
 #'                 verbose = verbose
@@ -71,7 +71,7 @@
 #'     )
 #'     # Make sure your query's chr format is the same as the vcf's chr format
 #'     has_chr <- determine_chrom_type_vcf(vcf_file = vcf_file)
-#'     dat <- dplyr::mutate(dat,
+#'    query_dat<- dplyr::mutate(query_dat
 #'         CHR = if (has_chr) {
 #'             paste0("chr", gsub("chr", "", CHR))
 #'         } else {
@@ -80,13 +80,13 @@
 #'     )
 #' 
 #'     vcf_subset <- query_vcf_cli(
-#'         dat = dat,
+#'        query_dat= query_dat
 #'         locus_dir = locus_dir,
 #'         LD_reference = LD_reference,
 #'         vcf_url = LD_reference,
 #'         whole_vcf = FALSE,
 #'         remove_original_vcf = FALSE,
-#'         force_new_vcf = force_new_LD,
+#'         force_new = force_new_LD,
 #'         query_by_regions = FALSE,
 #'         nThread = nThread,
 #'         conda_env = conda_env,
@@ -118,15 +118,15 @@
 #'         verbose = verbose
 #'     )
 #'     #### Get MAF  ####
-#'     dat <- snpstats_get_MAF(
-#'         dat = dat,
+#'    query_dat<- snpstats_get_MAF(
+#'        query_dat= query_dat
 #'         ss = ss,
 #'         force_new_MAF = FALSE,
 #'         verbose = verbose
 #'     )
 #'     # Filter out SNPs not in the same LD block as the lead SNP
 #'     # Get lead SNP rsid
-#'     leadSNP <- subset(dat, leadSNP)$SNP
+#'     leadSNP <- subset(query_dat leadSNP)$SNP
 #'     if (!is.null(LD_block_size)) {
 #'         block_snps <- leadsnp_block_plink(
 #'             leadSNP = leadSNP,
@@ -146,7 +146,7 @@
 #'     # Save LD matrix
 #'     LD_list <- save_LD_matrix(
 #'         LD_matrix = LD_matrix,
-#'         dat = dat,
+#'        query_dat= query_dat
 #'         locus_dir = locus_dir,
 #'         fillNA = fillNA,
 #'         LD_reference = gsub(".vcf|.gz", "", LD_reference),

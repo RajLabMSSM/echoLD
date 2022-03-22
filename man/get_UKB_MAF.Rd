@@ -8,7 +8,7 @@
 }
 \usage{
 get_UKB_MAF(
-  dat,
+  query_dat,
   output_path = tools::R_user_dir(package = "echoLD", which = "cache"),
   force_new_maf = FALSE,
   download_method = "axel",
@@ -18,7 +18,7 @@ get_UKB_MAF(
 )
 }
 \arguments{
-\item{dat}{SNP-level data.}
+\item{query_dat}{SNP-level data.}
 
 \item{output_path}{Path to store UKB_MAF file in.}
 
@@ -51,8 +51,8 @@ If \strong{MAF} column is missing,
 download MAF from UK Biobank and use that instead.
 }
 \examples{
-dat <- echodata::BST1
-dat$MAF <- NULL
-dat2 <- echoLD::get_UKB_MAF(dat = dat)
+query_dat<- echodata::BST1
+query_dat$MAF <- NULL
+dat2 <- echoLD::get_UKB_MAF(query_dat = query_dat)
 }
 \concept{standardizing functions}

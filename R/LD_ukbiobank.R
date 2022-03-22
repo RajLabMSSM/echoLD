@@ -2,7 +2,7 @@
 #'
 #' Download pre-computed LD matrices from
 #' \href{https://www.ukbiobank.ac.uk}{UK Biobank} in 3Mb windows,
-#' then subset to the region that overlaps with \code{dat}.
+#' then subset to the region that overlaps with \code{query_dat}.
 #'
 #' LD was derived from a  British, European-decent subpopulation
 #' in the UK Biobank. LD was pre-computed and stored by the Alkes Price lab
@@ -18,7 +18,7 @@
 #' @keywords internal
 #' @importFrom data.table fread data.table
 #' @importFrom  reticulate source_python
-LD_ukbiobank <- function(dat = NULL,
+LD_ukbiobank <- function(query_dat = NULL,
                          locus_dir,
                          sumstats_path = NULL,
                          chrom = NULL,
@@ -38,21 +38,21 @@ LD_ukbiobank <- function(dat = NULL,
     load_ld <- NULL
 
     messager("echoLD:: Using UK Biobank LD reference panel.", v = verbose)
-    #### Prepare dat ####
-    if (!is.null(dat)) {
-        dat <- dat
+    #### Preparequery_dat####
+    if (!is.null(query_dat)) {
+       query_dat<- query_dat
     } else if (!is.null(sumstats_path)) {
         messager("+ Assigning chrom and min_pos based on summary stats file",
             v = verbose
         )
         # sumstats_path="./example_data/BST1_Nalls23andMe_2019_subset.txt"
-        dat <- data.table::fread(
+       query_dat<- data.table::fread(
             input = sumstats_path,
             nThread = nThread
         )
     }
-    chrom <- unique(dat$CHR)
-    min_pos <- min(dat$POS)
+    chrom <- unique(query_dat$CHR)
+    min_pos <- min(query_dat$POS)
     LD.prefixes <- UKB_find_ld_prefix(
         chrom = chrom,
         min_pos = min_pos
@@ -63,8 +63,7 @@ LD_ukbiobank <- function(dat = NULL,
 
     #### Create LD locus dir ####
     LD_dir <- file.path(locus_dir, "LD")
-    dir.create(LD_dir, showWarnings = FALSE, recursive = TRUE)
-    locus <- basename(locus_dir)
+    dir.create(LD_dir, showWarnings = FALSE, recursive = TRUE) 
     # RDS_path <- file.path(LD_dir, paste0(locus,".UKB_LD.RDS"))
     RDS_path <- get_rds_path(
         locus_dir = locus_dir,
@@ -76,7 +75,7 @@ LD_ukbiobank <- function(dat = NULL,
             RDS_path,
             v = verbose
         )
-        LD_matrix <- readRDS(RDS_path)
+        ld_R <- readRDS(RDS_path)
     } else {
         if (download_method != "python") {
             if (download_full_ld |
@@ -156,13 +155,13 @@ LD_ukbiobank <- function(dat = NULL,
         if (is.null(colnames(ld_R))) colnames(ld_R) <- ld_snps$rsid
 
         # As a last resort download UKB MAF
-        if (!"MAF" %in% colnames(dat)) {
+        if (!"MAF" %in% colnames(query_dat)) {
             output_path <- file.path(
                 dirname(dirname(dirname(locus_dir))),
                 "Reference/UKB_MAF"
             )
-            dat <- get_UKB_MAF(
-                dat = dat,
+           query_dat<- get_UKB_MAF(
+               query_dat = query_dat,
                 output_path = output_path,
                 force_new_maf = FALSE,
                 nThread = nThread,
@@ -177,7 +176,7 @@ LD_ukbiobank <- function(dat = NULL,
         }
         RDS_path <- save_LD_matrix(
             LD_matrix = ld_R,
-            dat = dat,
+           query_dat= query_dat,
             locus_dir = locus_dir,
             LD_reference = "UKB",
             as_sparse = as_sparse,
@@ -195,7 +194,7 @@ LD_ukbiobank <- function(dat = NULL,
     }
     if (return_matrix) {
         return(list(
-            DT = dat,
+            query_dat = query_dat,
             LD = ld_R,
             RDS_path = RDS_path
         ))

@@ -5,18 +5,18 @@
 \title{Save LD matrix}
 \source{
 \code{
-dat <- echodata::BST1
+query_dat <- echodata::BST1
 LD_matrix <- echodata::BST1_LD_matrix 
 locus_dir <- file.path(tempdir(),echodata::locus_dir)
 
 LD_list <- echoLD:::save_LD_matrix(
     LD_matrix = LD_matrix,
-    dat = dat,
+    query_dat = query_dat
     locus_dir = locus_dir,
     LD_reference = "UKB")
 LD_list <- echoLD:::save_LD_matrix(
     LD_matrix = LD_matrix,
-    dat = dat,
+    query_dat = query_dat
     locus_dir = locus_dir,
     LD_reference = "custom_vcf")
 }
@@ -24,7 +24,7 @@ LD_list <- echoLD:::save_LD_matrix(
 \usage{
 save_LD_matrix(
   LD_matrix,
-  dat,
+  query_dat,
   locus_dir,
   fillNA = 0,
   LD_reference,
@@ -42,6 +42,7 @@ Other LD:
 \code{\link{LD_1KG}()},
 \code{\link{LD_custom}()},
 \code{\link{LD_ukbiobank}()},
+\code{\link{check_population_1kg}()},
 \code{\link{compute_LD}()},
 \code{\link{filter_LD}()},
 \code{\link{get_locus_vcf_folder}()},
@@ -52,8 +53,7 @@ Other LD:
 \code{\link{popDat_1KGphase3}},
 \code{\link{rds_to_npz}()},
 \code{\link{saveSparse}()},
-\code{\link{snpstats_get_MAF}()},
-\code{\link{translate_population}()}
+\code{\link{snpstats_get_MAF}()}
 }
 \concept{LD}
 \keyword{internal}

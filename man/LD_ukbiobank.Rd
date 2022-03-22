@@ -5,7 +5,7 @@
 \title{Download LD matrices from UK Biobank}
 \usage{
 LD_ukbiobank(
-  dat = NULL,
+  query_dat = NULL,
   locus_dir,
   sumstats_path = NULL,
   chrom = NULL,
@@ -24,7 +24,7 @@ LD_ukbiobank(
 )
 }
 \arguments{
-\item{dat}{GWAS summary statistics subset to query the LD panel with.}
+\item{query_dat}{GWAS summary statistics subset to query the LD panel with.}
 
 \item{locus_dir}{Storage directory to use.}
 
@@ -52,7 +52,7 @@ like VCF, npz, and plink files.}
 \description{
 Download pre-computed LD matrices from
 \href{https://www.ukbiobank.ac.uk}{UK Biobank} in 3Mb windows,
-then subset to the region that overlaps with \code{dat}.
+then subset to the region that overlaps with \code{query_dat}.
 }
 \details{
 LD was derived from a  British, European-decent subpopulation
@@ -64,6 +64,7 @@ Other LD:
 \code{\link{LD_1KG_download_vcf}()},
 \code{\link{LD_1KG}()},
 \code{\link{LD_custom}()},
+\code{\link{check_population_1kg}()},
 \code{\link{compute_LD}()},
 \code{\link{filter_LD}()},
 \code{\link{get_locus_vcf_folder}()},
@@ -75,8 +76,7 @@ Other LD:
 \code{\link{rds_to_npz}()},
 \code{\link{saveSparse}()},
 \code{\link{save_LD_matrix}()},
-\code{\link{snpstats_get_MAF}()},
-\code{\link{translate_population}()}
+\code{\link{snpstats_get_MAF}()}
 }
 \concept{LD}
 \keyword{internal}

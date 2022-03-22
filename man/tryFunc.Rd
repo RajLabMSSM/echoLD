@@ -14,9 +14,5 @@ tryFunc(input, func, ...)
 \description{
 Extension of tryCatch function.
 }
-\seealso{
-Other general: 
-\code{\link{get_os}()}
-}
 \concept{general}
 \keyword{internal}

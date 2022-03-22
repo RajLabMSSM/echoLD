@@ -3,7 +3,7 @@
 #' If \strong{MAF} column is missing,
 #' download MAF from UK Biobank and use that instead.
 #'
-#' @param dat SNP-level data.
+#' @param query_dat SNP-level data.
 #' @param output_path Path to store UKB_MAF file in.
 #' @param force_new_maf Download UKB_MAF file again.
 #' @param verbose Print messages.
@@ -11,15 +11,15 @@
 #'
 #' @family standardizing functions
 #' @examples
-#' dat <- echodata::BST1
-#' dat$MAF <- NULL
-#' dat2 <- echoLD::get_UKB_MAF(dat = dat)
+#'query_dat<- echodata::BST1
+#' query_dat$MAF <- NULL
+#' dat2 <- echoLD::get_UKB_MAF(query_dat = query_dat)
 #' @source \href{http://biobank.ctsu.ox.ac.uk/showcase/field.cgi?id=22801}{UKB}
 #' @export
 #' @importFrom data.table fread merge.data.table data.table
 #' @importFrom dplyr %>% group_by slice rename
 #' @importFrom tools R_user_dir
-get_UKB_MAF <- function(dat,
+get_UKB_MAF <- function(query_dat,
                         output_path = tools::R_user_dir(package = "echoLD",
                                                         which = "cache"),
                         force_new_maf = FALSE,
@@ -31,7 +31,7 @@ get_UKB_MAF <- function(dat,
     POS <- MAF <- SNP <- NULL;
 
     messager("UKB MAF:: Extracting MAF from UKB reference.", v = verbose)
-    chrom <- unique(dat$CHR)
+    chrom <- unique(query_dat$CHR)
     input_url <- paste0(
         file.path(
             "biobank.ctsu.ox.ac.uk",
@@ -64,15 +64,15 @@ get_UKB_MAF <- function(dat,
         select = c(3, 6),
         col.names = c("POS", "MAF")
     )
-    maf <- subset(maf, POS %in% dat$POS)
-    if ("MAF" %in% colnames(dat)) {
+    maf <- subset(maf, POS %in% query_dat$POS)
+    if ("MAF" %in% colnames(query_dat)) {
         messager(" UKB MAF:: Existing 'MAF' col detected.",
             "Naming UKB MAF col 'MAF_UKB'",
             v = verbose
         )
         maf <- dplyr::rename(maf, MAF_UKB = MAF)
     }
-    merged_dat <- data.table::merge.data.table(dat, maf,
+    merged_dat <- data.table::merge.data.table(query_dat, maf,
         by = "POS"
     ) %>%
         # Make sure each SNP just appears once

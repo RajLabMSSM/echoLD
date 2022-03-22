@@ -22,7 +22,7 @@ compute_LD_blocks <- function(x,
     stats <- stats[1]
     if (is_sparse_matrix(x)) {
         if (min(x) < 0) x <- x^2
-        x <- Matrix::forceSymmetric(x)
+        x <- Matrix::forceSymmetric(x, uplo = "U")
     } else {
         x <- x$genotypes
     }
@@ -31,7 +31,8 @@ compute_LD_blocks <- function(x,
         x = x,
         stats = stats
     )
-    messager("echoLD:: Clustering LD blocks using the", type, "method.", v = verbose)
+    messager("echoLD:: Clustering LD blocks using the",
+             type, "method.", v = verbose)
     clusters <- adjclust::select(
         x = fit,
         type = tolower(type[1]),

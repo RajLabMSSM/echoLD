@@ -20,11 +20,11 @@
 #' @export
 #' @importFrom stats heatmap
 #' @examples
-#' dat <- echodata::BST1
+#'query_dat<- echodata::BST1
 #' LD_matrix <- echodata::BST1_LD_matrix
-#' echoLD::plot_LD(LD_matrix = LD_matrix, dat = dat)  
+#' echoLD::plot_LD(LD_matrix = LD_matrix,query_dat= query_dat)  
 plot_LD <- function(LD_matrix,
-                    dat,
+                    query_dat,
                     span = 10,
                     method = c("stats","gaston","graphics"),
                     ...) {
@@ -32,13 +32,13 @@ plot_LD <- function(LD_matrix,
     SNP <- NULL; 
     
     method <- tolower(method[1])
-    leadSNP <- subset(dat, leadSNP)$SNP
+    leadSNP <- subset(query_dat, leadSNP)$SNP
     lead_index <- match(leadSNP, rownames(LD_matrix))
 
     start_pos <- lead_index - min(span, dim(LD_matrix)[1], na.rm = TRUE)
     start_pos <- max(start_pos, 0)
     end_pos <- lead_index + min(span, dim(LD_matrix)[1], na.rm = TRUE)
-    sub_DT <- subset(dat, SNP %in% rownames(LD_matrix))
+    sub_query_dat <- subset(query_dat, SNP %in% rownames(LD_matrix))
 
     if (method[1] == "gaston") {
         requireNamespace("gaston")
@@ -47,7 +47,7 @@ plot_LD <- function(LD_matrix,
                 seq(start_pos, end_pos),
                 seq(start_pos, end_pos)
             ],
-            snp.positions = sub_DT$POS[seq(start_pos, end_pos)],
+            snp.positions = sub_query_dat$POS[seq(start_pos, end_pos)],
             ...
         )
     } else if (method[1] == "graphics") {

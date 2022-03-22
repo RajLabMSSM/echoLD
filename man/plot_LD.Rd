@@ -6,7 +6,7 @@
 \usage{
 plot_LD(
   LD_matrix,
-  dat,
+  query_dat,
   span = 10,
   method = c("stats", "gaston", "graphics"),
   ...
@@ -15,7 +15,7 @@ plot_LD(
 \arguments{
 \item{LD_matrix}{LD matrix.}
 
-\item{dat}{GWAS summary statistics subset to query the LD panel with.}
+\item{query_dat}{GWAS summary statistics subset to query the LD panel with.}
 
 \item{span}{This is very computationally intensive,
 so you need to limit the number of SNPs with span.
@@ -35,9 +35,9 @@ If \code{span=10}, only 10 SNPs upstream and 10 SNPs downstream of the
 Plot a heatmap of pairwise LD between SNPs.
 }
 \examples{
-dat <- echodata::BST1
+query_dat<- echodata::BST1
 LD_matrix <- echodata::BST1_LD_matrix
-echoLD::plot_LD(LD_matrix = LD_matrix, dat = dat)  
+echoLD::plot_LD(LD_matrix = LD_matrix,query_dat= query_dat)  
 }
 \seealso{
 Other LD: 
@@ -45,6 +45,7 @@ Other LD:
 \code{\link{LD_1KG}()},
 \code{\link{LD_custom}()},
 \code{\link{LD_ukbiobank}()},
+\code{\link{check_population_1kg}()},
 \code{\link{compute_LD}()},
 \code{\link{filter_LD}()},
 \code{\link{get_locus_vcf_folder}()},
@@ -55,7 +56,6 @@ Other LD:
 \code{\link{rds_to_npz}()},
 \code{\link{saveSparse}()},
 \code{\link{save_LD_matrix}()},
-\code{\link{snpstats_get_MAF}()},
-\code{\link{translate_population}()}
+\code{\link{snpstats_get_MAF}()}
 }
 \concept{LD}
