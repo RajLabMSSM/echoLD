@@ -146,7 +146,7 @@
 #'     # Save LD matrix
 #'     LD_list <- save_LD_matrix(
 #'         LD_matrix = LD_matrix,
-#'        query_dat= query_dat
+#'         dat= query_dat
 #'         locus_dir = locus_dir,
 #'         fillNA = fillNA,
 #'         LD_reference = gsub(".vcf|.gz", "", LD_reference),

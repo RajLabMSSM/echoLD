@@ -53,7 +53,7 @@ LD_custom <- function(locus_dir = tempdir(),
     target_path <- LD_reference
     #### Query ####
     vcf <- echotabix::query_vcf(
-        query_dat = query_dat,
+        query_granges = query_dat,
         target_path = target_path, 
         target_genome = target_genome,
         samples = samples,
@@ -102,7 +102,7 @@ LD_custom <- function(locus_dir = tempdir(),
     #### Save LD matrix ####
     LD_list <- save_LD_matrix(
         LD_matrix = LD_matrix,
-        query_dat = query_dat,
+        dat = query_dat,
         locus_dir = locus_dir,
         subset_common = TRUE,
         fillNA = fillNA,

@@ -176,7 +176,7 @@ LD_ukbiobank <- function(query_dat = NULL,
         }
         RDS_path <- save_LD_matrix(
             LD_matrix = ld_R,
-           query_dat= query_dat,
+            dat = query_dat,
             locus_dir = locus_dir,
             LD_reference = "UKB",
             as_sparse = as_sparse,

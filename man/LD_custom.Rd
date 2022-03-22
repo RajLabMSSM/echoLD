@@ -24,7 +24,8 @@ LD_custom(
 \arguments{
 \item{locus_dir}{Storage directory to use.}
 
-\item{query_dat}{GWAS summary statistics subset to query the LD panel with.}
+\item{query_dat}{SNP-level summary statistics subset 
+to query the LD panel with.}
 
 \item{LD_reference}{LD reference to use:
 \itemize{

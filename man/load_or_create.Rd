@@ -26,7 +26,8 @@ load_or_create(
 \arguments{
 \item{locus_dir}{Storage directory to use.}
 
-\item{query_dat}{GWAS summary statistics subset to query the LD panel with.}
+\item{query_dat}{SNP-level summary statistics subset 
+to query the LD panel with.}
 
 \item{force_new_LD}{If LD file exists, create a new one.}
 

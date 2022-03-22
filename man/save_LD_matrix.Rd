@@ -5,18 +5,18 @@
 \title{Save LD matrix}
 \source{
 \code{
-query_dat <- echodata::BST1
+dat <- echodata::BST1
 LD_matrix <- echodata::BST1_LD_matrix 
 locus_dir <- file.path(tempdir(),echodata::locus_dir)
 
 LD_list <- echoLD:::save_LD_matrix(
     LD_matrix = LD_matrix,
-    query_dat = query_dat
+    dat = dat
     locus_dir = locus_dir,
     LD_reference = "UKB")
 LD_list <- echoLD:::save_LD_matrix(
     LD_matrix = LD_matrix,
-    query_dat = query_dat
+    dat = dat
     locus_dir = locus_dir,
     LD_reference = "custom_vcf")
 }
@@ -24,7 +24,7 @@ LD_list <- echoLD:::save_LD_matrix(
 \usage{
 save_LD_matrix(
   LD_matrix,
-  query_dat,
+  dat,
   locus_dir,
   fillNA = 0,
   LD_reference,

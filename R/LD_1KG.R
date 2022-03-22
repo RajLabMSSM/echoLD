@@ -88,7 +88,7 @@ LD_1KG <- function(locus_dir,
     #### Save LD matrix #### 
     LD_list <- save_LD_matrix(
         LD_matrix = LD_matrix,
-        query_dat = query_dat,
+        dat = query_dat,
         locus_dir = locus_dir,
         subset_common = TRUE,
         fillNA = fillNA,

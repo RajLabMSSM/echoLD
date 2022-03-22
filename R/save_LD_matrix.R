@@ -4,25 +4,25 @@
 #'
 #' @source 
 #' \code{
-#' query_dat <- echodata::BST1
+#' dat <- echodata::BST1
 #' LD_matrix <- echodata::BST1_LD_matrix 
 #' locus_dir <- file.path(tempdir(),echodata::locus_dir)
 #' 
 #' LD_list <- echoLD:::save_LD_matrix(
 #'     LD_matrix = LD_matrix,
-#'     query_dat = query_dat
+#'     dat = dat
 #'     locus_dir = locus_dir,
 #'     LD_reference = "UKB")
 #' LD_list <- echoLD:::save_LD_matrix(
 #'     LD_matrix = LD_matrix,
-#'     query_dat = query_dat
+#'     dat = dat
 #'     locus_dir = locus_dir,
 #'     LD_reference = "custom_vcf")
 #' }
 #' @family LD
 #' @keywords internal
 save_LD_matrix <- function(LD_matrix,
-                           query_dat,
+                           dat,
                            locus_dir,
                            fillNA = 0,
                            LD_reference,
@@ -38,11 +38,11 @@ save_LD_matrix <- function(LD_matrix,
         sub.out <- subset_common_snps(
             LD_matrix = LD_matrix,
             fillNA = fillNA,
-            query_dat = query_dat,
+            dat = dat,
             verbose = FALSE
         )
         LD_matrix <- sub.out$LD
-        query_dat <- sub.out$DT
+        dat <- sub.out$DT
     }
     messager(dim(LD_matrix)[1], "x", dim(LD_matrix)[2],
         "LD_matrix", if (as_sparse) "(sparse)" else NULL,
@@ -63,7 +63,7 @@ save_LD_matrix <- function(LD_matrix,
     }
     return(list(
         LD = LD_matrix,
-        query_dat = query_dat,
+        DT = dat,
         RDS_path = RDS_path
     ))
 }

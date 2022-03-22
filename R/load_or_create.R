@@ -12,7 +12,8 @@
 #' }
 #'
 #' @param locus_dir Storage directory to use.
-#' @param query_dat GWAS summary statistics subset to query the LD panel with.
+#' @param query_dat SNP-level summary statistics subset 
+#' to query the LD panel with.
 #' @param force_new_LD If LD file exists, create a new one.
 #' @param LD_reference LD reference to use:
 #' \itemize{

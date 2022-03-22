@@ -24,7 +24,8 @@ LD_ukbiobank(
 )
 }
 \arguments{
-\item{query_dat}{GWAS summary statistics subset to query the LD panel with.}
+\item{query_dat}{SNP-level summary statistics subset 
+to query the LD panel with.}
 
 \item{locus_dir}{Storage directory to use.}
 

@@ -6,6 +6,6 @@ test_that("filter_LD works", {
     LD_list2 <- echoLD::filter_LD(LD_list, min_r2 = .2)
     
     testthat::expect_gte(nrow(LD_list$LD), nrow(LD_list2$LD))
-    testthat::expect_gte(nrow(LD_list$query_dat), nrow(LD_list2$query_dat))
-    testthat::expect_equal(nrow(LD_list2$LD), nrow(LD_list2$query_dat))
+    testthat::expect_gte(nrow(LD_list$DT), nrow(LD_list2$DT))
+    testthat::expect_equal(nrow(LD_list2$LD), nrow(LD_list2$DT))
 })
