@@ -42,7 +42,7 @@ save_LD_matrix <- function(LD_matrix,
             verbose = FALSE
         )
         LD_matrix <- sub.out$LD
-        query_dat <- sub.out$query_dat
+        query_dat <- sub.out$DT
     }
     messager(dim(LD_matrix)[1], "x", dim(LD_matrix)[2],
         "LD_matrix", if (as_sparse) "(sparse)" else NULL,

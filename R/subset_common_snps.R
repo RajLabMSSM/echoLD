@@ -55,6 +55,6 @@ subset_common_snps <- function(LD_matrix,
     }
     return(list(
         LD = as.matrix(new_LD),
-        query_dat = new_query_dat
+        DT = new_query_dat
     ))
 }
