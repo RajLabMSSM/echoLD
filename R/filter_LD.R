@@ -51,7 +51,7 @@ filter_LD <- function(LD_list,
         )
         LD_list <- subset_common_snps(
             LD_matrix = LD_matrix,
-            dat= dat,
+            dat = dat,
             verbose = FALSE
         )
        dat<- LD_list$DT

@@ -58,7 +58,6 @@ LD_1KG_download_vcf <- function(query_granges,
         target_path = target_path, 
         ### 1KG is all aligned to GRCh37
         target_genome = "GRCh37", 
-        query_dat = NULL,
         query_granges = query_granges,
         samples = samples,
         query_save = query_save,
