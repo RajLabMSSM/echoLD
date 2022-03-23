@@ -17,13 +17,13 @@ get_1KG_url <- function(LD_reference,
         FTP <- "ftp://ftp-trace.ncbi.nih.gov/1000genomes/ftp/release/20130502/"
         messager("LD Reference Panel = 1KGphase3", v = verbose)
         if (is.null(local_storage)) { ## With internet
-            messager("+ echoLD:: Querying 1KG remote server.", v = verbose)
+            messager("Querying 1KG remote server.", v = verbose)
             vcf_url <- paste0(
                 FTP, "/ALL.chr", chrom,
                 ".phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz"
             )
         } else { ## WithOUT internet
-            messager("+ echoLD:: Querying 1KG local vcf files.", v = verbose)
+            messager("Querying 1KG local vcf files.", v = verbose)
             vcf_url <- paste(local_storage, "/ALL.chr", chrom,
                 ".phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz",
                 sep = ""
@@ -34,13 +34,13 @@ get_1KG_url <- function(LD_reference,
         FTP <- "ftp://ftp-trace.ncbi.nih.gov/1000genomes/ftp/release/20110521/"
         messager("LD Reference Panel = 1KGphase1", v = verbose)
         if (is.null(local_storage)) { ## With internet
-            messager("+ echoLD:: Querying 1KG remote server.", v = verbose)
+            messager("Querying 1KG remote server.", v = verbose)
             vcf_url <- paste(FTP, "/ALL.chr", chrom,
                 ".phase1_release_v3.20101123.snps_indels_svs.genotypes.vcf.gz",
                 sep = ""
             )
         } else { ## WithOUT internet
-            messager("+ echoLD:: Querying 1KG local vcf files.", v = verbose)
+            messager("Querying 1KG local vcf files.", v = verbose)
             vcf_url <- paste(local_storage, "/ALL.chr", chrom,
                 ".phase1_release_v3.20101123.snps_indels_svs.genotypes.vcf.gz",
                 sep = ""

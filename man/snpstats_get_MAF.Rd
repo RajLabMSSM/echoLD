@@ -18,16 +18,16 @@ Get MAF using \pkg{snpStats} package
 }
 \seealso{
 Other LD: 
-\code{\link{LD_1KG_download_vcf}()},
-\code{\link{LD_1KG}()},
-\code{\link{LD_custom}()},
-\code{\link{LD_ukbiobank}()},
 \code{\link{check_population_1kg}()},
 \code{\link{compute_LD}()},
 \code{\link{filter_LD}()},
+\code{\link{get_LD_1KG_download_vcf}()},
+\code{\link{get_LD_1KG}()},
+\code{\link{get_LD_UKB}()},
+\code{\link{get_LD_custom}()},
+\code{\link{get_LD}()},
 \code{\link{get_locus_vcf_folder}()},
 \code{\link{ldlinkr_ldproxy_batch}()},
-\code{\link{load_or_create}()},
 \code{\link{plot_LD}()},
 \code{\link{popDat_1KGphase1}},
 \code{\link{popDat_1KGphase3}},

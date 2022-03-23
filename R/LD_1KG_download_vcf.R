@@ -3,7 +3,7 @@
 #'
 #' Query the 1000 Genomes Project for a subset of their individual-level VCF
 #' files.
-#' @inheritParams load_or_create
+#' @inheritParams get_LD
 #' @inheritParams echotabix::query_vcf
 #' @source
 #' \code{
@@ -11,7 +11,7 @@
 #' locus_dir <- file.path(tempdir(), echodata::locus_dir)
 #' query_granges <- echotabix::construct_query(query_dat=query_dat)
 #'
-#' vcf_subset.popDat <- echoLD:::LD_1KG_download_vcf(
+#' vcf_subset.popDat <- echoLD:::get_LD_1KG_download_vcf(
 #'     query_granges = query_granges,
 #'     LD_reference = "1KGphase1",
 #'     locus_dir = locus_dir)
@@ -19,7 +19,7 @@
 #' @family LD
 #' @keywords internal
 #' @importFrom echotabix query_vcf
-LD_1KG_download_vcf <- function(query_granges,
+get_LD_1KG_download_vcf <- function(query_granges,
                                 LD_reference = "1KGphase1",
                                 superpopulation = NULL,
                                 samples = NULL,

@@ -5,7 +5,7 @@
 #' @param LD_matrix LD matrix. 
 #' @param dat SNP-level summary statistics subset 
 #' to query the LD panel with.
-#' @inheritParams load_or_create
+#' @inheritParams get_LD
 #'
 #' @family SNP filters
 #' @return data.frame
@@ -30,6 +30,8 @@ subset_common_snps <- function(LD_matrix,
     ld.snps <- unique(c(row.names(LD_matrix), colnames(LD_matrix)))
     
     # Remove duplicate SNPs
+    dat <- data.table::copy(data.table::as.data.table(dat))
+    if(!"SNP" %in% colnames(dat)) stop("Could not find SNP column in dat.")
     dat <- dat[!base::duplicated(dat$SNP), ]
     fm.snps <- dat$SNP
     common.snps <- base::intersect(ld.snps, fm.snps)
@@ -43,9 +45,8 @@ subset_common_snps <- function(LD_matrix,
     new_LD <- LD_matrix[common.snps, common.snps]
     
     # Subset/order dat
-    dat <- data.frame(dat)
-    row.names(dat) <- dat$SNP
-    new_dat <- unique(data.table::as.data.table(dat[common.snps, ]))
+    data.table::setkeyv(dat, "SNP")
+    new_dat <- unique(dat[common.snps, ])
     # Reassign the lead SNP if it's missing
     # new_dat <- assign_lead_SNP(new_dat, verbose = verbose)
     # Check dimensions are correct

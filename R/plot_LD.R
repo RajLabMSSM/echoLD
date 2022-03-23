@@ -14,7 +14,7 @@
 #' \item{"graphics" : }\link[graphics]{image}
 #' }
 #' @param ... Additional arguments passed to plotting function. 
-#' @inheritParams load_or_create
+#' @inheritParams get_LD
 #' @family LD
 #' 
 #' @export

@@ -46,7 +46,7 @@ select_vcf_samples <- function(superpopulation = NULL,
                        LD_reference,".")
         stop(stp2)
     } else {
-        messager("echoLD:: Selecting", length(samples_select),
+        messager("Selecting", length(samples_select),
                  superpopulation, "individuals from", 
                  paste0(LD_reference, "."),
                  v = verbose

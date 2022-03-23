@@ -7,5 +7,5 @@ test_that("subset_common_snps works", {
                                       dat= dat)
     
     testthat::expect_equal(nrow(out$LD), nrow(out$DT))
-    testthat::expect_equal(rownames(out$LD), out$query_dat$SNP)
+    testthat::expect_equal(rownames(out$LD), out$DT$SNP)
 })

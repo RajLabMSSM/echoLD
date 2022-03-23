@@ -23,7 +23,7 @@ locus_dir <- file.path(tempdir(), locus_dir)
 # 1000 Genomes: Phase 1 or 3
 
 ```{r}
-LD_1kgp3 <- load_or_create(locus_dir = locus_dir,
+LD_1kgp3 <- get_LD(locus_dir = locus_dir,
                            query_dat = query_dat,
                            LD_reference = "1KGphase3") # 1KGphase1
 ```
@@ -42,7 +42,7 @@ plot_LD(LD_matrix = LD_1kgp3$LD,
 *WARNING*: Takes substantially longer than 1000 Genomes methods.
 
 ```{r, eval=FALSE}
-LD_ukb <- load_or_create(locus_dir = locus_dir,
+LD_ukb <- get_LD(locus_dir = locus_dir,
                          query_dat = query_dat,
                          LD_reference = "UKB", 
                          download_method = "axel", 
@@ -54,7 +54,7 @@ LD_ukb <- load_or_create(locus_dir = locus_dir,
 ```{r, eval=FALSE}
 LD_reference <- system.file("extdata","BST1.1KGphase3.vcf.bgz", 
                             package = "echoLD")
-LD_custom <- load_or_create(locus_dir = locus_dir,
+LD_custom <- get_LD(locus_dir = locus_dir,
                             query_dat = query_dat,
                             LD_reference = LD_reference)
 ```

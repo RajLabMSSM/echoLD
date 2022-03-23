@@ -9,16 +9,16 @@
 #' @param verbose Print messages.
 #' @inheritParams downloadR::downloader
 #'
-#' @family standardizing functions
-#' @examples
-#'query_dat<- echodata::BST1
-#' query_dat$MAF <- NULL
-#' dat2 <- echoLD::get_UKB_MAF(query_dat = query_dat)
+#' @family standardizing functions 
 #' @source \href{http://biobank.ctsu.ox.ac.uk/showcase/field.cgi?id=22801}{UKB}
 #' @export
 #' @importFrom data.table fread merge.data.table data.table
 #' @importFrom dplyr %>% group_by slice rename
 #' @importFrom tools R_user_dir
+#' @examples
+#' query_dat<- echodata::BST1
+#' query_dat$MAF <- NULL
+#' dat2 <- echoLD::get_UKB_MAF(query_dat = query_dat)
 get_UKB_MAF <- function(query_dat,
                         output_path = tools::R_user_dir(package = "echoLD",
                                                         which = "cache"),

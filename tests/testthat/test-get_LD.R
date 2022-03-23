@@ -1,4 +1,4 @@
-test_that("load_or_create works", {
+test_that("get_LD works", {
     
     BST1 <- echodata::BST1
     locus_dir <- echodata::locus_dir
@@ -15,7 +15,7 @@ test_that("load_or_create works", {
     }
 
     #### 1000 Genomes: Phase 1 ####
-    LD_1kgp1 <- echoLD::load_or_create(
+    LD_1kgp1 <- echoLD::get_LD(
         locus_dir = locus_dir,
        query_dat= BST1,
         LD_reference = "1KGphase1"
@@ -23,7 +23,7 @@ test_that("load_or_create works", {
     run_tests(LD_1kgp1)
 
     #### 1000 Genomes: Phase 1 (from storage) ####
-    LD_1kgp1 <- echoLD::load_or_create(
+    LD_1kgp1 <- echoLD::get_LD(
         locus_dir = locus_dir,
        query_dat= BST1,
         LD_reference = "1KGphase1"
@@ -31,7 +31,7 @@ test_that("load_or_create works", {
     run_tests(LD_1kgp1)
 
     #### 1000 Genomes: Phase 3 ####
-    LD_1kgp3 <- echoLD::load_or_create(
+    LD_1kgp3 <- echoLD::get_LD(
         locus_dir = locus_dir,
        query_dat= BST1,
         LD_reference = "1KGphase3",
@@ -43,7 +43,7 @@ test_that("load_or_create works", {
     #### Custom VCF ####
     LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",
                                 package = "echoLD")
-    LD_custom <- echoLD::load_or_create(
+    LD_custom <- echoLD::get_LD(
         locus_dir = locus_dir,
        query_dat= BST1,
         LD_reference = LD_reference
@@ -51,7 +51,7 @@ test_that("load_or_create works", {
     run_tests(LD_custom)
 
     # UK Biobank LD
-    # LD_ukb<- load_or_create(locus_dir = locus_dir,
+    # LD_ukb<- get_LD(locus_dir = locus_dir,
     #                        query_dat= BST1,
     #                         LD_reference = "UKB")
     # run_tests(LD_ukb)
@@ -69,7 +69,7 @@ test_that("load_or_create works", {
     #     "results/GWAS/Nalls23andMe_2019/BST1/LD/BST1.1KGphase3.vcf")
     # LD_reference <- "var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpQuMo8l/results/GWAS/Nalls23andMe_2019/BST1/LD/BST1.1KGphase3.vcf"
     # file.exists(LD_reference)
-    # LD_local <- load_or_create(locus_dir = locus_dir,
+    # LD_local <- get_LD(locus_dir = locus_dir,
     #                           query_dat= BST1,
     #                            LD_reference = LD_reference,
     #                            force_new_LD = TRUE)

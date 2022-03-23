@@ -26,12 +26,12 @@ compute_LD_blocks <- function(x,
     } else {
         x <- x$genotypes
     }
-    messager("echoLD:: Computing adjacency matrix.", v = verbose)
+    messager("Computing adjacency matrix.", v = verbose)
     fit <- adjclust::snpClust(
         x = x,
         stats = stats
     )
-    messager("echoLD:: Clustering LD blocks using the",
+    messager("Clustering LD blocks using the",
              type, "method.", v = verbose)
     clusters <- adjclust::select(
         x = fit,

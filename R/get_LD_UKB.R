@@ -12,13 +12,13 @@
 #' directly into R using \pkg{reticulate}. Otherwise, will be passed to
 #' \link[downloadR]{downloader} to download the full 3Mb-window LD matrix first.
 #' @param local_storage Path to folder with previously download LD npz files.
-#' @inheritParams load_or_create 
+#' @inheritParams get_LD 
 #'
 #' @family LD
 #' @keywords internal
 #' @importFrom data.table fread data.table
 #' @importFrom  reticulate source_python
-LD_ukbiobank <- function(query_dat = NULL,
+get_LD_UKB <- function(query_dat = NULL,
                          locus_dir,
                          sumstats_path = NULL,
                          chrom = NULL,
@@ -37,7 +37,7 @@ LD_ukbiobank <- function(query_dat = NULL,
     # Avoid confusing checks
     load_ld <- NULL
 
-    messager("echoLD:: Using UK Biobank LD reference panel.", v = verbose)
+    messager("Using UK Biobank LD reference panel.", v = verbose)
     #### Preparequery_dat####
     if (!is.null(query_dat)) {
        query_dat<- query_dat
@@ -71,7 +71,7 @@ LD_ukbiobank <- function(query_dat = NULL,
     )
 
     if (file.exists(RDS_path) & force_new_LD == FALSE) {
-        messager("+ echoLD:: Pre-existing UKB_LD.RDS file detected. Importing",
+        messager("Pre-existing UKB_LD.RDS file detected. Importing",
             RDS_path,
             v = verbose
         )
@@ -82,7 +82,7 @@ LD_ukbiobank <- function(query_dat = NULL,
                 force_new_LD |
                 download_method %in% c("wget", "axel")) {
                 messager(
-                    "+ echoLD:: Downloading full .gz/.npz UKB files",
+                    "Downloading full .gz/.npz UKB files",
                     "and saving to disk."
                 )
                 URL <- download_UKB_LD(
@@ -103,7 +103,7 @@ LD_ukbiobank <- function(query_dat = NULL,
                             local_storage,
                             paste0(LD.prefixes, ".npz")
                         ))) {
-                        messager("+ echoLD:: Pre-existing UKB LD",
+                        messager("Pre-existing UKB LD",
                             "gz/npz files detected. Importing...",
                             v = verbose
                         )
@@ -111,7 +111,7 @@ LD_ukbiobank <- function(query_dat = NULL,
                     }
                 } else {
                     URL <- file.path(URL, LD.prefixes)
-                    messager("+ echoLD:: Importing UKB LD file",
+                    messager("Importing UKB LD file",
                         "directly to R from:",
                         v = verbose
                     )
@@ -119,7 +119,7 @@ LD_ukbiobank <- function(query_dat = NULL,
             }
         } else {
             URL <- file.path(URL, LD.prefixes)
-            messager("+ echoLD:: Importing UKB LD file directly to R from:",
+            messager("Importing UKB LD file directly to R from:",
                 v = verbose
             )
         }
@@ -130,11 +130,11 @@ LD_ukbiobank <- function(query_dat = NULL,
         reticulate::source_python(system.file("tools", "load_ld.py",
             package = "echodata"
         ))
-        messager("+ echoLD:: load_ld() python function input:",
+        messager("load_ld() python function input:",
             URL,
             v = verbose
         )
-        messager("+ echoLD:: Reading LD matrix into memory.",
+        messager("Reading LD matrix into memory.",
             "This could take some time...",
             v = verbose
         )

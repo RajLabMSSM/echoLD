@@ -5,7 +5,7 @@
 \title{Get LD with lead SNP}
 \usage{
 get_lead_r2(
-  query_dat,
+  dat,
   LD_matrix = NULL,
   fillNA = 0,
   LD_format = "matrix",
@@ -13,7 +13,7 @@ get_lead_r2(
 )
 }
 \arguments{
-\item{query_dat}{SNP-level data.}
+\item{dat}{SNP-level data.}
 
 \item{LD_matrix}{LD matrix.}
 
@@ -32,6 +32,6 @@ Add new columns r and r2 containing the degree of LD in each SNP (row)
  with the lead GWAS/QTL SNP.
 }
 \examples{
-query_dat2 <- echoLD::get_lead_r2(query_dat = echodata::BST1,
-                                  LD_matrix = echodata::BST1_LD_matrix)
+dat2 <- echoLD::get_lead_r2(dat = echodata::BST1,
+                            LD_matrix = echodata::BST1_LD_matrix)
 }

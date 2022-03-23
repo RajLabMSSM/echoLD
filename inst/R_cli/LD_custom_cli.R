@@ -40,10 +40,10 @@
 #'     # Avoid confusing checks
 #'     POS <- POS.hg38 <- CHR <- NULL
 #' 
-#'     messager("LD:: Computing LD from local vcf file:", LD_reference)
+#'     messager("Computing LD from local vcf file:", LD_reference)
 #' 
 #'     if (!toupper(target_genome) %in% c("HG19", "HG37", "GRCH37")) {
-#'         messager("LD:: LD panel in hg38. Handling accordingly.", v = verbose)
+#'         messager("LD panel in hg38. Handling accordingly.", v = verbose)
 #'         if (!toupper(fullSS_genome_build) %in% c("HG19", "HG37", "GRCH37")) {
 #'             ## If the query was originally in hg38,
 #'             # that means it's already been lifted over to hg19.

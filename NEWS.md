@@ -3,6 +3,12 @@
 ## New features
 
 * Update to match changes in `echotabix`.
+* Change to more consistent/intuitive function names:
+    - `create_or_load` --> `get_LD`
+    - `LD_ukbiobank` --> `get_LD_UKB`
+    - `LD_1KG` --> `get_LD_1KG`
+    - `LD_custom` --> `get_LD_custom`
+
 
 
 # echoLD 0.99.1

@@ -1,4 +1,4 @@
-test_that("LD_1KG_download_vcf works", {
+test_that("get_LD_1KG_download_vcf works", {
   
     query_dat <- echodata::BST1
     locus_dir <- file.path(tempdir(), echodata::locus_dir)
@@ -6,7 +6,7 @@ test_that("LD_1KG_download_vcf works", {
     
     ##### Select by sample ####
     samples1 <- c("HG00097","HG00099","HG00100","HG00101","HG00102") 
-    vcf1 <- echoLD:::LD_1KG_download_vcf(
+    vcf1 <- echoLD:::get_LD_1KG_download_vcf(
         query_granges = query_granges,
         LD_reference = "1KGphase1",
         samples = samples1,
@@ -17,7 +17,7 @@ test_that("LD_1KG_download_vcf works", {
     
     ##### Select by superpopulation and samples #### 
     samples2 <- c("HG00553","HG00554","HG00637")
-    vcf2 <- echoLD:::LD_1KG_download_vcf(
+    vcf2 <- echoLD:::get_LD_1KG_download_vcf(
         query_granges = query_granges,
         LD_reference = "1KGphase1",
         samples = samples2,

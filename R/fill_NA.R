@@ -15,7 +15,7 @@
 fill_NA <- function(LD_matrix,
                     fillNA = 0,
                     verbose = FALSE) {
-    messager("+ echoLD:: Removing unnamed rows/cols", v = verbose)
+    messager("Removing unnamed rows/cols", v = verbose)
     # First, filter any rows/cols without names
     LD_matrix <- data.frame(as.matrix(LD_matrix))
     LD_matrix <- LD_matrix[
@@ -25,7 +25,7 @@ fill_NA <- function(LD_matrix,
     LD_matrix_orig <- LD_matrix
 
     if (!is.null(fillNA)) {
-        messager("+ echoLD:: Replacing NAs with", fillNA, v = verbose)
+        messager("Replacing NAs with", fillNA, v = verbose)
         if (sum(is.na(LD_matrix)) > 0) {
             LD_matrix[is.na(LD_matrix)] <- 0
         }

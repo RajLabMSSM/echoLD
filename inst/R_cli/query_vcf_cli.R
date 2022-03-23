@@ -39,7 +39,7 @@
 #'         verbose = verbose
 #'     )
 #'     if ((!file.exists(vcf_subset)) | force_new) {
-#'         messager("LD:: Querying VCF subset", v = verbose)
+#'         messager("Querying VCF subset", v = verbose)
 #'         if (whole_vcf) {
 #'             region <- ""
 #'             locus <- ""
