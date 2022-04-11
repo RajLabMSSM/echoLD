@@ -36,10 +36,9 @@ LD_blocks_cli <- function(bed_bim_fam,
     # Reducing "--blocks-inform-frac" is the only parameter that seems
     # to make the block sizes larger
     dir.create(LD_folder, showWarnings = FALSE, recursive = TRUE)
-    plink <- plink_file(
-        plink = plink,
-        conda_env = conda_env
-    )
+    plink <- echoconda::find_packages(packages = "plink", 
+                                      conda_env = conda_env,
+                                      verbose = verbose)
     system(paste(
         plink, "--bfile", dirname(bed_bim_fam$bim),
         "--blocks no-pheno-req no-small-max-span --blocks-max-kb 100000",

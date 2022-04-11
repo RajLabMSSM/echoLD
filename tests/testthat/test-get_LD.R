@@ -1,23 +1,22 @@
 test_that("get_LD works", {
     
-    BST1 <- echodata::BST1
+    query_dat <- echodata::BST1[seq(1, 50), ]
     locus_dir <- echodata::locus_dir
-    locus_dir <- file.path(tempdir(), locus_dir)
-    BST1 <- BST1[seq(1, 50), ]
+    locus_dir <- file.path(tempdir(), locus_dir) 
 
     run_tests <- function(LD_list) {
         testthat::expect_length(LD_list, 3)
         testthat::expect_equal(nrow(LD_list$LD), ncol(LD_list$LD))
         testthat::expect_lte(nrow(LD_list$LD), nrow(LD_list$DT))
         testthat::expect_gte(nrow(LD_list$LD), 40)
-        testthat::expect_true(methods::is(LD_list$RDS_path, "character"))
-        testthat::expect_true(file.exists(LD_list$RDS_path))
+        testthat::expect_true(methods::is(LD_list$path, "character"))
+        testthat::expect_true(file.exists(LD_list$path))
     }
 
     #### 1000 Genomes: Phase 1 ####
     LD_1kgp1 <- echoLD::get_LD(
         locus_dir = locus_dir,
-       query_dat= BST1,
+        query_dat = query_dat,
         LD_reference = "1KGphase1"
     )
     run_tests(LD_1kgp1)
@@ -25,7 +24,7 @@ test_that("get_LD works", {
     #### 1000 Genomes: Phase 1 (from storage) ####
     LD_1kgp1 <- echoLD::get_LD(
         locus_dir = locus_dir,
-       query_dat= BST1,
+        query_dat = query_dat,
         LD_reference = "1KGphase1"
     )
     run_tests(LD_1kgp1)
@@ -33,7 +32,7 @@ test_that("get_LD works", {
     #### 1000 Genomes: Phase 3 ####
     LD_1kgp3 <- echoLD::get_LD(
         locus_dir = locus_dir,
-       query_dat= BST1,
+        query_dat= query_dat,
         LD_reference = "1KGphase3",
         remove_tmps = FALSE,
         force_new_LD = TRUE
@@ -45,16 +44,16 @@ test_that("get_LD works", {
                                 package = "echoLD")
     LD_custom <- echoLD::get_LD(
         locus_dir = locus_dir,
-       query_dat= BST1,
+        query_dat= query_dat,
         LD_reference = LD_reference
     )
     run_tests(LD_custom)
 
-    # UK Biobank LD
-    # LD_ukb<- get_LD(locus_dir = locus_dir,
-    #                        query_dat= BST1,
-    #                         LD_reference = "UKB")
-    # run_tests(LD_ukb)
+    #### UK Biobank ####
+    LD_ukb <- echoLD::get_LD(locus_dir = locus_dir,
+                             query_dat= query_dat,
+                             LD_reference = "UKB")
+    run_tests(LD_ukb)
 
     # # Local vcf file
     # vcf_url <- file.path(

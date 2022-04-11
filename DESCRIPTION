@@ -1,7 +1,7 @@
 Package: echoLD
 Type: Package
 Title: echoverse module: LD downloading and processing
-Version: 0.99.1
+Version: 0.99.3
 Authors@R: 
     c(person(given = "Brian",
            family = "Schilder",
@@ -24,7 +24,7 @@ URL: https://github.com/RajLabMSSM/echoLD
 BugReports: https://github.com/RajLabMSSM/echoLD/issues
 Encoding: UTF-8
 LazyData: true
-Depends: R (>= 4.0.0)
+Depends: R (>= 4.1)
 SystemRequirements: Python (>= 3.7.0)
 biocViews:
 Imports: 
@@ -35,7 +35,6 @@ Imports:
     R.utils,
     methods,
     Matrix,
-    parallel,
     BiocManager,  
     data.table,  
     reticulate,  
@@ -56,7 +55,8 @@ Suggests:
     graphics,
     LDlinkR,
     adjclust,
-    badger
+    badger,
+    parallel
 Remotes:
     github::RajLabMSSM/echotabix,
     github::RajLabMSSM/downloadR,

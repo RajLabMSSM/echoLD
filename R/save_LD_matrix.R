@@ -48,22 +48,21 @@ save_LD_matrix <- function(LD_matrix,
         "LD_matrix", if (as_sparse) "(sparse)" else NULL,
         v = verbose
     )
-
     dir.create(dirname(RDS_path), showWarnings = FALSE, recursive = TRUE)
     if (as_sparse) {
         saveSparse(
             LD_matrix = LD_matrix,
             LD_path = RDS_path,
-            verbose = FALSE
+            verbose = verbose
         )
     } else {
-        saveRDS(LD_matrix,
-            file = RDS_path
+        saveRDS(object = LD_matrix,
+                file = RDS_path
         )
     }
     return(list(
         LD = LD_matrix,
         DT = dat,
-        RDS_path = RDS_path
+        path = RDS_path
     ))
 }

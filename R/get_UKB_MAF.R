@@ -15,6 +15,8 @@
 #' @importFrom data.table fread merge.data.table data.table
 #' @importFrom dplyr %>% group_by slice rename
 #' @importFrom tools R_user_dir
+#' @importFrom downloadR downloader
+#' 
 #' @examples
 #' query_dat<- echodata::BST1
 #' query_dat$MAF <- NULL

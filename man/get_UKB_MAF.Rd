@@ -36,9 +36,7 @@ get_UKB_MAF(
 (passed to \link[utils]{download.file})}
 \item{\code{"curl"} : }{Single-threaded 
 (passed to \link[utils]{download.file})}
-}
- or
-\code{"download.file"} (single-threaded) .}
+}}
 
 \item{nThread}{Number of threads to parallelize over.}
 

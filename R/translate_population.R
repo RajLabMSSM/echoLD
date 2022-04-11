@@ -3,7 +3,7 @@
 #' Ensures a common ontology for synonymous superpopulation names.
 #' @family LD
 #' @keywords internal
-#' @param superpopulation Three-letter superpopulation name.
+#' @inheritParams get_LD
 check_population_1kg <- function(superpopulation,
                                  LD_reference) {
     

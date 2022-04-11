@@ -7,6 +7,7 @@
 get_LD(
   query_dat,
   locus_dir = tempdir(),
+  standardise_colnames = FALSE,
   force_new_LD = FALSE,
   LD_reference = c("1KGphase1", "1KGphase3", "UKB"),
   target_genome = "hg19",
@@ -81,9 +82,7 @@ like VCF, npz, and plink files.}
 (passed to \link[utils]{download.file})}
 \item{\code{"curl"} : }{Single-threaded 
 (passed to \link[utils]{download.file})}
-}
- or
-\code{"download.file"} (single-threaded) .}
+}}
 
 \item{conda_env}{Conda environment to use.}
 
@@ -95,7 +94,7 @@ A named list containing:
 \item{"LD": }{Symmetric LD matrix of pairwise SNP correlations.}
 \item{"DT": }{Standardised query data filtered to only the 
 SNPs included in both \code{query_dat} and the LD matrix.}
-\item{"RDS_path": }{The path to where the LD matrix was saved.}
+\item{"path": }{The path to where the LD matrix was saved.}
 }
 }
 \description{

@@ -47,7 +47,7 @@
 #' \item{"LD": }{Symmetric LD matrix of pairwise SNP correlations.}
 #' \item{"DT": }{Standardised query data filtered to only the 
 #' SNPs included in both \code{query_dat} and the LD matrix.}
-#' \item{"RDS_path": }{The path to where the LD matrix was saved.}
+#' \item{"path": }{The path to where the LD matrix was saved.}
 #' } 
 #'
 #' @family LD
@@ -63,6 +63,7 @@
 #'     LD_reference = "1KGphase1")
 get_LD <- function(query_dat,
                    locus_dir=tempdir(),
+                   standardise_colnames = FALSE,
                    force_new_LD = FALSE,
                    LD_reference = c("1KGphase1", "1KGphase3", "UKB"),
                    target_genome = "hg19",
@@ -78,16 +79,23 @@ get_LD <- function(query_dat,
                    conda_env = "echoR",
                    nThread = 1) {
     
+    # echoverseTemplate:::source_all(); 
+    # echoverseTemplate:::args2vars(get_LD)
+    
     LD_reference <- LD_reference[1]
     RDS_path <- get_rds_path(
         locus_dir = locus_dir,
         LD_reference = LD_reference
     )
     #### Standardise colnames ####
-    query_dat <- echodata::mungesumstats_to_echolocatoR(
-        dat = query_dat,
-        standardise_colnames = TRUE)
-    if (file.exists(RDS_path) & (!force_new_LD)) {
+    if(isTRUE(standardise_colnames)){
+        query_dat <- echodata::mungesumstats_to_echolocatoR(
+            dat = query_dat,
+            standardise_colnames = TRUE,
+            verbose = verbose)
+    }
+    #### Check if subset alread exists ####
+    if (file.exists(RDS_path) & (isFALSE(force_new_LD))) {
         #### Import existing LD ####
         messager("Previously computed LD_matrix detected.",
             "Importing...", RDS_path,
@@ -100,7 +108,7 @@ get_LD <- function(query_dat,
         LD_list <- list(
             query_dat = query_dat,
             LD = LD_matrix,
-            RDS_path = RDS_path
+            path = RDS_path
         )
     } else if (tolower(LD_reference) == "ukb") {
         #### UK Biobank ####

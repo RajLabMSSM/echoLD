@@ -14,10 +14,13 @@ calculate_LD <- function(locus_dir,
                          plink_prefix = "plink",
                          conda_env = "echoR",
                          verbose = TRUE) {
-    plink <- plink_file(conda_env = conda_env)
+    
+    plink <- echoconda::find_packages(packages = "plink", 
+                                      conda_env = conda_env,
+                                      verbose = verbose) 
     messager("LD:PLINK:: Calculating LD ( r & D'-signed; LD-window =", ld_window, ")", v = verbose)
     plink_path_prefix <- file.path(locus_dir, "LD", plink_prefix)
-    dir.create(file.path(locus_dir, "LD"), recursive = T, showWarnings = F)
+    dir.create(file.path(locus_dir, "LD"), recursive = TRUE, showWarnings = FALSE)
     out_prefix <- paste0(plink_path_prefix, ".r_dprimeSigned")
     if (ld_format == "r") {
         cmd <- paste(

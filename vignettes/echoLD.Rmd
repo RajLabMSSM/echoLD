@@ -23,7 +23,7 @@ locus_dir <- file.path(tempdir(), locus_dir)
 # 1000 Genomes: Phase 1 or 3
 
 ```{r}
-LD_1kgp3 <- get_LD(locus_dir = locus_dir,
+LD_1kgp3 <- echoLD::get_LD(locus_dir = locus_dir,
                            query_dat = query_dat,
                            LD_reference = "1KGphase3") # 1KGphase1
 ```
@@ -31,9 +31,9 @@ LD_1kgp3 <- get_LD(locus_dir = locus_dir,
 ## Plot
 
 ```{r}
-plot_LD(LD_matrix = LD_1kgp3$LD, 
-        query_dat = LD_1kgp3$query_dat,
-        span = 20)
+echoLD::plot_LD(LD_matrix = LD_1kgp3$LD, 
+                query_dat = LD_1kgp3$query_dat,
+                span = 20)
 ```
 
 
@@ -42,7 +42,7 @@ plot_LD(LD_matrix = LD_1kgp3$LD,
 *WARNING*: Takes substantially longer than 1000 Genomes methods.
 
 ```{r, eval=FALSE}
-LD_ukb <- get_LD(locus_dir = locus_dir,
+LD_ukb <- echoLD::get_LD(locus_dir = locus_dir,
                          query_dat = query_dat,
                          LD_reference = "UKB", 
                          download_method = "axel", 

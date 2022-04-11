@@ -1,3 +1,11 @@
+# echoLD 0.99.3
+
+## Bug fixes
+
+* Fix `downloadR`.
+* Fix which package *load_ld.py* is imported from (`echodata` --> `echoLD`).
+* Remove copy of `dt_to_granges`. 
+
 # echoLD 0.99.2
 
 ## New features

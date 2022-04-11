@@ -11,7 +11,9 @@
 #' dprime_table_cli <- function(SNP_list,
 #'                          LD_folder,
 #'                          conda_env = "echoR") {
-#'     plink <- plink_file(conda_env = conda_env)
+#' plink <- echoconda::find_packages(packages = "plink", 
+#'                                   conda_env = conda_env,
+#'                                   verbose = verbose)
 #'     messager("+ Creating DPrime table")
 #'     system(paste(
 #'         plink, "--bfile", file.path(LD_folder, "plink"),
