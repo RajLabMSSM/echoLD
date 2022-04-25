@@ -67,7 +67,7 @@ get_LD <- function(query_dat,
                    force_new_LD = FALSE,
                    LD_reference = c("1KGphase1", "1KGphase3", "UKB"),
                    target_genome = "hg19",
-                   samples = NULL,
+                   samples = character(0),
                    superpopulation = NULL,
                    local_storage = NULL,
                    leadSNP_LD_block = FALSE,
@@ -98,7 +98,7 @@ get_LD <- function(query_dat,
     if (file.exists(RDS_path) & (isFALSE(force_new_LD))) {
         #### Import existing LD ####
         messager("Previously computed LD_matrix detected.",
-            "Importing...", RDS_path,
+            "Importing:", RDS_path,
             v = verbose
         )
         LD_matrix <- readSparse(

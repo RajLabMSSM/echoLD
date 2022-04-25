@@ -17,21 +17,21 @@
 #' @family LD
 #' @keywords internal
 get_LD_1KG <- function(locus_dir,
-                   query_dat,
-                   LD_reference = "1KGphase1",
-                   superpopulation = NULL,
-                   samples = NULL,
-                   local_storage = NULL,
-                   leadSNP_LD_block = FALSE,
-                   force_new = FALSE,
-                   force_new_MAF = FALSE,
-                   fillNA = 0,
-                   stats = "R",
-                   as_sparse = TRUE,
-                   # min_r2=FALSE,
-                   # min_Dprime=FALSE,
-                   # remove_correlates = FALSE,
-                   verbose = TRUE) {
+                       query_dat,
+                       LD_reference = "1KGphase1",
+                       superpopulation = NULL,
+                       samples = character(0),
+                       local_storage = NULL,
+                       leadSNP_LD_block = FALSE,
+                       force_new = FALSE,
+                       force_new_MAF = FALSE,
+                       fillNA = 0,
+                       stats = "R",
+                       as_sparse = TRUE,
+                       # min_r2=FALSE,
+                       # min_Dprime=FALSE,
+                       # remove_correlates = FALSE,
+                       verbose = TRUE) {
     
     messager("Using 1000Genomes as LD reference panel.", v = verbose)
     #### Query ####

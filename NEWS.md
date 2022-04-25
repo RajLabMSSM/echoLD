@@ -1,3 +1,11 @@
+# echoLD 0.99.4
+
+## Bug fixes
+
+* Change default method for `echotabix::query_vcf` to 
+"conda" while "variantannotation" is being fixed. 
+* Move extdata example VCFs to `echodata`. 
+
 # echoLD 0.99.3
 
 ## Bug fixes

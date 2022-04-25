@@ -33,7 +33,8 @@ download_UKB_LD(
 (passed to \link[utils]{download.file})}
 }}
 
-\item{conda_env}{Conda environment to use.}
+\item{conda_env}{Conda environments to search in. 
+If \code{NULL} (default), will search all conda environments.}
 
 \item{nThread}{Number of threads to parallelize over.}
 

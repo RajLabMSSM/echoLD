@@ -22,7 +22,7 @@
 get_LD_1KG_download_vcf <- function(query_granges,
                                 LD_reference = "1KGphase1",
                                 superpopulation = NULL,
-                                samples = NULL,
+                                samples = character(0),
                                 local_storage = NULL,
                                 locus_dir = tempdir(),
                                 save_path  = echotabix::construct_vcf_path(

@@ -17,7 +17,8 @@
 #' @family LD
 #' @keywords internal
 #' @importFrom data.table fread data.table
-#' @importFrom  reticulate source_python
+#' @importFrom reticulate source_python
+#' @importFrom downloadR downloader
 get_LD_UKB <- function(query_dat = NULL,
                          locus_dir,
                          sumstats_path = NULL,

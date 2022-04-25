@@ -38,7 +38,8 @@ Plot a heatmap of pairwise LD between SNPs.
 \examples{
 query_dat<- echodata::BST1
 LD_matrix <- echodata::BST1_LD_matrix
-echoLD::plot_LD(LD_matrix = LD_matrix,query_dat= query_dat)  
+echoLD::plot_LD(LD_matrix = LD_matrix,
+                query_dat= query_dat)
 }
 \seealso{
 Other LD: 

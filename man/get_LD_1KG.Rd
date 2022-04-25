@@ -9,7 +9,7 @@ get_LD_1KG(
   query_dat,
   LD_reference = "1KGphase1",
   superpopulation = NULL,
-  samples = NULL,
+  samples = character(0),
   local_storage = NULL,
   leadSNP_LD_block = FALSE,
   force_new = FALSE,

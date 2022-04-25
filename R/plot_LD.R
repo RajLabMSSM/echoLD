@@ -20,9 +20,10 @@
 #' @export
 #' @importFrom stats heatmap
 #' @examples
-#'query_dat<- echodata::BST1
+#' query_dat<- echodata::BST1
 #' LD_matrix <- echodata::BST1_LD_matrix
-#' echoLD::plot_LD(LD_matrix = LD_matrix,query_dat= query_dat)  
+#' echoLD::plot_LD(LD_matrix = LD_matrix,
+#'                 query_dat= query_dat)
 plot_LD <- function(LD_matrix,
                     query_dat,
                     span = 10,
@@ -32,7 +33,7 @@ plot_LD <- function(LD_matrix,
     SNP <- NULL; 
     
     method <- tolower(method[1])
-    leadSNP <- subset(query_dat, leadSNP)$SNP
+    leadSNP <- subset(query_dat, leadSNP==TRUE)$SNP
     lead_index <- match(leadSNP, rownames(LD_matrix))
 
     start_pos <- lead_index - min(span, dim(LD_matrix)[1], na.rm = TRUE)

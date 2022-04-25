@@ -11,7 +11,7 @@ get_LD(
   force_new_LD = FALSE,
   LD_reference = c("1KGphase1", "1KGphase3", "UKB"),
   target_genome = "hg19",
-  samples = NULL,
+  samples = character(0),
   superpopulation = NULL,
   local_storage = NULL,
   leadSNP_LD_block = FALSE,
@@ -84,7 +84,8 @@ like VCF, npz, and plink files.}
 (passed to \link[utils]{download.file})}
 }}
 
-\item{conda_env}{Conda environment to use.}
+\item{conda_env}{Conda environments to search in. 
+If \code{NULL} (default), will search all conda environments.}
 
 \item{nThread}{Number of threads to parallelize over.}
 }

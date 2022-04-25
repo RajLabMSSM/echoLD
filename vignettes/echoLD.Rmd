@@ -32,7 +32,7 @@ LD_1kgp3 <- echoLD::get_LD(locus_dir = locus_dir,
 
 ```{r}
 echoLD::plot_LD(LD_matrix = LD_1kgp3$LD, 
-                query_dat = LD_1kgp3$query_dat,
+                query_dat = LD_1kgp3$DT,
                 span = 20)
 ```
 
@@ -51,11 +51,12 @@ LD_ukb <- echoLD::get_LD(locus_dir = locus_dir,
 
 # Custom VCF
 
-```{r, eval=FALSE}
+```{r}
 LD_reference <- system.file("extdata","BST1.1KGphase3.vcf.bgz", 
-                            package = "echoLD")
-LD_custom <- get_LD(locus_dir = locus_dir,
-                            query_dat = query_dat,
+                            package = "echodata")
+samples <- c("HG00097","HG00099","HG00100","HG00101","HG00102")
+LD_custom <- echoLD::get_LD(locus_dir = locus_dir,
+                            query_dat = query_dat, 
                             LD_reference = LD_reference)
 ```
 

@@ -43,7 +43,8 @@ directly into R using \pkg{reticulate}. Otherwise, will be passed to
 
 \item{as_sparse}{Convert the LD matrix to a sparse matrix.}
 
-\item{conda_env}{Conda environment to use.}
+\item{conda_env}{Conda environments to search in. 
+If \code{NULL} (default), will search all conda environments.}
 
 \item{remove_tmps}{Remove all intermediate files
 like VCF, npz, and plink files.}
