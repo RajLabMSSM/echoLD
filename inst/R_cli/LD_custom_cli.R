@@ -35,7 +35,7 @@
 #'                           remove_tmps = TRUE,
 #'                           as_sparse = TRUE,
 #'                           nThread = 1,
-#'                           conda_env = "echoR",
+#'                           conda_env = "echoR_mini",
 #'                           verbose = TRUE) {
 #'     # Avoid confusing checks
 #'     POS <- POS.hg38 <- CHR <- NULL

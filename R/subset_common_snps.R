@@ -5,6 +5,7 @@
 #' @param LD_matrix LD matrix. 
 #' @param dat SNP-level summary statistics subset 
 #' to query the LD panel with.
+#' @param as_sparse Convert \code{LD_matrix} to sparse matrix before returning.
 #' @inheritParams get_LD
 #'
 #' @family SNP filters
@@ -17,6 +18,7 @@
 subset_common_snps <- function(LD_matrix,
                                dat,
                                fillNA = 0,
+                               as_sparse = TRUE,
                                verbose = FALSE) {
     messager("+ Subsetting LD matrix and dat to common SNPs...",
              v = verbose)
@@ -56,8 +58,13 @@ subset_common_snps <- function(LD_matrix,
         warning("+ LD_matrix SNPs = ", nrow(new_LD), "; dat = ",
                 nrow(dat))
     }
+    #### Convert to sparse ####
+    if(as_sparse){
+        new_LD <- to_sparse(X = new_LD,
+                            verbose = verbose)
+    }
     return(list(
-        LD = as.matrix(new_LD),
+        LD = new_LD,
         DT = new_dat
     ))
 }

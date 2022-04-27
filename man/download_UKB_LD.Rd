@@ -11,7 +11,7 @@ download_UKB_LD(
   background = TRUE,
   force_overwrite = FALSE,
   download_method = "axel",
-  conda_env = "echoR",
+  conda_env = "echoR_mini",
   nThread = 1,
   verbose = TRUE
 )

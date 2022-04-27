@@ -20,7 +20,7 @@ get_LD(
   remove_tmps = TRUE,
   as_sparse = TRUE,
   download_method = "axel",
-  conda_env = "echoR",
+  conda_env = "echoR_mini",
   nThread = 1
 )
 }
@@ -30,6 +30,9 @@ to query the LD panel with.}
 
 \item{locus_dir}{Storage directory to use.}
 
+\item{standardise_colnames}{Automatically rename all columns to a standard 
+nomenclature using \link[MungeSumstats]{standardise_header}.}
+
 \item{force_new_LD}{If LD file exists, create a new one.}
 
 \item{LD_reference}{LD reference to use:
@@ -38,6 +41,8 @@ to query the LD panel with.}
 \item{"1KGphase3" : }{1000 Genomes Project Phase 3}
 \item{"UKB" : }{Pre-computed LD from a British
 European-decent subset of UK Biobank.}
+\item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
+to compute LD matrix from.}
 }}
 
 \item{target_genome}{Genome build of the LD panel
@@ -49,7 +54,9 @@ converted to a \link[VariantAnnotation]{ScanVcfParam} for usage by
 \link[VariantAnnotation]{readVcf}.}
 
 \item{superpopulation}{Superpopulation to subset LD panel by
-(used only if \code{LD_reference} is "1KGphase1" or "1KGphase3".)}
+(used only if \code{LD_reference} is "1KGphase1" or "1KGphase3").
+See \link[echoLD]{popDat_1KGphase1} and \link[echoLD]{popDat_1KGphase3}
+for full tables of their respective samples.}
 
 \item{local_storage}{Storage folder for previously downloaded LD files.
 If \code{LD_reference} is "1KGphase1" or "1KGphase3",

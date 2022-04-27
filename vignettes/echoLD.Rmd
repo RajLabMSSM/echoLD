@@ -14,9 +14,7 @@ vignette: >
 library(echoLD)
 
 query_dat <- echodata::BST1[seq(1,100),]
-locus_dir <- echodata::locus_dir
- 
-locus_dir <- file.path(tempdir(), locus_dir)
+locus_dir <- file.path(tempdir(), echodata::locus_dir)
 ```
 
 
@@ -49,6 +47,15 @@ LD_ukb <- echoLD::get_LD(locus_dir = locus_dir,
                          nThread = 10)
 ```
 
+## Plot
+
+```{r, eval=FALSE}
+echoLD::plot_LD(LD_matrix = LD_ukb$LD, 
+                query_dat = LD_ukb$DT,
+                span = 20)
+```
+
+
 # Custom VCF
 
 ```{r}
@@ -60,6 +67,13 @@ LD_custom <- echoLD::get_LD(locus_dir = locus_dir,
                             LD_reference = LD_reference)
 ```
 
+## Plot
+
+```{r, eval=FALSE}
+echoLD::plot_LD(LD_matrix = LD_custom$LD, 
+                query_dat = LD_custom$DT,
+                span = 20)
+```
 
 # Session Info 
 

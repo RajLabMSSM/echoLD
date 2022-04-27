@@ -10,7 +10,7 @@
 #'                            superpopulation,
 #'                            LD_reference,
 #'                            remove_tmp = TRUE,
-#'                            conda_env = "echoR",
+#'                            conda_env = "echoR_mini",
 #'                            verbose = TRUE) {
 #'     # Avoid confusing checks
 #'     leadSNP <- superpop <- NULL

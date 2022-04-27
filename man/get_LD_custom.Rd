@@ -18,6 +18,8 @@ get_LD_custom(
   fillNA = 0,
   stats = "R",
   as_sparse = TRUE,
+  remove_tmps = TRUE,
+  conda_env = "echoR_mini",
   verbose = TRUE
 )
 }
@@ -33,13 +35,17 @@ to query the LD panel with.}
 \item{"1KGphase3" : }{1000 Genomes Project Phase 3}
 \item{"UKB" : }{Pre-computed LD from a British
 European-decent subset of UK Biobank.}
+\item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
+to compute LD matrix from.}
 }}
 
 \item{target_genome}{Genome build of the LD panel
 (used only if providing custom LD panel).}
 
 \item{superpopulation}{Superpopulation to subset LD panel by
-(used only if \code{LD_reference} is "1KGphase1" or "1KGphase3".)}
+(used only if \code{LD_reference} is "1KGphase1" or "1KGphase3").
+See \link[echoLD]{popDat_1KGphase1} and \link[echoLD]{popDat_1KGphase3}
+for full tables of their respective samples.}
 
 \item{samples}{[Optional] Sample names to subset the VCF by. 
 If this option is used, the \link[GenomicRanges]{GRanges} object will be
@@ -63,6 +69,12 @@ even if one exists.}
 replace with 0.}
 
 \item{as_sparse}{Convert the LD matrix to a sparse matrix.}
+
+\item{remove_tmps}{Remove all intermediate files
+like VCF, npz, and plink files.}
+
+\item{conda_env}{Conda environments to search in. 
+If \code{NULL} (default), will search all conda environments.}
 
 \item{verbose}{Print messages.}
 }

@@ -1,10 +1,17 @@
 # echoLD 0.99.4
 
+## New features
+
+* Switched default conda env to *echoR_mini*. 
+* Make dedicated `read_LD_list`.
+
 ## Bug fixes
 
 * Change default method for `echotabix::query_vcf` to 
 "conda" while "variantannotation" is being fixed. 
 * Move extdata example VCFs to `echodata`. 
+* Ensure `get_LD` converts returned matrix to sparse for all methods. 
+* Pass `conda_env` down to `get_LD_custom`. 
 
 # echoLD 0.99.3
 

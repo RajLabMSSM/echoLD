@@ -12,7 +12,7 @@ run_plink_LD <- function(bim,
                          plink_prefix = "plink",
                          r_format = "r",
                          extract_file = NULL,
-                         conda_env = "echoR") {
+                         conda_env = "echoR_mini") {
     plink <- plink_file(conda_env = conda_env)
     # METHOD 2 (faster, but less control over parameters.
     # Most importantly, can't get Dprime)

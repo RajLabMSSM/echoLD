@@ -17,6 +17,8 @@ get_LD_1KG(
   fillNA = 0,
   stats = "R",
   as_sparse = TRUE,
+  remove_tmps = TRUE,
+  conda_env = "echoR_mini",
   verbose = TRUE
 )
 }
@@ -32,10 +34,14 @@ to query the LD panel with.}
 \item{"1KGphase3" : }{1000 Genomes Project Phase 3}
 \item{"UKB" : }{Pre-computed LD from a British
 European-decent subset of UK Biobank.}
+\item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
+to compute LD matrix from.}
 }}
 
 \item{superpopulation}{Superpopulation to subset LD panel by
-(used only if \code{LD_reference} is "1KGphase1" or "1KGphase3".)}
+(used only if \code{LD_reference} is "1KGphase1" or "1KGphase3").
+See \link[echoLD]{popDat_1KGphase1} and \link[echoLD]{popDat_1KGphase3}
+for full tables of their respective samples.}
 
 \item{samples}{[Optional] Sample names to subset the VCF by. 
 If this option is used, the \link[GenomicRanges]{GRanges} object will be
@@ -52,10 +58,19 @@ Set to \code{NULL} to download VCFs/LD npz from remote storage system.}
 \item{leadSNP_LD_block}{Only return SNPs within the same LD block
 as the lead SNP (the SNP with the smallest p-value).}
 
+\item{force_new}{Force the creation of a new VCF subset file
+even if one exists.}
+
 \item{fillNA}{When pairwise LD (r) between two SNPs is \code{NA},
 replace with 0.}
 
 \item{as_sparse}{Save/return LD matrix as a sparse matrix.}
+
+\item{remove_tmps}{Remove all intermediate files
+like VCF, npz, and plink files.}
+
+\item{conda_env}{Conda environments to search in. 
+If \code{NULL} (default), will search all conda environments.}
 
 \item{verbose}{Print messages.}
 }

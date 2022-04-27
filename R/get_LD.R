@@ -11,7 +11,7 @@
 #' \item{Use a user-supplied pre-computed LD-matrix.}
 #' }
 #'
-#' @param locus_dir Storage directory to use.
+#' @param locus_dir Storage directory to use. 
 #' @param query_dat SNP-level summary statistics subset 
 #' to query the LD panel with.
 #' @param force_new_LD If LD file exists, create a new one.
@@ -21,11 +21,15 @@
 #' \item{"1KGphase3" : }{1000 Genomes Project Phase 3}
 #' \item{"UKB" : }{Pre-computed LD from a British
 #' European-decent subset of UK Biobank.}
+#' \item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
+#' to compute LD matrix from.}
 #' }
 #' @param target_genome Genome build of the LD panel
 #' (used only if providing custom LD panel).
 #' @param superpopulation Superpopulation to subset LD panel by
-#'  (used only if \code{LD_reference} is "1KGphase1" or "1KGphase3".)
+#'  (used only if \code{LD_reference} is "1KGphase1" or "1KGphase3").
+#'  See \link[echoLD]{popDat_1KGphase1} and \link[echoLD]{popDat_1KGphase3}
+#'  for full tables of their respective samples. 
 #' @param local_storage Storage folder for previously downloaded LD files.
 #' If \code{LD_reference} is "1KGphase1" or "1KGphase3",
 #' \code{local_storage} is where VCF files are stored.
@@ -41,6 +45,7 @@
 #'
 #' @inheritParams echotabix::query_vcf
 #' @inheritParams downloadR::downloader
+#' @inheritParams echodata::mungesumstats_to_echolocatoR
 #'
 #' @returns A named list containing:
 #' \itemize{
@@ -76,7 +81,7 @@ get_LD <- function(query_dat,
                    remove_tmps = TRUE,
                    as_sparse = TRUE,
                    download_method = "axel",
-                   conda_env = "echoR",
+                   conda_env = "echoR_mini",
                    nThread = 1) {
     
     # echoverseTemplate:::source_all(); 
@@ -94,22 +99,11 @@ get_LD <- function(query_dat,
             standardise_colnames = TRUE,
             verbose = verbose)
     }
-    #### Check if subset alread exists ####
+    #### Import existing LD ####
     if (file.exists(RDS_path) & (isFALSE(force_new_LD))) {
-        #### Import existing LD ####
-        messager("Previously computed LD_matrix detected.",
-            "Importing:", RDS_path,
-            v = verbose
-        )
-        LD_matrix <- readSparse(
-            LD_path = RDS_path,
-            convert_to_df = FALSE
-        )
-        LD_list <- list(
-            query_dat = query_dat,
-            LD = LD_matrix,
-            path = RDS_path
-        )
+        LD_list <- read_LD_list(RDS_path=RDS_path,
+                                query_dat=query_dat,
+                                verbose=verbose)
     } else if (tolower(LD_reference) == "ukb") {
         #### UK Biobank ####
         LD_list <- get_LD_UKB(
@@ -123,7 +117,8 @@ get_LD <- function(query_dat,
             return_matrix = TRUE,
             as_sparse = as_sparse,
             conda_env = conda_env,
-            remove_tmps = remove_tmps
+            remove_tmps = remove_tmps,
+            verbose = verbose
         )
     } else if (tolower(LD_reference) %in% c("1kgphase1", "1kgphase3")) {
         #### 1000 Genomes ####
@@ -137,6 +132,8 @@ get_LD <- function(query_dat,
             leadSNP_LD_block = leadSNP_LD_block,
             fillNA = fillNA,
             as_sparse = as_sparse,
+            remove_tmps = remove_tmps,
+            conda_env = conda_env,
             verbose = verbose
         )
     } else if (any(endsWith(
@@ -154,6 +151,9 @@ get_LD <- function(query_dat,
             superpopulation = superpopulation,
             leadSNP_LD_block = leadSNP_LD_block,
             fillNA = fillNA,
+            as_sparse = as_sparse,
+            remove_tmps = remove_tmps,
+            conda_env = conda_env,
             verbose = verbose
         )
     } else {

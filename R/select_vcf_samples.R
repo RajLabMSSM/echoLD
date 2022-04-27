@@ -1,7 +1,9 @@
 #' Subset VCF samples
 #'
 #' Subsrt VCF samples by superpopulation.
+#' @inheritParams get_LD
 #' @inheritParams echotabix::query_vcf
+#' @inheritParams echodata::mungesumstats_to_echolocatoR
 #' @export 
 select_vcf_samples <- function(superpopulation = NULL,
                                samples = NULL,

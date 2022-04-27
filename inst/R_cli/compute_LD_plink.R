@@ -12,7 +12,7 @@ calculate_LD <- function(locus_dir,
                          ld_window = 1000, # 10000000
                          ld_format = "r",
                          plink_prefix = "plink",
-                         conda_env = "echoR",
+                         conda_env = "echoR_mini",
                          verbose = TRUE) {
     
     plink <- echoconda::find_packages(packages = "plink", 

@@ -4,7 +4,7 @@
 \alias{rds_to_npz}
 \title{Convert .RDS file back to .npz format}
 \usage{
-rds_to_npz(rds_path, conda_env = "echoR", verbose = TRUE)
+rds_to_npz(rds_path, conda_env = "echoR_mini", verbose = TRUE)
 }
 \description{
 Convert .RDS file back to .npz format

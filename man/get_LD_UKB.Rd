@@ -18,7 +18,7 @@ get_LD_UKB(
   nThread = 1,
   return_matrix = TRUE,
   as_sparse = TRUE,
-  conda_env = "echoR",
+  conda_env = "echoR_mini",
   remove_tmps = TRUE,
   verbose = TRUE
 )

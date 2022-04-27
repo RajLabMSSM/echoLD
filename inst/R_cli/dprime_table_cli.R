@@ -10,7 +10,7 @@
 #' #' @importFrom stats complete.cases
 #' dprime_table_cli <- function(SNP_list,
 #'                          LD_folder,
-#'                          conda_env = "echoR") {
+#'                          conda_env = "echoR_mini") {
 #' plink <- echoconda::find_packages(packages = "plink", 
 #'                                   conda_env = conda_env,
 #'                                   verbose = verbose)

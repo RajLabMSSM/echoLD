@@ -14,7 +14,7 @@ get_UKB_MAF(
   download_method = "axel",
   nThread = 1,
   verbose = TRUE,
-  conda_env = "echoR"
+  conda_env = "echoR_mini"
 )
 }
 \arguments{

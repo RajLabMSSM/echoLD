@@ -18,7 +18,7 @@ download_UKB_LD <- function(LD.prefixes,
                             background = TRUE,
                             force_overwrite = FALSE,
                             download_method = "axel",
-                            conda_env = "echoR",
+                            conda_env = "echoR_mini",
                             nThread = 1,
                             verbose = TRUE) {
     for (f in LD.prefixes) {

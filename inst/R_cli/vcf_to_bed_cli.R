@@ -8,7 +8,7 @@
 #' vcf_to_bed_cli <- function(vcf.gz.subset,
 #'                            locus_dir,
 #'                            plink_prefix = "plink",
-#'                            conda_env = "echoR",
+#'                            conda_env = "echoR_mini",
 #'                            verbose = TRUE) {
 #'     plink <- echoconda::find_packages(packages = "plink",
 #'                                       conda_env = conda_env,

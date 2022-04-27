@@ -44,9 +44,8 @@ get_LD_custom <- function(locus_dir = tempdir(),
                           fillNA = 0,
                           stats = "R",
                           as_sparse = TRUE,
-                          # min_r2=FALSE,
-                          # min_Dprime=FALSE,
-                          # remove_correlates = FALSE,
+                          remove_tmps = TRUE,
+                          conda_env = "echoR_mini",
                           verbose = TRUE) {
     
     messager("Using custom VCF as LD reference panel.", v = verbose) 
@@ -58,6 +57,7 @@ get_LD_custom <- function(locus_dir = tempdir(),
         target_genome = target_genome,
         samples = samples,
         force_new = force_new,
+        conda_env = conda_env,
         verbose = verbose
     )
     #### Convert to snpStats object ####
@@ -94,11 +94,6 @@ get_LD_custom <- function(locus_dir = tempdir(),
             verbose = verbose
         )
     }
-    #### Convert to sparse ####
-    if(as_sparse){
-        LD_matrix <- to_sparse(X = LD_matrix,
-                          verbose = verbose)
-    }
     #### Save LD matrix ####
     LD_list <- save_LD_matrix(
         LD_matrix = LD_matrix,
@@ -107,7 +102,16 @@ get_LD_custom <- function(locus_dir = tempdir(),
         subset_common = TRUE,
         fillNA = fillNA,
         LD_reference = LD_reference,
+        as_sparse = as_sparse,
         verbose = verbose
     )
+    #### Remove tmp files ####
+    if(isTRUE(remove_tmps)){
+        tbis <- list.files(pattern = ".tbi")
+        if(length(tbis)>0){
+            messager("Removing",length(tbis),"temp files.",v=verbose)
+            out <- file.remove(tbis)
+        }
+    }
     return(LD_list)
 }

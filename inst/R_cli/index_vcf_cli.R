@@ -4,7 +4,7 @@
 #' #' @keywords internal
 #' index_vcf_cli <- function(vcf_file,
 #'                           force_new_index = FALSE,
-#'                           conda_env = "echoR",
+#'                           conda_env = "echoR_mini",
 #'                           verbose = TRUE) {
 #'     if (!endsWith(vcf_file, ".gz")) {
 #'         messager("+ LD:: Compressing vcf with bgzip", v = verbose)

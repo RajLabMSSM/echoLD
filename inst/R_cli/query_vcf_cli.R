@@ -16,7 +16,7 @@
 #'                           download_method = "download.file",
 #'                           query_by_regions = FALSE,
 #'                           nThread = 1,
-#'                           conda_env = "echoR",
+#'                           conda_env = "echoR_mini",
 #'                           verbose = TRUE) {
 #'     # vcf_subset <- "/pd-omics/brian/Fine_Mapping/Data/GWAS/Nalls23andMe_2019/BRIP1/LD/BRIP1.1KGphase3.vcf.gz"
 #'     vcf_subset <- construct_subset_vcf_name(

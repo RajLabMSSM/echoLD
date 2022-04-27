@@ -39,6 +39,7 @@ save_LD_matrix <- function(LD_matrix,
             LD_matrix = LD_matrix,
             fillNA = fillNA,
             dat = dat,
+            as_sparse = as_sparse,
             verbose = FALSE
         )
         LD_matrix <- sub.out$LD

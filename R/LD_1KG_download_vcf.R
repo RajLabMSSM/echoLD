@@ -20,20 +20,21 @@
 #' @keywords internal
 #' @importFrom echotabix query_vcf
 get_LD_1KG_download_vcf <- function(query_granges,
-                                LD_reference = "1KGphase1",
-                                superpopulation = NULL,
-                                samples = character(0),
-                                local_storage = NULL,
-                                locus_dir = tempdir(),
-                                save_path  = echotabix::construct_vcf_path(
-                                    locus_dir = locus_dir, 
-                                    subdir = "LD",
-                                    target_path = LD_reference,  
-                                    query_granges = query_granges
-                                    ),
-                                query_save = TRUE,
-                                force_new = FALSE,
-                                verbose = TRUE) {
+                                    LD_reference = "1KGphase1",
+                                    superpopulation = NULL,
+                                    samples = character(0),
+                                    local_storage = NULL,
+                                    locus_dir = tempdir(),
+                                    save_path  = echotabix::construct_vcf_path(
+                                        locus_dir = locus_dir, 
+                                        subdir = "LD",
+                                        target_path = LD_reference,  
+                                        query_granges = query_granges
+                                        ),
+                                    query_save = TRUE,
+                                    force_new = FALSE,
+                                    conda_env = "echoR_mini",
+                                    verbose = TRUE) {
     
     LD_reference <- tolower(LD_reference)[1]
     # throw error if anything but phase 1 or phase 3 are specified
@@ -64,6 +65,7 @@ get_LD_1KG_download_vcf <- function(query_granges,
         save_path = save_path,
         force_new = force_new,
         overlapping_only = TRUE,
+        conda_env = conda_env,
         verbose = verbose
     )
     #### Return ####

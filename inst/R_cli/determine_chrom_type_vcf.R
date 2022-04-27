@@ -1,5 +1,5 @@
 # determine_chrom_type_vcf <- function(vcf_file,
-#                                      conda_env = "echoR",
+#                                      conda_env = "echoR_mini",
 #                                      verbose = T) {
 #     vcf <- gaston::read.vcf(vcf_file, max.snps = 1, convert.chr = FALSE)
 #     has_chr <- grepl("chr", vcf@snps$chr[1])

@@ -4,7 +4,7 @@
 #' @keywords internal
 #' @importFrom reticulate use_condaenv import
 rds_to_npz <- function(rds_path,
-                       conda_env = "echoR",
+                       conda_env = "echoR_mini",
                        verbose = TRUE) {
     messager("POLYFUN:: Converting LD .RDS to .npz:", rds_path, v = verbose)
     LD_matrix <- readRDS(rds_path)

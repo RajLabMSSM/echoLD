@@ -9,7 +9,7 @@ leadsnp_block_plink <- function(leadSNP,
                                 bed_bim_fam,
                                 LD_block_size = .7,
                                 verbose = TRUE,
-                                conda_env = "echoR") {
+                                conda_env = "echoR_mini") {
     messager("Returning lead SNP's block...")
     blocks <- LD_blocks_cli(
         bed_bim_fam = bed_bim_fam,

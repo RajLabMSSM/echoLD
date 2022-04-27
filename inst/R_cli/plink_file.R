@@ -5,7 +5,7 @@
 #' #' @family LD
 #' #' @keywords internal
 #' plink_file <- function(plink = NULL,
-#'                        conda_env = "echoR") {
+#'                        conda_env = "echoR_mini") {
 #'     if (!is.null(plink)) {
 #'         return(plink)
 #'     } else if (!is.null(conda_env)) {

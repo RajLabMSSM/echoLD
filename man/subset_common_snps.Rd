@@ -4,7 +4,13 @@
 \alias{subset_common_snps}
 \title{Subset LD matrix and dataframe to only their shared SNPs}
 \usage{
-subset_common_snps(LD_matrix, dat, fillNA = 0, verbose = FALSE)
+subset_common_snps(
+  LD_matrix,
+  dat,
+  fillNA = 0,
+  as_sparse = TRUE,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{LD_matrix}{LD matrix.}
@@ -13,6 +19,8 @@ subset_common_snps(LD_matrix, dat, fillNA = 0, verbose = FALSE)
 to query the LD panel with.}
 
 \item{fillNA}{Value to fill LD matrix NAs with.}
+
+\item{as_sparse}{Convert \code{LD_matrix} to sparse matrix before returning.}
 
 \item{verbose}{Print messages.}
 }

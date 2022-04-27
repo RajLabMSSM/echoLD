@@ -20,21 +20,21 @@
 #' @importFrom reticulate source_python
 #' @importFrom downloadR downloader
 get_LD_UKB <- function(query_dat = NULL,
-                         locus_dir,
-                         sumstats_path = NULL,
-                         chrom = NULL,
-                         min_pos = NULL,
-                         force_new_LD = FALSE,
-                         local_storage = NULL,
-                         download_full_ld = FALSE,
-                         download_method = "axel",
-                         fillNA = 0,
-                         nThread = 1,
-                         return_matrix = TRUE,
-                         as_sparse = TRUE,
-                         conda_env = "echoR",
-                         remove_tmps = TRUE,
-                         verbose = TRUE) {
+                       locus_dir,
+                       sumstats_path = NULL,
+                       chrom = NULL,
+                       min_pos = NULL,
+                       force_new_LD = FALSE,
+                       local_storage = NULL,
+                       download_full_ld = FALSE,
+                       download_method = "axel",
+                       fillNA = 0,
+                       nThread = 1,
+                       return_matrix = TRUE,
+                       as_sparse = TRUE,
+                       conda_env = "echoR_mini",
+                       remove_tmps = TRUE,
+                       verbose = TRUE) {
     
     # echoverseTemplate:::source_all();
     # echoverseTemplate:::args2vars(get_LD_UKB)
@@ -101,15 +101,14 @@ get_LD_UKB <- function(query_dat = NULL,
                     nThread = nThread
                 )
             } else {
+                #### Check for existing gz/npz files ####
                 if (!is.null(local_storage)) {
-                    if (file.exists(file.path(
-                        local_storage,
-                        paste0(LD.prefixes, ".gz")
-                    )) &
-                        file.exists(file.path(
-                            local_storage,
-                            paste0(LD.prefixes, ".npz")
-                        ))) {
+                    gz_file <- file.path(local_storage,
+                                         paste0(LD.prefixes,".gz"))
+                    npz_file <- file.path(local_storage,
+                                          paste0(LD.prefixes,".npz"))
+                    if (file.exists(gz_file) &&
+                        file.exists(npz_file)) {
                         messager("Pre-existing UKB LD",
                             "gz/npz files detected. Importing...",
                             v = verbose
@@ -137,13 +136,8 @@ get_LD_UKB <- function(query_dat = NULL,
                  "This could take some time...",v = verbose)
         server <- FALSE
         ld.out <- tryFunc(input = URL, load_ld, server)
-        #### LD matrix: as sparse matrix ####
+        #### LD matrix: as matrix ####
         ld_R <- ld.out[[1]]
-        #### Convert to sparse ####
-        if(as_sparse){
-            ld_R <- to_sparse(X = ld_R,
-                              verbose = verbose)
-        }
         messager("+ Full UKB LD matrix:",
             paste(formatC(dim(ld_R),big.mark = ","), collapse = " x "),
             v = verbose
@@ -179,14 +173,9 @@ get_LD_UKB <- function(query_dat = NULL,
             verbose = verbose
         )
         #### Remove temp files ####
-        if (remove_tmps) {
-            messager("+ Removing .gz/.npz files.")
-            if (file.exists(paste0(URL, ".gz"))) {
-                file.remove(paste0(URL, ".gz"))
-            }
-            if (file.exists(paste0(URL, ".npz"))) {
-                file.remove(paste0(URL, ".npz"))
-            }
+        if (isTRUE(remove_tmps)) { 
+            clean_UKB_tmps(URL=URL,
+                           verbose=verbose)
         }
     }
     #### Return ####

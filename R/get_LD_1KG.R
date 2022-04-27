@@ -13,9 +13,11 @@
 #' replace with 0.
 #' @param as_sparse Save/return LD matrix as a sparse matrix. 
 #' @inheritParams get_LD 
+#' @inheritParams echotabix::query_vcf
 #'
 #' @family LD
 #' @keywords internal
+#' @importFrom VariantAnnotation genotypeToSnpMatrix
 get_LD_1KG <- function(locus_dir,
                        query_dat,
                        LD_reference = "1KGphase1",
@@ -28,6 +30,8 @@ get_LD_1KG <- function(locus_dir,
                        fillNA = 0,
                        stats = "R",
                        as_sparse = TRUE,
+                       remove_tmps = TRUE,
+                       conda_env = "echoR_mini",
                        # min_r2=FALSE,
                        # min_Dprime=FALSE,
                        # remove_correlates = FALSE,
@@ -44,6 +48,7 @@ get_LD_1KG <- function(locus_dir,
         samples = samples,
         force_new = force_new,
         local_storage = local_storage,
+        conda_env = conda_env,
         verbose = verbose
     )
     #### Convert to snpStats object ####
@@ -79,12 +84,7 @@ get_LD_1KG <- function(locus_dir,
             stats = stats,
             verbose = verbose
         )
-    }
-    #### Convert to sparse ####
-    if(as_sparse){
-        LD_matrix <- to_sparse(X = LD_matrix,
-                               verbose = verbose)
-    }
+    } 
     #### Save LD matrix #### 
     LD_list <- save_LD_matrix(
         LD_matrix = LD_matrix,
@@ -96,5 +96,13 @@ get_LD_1KG <- function(locus_dir,
         as_sparse = as_sparse,
         verbose = verbose
     )
+    #### Remove tmp files ####
+    if(isTRUE(remove_tmps)){
+        tbis <- list.files(pattern = ".tbi")
+        if(length(tbis)>0){
+            messager("Removing",length(tbis),"temp files.",v=verbose)
+            out <- file.remove(tbis)
+        }
+    }
     return(LD_list)
 }

@@ -41,7 +41,7 @@ test_that("get_LD works", {
 
     #### Custom VCF ####
     LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",
-                                package = "echoLD")
+                                package = "echodata")
     LD_custom <- echoLD::get_LD(
         locus_dir = locus_dir,
         query_dat= query_dat,
@@ -51,7 +51,7 @@ test_that("get_LD works", {
 
     #### UK Biobank ####
     LD_ukb <- echoLD::get_LD(locus_dir = locus_dir,
-                             query_dat= query_dat,
+                             query_dat = query_dat,
                              LD_reference = "UKB")
     run_tests(LD_ukb)
 
