@@ -1,3 +1,13 @@
+# echoLD 0.99.5
+
+## New features
+
+* Updated GHA. 
+
+## Bug fixes
+
+* Flipped reporting of SNPs/samples in `compute_LD`. 
+
 # echoLD 0.99.4
 
 ## New features

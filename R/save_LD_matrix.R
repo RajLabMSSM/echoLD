@@ -33,7 +33,7 @@ save_LD_matrix <- function(LD_matrix,
         locus_dir = locus_dir,
         LD_reference = basename(LD_reference)
     )
-    messager("Saving LD matrix ==>", RDS_path, v = verbose)
+    
     if (subset_common) {
         sub.out <- subset_common_snps(
             LD_matrix = LD_matrix,
@@ -57,6 +57,7 @@ save_LD_matrix <- function(LD_matrix,
             verbose = verbose
         )
     } else {
+        messager("Saving dense LD matrix ==>", RDS_path, v = verbose)
         saveRDS(object = LD_matrix,
                 file = RDS_path
         )

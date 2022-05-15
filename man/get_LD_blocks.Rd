@@ -20,14 +20,6 @@ get_LD_blocks(
 
 \item{ss}{\pkg{snpStats} object or LD matrix (containing r or r^2 values).}
 
-\item{stats}{a character vector specifying the linkage disequilibrium
-measures to be calculated (using the \code{\link[snpStats:ld]{ld}}
-function) when \code{x} is a genotype matrix. Only "R.squared" and
-"D.prime" are allowed, see Details.}
-
-\item{pct}{minimum percentage of points for the plateau selection in 
-capushe selection. See \code{\link[capushe]{DDSE}} for further details}
-
 \item{verbose}{Print messages.}
 }
 \value{

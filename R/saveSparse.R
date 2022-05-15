@@ -13,7 +13,7 @@ saveSparse <- function(LD_matrix,
     # messager("Dense size:")
     # print(object.size(LD_matrix),units="auto")
     # messager("Sparse size:")
-    # print(object.size(LD_sparse),units="auto")
-    messager("Saving LD as sparse matrix ==>", LD_path, v = verbose)
+    # print(object.size(LD_sparse),units="auto") 
+    messager("Saving sparse LD matrix ==>", LD_path, v = verbose)
     saveRDS(LD_sparse, LD_path)
 }

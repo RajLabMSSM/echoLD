@@ -24,8 +24,8 @@ compute_LD <- function(ss,
         ss$map <- ss$map[ss$map$snp.names %in% select_snps, ]
     }
     messager("LD:snpStats:: Computing pairwise LD between",
-        formatC(nrow(ss$genotypes), big.mark = ","), "SNPs",
-        "across", formatC(ncol(ss$genotypes), big.mark = ","), "individuals",
+        formatC(ncol(ss$genotypes), big.mark = ","), "SNPs",
+        "across", formatC(nrow(ss$genotypes), big.mark = ","), "individuals",
         paste0("(stats = ", paste(stats, collapse = ", "), ")."),
         v = verbose
     )
