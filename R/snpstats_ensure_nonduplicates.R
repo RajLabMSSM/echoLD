@@ -9,12 +9,12 @@ snpstats_ensure_nonduplicates <- function(bim_path,
             stringsAsFactors = FALSE,
             nThread = nThread
         )
-        messager("+ LD:snpStats::", nrow(bim), "rows in bim file.",
+        messager("+ echoLDLD:snpStats::", nrow(bim), "rows in bim file.",
             v = verbose
         )
         bim <- bim[!duplicated(bim$SNP), ]
         select_snps <- select_snps[select_snps %in% unique(bim$SNP)]
-        messager("+ LD:snpStats::", length(select_snps),
+        messager("+ echoLDLD:snpStats::", length(select_snps),
             "SNPs in select_snps",
             v = verbose
         )
