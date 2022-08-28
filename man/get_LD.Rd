@@ -10,6 +10,7 @@ get_LD(
   standardise_colnames = FALSE,
   force_new_LD = FALSE,
   LD_reference = c("1KGphase1", "1KGphase3", "UKB"),
+  query_genome = "hg19",
   target_genome = "hg19",
   samples = character(0),
   superpopulation = NULL,
@@ -33,7 +34,7 @@ to query the LD panel with.}
 \item{standardise_colnames}{Automatically rename all columns to a standard 
 nomenclature using \link[MungeSumstats]{standardise_header}.}
 
-\item{force_new_LD}{If LD file exists, create a new one.}
+\item{force_new_LD}{Force new LD subset.}
 
 \item{LD_reference}{LD reference to use:
 \itemize{
@@ -45,8 +46,9 @@ European-decent subset of UK Biobank.}
 to compute LD matrix from.}
 }}
 
-\item{target_genome}{Genome build of the LD panel
-(used only if providing custom LD panel).}
+\item{query_genome}{Genome build of the \code{query_dat}.}
+
+\item{target_genome}{Genome build of the LD panel.}
 
 \item{samples}{[Optional] Sample names to subset the VCF by. 
 If this option is used, the \link[GenomicRanges]{GRanges} object will be
@@ -107,10 +109,8 @@ SNPs included in both \code{query_dat} and the LD matrix.}
 }
 \description{
 Calculate and/or query linkage disequilibrium (LD) from reference panels
- (UK Biobank, 1000 Genomes), a user-supplied pre-computed LD matrix
-}
-\details{
-Options:
+ (UK Biobank, 1000 Genomes), a user-supplied pre-computed LD matrix.\cr\cr
+\strong{Options}:\cr
 \itemize{
 \item{Download pre-computed LD matrix from UK Biobank.}
 \item{Download raw VCF file from 1KG and compute LD on the fly.}

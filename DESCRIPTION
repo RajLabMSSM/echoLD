@@ -1,7 +1,7 @@
 Package: echoLD
 Type: Package
 Title: echoverse module: LD downloading and processing
-Version: 0.99.5
+Version: 0.99.6
 Authors@R: 
     c(person(given = "Brian",
            family = "Schilder",
@@ -60,7 +60,7 @@ Remotes:
     github::RajLabMSSM/echotabix,
     github::RajLabMSSM/downloadR,
     github::RajLabMSSM/echodata
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1.9000
 VignetteBuilder: knitr
 License: GPL (>= 3)
 Config/testthat/edition: 3

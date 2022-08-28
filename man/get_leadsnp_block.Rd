@@ -10,6 +10,9 @@
 get_leadsnp_block(query_dat, ss, pct = 0.15, verbose = TRUE)
 }
 \arguments{
+\item{pct}{minimum percentage of points for the plateau selection in 
+capushe selection. See \code{\link[capushe]{DDSE}} for further details}
+
 \item{verbose}{Print messages.}
 }
 \description{

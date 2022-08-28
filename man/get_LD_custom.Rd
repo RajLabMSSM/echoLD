@@ -39,8 +39,7 @@ European-decent subset of UK Biobank.}
 to compute LD matrix from.}
 }}
 
-\item{target_genome}{Genome build of the LD panel
-(used only if providing custom LD panel).}
+\item{target_genome}{Genome build of the LD panel.}
 
 \item{superpopulation}{Superpopulation to subset LD panel by
 (used only if \code{LD_reference} is "1KGphase1" or "1KGphase3").

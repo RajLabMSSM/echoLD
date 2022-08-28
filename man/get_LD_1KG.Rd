@@ -7,6 +7,7 @@
 get_LD_1KG(
   locus_dir,
   query_dat,
+  query_genome = "hg19",
   LD_reference = "1KGphase1",
   superpopulation = NULL,
   samples = character(0),
@@ -19,6 +20,7 @@ get_LD_1KG(
   as_sparse = TRUE,
   remove_tmps = TRUE,
   conda_env = "echoR_mini",
+  nThread = 1,
   verbose = TRUE
 )
 }
@@ -27,6 +29,8 @@ get_LD_1KG(
 
 \item{query_dat}{SNP-level summary statistics subset 
 to query the LD panel with.}
+
+\item{query_genome}{Genome build of the \code{query_dat}.}
 
 \item{LD_reference}{LD reference to use:
 \itemize{
@@ -58,9 +62,6 @@ Set to \code{NULL} to download VCFs/LD npz from remote storage system.}
 \item{leadSNP_LD_block}{Only return SNPs within the same LD block
 as the lead SNP (the SNP with the smallest p-value).}
 
-\item{force_new}{Force the creation of a new VCF subset file
-even if one exists.}
-
 \item{fillNA}{When pairwise LD (r) between two SNPs is \code{NA},
 replace with 0.}
 
@@ -71,6 +72,8 @@ like VCF, npz, and plink files.}
 
 \item{conda_env}{Conda environments to search in. 
 If \code{NULL} (default), will search all conda environments.}
+
+\item{nThread}{Number of threads to parallelize over.}
 
 \item{verbose}{Print messages.}
 }

@@ -5,9 +5,9 @@
 \title{Download LD matrices from UK Biobank}
 \usage{
 get_LD_UKB(
-  query_dat = NULL,
+  query_dat,
+  query_genome = "hg19",
   locus_dir,
-  sumstats_path = NULL,
   chrom = NULL,
   min_pos = NULL,
   force_new_LD = FALSE,
@@ -27,9 +27,11 @@ get_LD_UKB(
 \item{query_dat}{SNP-level summary statistics subset 
 to query the LD panel with.}
 
+\item{query_genome}{Genome build of the \code{query_dat}.}
+
 \item{locus_dir}{Storage directory to use.}
 
-\item{force_new_LD}{If LD file exists, create a new one.}
+\item{force_new_LD}{Force new LD subset.}
 
 \item{local_storage}{Path to folder with previously download LD npz files.}
 

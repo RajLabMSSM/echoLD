@@ -1,3 +1,13 @@
+# echoLD 0.99.6
+
+## New features
+
+* Perform `liftover` in all areas where necessary. 
+
+## Bug fixes
+
+* Fix typos in unit tests: *test-plot_LD*
+
 # echoLD 0.99.5
 
 ## New features

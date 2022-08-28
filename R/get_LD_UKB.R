@@ -19,9 +19,10 @@
 #' @importFrom data.table fread data.table
 #' @importFrom reticulate source_python
 #' @importFrom downloadR downloader
-get_LD_UKB <- function(query_dat = NULL,
+#' @importFrom echotabix liftover
+get_LD_UKB <- function(query_dat,
+                       query_genome = "hg19",
                        locus_dir,
-                       sumstats_path = NULL,
                        chrom = NULL,
                        min_pos = NULL,
                        force_new_LD = FALSE,
@@ -41,22 +42,18 @@ get_LD_UKB <- function(query_dat = NULL,
     load_ld <- NULL
 
     messager("Using UK Biobank LD reference panel.", v = verbose)
-    #### Preparequery_dat#### 
-    if (!is.null(sumstats_path)) {
-        messager("+ Assigning chrom and min_pos based on summary stats file",
-            v = verbose)
-       query_dat<- data.table::fread(
-            input = sumstats_path,
-            nThread = nThread
-        )
-    }
+    #### Liftover ####
+    query_dat <- echotabix::liftover(dat = query_dat, 
+                                     query_genome = query_genome, 
+                                     target_genome = "hg19",
+                                     verbose = verbose)
+    #### Prepare query ####  
     chrom <- unique(query_dat$CHR)
     min_pos <- min(query_dat$POS)
     LD.prefixes <- UKB_find_ld_prefix(
         chrom = chrom,
         min_pos = min_pos
-    )
-    # chimera.path <- "/sc/orga/projects/pd-omics/tools/polyfun/UKBB_LD"
+    ) 
     alkes_url <- "https://data.broadinstitute.org/alkesgroup/UKBB_LD"
     URL <- alkes_url
 

@@ -13,13 +13,14 @@
 #' replace with 0.
 #' @param as_sparse Save/return LD matrix as a sparse matrix. 
 #' @inheritParams get_LD 
-#' @inheritParams echotabix::query_vcf
+#' @inheritParams echotabix::query
 #'
 #' @family LD
 #' @keywords internal
 #' @importFrom VariantAnnotation genotypeToSnpMatrix
 get_LD_1KG <- function(locus_dir,
                        query_dat,
+                       query_genome = "hg19",
                        LD_reference = "1KGphase1",
                        superpopulation = NULL,
                        samples = character(0),
@@ -35,19 +36,23 @@ get_LD_1KG <- function(locus_dir,
                        # min_r2=FALSE,
                        # min_Dprime=FALSE,
                        # remove_correlates = FALSE,
+                       nThread = 1,
                        verbose = TRUE) {
     
     messager("Using 1000Genomes as LD reference panel.", v = verbose)
     #### Query ####
-    query_granges <- echotabix::construct_query(query_dat=query_dat)
+    query_granges <- echotabix::construct_query(query_dat = query_dat,
+                                                verbose = verbose)
     vcf <- get_LD_1KG_download_vcf(
         query_granges = query_granges,
+        query_genome = query_genome,
         locus_dir = locus_dir,
         LD_reference = LD_reference,
         superpopulation = superpopulation,
         samples = samples,
         force_new = force_new,
         local_storage = local_storage,
+        nThread = nThread,
         conda_env = conda_env,
         verbose = verbose
     )

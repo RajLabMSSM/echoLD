@@ -18,6 +18,7 @@ vcf_subset.popDat <- echoLD:::get_LD_1KG_download_vcf(
 \usage{
 get_LD_1KG_download_vcf(
   query_granges,
+  query_genome = "hg19",
   LD_reference = "1KGphase1",
   superpopulation = NULL,
   samples = character(0),
@@ -28,6 +29,7 @@ get_LD_1KG_download_vcf(
   query_save = TRUE,
   force_new = FALSE,
   conda_env = "echoR_mini",
+  nThread = 1,
   verbose = TRUE
 )
 }
@@ -36,6 +38,8 @@ get_LD_1KG_download_vcf(
 to be used for querying the \code{target_path} file. 
 Alternatively, can be variant-level summary statistics to be converted into a
 \link[GenomicRanges]{GRanges} object by \link[echotabix]{construct_query}.}
+
+\item{query_genome}{Genome build of the \code{query_dat}.}
 
 \item{LD_reference}{LD reference to use:
 \itemize{
@@ -66,16 +70,14 @@ Set to \code{NULL} to download VCFs/LD npz from remote storage system.}
 
 \item{locus_dir}{Storage directory to use.}
 
-\item{save_path}{File path to save query subset to (as VCF).}
+\item{save_path}{Path to save LD subset to.}
 
-\item{query_save}{Whether to save the results of the query on disk. 
-\emph{Note}: Writing to disk can take some time.}
-
-\item{force_new}{Force the creation of a new VCF subset file
-even if one exists.}
+\item{query_save}{Whether to save the queried data subset.}
 
 \item{conda_env}{Conda environments to search in. 
 If \code{NULL} (default), will search all conda environments.}
+
+\item{nThread}{Number of threads to parallelize over.}
 
 \item{verbose}{Print messages.}
 }

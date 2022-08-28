@@ -3,8 +3,9 @@
 #'
 #' Query the 1000 Genomes Project for a subset of their individual-level VCF
 #' files.
+#' @param save_path Path to save LD subset to.
 #' @inheritParams get_LD
-#' @inheritParams echotabix::query_vcf
+#' @inheritParams echotabix::query 
 #' @source
 #' \code{
 #' query_dat <- echodata::BST1
@@ -18,8 +19,9 @@
 #' } 
 #' @family LD
 #' @keywords internal
-#' @importFrom echotabix query_vcf
+#' @importFrom echotabix query liftover 
 get_LD_1KG_download_vcf <- function(query_granges,
+                                    query_genome = "hg19",
                                     LD_reference = "1KGphase1",
                                     superpopulation = NULL,
                                     samples = character(0),
@@ -34,6 +36,7 @@ get_LD_1KG_download_vcf <- function(query_granges,
                                     query_save = TRUE,
                                     force_new = FALSE,
                                     conda_env = "echoR_mini",
+                                    nThread = 1,
                                     verbose = TRUE) {
     
     LD_reference <- tolower(LD_reference)[1]
@@ -54,18 +57,29 @@ get_LD_1KG_download_vcf <- function(query_granges,
         LD_reference = LD_reference,
         verbose = verbose
     )
+    #### Liftover ####
+    query_granges <- echotabix::liftover(dat = query_granges, 
+                                         query_genome = query_genome, 
+                                         target_genome = "hg19",
+                                         as_granges = TRUE,
+                                         style = "UCSC",
+                                         verbose = verbose)
     #### Query ####  
-    vcf <- echotabix::query_vcf( 
+    vcf <- echotabix::query( 
         target_path = target_path, 
+        query_genome = query_genome,
+        target_format = "vcf",
         ### 1KG is all aligned to GRCh37
         target_genome = "GRCh37", 
         query_granges = query_granges,
         samples = samples,
         query_save = query_save,
-        save_path = save_path,
-        force_new = force_new,
+        query_save_path = save_path,
+        query_force_new = force_new,
         overlapping_only = TRUE,
+        as_datatable = FALSE,
         conda_env = conda_env,
+        nThread = nThread,
         verbose = verbose
     )
     #### Return ####

@@ -1,9 +1,8 @@
 #' Procure an LD matrix for fine-mapping
 #'
 #' Calculate and/or query linkage disequilibrium (LD) from reference panels
-#'  (UK Biobank, 1000 Genomes), a user-supplied pre-computed LD matrix
-#'
-#' Options:
+#'  (UK Biobank, 1000 Genomes), a user-supplied pre-computed LD matrix.\cr\cr
+#' \strong{Options}:\cr
 #' \itemize{
 #' \item{Download pre-computed LD matrix from UK Biobank.}
 #' \item{Download raw VCF file from 1KG and compute LD on the fly.}
@@ -24,8 +23,8 @@
 #' \item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
 #' to compute LD matrix from.}
 #' }
-#' @param target_genome Genome build of the LD panel
-#' (used only if providing custom LD panel).
+#' @param query_genome Genome build of the \code{query_dat}.
+#' @param target_genome Genome build of the LD panel.
 #' @param superpopulation Superpopulation to subset LD panel by
 #'  (used only if \code{LD_reference} is "1KGphase1" or "1KGphase3").
 #'  See \link[echoLD]{popDat_1KGphase1} and \link[echoLD]{popDat_1KGphase3}
@@ -42,6 +41,7 @@
 #' @param as_sparse Convert the LD matrix to a sparse matrix.
 #' @param leadSNP_LD_block Only return SNPs within the same LD block
 #' as the lead SNP (the SNP with the smallest p-value).
+#' @param force_new_LD Force new LD subset.
 #'
 #' @inheritParams echotabix::query_vcf
 #' @inheritParams downloadR::downloader
@@ -71,6 +71,7 @@ get_LD <- function(query_dat,
                    standardise_colnames = FALSE,
                    force_new_LD = FALSE,
                    LD_reference = c("1KGphase1", "1KGphase3", "UKB"),
+                   query_genome = "hg19",
                    target_genome = "hg19",
                    samples = character(0),
                    superpopulation = NULL,
@@ -98,7 +99,7 @@ get_LD <- function(query_dat,
             dat = query_dat,
             standardise_colnames = TRUE,
             verbose = verbose)
-    }
+    } 
     #### Import existing LD ####
     if (file.exists(RDS_path) & (isFALSE(force_new_LD))) {
         LD_list <- read_LD_list(RDS_path=RDS_path,
@@ -108,6 +109,7 @@ get_LD <- function(query_dat,
         #### UK Biobank ####
         LD_list <- get_LD_UKB(
             query_dat = query_dat,
+            query_genome = query_genome,
             locus_dir = locus_dir,
             force_new_LD = force_new_LD,
             local_storage = local_storage,
@@ -118,6 +120,7 @@ get_LD <- function(query_dat,
             as_sparse = as_sparse,
             conda_env = conda_env,
             remove_tmps = remove_tmps,
+            nThread = nThread,
             verbose = verbose
         )
     } else if (tolower(LD_reference) %in% c("1kgphase1", "1kgphase3")) {
@@ -125,6 +128,7 @@ get_LD <- function(query_dat,
         LD_list <- get_LD_1KG(
             locus_dir = locus_dir,
             query_dat = query_dat,
+            query_genome = query_genome,
             local_storage = local_storage,
             LD_reference = LD_reference,
             samples = samples,
