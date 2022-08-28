@@ -32,7 +32,6 @@ Imports:
     downloadR,
     echodata,
     dplyr,
-    R.utils,
     methods,
     Matrix,
     data.table,  

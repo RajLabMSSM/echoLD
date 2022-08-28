@@ -6,7 +6,8 @@
 
 ## Bug fixes
 
-* Fix typos in unit tests: *test-plot_LD*
+* Fix typos in unit tests: *test-plot_LD*/
+* Remove `R.utils` from Imports. 
 
 # echoLD 0.99.5
 
