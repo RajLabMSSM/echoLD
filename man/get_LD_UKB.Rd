@@ -3,6 +3,15 @@
 \name{get_LD_UKB}
 \alias{get_LD_UKB}
 \title{Download LD matrices from UK Biobank}
+\source{
+\code{
+query_dat <- echodata::BST1[seq(1, 50), ]
+locus_dir <- file.path(tempdir(), echodata::locus_dir)
+LD_list <- echoLD:::get_LD_UKB(
+    query_dat = query_dat,
+    locus_dir = locus_dir)
+}
+}
 \usage{
 get_LD_UKB(
   query_dat,
@@ -56,12 +65,12 @@ like VCF, npz, and plink files.}
 \description{
 Download pre-computed LD matrices from
 \href{https://www.ukbiobank.ac.uk}{UK Biobank} in 3Mb windows,
-then subset to the region that overlaps with \code{query_dat}.
-}
-\details{
+then subset to the region that overlaps with \code{query_dat}.\cr\cr
 LD was derived from a  British, European-decent subpopulation
-in the UK Biobank. LD was pre-computed and stored by the Alkes Price lab
-(see \href{https://www.biorxiv.org/content/10.1101/807792v3}{here}).
+in the UK Biobank. LD was pre-computed and stored by the Alkes Price lab.
+All data is aligned to the hg19 reference genome.
+For further details, see the 
+\href{http://dx.doi.org/10.1038/s41588-020-00735-5}{PolyFun publication}.
 }
 \seealso{
 Other LD: 

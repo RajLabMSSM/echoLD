@@ -1,30 +1,27 @@
 #' Procure an LD matrix for fine-mapping
 #'
 #' Calculate and/or query linkage disequilibrium (LD) from reference panels
-#'  (UK Biobank, 1000 Genomes), a user-supplied pre-computed LD matrix.\cr\cr
-#' \strong{Options}:\cr
-#' \itemize{
-#' \item{Download pre-computed LD matrix from UK Biobank.}
-#' \item{Download raw VCF file from 1KG and compute LD on the fly.}
-#' \item{Compute LD on the fly from a user-supplied VCF file.}
-#' \item{Use a user-supplied pre-computed LD-matrix.}
-#' }
-#'
+#'  (UK Biobank, 1000 Genomes), a user-supplied pre-computed LD matrix.
+#' If need be, \code{query_dat} will automatically be lifted over 
+#' to the genome build of the target LD panel before query is performed. 
 #' @param locus_dir Storage directory to use. 
 #' @param query_dat SNP-level summary statistics subset 
 #' to query the LD panel with.
 #' @param force_new_LD If LD file exists, create a new one.
 #' @param LD_reference LD reference to use:
 #' \itemize{
-#' \item{"1KGphase1" : }{1000 Genomes Project Phase 1}
-#' \item{"1KGphase3" : }{1000 Genomes Project Phase 3}
+#' \item{"1KGphase1" : }{1000 Genomes Project Phase 1 (genome build: hg19).}
+#' \item{"1KGphase3" : }{1000 Genomes Project Phase 3 (genome build: hg19).}
 #' \item{"UKB" : }{Pre-computed LD from a British
-#' European-decent subset of UK Biobank.}
+#' European-decent subset of UK Biobank (genome build: hg19).}
 #' \item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
-#' to compute LD matrix from.}
+#' to compute LD matrix from 
+#' (genome build: defined by user with \code{target_genome}).}
 #' }
 #' @param query_genome Genome build of the \code{query_dat}.
-#' @param target_genome Genome build of the LD panel.
+#' @param target_genome Genome build of the LD panel. 
+#' This is automatically assigned to the correct genome build for each LD panel
+#'  except when the user supplies custom vcf/LD files.
 #' @param superpopulation Superpopulation to subset LD panel by
 #'  (used only if \code{LD_reference} is "1KGphase1" or "1KGphase3").
 #'  See \link[echoLD]{popDat_1KGphase1} and \link[echoLD]{popDat_1KGphase3}

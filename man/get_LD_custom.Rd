@@ -31,15 +31,18 @@ to query the LD panel with.}
 
 \item{LD_reference}{LD reference to use:
 \itemize{
-\item{"1KGphase1" : }{1000 Genomes Project Phase 1}
-\item{"1KGphase3" : }{1000 Genomes Project Phase 3}
+\item{"1KGphase1" : }{1000 Genomes Project Phase 1 (genome build: hg19).}
+\item{"1KGphase3" : }{1000 Genomes Project Phase 3 (genome build: hg19).}
 \item{"UKB" : }{Pre-computed LD from a British
-European-decent subset of UK Biobank.}
+European-decent subset of UK Biobank (genome build: hg19).}
 \item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
-to compute LD matrix from.}
+to compute LD matrix from 
+(genome build: defined by user with \code{target_genome}).}
 }}
 
-\item{target_genome}{Genome build of the LD panel.}
+\item{target_genome}{Genome build of the LD panel. 
+This is automatically assigned to the correct genome build for each LD panel
+ except when the user supplies custom vcf/LD files.}
 
 \item{superpopulation}{Superpopulation to subset LD panel by
 (used only if \code{LD_reference} is "1KGphase1" or "1KGphase3").

@@ -2,11 +2,12 @@
 #'
 #' Download pre-computed LD matrices from
 #' \href{https://www.ukbiobank.ac.uk}{UK Biobank} in 3Mb windows,
-#' then subset to the region that overlaps with \code{query_dat}.
-#'
+#' then subset to the region that overlaps with \code{query_dat}.\cr\cr
 #' LD was derived from a  British, European-decent subpopulation
-#' in the UK Biobank. LD was pre-computed and stored by the Alkes Price lab
-#' (see \href{https://www.biorxiv.org/content/10.1101/807792v3}{here}).
+#' in the UK Biobank. LD was pre-computed and stored by the Alkes Price lab.
+#' All data is aligned to the hg19 reference genome.
+#' For further details, see the 
+#' \href{http://dx.doi.org/10.1038/s41588-020-00735-5}{PolyFun publication}.
 #'
 #' @param download_method If "python" will import compressed numpy array
 #' directly into R using \pkg{reticulate}. Otherwise, will be passed to
@@ -20,6 +21,14 @@
 #' @importFrom reticulate source_python
 #' @importFrom downloadR downloader
 #' @importFrom echotabix liftover
+#' @source
+#' \code{
+#' query_dat <- echodata::BST1[seq(1, 50), ]
+#' locus_dir <- file.path(tempdir(), echodata::locus_dir)
+#' LD_list <- echoLD:::get_LD_UKB(
+#'     query_dat = query_dat,
+#'     locus_dir = locus_dir)
+#' }
 get_LD_UKB <- function(query_dat,
                        query_genome = "hg19",
                        locus_dir,

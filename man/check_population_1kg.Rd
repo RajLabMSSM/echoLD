@@ -14,12 +14,13 @@ for full tables of their respective samples.}
 
 \item{LD_reference}{LD reference to use:
 \itemize{
-\item{"1KGphase1" : }{1000 Genomes Project Phase 1}
-\item{"1KGphase3" : }{1000 Genomes Project Phase 3}
+\item{"1KGphase1" : }{1000 Genomes Project Phase 1 (genome build: hg19).}
+\item{"1KGphase3" : }{1000 Genomes Project Phase 3 (genome build: hg19).}
 \item{"UKB" : }{Pre-computed LD from a British
-European-decent subset of UK Biobank.}
+European-decent subset of UK Biobank (genome build: hg19).}
 \item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
-to compute LD matrix from.}
+to compute LD matrix from 
+(genome build: defined by user with \code{target_genome}).}
 }}
 }
 \description{

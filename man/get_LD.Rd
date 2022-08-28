@@ -38,17 +38,20 @@ nomenclature using \link[MungeSumstats]{standardise_header}.}
 
 \item{LD_reference}{LD reference to use:
 \itemize{
-\item{"1KGphase1" : }{1000 Genomes Project Phase 1}
-\item{"1KGphase3" : }{1000 Genomes Project Phase 3}
+\item{"1KGphase1" : }{1000 Genomes Project Phase 1 (genome build: hg19).}
+\item{"1KGphase3" : }{1000 Genomes Project Phase 3 (genome build: hg19).}
 \item{"UKB" : }{Pre-computed LD from a British
-European-decent subset of UK Biobank.}
+European-decent subset of UK Biobank (genome build: hg19).}
 \item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
-to compute LD matrix from.}
+to compute LD matrix from 
+(genome build: defined by user with \code{target_genome}).}
 }}
 
 \item{query_genome}{Genome build of the \code{query_dat}.}
 
-\item{target_genome}{Genome build of the LD panel.}
+\item{target_genome}{Genome build of the LD panel. 
+This is automatically assigned to the correct genome build for each LD panel
+ except when the user supplies custom vcf/LD files.}
 
 \item{samples}{[Optional] Sample names to subset the VCF by. 
 If this option is used, the \link[GenomicRanges]{GRanges} object will be
@@ -109,14 +112,9 @@ SNPs included in both \code{query_dat} and the LD matrix.}
 }
 \description{
 Calculate and/or query linkage disequilibrium (LD) from reference panels
- (UK Biobank, 1000 Genomes), a user-supplied pre-computed LD matrix.\cr\cr
-\strong{Options}:\cr
-\itemize{
-\item{Download pre-computed LD matrix from UK Biobank.}
-\item{Download raw VCF file from 1KG and compute LD on the fly.}
-\item{Compute LD on the fly from a user-supplied VCF file.}
-\item{Use a user-supplied pre-computed LD-matrix.}
-}
+ (UK Biobank, 1000 Genomes), a user-supplied pre-computed LD matrix.
+If need be, \code{query_dat} will automatically be lifted over 
+to the genome build of the target LD panel before query is performed.
 }
 \examples{
 query_dat <- echodata::BST1[seq(1, 50), ] 

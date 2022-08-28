@@ -3,6 +3,8 @@
 ## New features
 
 * Perform `liftover` in all areas where necessary. 
+* Confirm that UKB is indeed aligned to hg19. 
+* Document genome builds of each LD reference panel. 
 
 ## Bug fixes
 
