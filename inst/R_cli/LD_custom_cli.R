@@ -11,7 +11,7 @@
 #' #' data("BST1")
 #' #' data("locus_dir")
 #' #' LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",
-#' #'     package = "echoLD"
+#' #'     package = "echodata"
 #' #' )
 #' #' LD_matrix <- LD_custom_cli(
 #' #'     LD_reference = LD_reference,

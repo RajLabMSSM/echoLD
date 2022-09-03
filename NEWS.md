@@ -1,3 +1,11 @@
+# echoLD 0.99.7
+
+## New features
+
+- New function:
+    - `vcf_to_plink`
+
+
 # echoLD 0.99.6
 
 ## New features
