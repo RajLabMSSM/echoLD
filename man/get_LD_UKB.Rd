@@ -58,7 +58,7 @@ directly into R using \pkg{reticulate}. Otherwise, will be passed to
 If \code{NULL} (default), will search all conda environments.}
 
 \item{remove_tmps}{Remove all intermediate files
-like VCF, npz, and plink files.}
+like \emph{vcf}, \emph{npz}, and \emph{plink} files.}
 
 \item{verbose}{Print messages.}
 }

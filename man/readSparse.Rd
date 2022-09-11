@@ -4,7 +4,7 @@
 \alias{readSparse}
 \title{Read LD matrix}
 \usage{
-readSparse(LD_path, as_sparse = TRUE, as_df = FALSE, verbose = TRUE)
+readSparse(LD_path, as_sparse = TRUE, as_df = FALSE, verbose = TRUE, ...)
 }
 \arguments{
 \item{LD_path}{Path to LD matrix.}
@@ -14,13 +14,18 @@ readSparse(LD_path, as_sparse = TRUE, as_df = FALSE, verbose = TRUE)
 \item{as_df}{Convert to the matrix to a \link[base]{data.frame}.}
 
 \item{verbose}{Print messages.}
+
+\item{...}{
+  Arguments passed on to \code{\link[downloadR:load_rdata]{downloadR::load_rdata}}
+  \describe{
+    \item{\code{fileName}}{Name of the file to load.}
+  }}
 }
 \description{
 Read in an LD matrix stored in a variety of file formats, and convert it
 to a sprase matrix.
 }
 \examples{
-query_dat <-  echodata::BST1[seq(1, 50), ]  
 LD_path <- tempfile(fileext = ".csv")
 utils::write.csv(echodata::BST1_LD_matrix,
                  file = LD_path,

@@ -13,12 +13,16 @@
 #' \item{"1KGphase1" : }{1000 Genomes Project Phase 1 (genome build: hg19).}
 #' \item{"1KGphase3" : }{1000 Genomes Project Phase 3 (genome build: hg19).}
 #' \item{"UKB" : }{Pre-computed LD from a British
-#' European-decent subset of UK Biobank (genome build: hg19).}
+#' European-decent subset of UK Biobank.
+#' \emph{Genome build} : hg19}
 #' \item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
-#' to compute LD matrix from 
-#' (genome build: defined by user with \code{target_genome}).}
+#' to compute LD matrix from.\cr
+#' \emph{Accepted formats}: \emph{.vcf} / \emph{.vcf.gz} / \emph{.vcf.bgz}\cr
+#' \emph{Genome build} : defined by user with \code{target_genome}.}
 #' \item{"<matrix_path>" : }{User-supplied path to a pre-computed LD matrix   
-#' (genome build: defined by user with \code{target_genome}).}
+#' \emph{Accepted formats}:  \emph{.rds} / \emph{.rda} / \emph{.csv} / 
+#' \emph{.tsv} / \emph{.txt}\cr
+#' \emph{Genome build} : defined by user with \code{target_genome}.}
 #' }
 #' @param query_genome Genome build of the \code{query_dat}.
 #' @param target_genome Genome build of the LD panel. 
@@ -36,7 +40,7 @@
 #' Set to \code{NULL} to download VCFs/LD npz from remote storage system.
 #' @param fillNA Value to fill LD matrix NAs with.
 #' @param remove_tmps Remove all intermediate files
-#' like VCF, npz, and plink files.
+#' like \emph{vcf}, \emph{npz}, and \emph{plink} files.
 #' @param as_sparse Convert the LD matrix to a sparse matrix.
 #' @param leadSNP_LD_block Only return SNPs within the same LD block
 #' as the lead SNP (the SNP with the smallest p-value).
