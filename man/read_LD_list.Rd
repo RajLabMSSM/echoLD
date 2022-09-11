@@ -4,14 +4,16 @@
 \alias{read_LD_list}
 \title{Read LD list}
 \usage{
-read_LD_list(RDS_path, query_dat, verbose = TRUE)
+read_LD_list(LD_path, query_dat, as_sparse = TRUE, verbose = TRUE)
 }
 \arguments{
-\item{RDS_path}{Path to saved LD matrix.}
-
 \item{query_dat}{Query data.frame.}
 
+\item{as_sparse}{Convert the LD matrix to a sparse matrix.}
+
 \item{verbose}{Print messages.}
+
+\item{RDS_path}{Path to saved LD matrix.}
 }
 \value{
 LD list with 3 elements.

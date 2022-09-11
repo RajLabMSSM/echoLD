@@ -4,7 +4,20 @@
 
 - New function:
     - `vcf_to_plink`
+- New exports:
+    - `readSparse`
+    - `saveSparse`
+    - `get_LD_vcf`
+    - `get_LD_matrix`
+    - `r2_to_r`
+    - `to_sparse`
+- Enabled reading of pre-computed matrices stored in various file formats,
+    both from local and remote files. 
+    
 
+## Bug fixes
+
+* Pass `query_genome` to `get_LD_vcf()` and `get_LD_matrix`.
 
 # echoLD 0.99.6
 

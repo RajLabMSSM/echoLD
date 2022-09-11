@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_LD_blocks.R
 \name{get_LD_blocks}
 \alias{get_LD_blocks}
-\title{Identify the LD block in which the lead SNP resides}
+\title{Get LD blocks}
 \source{
 \href{https://github.com/pneuvial/adjclust}{adjclust GitHub}
 }
@@ -18,7 +18,9 @@ get_LD_blocks(
 \arguments{
 \item{query_dat}{SNP-level data table.}
 
-\item{ss}{\pkg{snpStats} object or LD matrix (containing r or r^2 values).}
+\item{ss}{\pkg{snpStats} object or LD matrix containing 
+\ifelse{html}{\out{r}}{\eqn{r}} or 
+\ifelse{html}{\out{r<sup>2</sup>}}{\eqn{r^2}} values.}
 
 \item{stats}{a character vector specifying the linkage disequilibrium
 measures to be calculated (using the \code{\link[snpStats:ld]{ld}}
@@ -31,8 +33,9 @@ capushe selection. See \code{\link[capushe]{DDSE}} for further details}
 \item{verbose}{Print messages.}
 }
 \value{
-A list with the input data and LD matrix (r^2),
+A list with the input data and LD matrix 
+(\ifelse{html}{\out{r<sup>2</sup>}}{\eqn{r^2}}).
 }
 \description{
-Identify the LD block in which the lead SNP resides
+Identify the LD block in which the lead SNP resides.
 }

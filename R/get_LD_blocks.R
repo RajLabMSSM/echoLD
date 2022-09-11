@@ -1,10 +1,13 @@
-#' Identify the LD block in which the lead SNP resides
-#'
-#'
-#' @return A list with the input data and LD matrix (r^2),
+#' Get LD blocks
+#' 
+#' Identify the LD block in which the lead SNP resides.
+#' @return A list with the input data and LD matrix 
+#' (\ifelse{html}{\out{r<sup>2</sup>}}{\eqn{r^2}}).
 #'
 #' @param query_dat SNP-level data table.
-#' @param ss \pkg{snpStats} object or LD matrix (containing r or r^2 values).
+#' @param ss \pkg{snpStats} object or LD matrix containing 
+#' \ifelse{html}{\out{r}}{\eqn{r}} or 
+#' \ifelse{html}{\out{r<sup>2</sup>}}{\eqn{r^2}} values.
 #' @param verbose Print messages.
 #' @inheritParams adjclust::snpClust
 #' @inheritParams adjclust::select

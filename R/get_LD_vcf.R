@@ -1,62 +1,64 @@
-#' Compute LD from 1000 Genomes
+#' Compute LD from VCF file
 #'
-#' Downloads a subset vcf of the 1KG database that matches
+#' Imports a subset of a local or remote VCF file that matches
 #'  your locus coordinates. Then uses \link[snpStats]{ld}
-#'   to calculate LD on the fly.
-#'
-#' This approach is taken, because other API query tools have
-#' limitations with the window size being queried.
-#' This approach does not have this limitations,
-#' allowing you to fine-map loci more completely.
-#'
-#' @param fillNA When pairwise LD (r) between two SNPs is \code{NA},
+#'   to calculate LD on the fly. 
+#' @param stats LD stats to r
+#' @param fillNA When pairwise LD between two SNPs is \code{NA},
 #' replace with 0.
 #' @inheritParams get_LD
 #' @inheritParams echotabix::query_vcf
+#' @inheritParams echotabix::query
+#' @inheritParams snpStats::ld
 #'
-#' @examples
-#' \dontrun{
+#' @family LD
+#' @export
+#' @importFrom echotabix query_vcf
+#' @importFrom VariantAnnotation genotypeToSnpMatrix
+#' @examples  
 #' query_dat <-  echodata::BST1[seq(1, 50), ]
 #' locus_dir <- echodata::locus_dir
 #' locus_dir <- file.path(tempdir(), locus_dir) 
 #' LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",
 #'     package = "echodata"
 #' )
-#' LD_list <- get_LD_custom(
+#' LD_list <- get_LD_vcf(
 #'     locus_dir = locus_dir,
-#'     query_dat = query_dat
-#'     LD_reference = LD_reference
-#' )
-#' }
-#' @family LD
-#' @keywords internal
-#' @importFrom echotabix query_vcf
-get_LD_custom <- function(locus_dir = tempdir(),
-                          query_dat,
-                          LD_reference,
-                          target_genome = "GRCh37",
-                          superpopulation = NULL,
-                          samples = NULL,
-                          local_storage = NULL,
-                          leadSNP_LD_block = FALSE,
-                          force_new = FALSE,
-                          force_new_MAF = FALSE,
-                          fillNA = 0,
-                          stats = "R",
-                          as_sparse = TRUE,
-                          remove_tmps = TRUE,
-                          conda_env = "echoR_mini",
-                          verbose = TRUE) {
+#'     query_dat = query_dat,
+#'     LD_reference = LD_reference) 
+get_LD_vcf <- function(locus_dir = tempdir(),
+                       query_dat,
+                       LD_reference,
+                       query_genome = "hg19",
+                       target_genome = "hg19",
+                       superpopulation = NULL,
+                       samples = NULL, 
+                       overlapping_only = TRUE,
+                       leadSNP_LD_block = FALSE,
+                       force_new = FALSE,
+                       force_new_MAF = FALSE,
+                       fillNA = 0,
+                       stats = "R",
+                       as_sparse = TRUE,
+                       remove_tmps = TRUE,
+                       nThread = 1,
+                       conda_env = "echoR_mini",
+                       verbose = TRUE) {
     
     messager("Using custom VCF as LD reference panel.", v = verbose) 
-    target_path <- LD_reference
+    target_path <- LD_reference  
     #### Query ####
-    vcf <- echotabix::query_vcf(
+    vcf <- echotabix::query(
         query_granges = query_dat,
         target_path = target_path, 
+        query_genome = query_genome,
         target_genome = target_genome,
+        target_format = "vcf",
         samples = samples,
-        force_new = force_new,
+        as_datatable = FALSE,
+        query_force_new = force_new,
+        overlapping_only = overlapping_only,
+        nThread = nThread,
         conda_env = conda_env,
         verbose = verbose
     )
@@ -73,7 +75,7 @@ get_LD_custom <- function(locus_dir = tempdir(),
         verbose = verbose
     )
     #### Filter out SNPs not in the same LD block as the lead SNP ####
-    if (leadSNP_LD_block) {
+    if (isTRUE(leadSNP_LD_block)) {
         dat_LD <- get_leadsnp_block(
             query_dat = query_dat,
             ss = ss,

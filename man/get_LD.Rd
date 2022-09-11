@@ -45,6 +45,8 @@ European-decent subset of UK Biobank (genome build: hg19).}
 \item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
 to compute LD matrix from 
 (genome build: defined by user with \code{target_genome}).}
+\item{"<matrix_path>" : }{User-supplied path to a pre-computed LD matrix   
+(genome build: defined by user with \code{target_genome}).}
 }}
 
 \item{query_genome}{Genome build of the \code{query_dat}.}
@@ -118,8 +120,7 @@ to the genome build of the target LD panel before query is performed.
 }
 \examples{
 query_dat <- echodata::BST1[seq(1, 50), ] 
-locus_dir <- file.path(tempdir(), echodata::locus_dir) 
-
+locus_dir <- file.path(tempdir(), echodata::locus_dir)  
 LD_list <- echoLD::get_LD(
     locus_dir = locus_dir,
     query_dat = query_dat,
@@ -133,7 +134,8 @@ Other LD:
 \code{\link{get_LD_1KG_download_vcf}()},
 \code{\link{get_LD_1KG}()},
 \code{\link{get_LD_UKB}()},
-\code{\link{get_LD_custom}()},
+\code{\link{get_LD_matrix}()},
+\code{\link{get_LD_vcf}()},
 \code{\link{get_locus_vcf_folder}()},
 \code{\link{ldlinkr_ldproxy_batch}()},
 \code{\link{plot_LD}()},

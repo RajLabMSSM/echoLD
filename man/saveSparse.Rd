@@ -4,10 +4,21 @@
 \alias{saveSparse}
 \title{Save LD matrix as a sparse matrix}
 \usage{
-saveSparse(LD_matrix, LD_path, verbose = TRUE)
+saveSparse(LD_matrix, LD_path = tempfile(fileext = ".rds"), verbose = TRUE)
+}
+\arguments{
+\item{LD_matrix}{LD matrix to save.}
+
+\item{LD_path}{Path to save LD matrix to.}
+
+\item{verbose}{Print messages.}
 }
 \description{
 Converting LD matrices to sparse format reduces file size by half.
+}
+\examples{
+echodata::BST1_LD_matrix
+LD_path <- saveSparse(LD_matrix = LD_matrix)
 }
 \seealso{
 Other LD: 
@@ -17,7 +28,8 @@ Other LD:
 \code{\link{get_LD_1KG_download_vcf}()},
 \code{\link{get_LD_1KG}()},
 \code{\link{get_LD_UKB}()},
-\code{\link{get_LD_custom}()},
+\code{\link{get_LD_matrix}()},
+\code{\link{get_LD_vcf}()},
 \code{\link{get_LD}()},
 \code{\link{get_locus_vcf_folder}()},
 \code{\link{ldlinkr_ldproxy_batch}()},
@@ -29,4 +41,3 @@ Other LD:
 \code{\link{snpstats_get_MAF}()}
 }
 \concept{LD}
-\keyword{internal}

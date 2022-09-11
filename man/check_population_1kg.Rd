@@ -21,6 +21,8 @@ European-decent subset of UK Biobank (genome build: hg19).}
 \item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
 to compute LD matrix from 
 (genome build: defined by user with \code{target_genome}).}
+\item{"<matrix_path>" : }{User-supplied path to a pre-computed LD matrix   
+(genome build: defined by user with \code{target_genome}).}
 }}
 }
 \description{
@@ -33,7 +35,8 @@ Other LD:
 \code{\link{get_LD_1KG_download_vcf}()},
 \code{\link{get_LD_1KG}()},
 \code{\link{get_LD_UKB}()},
-\code{\link{get_LD_custom}()},
+\code{\link{get_LD_matrix}()},
+\code{\link{get_LD_vcf}()},
 \code{\link{get_LD}()},
 \code{\link{get_locus_vcf_folder}()},
 \code{\link{ldlinkr_ldproxy_batch}()},

@@ -17,6 +17,8 @@
 #' \item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
 #' to compute LD matrix from 
 #' (genome build: defined by user with \code{target_genome}).}
+#' \item{"<matrix_path>" : }{User-supplied path to a pre-computed LD matrix   
+#' (genome build: defined by user with \code{target_genome}).}
 #' }
 #' @param query_genome Genome build of the \code{query_dat}.
 #' @param target_genome Genome build of the LD panel. 
@@ -57,8 +59,7 @@
 #' @importFrom echodata mungesumstats_to_echolocatoR
 #' @examples
 #' query_dat <- echodata::BST1[seq(1, 50), ] 
-#' locus_dir <- file.path(tempdir(), echodata::locus_dir) 
-#'
+#' locus_dir <- file.path(tempdir(), echodata::locus_dir)  
 #' LD_list <- echoLD::get_LD(
 #'     locus_dir = locus_dir,
 #'     query_dat = query_dat,
@@ -86,6 +87,8 @@ get_LD <- function(query_dat,
     # echoverseTemplate:::args2vars(get_LD)
     
     LD_reference <- LD_reference[1]
+    LD_ref_type <- LD_reference_options(LD_reference = LD_reference, 
+                                        verbose = verbose)
     RDS_path <- get_rds_path(
         locus_dir = locus_dir,
         LD_reference = LD_reference
@@ -99,10 +102,10 @@ get_LD <- function(query_dat,
     } 
     #### Import existing LD ####
     if (file.exists(RDS_path) & (isFALSE(force_new_LD))) {
-        LD_list <- read_LD_list(RDS_path=RDS_path,
+        LD_list <- read_LD_list(LD_path=RDS_path,
                                 query_dat=query_dat,
                                 verbose=verbose)
-    } else if (tolower(LD_reference) == "ukb") {
+    } else if (LD_ref_type == "ukb") {
         #### UK Biobank ####
         LD_list <- get_LD_UKB(
             query_dat = query_dat,
@@ -119,13 +122,13 @@ get_LD <- function(query_dat,
             nThread = nThread,
             verbose = verbose
         )
-    } else if (tolower(LD_reference) %in% c("1kgphase1", "1kgphase3")) {
+    } else if (LD_ref_type=="1kg") {
         #### 1000 Genomes ####
         LD_list <- get_LD_1KG(
             locus_dir = locus_dir,
             query_dat = query_dat,
             query_genome = query_genome,
-            local_storage = local_storage,
+            local_storage = local_storage, 
             LD_reference = LD_reference,
             samples = samples,
             superpopulation = superpopulation,
@@ -136,16 +139,13 @@ get_LD <- function(query_dat,
             conda_env = conda_env,
             verbose = verbose
         )
-    } else if (any(endsWith(
-        tolower(LD_reference),
-        c(".vcf", ".vcf.gz", ".vcf.bgz")
-    ))) {
+    } else if (LD_ref_type=="vcf") {
         #### Custom vcf ####
-        LD_list <- get_LD_custom(
+        LD_list <- get_LD_vcf(
             locus_dir = locus_dir,
             query_dat = query_dat,
-            local_storage = local_storage,
             LD_reference = LD_reference,
+            query_genome = query_genome,
             target_genome = target_genome,
             samples = samples,
             superpopulation = superpopulation,
@@ -156,21 +156,17 @@ get_LD <- function(query_dat,
             conda_env = conda_env,
             verbose = verbose
         )
-    } else {
-        msg <- paste0(
-            "LD_reference input not recognized.", 
-            " Must both one of:\n",
-            paste0(" - ",
-                c(
-                    "1KGphase1", "1KGphase3", "UKB",
-                    "Path to VCF file: .vcf / .vcf.gz / .vcf.bgz",
-                    "Path to LD file: .rds / .tsv.gz / .csv.gz / .mtx.gz"
-                ),
-                collapse = "\n"
-            )
-        )
-        stop(msg)
-    }
+    } else if (LD_ref_type=="matrix"){
+        #### Custom matrix ####
+        LD_list <- get_LD_matrix(locus_dir = locus_dir,
+                                  query_dat = query_dat,
+                                  LD_reference = LD_reference,
+                                  query_genome = query_genome,
+                                  target_genome = target_genome,
+                                  fillNA = fillNA,
+                                  as_sparse = as_sparse,
+                                  verbose = verbose)
+    }  
     return(LD_list)
 }
 
