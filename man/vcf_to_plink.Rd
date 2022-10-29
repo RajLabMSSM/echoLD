@@ -18,12 +18,18 @@ vcf_to_plink(
 
 \item{output_prefix}{Specify prefix for output files.}
 
+\item{bcftools_path}{Path to \code{bedtools} executable. 
+If \code{NULL}, will automatically be downloaded with 
+\link[echoconda]{find_executables_remote}.}
+
 \item{make_bed}{Create a new binary fileset. 
 Unlike the automatic text-to-binary converters
 (which only heed chromosome filters), this supports all of
 PLINK's filtering flags.}
 
 \item{recode}{Create a new text fileset with all filters applied.}
+
+\item{verbose}{Print messages.}
 }
 \description{
 Convert a Variant Call File (VCF) to

@@ -17,7 +17,7 @@ saveSparse(LD_matrix, LD_path = tempfile(fileext = ".rds"), verbose = TRUE)
 Converting LD matrices to sparse format reduces file size by half.
 }
 \examples{
-echodata::BST1_LD_matrix
+LD_matrix <- echodata::BST1_LD_matrix
 LD_path <- saveSparse(LD_matrix = LD_matrix)
 }
 \seealso{

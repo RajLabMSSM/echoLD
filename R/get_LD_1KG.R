@@ -27,7 +27,7 @@ get_LD_1KG <- function(locus_dir,
                        local_storage = NULL,
                        leadSNP_LD_block = FALSE,
                        force_new = FALSE,
-                       force_new_MAF = FALSE,
+                       force_new_maf = FALSE,
                        fillNA = 0,
                        stats = "R",
                        as_sparse = TRUE,
@@ -65,7 +65,7 @@ get_LD_1KG <- function(locus_dir,
     query_dat <- snpstats_get_MAF(
         query_dat = query_dat,
         ss = ss,
-        force_new_MAF = force_new_MAF,
+        force_new_maf = force_new_maf,
         verbose = verbose
     )
     #### Filter out SNPs not in the same LD block as the lead SNP ####

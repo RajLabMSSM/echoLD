@@ -133,15 +133,9 @@ get_LD_UKB <- function(query_dat,
             URL <- paste(URL, LD.prefixes, sep="/")
             messager("Importing UKB LD file directly to R from:",v = verbose)
         } 
-        #### Import LD via python function #### 
-        reticulate::source_python(
-            system.file("tools", "load_ld.py",package = "echoLD"
-        ))
-        messager("load_ld() python function input:",URL,v = verbose)
-        messager("Reading LD matrix into memory.",
-                 "This could take some time...",v = verbose)
-        server <- FALSE
-        ld.out <- tryFunc(input = URL, load_ld, server)
+        #### Import LD via python function ####  
+        ld.out <- load_ld_r(URL=URL,
+                            verbose=verbose) 
         #### LD matrix: as matrix ####
         ld_R <- ld.out[[1]]
         messager("+ Full UKB LD matrix:",
@@ -161,7 +155,7 @@ get_LD_UKB <- function(query_dat,
         if (is.null(colnames(ld_R))) colnames(ld_R) <- ld_snps$rsid
         #### As a last resort download UKB MAF ####
         if (!"MAF" %in% colnames(query_dat)) { 
-           query_dat<- get_UKB_MAF(
+           query_dat<- get_MAF_UKB(
                query_dat = query_dat,  
                 nThread = nThread,
                 download_method = download_method,

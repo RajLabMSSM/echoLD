@@ -5,7 +5,7 @@
 #' @family LD
 #' @keywords internal
 #' @importFrom data.table fread dcast.data.table data.table
-#' @importFrom dplyr %>%
+#' @importFrom dplyr 
 read_ld_table <- function(ld.path,
                           snp.subset = FALSE,
                           fillNA = 0,
@@ -30,8 +30,8 @@ read_ld_table <- function(ld.path,
         }
     )
     ld.cast <- subset(ld.cast, SNP_B != ".", select = -`.`)
-    ld.mat <- data.frame(ld.cast, row.names = ld.cast$SNP_B) %>%
-        data.table() %>%
+    ld.mat <- data.frame(ld.cast, row.names = ld.cast$SNP_B) |>
+        data.table() |>
         as.matrix()
     # ld.mat[1:10,1:10]
     ld.mat <- fill_NA(

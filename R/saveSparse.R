@@ -7,7 +7,7 @@
 #' @family LD
 #' @export 
 #' @examples 
-#' echodata::BST1_LD_matrix
+#' LD_matrix <- echodata::BST1_LD_matrix
 #' LD_path <- saveSparse(LD_matrix = LD_matrix)
 saveSparse <- function(LD_matrix,
                        LD_path=tempfile(fileext = ".rds"),
@@ -21,6 +21,7 @@ saveSparse <- function(LD_matrix,
     # messager("Sparse size:")
     # print(object.size(LD_sparse),units="auto") 
     messager("Saving sparse LD matrix ==>", LD_path, v = verbose)
-    saveRDS(LD_sparse, LD_path)
+    saveRDS(object = LD_sparse, 
+            file = LD_path)
     return(LD_path)
 }

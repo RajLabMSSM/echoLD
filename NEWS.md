@@ -1,3 +1,22 @@
+# echoLD 0.99.8
+
+## New features 
+
+* `get_UKB_MAF` --> `get_MAF_UKB`
+* `get_LD_UKB`:
+    - New subfunction `load_ld_r``tryFun`: 
+    - Remove `tryFun` function. 
+
+## Bug fixes
+
+* Added `echoconda` to *Remotes*: `github::RajLabMSSM/echoconda`
+* Remote `GenomeInfoDb` Import (no longer used here).  
+* Fix GHA: @master --> @v2  
+* Fix `saveSparse` example. 
+* Fix `filter_LD` unit test. 
+* Fix `download_UKB_LD`: Update `downloadR::downloader` arg 
+    from `output_path` --> `output_dir` 
+
 # echoLD 0.99.7
 
 ## New features

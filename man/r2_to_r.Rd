@@ -8,7 +8,7 @@
 r2_to_r(LD_matrix, LD_path = "", stats = "R", verbose = TRUE)
 }
 \arguments{
-\item{LD_matrix}{}
+\item{LD_matrix}{LD matrix.}
 
 \item{LD_path}{[Optional] Path where LD matrix is stored. This is used to 
 determine whether the matrix has already been converted to absolute 

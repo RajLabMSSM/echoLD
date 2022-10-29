@@ -52,11 +52,12 @@ test_that("get_LD works", {
     #### UK Biobank ####
     LD_ukb <- echoLD::get_LD(locus_dir = locus_dir,
                              query_dat = query_dat,
+                             download_method = "download.file",
                              LD_reference = "UKB")
     run_tests(LD_ukb)
 
     #### Local vcf file ####
-    query_dat <-  echodata::BST1[seq(1, 50), ]
+    query_dat <- echodata::BST1[seq(1, 50), ]
     locus_dir <- echodata::locus_dir
     locus_dir <- file.path(tempdir(), locus_dir)
     LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",

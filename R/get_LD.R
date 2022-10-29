@@ -87,8 +87,8 @@ get_LD <- function(query_dat,
                    conda_env = "echoR_mini",
                    nThread = 1) {
     
-    # echoverseTemplate:::source_all(); 
-    # echoverseTemplate:::args2vars(get_LD)
+    # echoverseTemplate:::source_all();
+    # echoverseTemplate:::args2vars(echoLD:::get_LD)
     
     LD_reference <- LD_reference[1]
     LD_ref_type <- LD_reference_options(LD_reference = LD_reference, 
@@ -109,7 +109,7 @@ get_LD <- function(query_dat,
         LD_list <- read_LD_list(LD_path=RDS_path,
                                 query_dat=query_dat,
                                 verbose=verbose)
-    } else if (LD_ref_type == "ukb") {
+    } else if (LD_ref_type=="ukb") {
         #### UK Biobank ####
         LD_list <- get_LD_UKB(
             query_dat = query_dat,

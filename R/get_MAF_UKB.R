@@ -4,7 +4,7 @@
 #' download MAF from UK Biobank and use that instead.
 #'
 #' @param query_dat SNP-level data.
-#' @param output_path Path to store UKB_MAF file in.
+#' @param output_dir Path to store UKB_MAF file in.
 #' @param force_new_maf Download UKB_MAF file again.
 #' @param verbose Print messages.
 #' @inheritParams downloadR::downloader
@@ -13,17 +13,17 @@
 #' @source \href{http://biobank.ctsu.ox.ac.uk/showcase/field.cgi?id=22801}{UKB}
 #' @export
 #' @importFrom data.table fread merge.data.table data.table
-#' @importFrom dplyr %>% group_by slice rename
+#' @importFrom dplyr group_by slice rename
 #' @importFrom tools R_user_dir
 #' @importFrom downloadR downloader
 #' 
 #' @examples
 #' query_dat<- echodata::BST1
 #' query_dat$MAF <- NULL
-#' dat2 <- echoLD::get_UKB_MAF(query_dat = query_dat)
-get_UKB_MAF <- function(query_dat,
-                        output_path = tools::R_user_dir(package = "echoLD",
-                                                        which = "cache"),
+#' dat2 <- echoLD::get_MAF_UKB(query_dat = query_dat)
+get_MAF_UKB <- function(query_dat,
+                        output_dir = tools::R_user_dir(package = "echoLD",
+                                                       which = "cache"),
                         force_new_maf = FALSE,
                         download_method = "axel",
                         nThread = 1,
@@ -41,10 +41,10 @@ get_UKB_MAF <- function(query_dat,
         ),
         chrom, "_v3.txt"
     )
-    out_file <- file.path(output_path, basename(input_url))
+    out_file <- file.path(output_dir, basename(input_url))
     if (file.exists(out_file)) {
         if (file.size(out_file) == 0) {
-            messager("+ UKB MAF:: Removing empty UKB MAF ref file.")
+            messager("+ UKB MAF:: Removing empty UKB MAF ref file.",v=verbose)
             file.remove(out_file)
         }
     }
@@ -53,7 +53,7 @@ get_UKB_MAF <- function(query_dat,
     } else {
         out_file <- downloadR::downloader(
             input_url = input_url,
-            output_path = output_path,
+            output_dir = output_dir,
             background = FALSE,
             force_overwrite = force_new_maf,
             download_method = download_method,
@@ -76,10 +76,10 @@ get_UKB_MAF <- function(query_dat,
     }
     merged_dat <- data.table::merge.data.table(query_dat, maf,
         by = "POS"
-    ) %>%
+    ) |>
         # Make sure each SNP just appears once
-        dplyr::group_by(SNP) %>%
-        dplyr::slice(1) %>%
+        dplyr::group_by(SNP) |>
+        dplyr::slice(1) |>
         data.table::data.table()
     return(merged_dat)
 }

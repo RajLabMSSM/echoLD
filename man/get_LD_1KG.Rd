@@ -14,7 +14,7 @@ get_LD_1KG(
   local_storage = NULL,
   leadSNP_LD_block = FALSE,
   force_new = FALSE,
-  force_new_MAF = FALSE,
+  force_new_maf = FALSE,
   fillNA = 0,
   stats = "R",
   as_sparse = TRUE,

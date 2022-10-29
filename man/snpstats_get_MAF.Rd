@@ -8,7 +8,7 @@
 snpStats Bioconductor page}
 }
 \usage{
-snpstats_get_MAF(query_dat, ss, force_new_MAF = FALSE, verbose = TRUE)
+snpstats_get_MAF(query_dat, ss, force_new_maf = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{LD_folder}{Locus-specific LD output folder.}

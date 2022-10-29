@@ -11,12 +11,12 @@
 #' @importFrom data.table merge.data.table
 snpstats_get_MAF <- function(query_dat,
                              ss,
-                             force_new_MAF = FALSE,
+                             force_new_maf = FALSE,
                              verbose = TRUE) {
     # Avoid confusing checks
     MAF <- NULL
 
-    if (!"MAF" %in% colnames(query_dat) | force_new_MAF) {
+    if (!"MAF" %in% colnames(query_dat) | force_new_maf) {
         messager(
             "echoLD::snpStats:: Filling `MAF` column with MAF from LD panel.",
             v = verbose

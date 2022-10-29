@@ -1,4 +1,4 @@
-test_that("get_UKB_MAF works", {
+test_that("get_MAF_UKB works", {
     
    query_dat<- echodata::BST1
     query_dat$MAF <- NULL
@@ -11,16 +11,16 @@ test_that("get_UKB_MAF works", {
     }
     
     #### First try ####
-    query_dat2 <- echoLD::get_UKB_MAF(query_dat = query_dat)
+    query_dat2 <- echoLD::get_MAF_UKB(query_dat = query_dat)
     run_tests(query_dat = query_dat,
               query_dat2 = query_dat2)
      
     #### Test whether cached UKB MAF file is used ####
-    dat3 <- echoLD::get_UKB_MAF(query_dat = query_dat) 
+    dat3 <- echoLD::get_MAF_UKB(query_dat = query_dat) 
     run_tests(query_dat = query_dat,
               query_dat2 = dat3)
     out <- testthat::capture_messages(
-        code = echoLD::get_UKB_MAF(query_dat = query_dat)
+        code = echoLD::get_MAF_UKB(query_dat = query_dat)
     )
     testthat::expect_equal(out[2],
                            "+ UKB MAF:: Importing pre-existing file\n")

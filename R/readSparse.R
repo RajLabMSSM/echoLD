@@ -24,7 +24,8 @@ readSparse <- function(LD_path,
                        ...) {
     
     LD_ref_type <- LD_reference_options(LD_reference = LD_path, 
-                                        as_subgroups = TRUE)
+                                        as_subgroups = TRUE,
+                                        verbose = TRUE)
     #### Read matrix ####
     if(LD_ref_type=="r"){
         ld_mat <- downloadR::load_rdata(fileName = LD_path,

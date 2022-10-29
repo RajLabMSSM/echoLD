@@ -29,7 +29,7 @@ download_UKB_LD <- function(LD.prefixes,
             out.file <- downloadR::downloader(
                 input_url = furl,
                 download_method = download_method,
-                output_path = file.path(locus_dir, "LD"),
+                output_dir = file.path(locus_dir, "LD"),
                 background = background,
                 conda_env = conda_env,
                 nThread = nThread,

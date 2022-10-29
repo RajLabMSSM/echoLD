@@ -4,11 +4,15 @@
 #'  \href{https://www.cog-genomics.org/plink/}{PLINK} format. 
 #' @param vcf Specify full name of .vcf or .vcf.gz file.
 #' @param output_prefix Specify prefix for output files.
+#' @param bcftools_path Path to \code{bedtools} executable. 
+#' If \code{NULL}, will automatically be downloaded with 
+#' \link[echoconda]{find_executables_remote}. 
 #' @param make_bed  Create a new binary fileset. 
 #'  Unlike the automatic text-to-binary converters
 #'  (which only heed chromosome filters), this supports all of
 #'  PLINK's filtering flags.
 #' @param recode Create a new text fileset with all filters applied. 
+#' @param verbose Print messages.
 
 #' @export
 #' @importFrom echoconda find_executables_remote

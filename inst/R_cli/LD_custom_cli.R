@@ -19,7 +19,7 @@
 #' #'     locus_dir = locus_dir
 #' #' )
 #' #' }
-#' #' @importFrom dplyr %>% rename mutate
+#' #' @importFrom dplyr  rename mutate
 #' LD_custom_cli <- function(LD_reference,
 #'                           superpopulation = NULL,
 #'                           fullSS_genome_build = "hg19",
@@ -48,8 +48,8 @@
 #'             ## If the query was originally in hg38,
 #'             # that means it's already been lifted over to hg19.
 #'             # So you can use the old stored POS.hg38 when the
-#'            query_dat<-query_dat%>%
-#'                 dplyr::rename(POS.hg19 = POS) %>%
+#'            query_dat<-query_dat|>
+#'                 dplyr::rename(POS.hg19 = POS) |>
 #'                 dplyr::rename(POS = POS.hg38)
 #'         } else {
 #'             ## If the query was originally in hg19,
@@ -121,7 +121,7 @@
 #'    query_dat<- snpstats_get_MAF(
 #'        query_dat= query_dat
 #'         ss = ss,
-#'         force_new_MAF = FALSE,
+#'         force_new_maf = FALSE,
 #'         verbose = verbose
 #'     )
 #'     # Filter out SNPs not in the same LD block as the lead SNP

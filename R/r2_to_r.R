@@ -8,7 +8,7 @@
 #' \ifelse{html}{\out{r<sup>2</sup>}}{\eqn{r^2}}
 #'  can only be converted to \emph{absolute} 
 #'  \ifelse{html}{\out{r}}{\eqn{r}}.
-#' @param LD_matrix 
+#' @param LD_matrix LD matrix. 
 #' @param LD_path [Optional] Path where LD matrix is stored. This is used to 
 #' determine whether the matrix has already been converted to absolute 
 #'  \ifelse{html}{\out{r}}{\eqn{r}} based on the presence of the 
@@ -26,6 +26,7 @@ r2_to_r <- function(LD_matrix,
                     stats="R",
                     verbose=TRUE){
     
+    messager("Checking LD metric (r/r2).",v=verbose)
     stats <- tolower(stats)[[1]]
     if(sum(LD_matrix<0)==0 && 
        stats=="r" &&

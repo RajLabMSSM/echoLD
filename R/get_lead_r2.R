@@ -13,7 +13,7 @@
 #' @returns \link[data.table]{data.table} with the columns r and r2.
 #'
 #' @export
-#' @importFrom dplyr %>% mutate
+#' @importFrom dplyr  mutate
 #' @importFrom data.table as.data.table merge.data.table
 #' 
 #' @examples
@@ -58,12 +58,12 @@ get_lead_r2 <- function(dat,
                 "Coloring SNPs by LD with lead SNP.",
                 v = verbose
             )
-            LD_sub <- LD_matrix[, LD_SNP] %>%
-                # subset(LD_matrix, select=LD_SNP) %>%
-                # subset(select = -c(r,r2)) %>%
-                data.table::as.data.table(keep.rownames  =  TRUE) %>%
-                `colnames<-`(c("SNP", "r")) %>%
-                dplyr::mutate(r2 = r^2) %>%
+            LD_sub <- LD_matrix[, LD_SNP] |>
+                # subset(LD_matrix, select=LD_SNP) |>
+                # subset(select = -c(r,r2)) |>
+                data.table::as.data.table(keep.rownames  =  TRUE) |>
+                `colnames<-`(c("SNP", "r")) |>
+                dplyr::mutate(r2 = r^2) |>
                 data.table::as.data.table()
            dat<- data.table::merge.data.table(dat, LD_sub,
                 by = "SNP",
@@ -72,9 +72,9 @@ get_lead_r2 <- function(dat,
         }
     }
     if (LD_format == "df") {
-        LD_sub <- subset(LD_matrix, select = c("SNP", LD_SNP)) %>%
-            `colnames<-`(c("SNP", "r")) %>%
-            dplyr::mutate(r2 = r^2) %>%
+        LD_sub <- subset(LD_matrix, select = c("SNP", LD_SNP)) |>
+            `colnames<-`(c("SNP", "r")) |>
+            dplyr::mutate(r2 = r^2) |>
             data.table::as.data.table()
        dat<- data.table::merge.data.table(dat, LD_sub,
             by = "SNP",

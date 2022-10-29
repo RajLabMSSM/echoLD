@@ -15,7 +15,7 @@ get_LD_vcf(
   overlapping_only = TRUE,
   leadSNP_LD_block = FALSE,
   force_new = FALSE,
-  force_new_MAF = FALSE,
+  force_new_maf = FALSE,
   fillNA = 0,
   stats = "R",
   as_sparse = TRUE,
@@ -72,6 +72,8 @@ as the lead SNP (the SNP with the smallest p-value).}
 
 \item{force_new}{Force the creation of a new VCF subset file
 even if one exists.}
+
+\item{force_new_maf}{Download UKB_MAF file again.}
 
 \item{fillNA}{When pairwise LD between two SNPs is \code{NA},
 replace with 0.}

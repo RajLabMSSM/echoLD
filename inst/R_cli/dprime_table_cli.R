@@ -28,7 +28,7 @@
 #'     # # Awk method: theoretically faster?
 #'     # if(min_Dprime==F){Dprime = -1}else{Dprime=min_Dprime}
 #'     # if(min_r2==F){r = -1}else{r = round(sqrt(min_r2),2) }
-#'     # columns <- data.table::fread(file.path(LD_folder, "plink.ld"), nrows = 0) %>% colnames()
+#'     # columns <- data.table::fread(file.path(LD_folder, "plink.ld"), nrows = 0) |> colnames()
 #'     # col_dict <- setNames(1:length(columns), columns)
 #'     # awk_cmd <- paste("awk -F \"\t\" 'NR==1{print $0}{ if(($",col_dict["DP"]," >= ",Dprime,")",
 #'     #                  " && ($",col_dict["R"]," >= ",r,")) { print } }' ",file.path(LD_folder, "plink.ld"),

@@ -34,7 +34,7 @@ save_LD_matrix <- function(LD_matrix,
         LD_reference = basename(LD_reference)
     )
     
-    if (subset_common) {
+    if (isTRUE(subset_common)) {
         sub.out <- subset_common_snps(
             LD_matrix = LD_matrix,
             fillNA = fillNA,
@@ -50,7 +50,7 @@ save_LD_matrix <- function(LD_matrix,
         v = verbose
     )
     dir.create(dirname(RDS_path), showWarnings = FALSE, recursive = TRUE)
-    if (as_sparse) {
+    if (isTRUE(as_sparse)) {
         saveSparse(
             LD_matrix = LD_matrix,
             LD_path = RDS_path,

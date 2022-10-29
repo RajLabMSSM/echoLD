@@ -7,6 +7,7 @@
 #' @param fillNA When pairwise LD between two SNPs is \code{NA},
 #' replace with 0.
 #' @inheritParams get_LD
+#' @inheritParams get_MAF_UKB
 #' @inheritParams echotabix::query_vcf
 #' @inheritParams echotabix::query
 #' @inheritParams snpStats::ld
@@ -36,7 +37,7 @@ get_LD_vcf <- function(locus_dir = tempdir(),
                        overlapping_only = TRUE,
                        leadSNP_LD_block = FALSE,
                        force_new = FALSE,
-                       force_new_MAF = FALSE,
+                       force_new_maf = FALSE,
                        fillNA = 0,
                        stats = "R",
                        as_sparse = TRUE,
@@ -71,7 +72,7 @@ get_LD_vcf <- function(locus_dir = tempdir(),
     query_dat <- snpstats_get_MAF(
         query_dat = query_dat,
         ss = ss,
-        force_new_MAF = force_new_MAF,
+        force_new_maf = force_new_maf,
         verbose = verbose
     )
     #### Filter out SNPs not in the same LD block as the lead SNP ####

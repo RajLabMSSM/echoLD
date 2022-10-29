@@ -25,7 +25,7 @@ leadsnp_block_plink <- function(leadSNP,
             }
         },
         leadSNP = leadSNP
-    ) %>% unlist()
+    ) |> unlist()
     messager("Number of SNPs in LD block =", length(block_snps))
     return(block_snps)
 }
