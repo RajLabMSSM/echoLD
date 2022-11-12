@@ -27,7 +27,7 @@ get_MAF_UKB <- function(query_dat,
                         force_new_maf = FALSE,
                         download_method = "axel",
                         nThread = 1,
-                        verbose = TRUE,
+                        verbose = 1,
                         conda_env = "echoR_mini") {
     # Avoid confusing checks
     POS <- MAF <- SNP <- NULL;
