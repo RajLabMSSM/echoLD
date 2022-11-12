@@ -95,7 +95,7 @@ get_LD_UKB <- function(query_dat,
                 download_method %in% method_opts) {
                 messager(
                     "Downloading full .gz/.npz UKB files",
-                    "and saving to disk."
+                    "and saving to disk.", v = verbose)
                 )
                 URL <- download_UKB_LD(
                     LD.prefixes = LD.prefixes,
