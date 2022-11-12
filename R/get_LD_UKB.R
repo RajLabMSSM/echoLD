@@ -44,7 +44,7 @@ get_LD_UKB <- function(query_dat,
                        as_sparse = TRUE,
                        conda_env = "echoR_mini",
                        remove_tmps = TRUE,
-                       verbose = TRUE) {
+                       verbose = 1) {
     
     # echoverseTemplate:::source_all();
     # echoverseTemplate:::args2vars(get_LD_UKB)
@@ -95,7 +95,7 @@ get_LD_UKB <- function(query_dat,
                 download_method %in% method_opts) {
                 messager(
                     "Downloading full .gz/.npz UKB files",
-                    "and saving to disk."
+                    "and saving to disk.", v = verbose)
                 )
                 URL <- download_UKB_LD(
                     LD.prefixes = LD.prefixes,
