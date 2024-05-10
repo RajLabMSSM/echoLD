@@ -1,7 +1,6 @@
 #' Save LD matrix
 #'
 #' Save an LD matrix after initial pre-processing.
-#'
 #' @source 
 #' \code{
 #' dat <- echodata::BST1
@@ -19,6 +18,7 @@
 #'     locus_dir = locus_dir,
 #'     LD_reference = "custom_vcf")
 #' }
+#' @inheritParams get_LD
 #' @family LD
 #' @keywords internal
 save_LD_matrix <- function(LD_matrix,

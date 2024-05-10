@@ -45,6 +45,8 @@
 #' @param leadSNP_LD_block Only return SNPs within the same LD block
 #' as the lead SNP (the SNP with the smallest p-value).
 #' @param force_new_LD Force new LD subset.
+#' @param subset_common Subset \code{LD_matrix} and \code{dat} to only the 
+#'  SNPs that are common to them both.
 #'
 #' @inheritParams echotabix::query_vcf
 #' @inheritParams downloadR::downloader
@@ -83,6 +85,7 @@ get_LD <- function(query_dat,
                    verbose = TRUE,
                    remove_tmps = TRUE,
                    as_sparse = TRUE,
+                   subset_common = TRUE,
                    download_method = "axel",
                    conda_env = "echoR_mini",
                    nThread = 1) {
@@ -124,7 +127,8 @@ get_LD <- function(query_dat,
             conda_env = conda_env,
             remove_tmps = remove_tmps,
             nThread = nThread,
-            verbose = verbose
+            verbose = verbose,
+            subset_common = subset_common
         )
     } else if (LD_ref_type=="1kg") {
         #### 1000 Genomes ####
@@ -141,7 +145,8 @@ get_LD <- function(query_dat,
             as_sparse = as_sparse,
             remove_tmps = remove_tmps,
             conda_env = conda_env,
-            verbose = verbose
+            verbose = verbose,
+            subset_common = subset_common
         )
     } else if (LD_ref_type=="vcf") {
         #### Custom vcf ####
@@ -158,7 +163,8 @@ get_LD <- function(query_dat,
             as_sparse = as_sparse,
             remove_tmps = remove_tmps,
             conda_env = conda_env,
-            verbose = verbose
+            verbose = verbose,
+            subset_common = subset_common
         )
     } else if (LD_ref_type=="matrix"){
         #### Custom matrix ####

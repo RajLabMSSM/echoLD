@@ -4,10 +4,12 @@ test_that("get_LD works", {
     locus_dir <- echodata::locus_dir
     locus_dir <- file.path(tempdir(), locus_dir) 
 
-    run_tests <- function(LD_list) {
+    run_tests <- function(LD_list, subset_common=TRUE) {
         testthat::expect_length(LD_list, 3)
         testthat::expect_equal(nrow(LD_list$LD), ncol(LD_list$LD))
-        testthat::expect_lte(nrow(LD_list$LD), nrow(LD_list$DT))
+        if(subset_common){
+            testthat::expect_lte(nrow(LD_list$LD), nrow(LD_list$DT))    
+        }
         testthat::expect_gte(nrow(LD_list$LD), 40)
         testthat::expect_true(methods::is(LD_list$path, "character"))
         testthat::expect_true(file.exists(LD_list$path))
@@ -50,11 +52,13 @@ test_that("get_LD works", {
     run_tests(LD_custom)
 
     #### UK Biobank ####
+    query_dat_ukb <- data.table::data.table(CHR=10,POS=c(135000001,135001001),
+                                            SNP=c( "rs1234_FAKE"))
     LD_ukb <- echoLD::get_LD(locus_dir = locus_dir,
-                             query_dat = query_dat,
-                             download_method = "download.file",
+                             query_dat = query_dat_ukb,
+                             subset_common = FALSE,
                              LD_reference = "UKB")
-    run_tests(LD_ukb)
+    run_tests(LD_ukb, subset_common = FALSE)
 
     #### Local vcf file ####
     query_dat <- echodata::BST1[seq(1, 50), ]

@@ -1,3 +1,13 @@
+# echoLD 0.99.10
+
+## New features 
+
+* `get_LD`: pass up `subset_common` arg
+
+## Bug fixes
+
+* Fix UKB LD now that AlkesGroup moved data to AWS S3 bucket: #12
+
 # echoLD 0.99.9
 
 ## New features 

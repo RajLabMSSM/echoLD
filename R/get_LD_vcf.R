@@ -41,6 +41,7 @@ get_LD_vcf <- function(locus_dir = tempdir(),
                        fillNA = 0,
                        stats = "R",
                        as_sparse = TRUE,
+                       subset_common = TRUE,
                        remove_tmps = TRUE,
                        nThread = 1,
                        conda_env = "echoR_mini",
@@ -102,11 +103,11 @@ get_LD_vcf <- function(locus_dir = tempdir(),
         LD_matrix = LD_matrix,
         dat = query_dat,
         locus_dir = locus_dir,
-        subset_common = TRUE,
         fillNA = fillNA,
         LD_reference = LD_reference,
         as_sparse = as_sparse,
-        verbose = verbose
+        verbose = verbose,
+        subset_common = subset_common
     )
     #### Remove tmp files ####
     if(isTRUE(remove_tmps)){

@@ -32,6 +32,7 @@ get_LD_matrix <- function(locus_dir = tempdir(),
                           fillNA = 0,
                           stats = "R",
                           as_sparse = TRUE,
+                          subset_common = TRUE,
                           verbose = TRUE) {
     
     messager("Using custom VCF as LD reference panel.", v = verbose)  
@@ -56,11 +57,11 @@ get_LD_matrix <- function(locus_dir = tempdir(),
         LD_matrix = r2r_out$LD_matrix,
         dat = query_dat,
         locus_dir = locus_dir,
-        subset_common = TRUE,
         fillNA = fillNA,
         LD_reference = paste("custom",r2r_out$LD_metric,sep="_"),
         as_sparse = as_sparse,
-        verbose = verbose
+        verbose = verbose,
+        subset_common = subset_common
     ) 
     return(LD_list)
 }

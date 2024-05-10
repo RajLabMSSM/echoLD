@@ -4,37 +4,30 @@
 #' pre-computed in 3Mb windows by the Alkes Price lab (Broad Institute).
 #' 
 #' @inheritParams get_LD
-#' 
+#' @inheritParams downloadR::aws
+#' @inheritDotParams downloadR::aws
 #' @keywords internal
 #' @importFrom downloadR downloader
 download_UKB_LD <- function(LD.prefixes,
-                            locus_dir,
-                            alkes_url =
-                                paste(
-                                    "https://data.broadinstitute.org",
-                                    "alkesgroup/UKBB_LD",
-                                    sep="/"
-                                ),
+                            locus_dir, 
+                            bucket="s3://broad-alkesgroup-ukbb-ld/", 
                             background = TRUE,
                             force_overwrite = FALSE,
-                            download_method = "axel",
-                            conda_env = "echoR_mini",
                             nThread = 1,
-                            verbose = TRUE) {
+                            verbose = TRUE,
+                            ...) { 
     for (f in LD.prefixes) {
-        gz.url <- paste(alkes_url, paste0(f, ".gz"), sep="/")
-        npz.url <- paste(alkes_url, paste0(f, ".npz"), sep="/")
-
+        gz.url <- paste0("UKBB_LD/",f, ".gz")
+        npz.url <- paste0("UKBB_LD/",f, ".npz")  
         for (furl in c(gz.url, npz.url)) {
-            out.file <- downloadR::downloader(
+            path <- file.path(locus_dir,"LD",furl)
+            out.file <- downloadR::aws(
                 input_url = furl,
-                download_method = download_method,
-                output_dir = file.path(locus_dir, "LD"),
-                background = background,
-                conda_env = conda_env,
-                nThread = nThread,
+                bucket = bucket,
+                output_path = path,
                 force_overwrite = force_overwrite,
-                verbose = verbose
+                verbose = verbose,
+                ...
             )
         }
     }

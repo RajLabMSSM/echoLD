@@ -31,6 +31,7 @@ get_LD_1KG <- function(locus_dir,
                        fillNA = 0,
                        stats = "R",
                        as_sparse = TRUE,
+                       subset_common = TRUE,
                        remove_tmps = TRUE,
                        conda_env = "echoR_mini",
                        # min_r2=FALSE,
@@ -95,11 +96,11 @@ get_LD_1KG <- function(locus_dir,
         LD_matrix = LD_matrix,
         dat = query_dat,
         locus_dir = locus_dir,
-        subset_common = TRUE,
         fillNA = fillNA,
         LD_reference = LD_reference,
         as_sparse = as_sparse,
-        verbose = verbose
+        verbose = verbose,
+        subset_common = subset_common
     )
     #### Remove tmp files ####
     if(isTRUE(remove_tmps)){

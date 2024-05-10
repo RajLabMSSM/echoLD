@@ -5,8 +5,8 @@
 \title{Download LD matrices from UK Biobank}
 \source{
 \code{
-query_dat <- echodata::BST1[seq(1, 50), ]
-locus_dir <- file.path(tempdir(), echodata::locus_dir)
+query_dat <- data.table::data.table(CHR=10,POS=c(135000001), SNP="rs1234")
+locus_dir <- file.path(tempdir(), "locus_A")
 LD_list <- echoLD:::get_LD_UKB(
     query_dat = query_dat,
     locus_dir = locus_dir)
@@ -29,6 +29,7 @@ get_LD_UKB(
   as_sparse = TRUE,
   conda_env = "echoR_mini",
   remove_tmps = TRUE,
+  subset_common = TRUE,
   verbose = TRUE
 )
 }
@@ -60,6 +61,9 @@ If \code{NULL} (default), will search all conda environments.}
 \item{remove_tmps}{Remove all intermediate files
 like \emph{vcf}, \emph{npz}, and \emph{plink} files.}
 
+\item{subset_common}{Subset \code{LD_matrix} and \code{dat} to only the 
+SNPs that are common to them both.}
+
 \item{verbose}{Print messages.}
 }
 \description{
@@ -77,11 +81,11 @@ Other LD:
 \code{\link{check_population_1kg}()},
 \code{\link{compute_LD}()},
 \code{\link{filter_LD}()},
-\code{\link{get_LD_1KG_download_vcf}()},
+\code{\link{get_LD}()},
 \code{\link{get_LD_1KG}()},
+\code{\link{get_LD_1KG_download_vcf}()},
 \code{\link{get_LD_matrix}()},
 \code{\link{get_LD_vcf}()},
-\code{\link{get_LD}()},
 \code{\link{get_locus_vcf_folder}()},
 \code{\link{ldlinkr_ldproxy_batch}()},
 \code{\link{plot_LD}()},

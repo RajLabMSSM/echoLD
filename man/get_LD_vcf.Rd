@@ -19,6 +19,7 @@ get_LD_vcf(
   fillNA = 0,
   stats = "R",
   as_sparse = TRUE,
+  subset_common = TRUE,
   remove_tmps = TRUE,
   nThread = 1,
   conda_env = "echoR_mini",
@@ -82,6 +83,9 @@ replace with 0.}
 
 \item{as_sparse}{Convert the LD matrix to a sparse matrix.}
 
+\item{subset_common}{Subset \code{LD_matrix} and \code{dat} to only the 
+SNPs that are common to them both.}
+
 \item{remove_tmps}{Remove all intermediate files
 like \emph{vcf}, \emph{npz}, and \emph{plink} files.}
 
@@ -115,11 +119,11 @@ Other LD:
 \code{\link{check_population_1kg}()},
 \code{\link{compute_LD}()},
 \code{\link{filter_LD}()},
-\code{\link{get_LD_1KG_download_vcf}()},
+\code{\link{get_LD}()},
 \code{\link{get_LD_1KG}()},
+\code{\link{get_LD_1KG_download_vcf}()},
 \code{\link{get_LD_UKB}()},
 \code{\link{get_LD_matrix}()},
-\code{\link{get_LD}()},
 \code{\link{get_locus_vcf_folder}()},
 \code{\link{ldlinkr_ldproxy_batch}()},
 \code{\link{plot_LD}()},

@@ -7,38 +7,31 @@
 download_UKB_LD(
   LD.prefixes,
   locus_dir,
-  alkes_url = paste("https://data.broadinstitute.org", "alkesgroup/UKBB_LD", sep = "/"),
+  bucket = "s3://broad-alkesgroup-ukbb-ld/",
   background = TRUE,
   force_overwrite = FALSE,
-  download_method = "axel",
-  conda_env = "echoR_mini",
   nThread = 1,
-  verbose = TRUE
+  verbose = TRUE,
+  ...
 )
 }
 \arguments{
 \item{locus_dir}{Storage directory to use.}
 
-\item{download_method}{\itemize{
-\item{\code{"axel"} : }{Multi-threaded}
-\item{\code{"wget"} : }{Single-threaded}
-\item{\code{"download.file"} : }{Single-threaded}
-\item{\code{"internal"} : }{Single-threaded 
-(passed to \link[utils]{download.file})}
-\item{\code{"wininet"} : }{Single-threaded 
-(passed to \link[utils]{download.file})}
-\item{\code{"libcurl"} : }{Single-threaded 
-(passed to \link[utils]{download.file})}
-\item{\code{"curl"} : }{Single-threaded 
-(passed to \link[utils]{download.file})}
-}}
+\item{bucket}{Character string with the name of the bucket, or an object of class \dQuote{s3_bucket}.}
 
-\item{conda_env}{Conda environments to search in. 
-If \code{NULL} (default), will search all conda environments.}
+\item{force_overwrite}{Overwrite existing file.}
 
 \item{nThread}{Number of threads to parallelize over.}
 
 \item{verbose}{Print messages.}
+
+\item{...}{
+  Arguments passed on to \code{\link[downloadR:aws]{downloadR::aws}}
+  \describe{
+    \item{\code{input_url}}{URL to remote file.}
+    \item{\code{output_path}}{The file name you want to save the download as.}
+  }}
 }
 \description{
 Download UK Biobank Linkage Disequilibrium, 

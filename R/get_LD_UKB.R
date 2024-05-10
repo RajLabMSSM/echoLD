@@ -23,8 +23,8 @@
 #' @importFrom echotabix liftover
 #' @source
 #' \code{
-#' query_dat <- echodata::BST1[seq(1, 50), ]
-#' locus_dir <- file.path(tempdir(), echodata::locus_dir)
+#' query_dat <- data.table::data.table(CHR=10,POS=c(135000001), SNP="rs1234")
+#' locus_dir <- file.path(tempdir(), "locus_A")
 #' LD_list <- echoLD:::get_LD_UKB(
 #'     query_dat = query_dat,
 #'     locus_dir = locus_dir)
@@ -44,12 +44,8 @@ get_LD_UKB <- function(query_dat,
                        as_sparse = TRUE,
                        conda_env = "echoR_mini",
                        remove_tmps = TRUE,
-                       verbose = TRUE) {
-    
-    # echoverseTemplate:::source_all();
-    # echoverseTemplate:::args2vars(get_LD_UKB)
-    load_ld <- NULL
-
+                       subset_common = TRUE,
+                       verbose = TRUE) {  
     messager("Using UK Biobank LD reference panel.", v = verbose)
     #### Liftover ####
     query_dat <- echotabix::liftover(dat = query_dat, 
@@ -63,9 +59,6 @@ get_LD_UKB <- function(query_dat,
         chrom = chrom,
         min_pos = min_pos
     ) 
-    alkes_url <- "https://data.broadinstitute.org/alkesgroup/UKBB_LD"
-    URL <- alkes_url
-
     #### Create LD locus dir ####
     LD_dir <- file.path(locus_dir, "LD")
     dir.create(LD_dir, showWarnings = FALSE, recursive = TRUE) 
@@ -100,10 +93,7 @@ get_LD_UKB <- function(query_dat,
                 URL <- download_UKB_LD(
                     LD.prefixes = LD.prefixes,
                     locus_dir = locus_dir,
-                    background = FALSE,
                     force_overwrite = force_new_LD,
-                    conda_env = conda_env,
-                    download_method = download_method,
                     nThread = nThread
                 )
             } else {
@@ -170,6 +160,7 @@ get_LD_UKB <- function(query_dat,
             locus_dir = locus_dir,
             LD_reference = "UKB",
             as_sparse = as_sparse,
+            subset_common = subset_common,
             verbose = verbose
         )
         #### Remove temp files ####

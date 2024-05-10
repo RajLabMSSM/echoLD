@@ -33,6 +33,35 @@ save_LD_matrix(
   verbose = TRUE
 )
 }
+\arguments{
+\item{locus_dir}{Storage directory to use.}
+
+\item{fillNA}{Value to fill LD matrix NAs with.}
+
+\item{LD_reference}{LD reference to use:
+\itemize{
+\item{"1KGphase1" : }{1000 Genomes Project Phase 1 (genome build: hg19).}
+\item{"1KGphase3" : }{1000 Genomes Project Phase 3 (genome build: hg19).}
+\item{"UKB" : }{Pre-computed LD from a British
+European-decent subset of UK Biobank.
+\emph{Genome build} : hg19}
+\item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
+to compute LD matrix from.\cr
+\emph{Accepted formats}: \emph{.vcf} / \emph{.vcf.gz} / \emph{.vcf.bgz}\cr
+\emph{Genome build} : defined by user with \code{target_genome}.}
+\item{"<matrix_path>" : }{User-supplied path to a pre-computed LD matrix   
+\emph{Accepted formats}:  \emph{.rds} / \emph{.rda} / \emph{.csv} / 
+\emph{.tsv} / \emph{.txt}\cr
+\emph{Genome build} : defined by user with \code{target_genome}.}
+}}
+
+\item{subset_common}{Subset \code{LD_matrix} and \code{dat} to only the 
+SNPs that are common to them both.}
+
+\item{as_sparse}{Convert the LD matrix to a sparse matrix.}
+
+\item{verbose}{Print messages.}
+}
 \description{
 Save an LD matrix after initial pre-processing.
 }
@@ -41,12 +70,12 @@ Other LD:
 \code{\link{check_population_1kg}()},
 \code{\link{compute_LD}()},
 \code{\link{filter_LD}()},
-\code{\link{get_LD_1KG_download_vcf}()},
+\code{\link{get_LD}()},
 \code{\link{get_LD_1KG}()},
+\code{\link{get_LD_1KG_download_vcf}()},
 \code{\link{get_LD_UKB}()},
 \code{\link{get_LD_matrix}()},
 \code{\link{get_LD_vcf}()},
-\code{\link{get_LD}()},
 \code{\link{get_locus_vcf_folder}()},
 \code{\link{ldlinkr_ldproxy_batch}()},
 \code{\link{plot_LD}()},

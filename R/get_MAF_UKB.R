@@ -35,8 +35,8 @@ get_MAF_UKB <- function(query_dat,
     messager("UKB MAF:: Extracting MAF from UKB reference.", v = verbose)
     chrom <- unique(query_dat$CHR)
     input_url <- paste0(
-        file.path(
-            "biobank.ctsu.ox.ac.uk",
+        paste0(
+            "biobank.ctsu.ox.ac.uk/",
             "showcase/showcase/auxdata/ukb_mfi_chr"
         ),
         chrom, "_v3.txt"
@@ -75,7 +75,8 @@ get_MAF_UKB <- function(query_dat,
         maf <- dplyr::rename(maf, MAF_UKB = MAF)
     }
     merged_dat <- data.table::merge.data.table(query_dat, maf,
-        by = "POS"
+        by = "POS",
+        all.x = TRUE
     ) |>
         # Make sure each SNP just appears once
         dplyr::group_by(SNP) |>

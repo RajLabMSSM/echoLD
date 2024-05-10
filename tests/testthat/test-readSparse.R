@@ -2,9 +2,8 @@ test_that("readSparse works", {
   
     LD_matrix <- echodata::BST1_LD_matrix
     run_tests <- function(LD_matrix,
-                          ld_mat,
-                          class2="dgCMatrix"){
-        testthat::expect_true(methods::is(ld_mat,class2 = class2))
+                          ld_mat){ 
+        testthat::expect_true(is_sparse_matrix(ld_mat))
         testthat::expect_equal(LD_matrix,as.matrix(ld_mat))
         
     }
@@ -48,7 +47,8 @@ test_that("readSparse works", {
     Matrix::writeMM(obj = methods::as(LD_matrix,"sparseMatrix"), 
                     file = LD_path) 
     ld_mat <- readSparse(LD_path = LD_path)
-    testthat::expect_equal(mean(ld_mat),mean(LD_matrix))
+    testthat::expect_equal(Matrix::mean(ld_mat),
+                           Matrix::mean(LD_matrix))
     testthat::expect_null(rownames(ld_mat))
     testthat::expect_null(colnames(ld_mat))
 })
