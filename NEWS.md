@@ -1,3 +1,12 @@
+# echoLD 0.99.11
+
+## New features
+
+* Standardize `rworkflows.yml` with canonical template:
+  enable Docker on `ghcr.io`, set `write-all` permissions,
+  use `GITHUB_TOKEN`, add `devel` branch trigger.
+* Remove tracked `.DS_Store` files.
+
 # echoLD 0.99.10
 
 ## New features 
