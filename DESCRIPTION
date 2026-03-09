@@ -1,7 +1,8 @@
 Package: echoLD
 Type: Package
-Title: echoverse module: LD downloading and processing
-Version: 0.99.11
+Title: Echoverse Module: LD Downloading and Processing
+Version: 0.99.12
+Date: 2026-03-08
 Authors@R: 
     c(person(given = "Brian",
            family = "Schilder",
@@ -19,7 +20,7 @@ Authors@R:
            email = "towfique.raj@mssm.edu",
            comment = c(ORCID = "0000-0002-9355-5704"))
            ) 
-Description: echoverse module: LD downloading and processing.  
+Description: Echoverse module: LD downloading and processing.
 URL: https://github.com/RajLabMSSM/echoLD
 BugReports: https://github.com/RajLabMSSM/echoLD/issues
 Encoding: UTF-8
@@ -60,7 +61,7 @@ Remotes:
     github::RajLabMSSM/downloadR,
     github::RajLabMSSM/echodata,
     github::RajLabMSSM/echoconda
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.3
 VignetteBuilder: knitr
 License: GPL (>= 3)
 Config/testthat/edition: 3

@@ -1,6 +1,5 @@
 #' Get MAF using \pkg{snpStats} package
 #'
-#' @param LD_folder Locus-specific LD output folder.
 #' @inheritParams snpStats::ld
 #' @family LD
 #' @keywords internal

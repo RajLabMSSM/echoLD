@@ -11,7 +11,6 @@
 #' query_dat <- echodata::BST1
 #' locus_dir <- file.path(tempdir(), echodata::locus_dir)
 #' query_granges <- echotabix::construct_query(query_dat=query_dat)
-#'
 #' vcf_subset.popDat <- echoLD:::get_LD_1KG_download_vcf(
 #'     query_granges = query_granges,
 #'     LD_reference = "1KGphase1",

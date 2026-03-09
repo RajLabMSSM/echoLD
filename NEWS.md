@@ -1,3 +1,8 @@
+# echoLD 0.99.12
+
+## Bug fixes
+* Local R CMD check fixes and compatibility updates.
+
 # echoLD 0.99.11
 
 ## New features

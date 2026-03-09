@@ -22,13 +22,11 @@ get_LD_blocks(
 \ifelse{html}{\out{r}}{\eqn{r}} or 
 \ifelse{html}{\out{r<sup>2</sup>}}{\eqn{r^2}} values.}
 
-\item{stats}{a character vector specifying the linkage disequilibrium
-measures to be calculated (using the \code{\link[snpStats:ld]{ld}}
-function) when \code{x} is a genotype matrix. Only "R.squared" and
-"D.prime" are allowed, see Details.}
+\item{stats}{Character vector of LD statistics to compute.
+Passed to \code{\link[adjclust]{snpClust}}.}
 
-\item{pct}{minimum percentage of points for the plateau selection in 
-capushe selection. See \code{\link[capushe]{DDSE}} for further details}
+\item{pct}{Numeric. Percentage of the maximum number of clusters
+to select. Passed to \code{\link[adjclust]{select}}.}
 
 \item{verbose}{Print messages.}
 }

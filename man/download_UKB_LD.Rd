@@ -22,7 +22,7 @@ download_UKB_LD(
 
 \item{force_overwrite}{Overwrite existing file.}
 
-\item{nThread}{Number of threads to parallelize over.}
+\item{nThread}{Number of threads to parallelise across (when applicable).}
 
 \item{verbose}{Print messages.}
 

@@ -4,9 +4,8 @@
 #' @source 
 #' \code{
 #' dat <- echodata::BST1
-#' LD_matrix <- echodata::BST1_LD_matrix 
+#' LD_matrix <- echodata::BST1_LD_matrix
 #' locus_dir <- file.path(tempdir(),echodata::locus_dir)
-#' 
 #' LD_list <- echoLD:::save_LD_matrix(
 #'     LD_matrix = LD_matrix,
 #'     dat = dat

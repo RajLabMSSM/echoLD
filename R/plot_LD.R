@@ -8,10 +8,10 @@
 #' If \code{span=10}, only 10 SNPs upstream and 10 SNPs downstream of the
 #'  lead SNP will be plotted.
 #' @param method Method to use for plotting:
-#' \itemize{
-#' \item{"stats" : }\link[stats]{heatmap}
-#' \item{"gaston" : }\link[gaston]{LD.plot}
-#' \item{"graphics" : }\link[graphics]{image}
+#' \describe{
+#' \item{stats}{\link[stats]{heatmap}}
+#' \item{gaston}{\link[gaston]{LD.plot}}
+#' \item{graphics}{\link[graphics]{image}}
 #' }
 #' @param ... Additional arguments passed to plotting function. 
 #' @inheritParams get_LD

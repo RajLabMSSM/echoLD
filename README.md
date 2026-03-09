@@ -3,7 +3,7 @@
 [![R build
 status](https://github.com/RajLabMSSM/echoLD/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/RajLabMSSM/echoLD/actions)
 [![](https://img.shields.io/github/last-commit/RajLabMSSM/echoLD.svg)](https://github.com/RajLabMSSM/echoLD/commits/main)
-[![](https://codecov.io/gh/RajLabMSSM/echoLD/branch/main/graph/badge.svg)](https://codecov.io/gh/RajLabMSSM/echoLD)
+[![](https://app.codecov.io/gh/RajLabMSSM/echoLD/branch/main/graph/badge.svg)](https://app.codecov.io/gh/RajLabMSSM/echoLD)
 [![License: GPL (>=
 3)](https://img.shields.io/badge/license-GPL%20(%3E=%203)-blue.svg)](https://cran.r-project.org/web/licenses/GPL%20(%3E=%203))
 <h5>
@@ -56,5 +56,5 @@ library(echoLD)
 <a href="https://bschilder.github.io/BMSchilder/" target="_blank">Brian
 M. Schilder, Bioinformatician II</a>  
 <a href="https://rajlab.org" target="_blank">Raj Lab</a>  
-<a href="https://icahn.mssm.edu/about/departments/neuroscience" target="_blank">Department
+<a href="https://icahn.mssm.edu/about/departments-offices/neuroscience" target="_blank">Department
 of Neuroscience, Icahn School of Medicine at Mount Sinai</a>

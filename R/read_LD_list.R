@@ -1,7 +1,7 @@
 #' Read LD list
 #' 
 #' Import existing LD results.
-#' @param RDS_path Path to saved LD matrix.
+#' @param LD_path Path to saved LD matrix.
 #' @param query_dat Query data.frame.
 #' @param verbose Print messages.
 #' @inheritParams get_LD 

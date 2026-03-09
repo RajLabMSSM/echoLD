@@ -20,7 +20,7 @@ locus_dir <- file.path(tempdir(), echodata::locus_dir)
 
 # 1000 Genomes: Phase 1 or 3
 
-```{r}
+```{r, eval=FALSE}
 LD_1kgp3 <- echoLD::get_LD(locus_dir = locus_dir,
                            query_dat = query_dat,
                            LD_reference = "1KGphase3") # 1KGphase1
@@ -28,8 +28,8 @@ LD_1kgp3 <- echoLD::get_LD(locus_dir = locus_dir,
 
 ## Plot
 
-```{r}
-echoLD::plot_LD(LD_matrix = LD_1kgp3$LD, 
+```{r, eval=FALSE}
+echoLD::plot_LD(LD_matrix = LD_1kgp3$LD,
                 query_dat = LD_1kgp3$DT,
                 span = 20)
 ```
@@ -58,8 +58,8 @@ echoLD::plot_LD(LD_matrix = LD_ukb$LD,
 
 # Custom VCF
 
-```{r}
-LD_reference <- system.file("extdata","BST1.1KGphase3.vcf.bgz", 
+```{r, eval=FALSE}
+LD_reference <- system.file("extdata","BST1.1KGphase3.vcf.bgz",
                             package = "echodata")
 samples <- c("HG00097","HG00099","HG00100","HG00101","HG00102")
 LD_custom <- echoLD::get_LD(locus_dir = locus_dir,

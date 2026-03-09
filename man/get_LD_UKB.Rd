@@ -51,12 +51,11 @@ directly into R using \pkg{reticulate}. Otherwise, will be passed to
 
 \item{fillNA}{Value to fill LD matrix NAs with.}
 
-\item{nThread}{Number of threads to parallelize over.}
+\item{nThread}{Number of threads to parallelise across (when applicable).}
 
 \item{as_sparse}{Convert the LD matrix to a sparse matrix.}
 
-\item{conda_env}{Conda environments to search in. 
-If \code{NULL} (default), will search all conda environments.}
+\item{conda_env}{Conda environment to use.}
 
 \item{remove_tmps}{Remove all intermediate files
 like \emph{vcf}, \emph{npz}, and \emph{plink} files.}
@@ -74,7 +73,7 @@ LD was derived from a  British, European-decent subpopulation
 in the UK Biobank. LD was pre-computed and stored by the Alkes Price lab.
 All data is aligned to the hg19 reference genome.
 For further details, see the 
-\href{http://dx.doi.org/10.1038/s41588-020-00735-5}{PolyFun publication}.
+PolyFun publication (\doi{10.1038/s41588-020-00735-5}).
 }
 \seealso{
 Other LD: 

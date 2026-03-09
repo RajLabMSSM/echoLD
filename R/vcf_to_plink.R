@@ -16,10 +16,12 @@
 
 #' @export
 #' @importFrom echoconda find_executables_remote
-#' @examples 
+#' @examples
+#' \dontrun{
 #' vcf <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",
 #'     package = "echodata")
 #' paths <- vcf_to_plink(vcf = vcf)
+#' }
 vcf_to_plink <- function(vcf,
                          output_prefix = NULL,
                          bcftools_path = NULL,

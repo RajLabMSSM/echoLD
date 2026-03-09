@@ -24,17 +24,18 @@ get_MAF_UKB(
 
 \item{force_new_maf}{Download UKB_MAF file again.}
 
-\item{download_method}{\itemize{
-\item{\code{"axel"} : }{Multi-threaded}
-\item{\code{"wget"} : }{Single-threaded}
-\item{\code{"download.file"} : }{Single-threaded}
-\item{\code{"internal"} : }{Single-threaded 
+\item{download_method}{Download method to use:
+\describe{
+\item{\code{"axel"}}{Multi-threaded}
+\item{\code{"wget"}}{Single-threaded}
+\item{\code{"download.file"}}{Single-threaded}
+\item{\code{"internal"}}{Single-threaded
 (passed to \link[utils]{download.file})}
-\item{\code{"wininet"} : }{Single-threaded 
+\item{\code{"wininet"}}{Single-threaded
 (passed to \link[utils]{download.file})}
-\item{\code{"libcurl"} : }{Single-threaded 
+\item{\code{"libcurl"}}{Single-threaded
 (passed to \link[utils]{download.file})}
-\item{\code{"curl"} : }{Single-threaded 
+\item{\code{"curl"}}{Single-threaded
 (passed to \link[utils]{download.file})}
 }}
 
@@ -49,8 +50,10 @@ If \strong{MAF} column is missing,
 download MAF from UK Biobank and use that instead.
 }
 \examples{
+\dontrun{
 query_dat<- echodata::BST1
 query_dat$MAF <- NULL
 dat2 <- echoLD::get_MAF_UKB(query_dat = query_dat)
+}
 }
 \concept{standardizing functions}

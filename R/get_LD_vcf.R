@@ -16,17 +16,19 @@
 #' @export
 #' @importFrom echotabix query_vcf
 #' @importFrom VariantAnnotation genotypeToSnpMatrix
-#' @examples  
+#' @examples
+#' \dontrun{
 #' query_dat <-  echodata::BST1[seq(1, 50), ]
 #' locus_dir <- echodata::locus_dir
-#' locus_dir <- file.path(tempdir(), locus_dir) 
+#' locus_dir <- file.path(tempdir(), locus_dir)
 #' LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",
 #'     package = "echodata"
 #' )
 #' LD_list <- get_LD_vcf(
 #'     locus_dir = locus_dir,
 #'     query_dat = query_dat,
-#'     LD_reference = LD_reference) 
+#'     LD_reference = LD_reference)
+#' }
 get_LD_vcf <- function(locus_dir = tempdir(),
                        query_dat,
                        LD_reference,

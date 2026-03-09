@@ -38,18 +38,18 @@ nomenclature using \link[MungeSumstats]{standardise_header}.}
 \item{force_new_LD}{Force new LD subset.}
 
 \item{LD_reference}{LD reference to use:
-\itemize{
-\item{"1KGphase1" : }{1000 Genomes Project Phase 1 (genome build: hg19).}
-\item{"1KGphase3" : }{1000 Genomes Project Phase 3 (genome build: hg19).}
-\item{"UKB" : }{Pre-computed LD from a British
+\describe{
+\item{1KGphase1}{1000 Genomes Project Phase 1 (genome build: hg19).}
+\item{1KGphase3}{1000 Genomes Project Phase 3 (genome build: hg19).}
+\item{UKB}{Pre-computed LD from a British
 European-decent subset of UK Biobank.
 \emph{Genome build} : hg19}
-\item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
+\item{<vcf_path>}{User-supplied path to a custom VCF file
 to compute LD matrix from.\cr
 \emph{Accepted formats}: \emph{.vcf} / \emph{.vcf.gz} / \emph{.vcf.bgz}\cr
 \emph{Genome build} : defined by user with \code{target_genome}.}
-\item{"<matrix_path>" : }{User-supplied path to a pre-computed LD matrix   
-\emph{Accepted formats}:  \emph{.rds} / \emph{.rda} / \emph{.csv} / 
+\item{<matrix_path>}{User-supplied path to a pre-computed LD matrix.
+\emph{Accepted formats}: \emph{.rds} / \emph{.rda} / \emph{.csv} /
 \emph{.tsv} / \emph{.txt}\cr
 \emph{Genome build} : defined by user with \code{target_genome}.}
 }}
@@ -92,32 +92,32 @@ like \emph{vcf}, \emph{npz}, and \emph{plink} files.}
 \item{subset_common}{Subset \code{LD_matrix} and \code{dat} to only the 
 SNPs that are common to them both.}
 
-\item{download_method}{\itemize{
-\item{\code{"axel"} : }{Multi-threaded}
-\item{\code{"wget"} : }{Single-threaded}
-\item{\code{"download.file"} : }{Single-threaded}
-\item{\code{"internal"} : }{Single-threaded 
+\item{download_method}{Download method to use:
+\describe{
+\item{\code{"axel"}}{Multi-threaded}
+\item{\code{"wget"}}{Single-threaded}
+\item{\code{"download.file"}}{Single-threaded}
+\item{\code{"internal"}}{Single-threaded
 (passed to \link[utils]{download.file})}
-\item{\code{"wininet"} : }{Single-threaded 
+\item{\code{"wininet"}}{Single-threaded
 (passed to \link[utils]{download.file})}
-\item{\code{"libcurl"} : }{Single-threaded 
+\item{\code{"libcurl"}}{Single-threaded
 (passed to \link[utils]{download.file})}
-\item{\code{"curl"} : }{Single-threaded 
+\item{\code{"curl"}}{Single-threaded
 (passed to \link[utils]{download.file})}
 }}
 
-\item{conda_env}{Conda environments to search in. 
-If \code{NULL} (default), will search all conda environments.}
+\item{conda_env}{Conda environment to use.}
 
-\item{nThread}{Number of threads to parallelize over.}
+\item{nThread}{Number of threads to parallelise across (when applicable).}
 }
 \value{
 A named list containing:
-\itemize{
-\item{"LD": }{Symmetric LD matrix of pairwise SNP correlations.}
-\item{"DT": }{Standardised query data filtered to only the 
+\describe{
+\item{LD}{Symmetric LD matrix of pairwise SNP correlations.}
+\item{DT}{Standardised query data filtered to only the
 SNPs included in both \code{query_dat} and the LD matrix.}
-\item{"path": }{The path to where the LD matrix was saved.}
+\item{path}{The path to where the LD matrix was saved.}
 }
 }
 \description{
@@ -127,12 +127,14 @@ If need be, \code{query_dat} will automatically be lifted over
 to the genome build of the target LD panel before query is performed.
 }
 \examples{
-query_dat <- echodata::BST1[seq(1, 50), ] 
-locus_dir <- file.path(tempdir(), echodata::locus_dir)  
+\dontrun{
+query_dat <- echodata::BST1[seq(1, 50), ]
+locus_dir <- file.path(tempdir(), echodata::locus_dir)
 LD_list <- echoLD::get_LD(
     locus_dir = locus_dir,
     query_dat = query_dat,
     LD_reference = "1KGphase1")
+}
 }
 \seealso{
 Other LD: 

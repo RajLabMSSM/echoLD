@@ -7,7 +7,7 @@
 #' in the UK Biobank. LD was pre-computed and stored by the Alkes Price lab.
 #' All data is aligned to the hg19 reference genome.
 #' For further details, see the 
-#' \href{http://dx.doi.org/10.1038/s41588-020-00735-5}{PolyFun publication}.
+#' PolyFun publication (\doi{10.1038/s41588-020-00735-5}).
 #'
 #' @param download_method If "python" will import compressed numpy array
 #' directly into R using \pkg{reticulate}. Otherwise, will be passed to

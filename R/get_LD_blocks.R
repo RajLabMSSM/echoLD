@@ -8,6 +8,10 @@
 #' @param ss \pkg{snpStats} object or LD matrix containing 
 #' \ifelse{html}{\out{r}}{\eqn{r}} or 
 #' \ifelse{html}{\out{r<sup>2</sup>}}{\eqn{r^2}} values.
+#' @param stats Character vector of LD statistics to compute.
+#' Passed to \code{\link[adjclust]{snpClust}}.
+#' @param pct Numeric. Percentage of the maximum number of clusters
+#' to select. Passed to \code{\link[adjclust]{select}}.
 #' @param verbose Print messages.
 #' @inheritParams adjclust::snpClust
 #' @inheritParams adjclust::select

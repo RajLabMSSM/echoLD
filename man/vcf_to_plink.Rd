@@ -36,7 +36,9 @@ Convert a Variant Call File (VCF) to
  \href{https://www.cog-genomics.org/plink/}{PLINK} format.
 }
 \examples{
+\dontrun{
 vcf <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",
     package = "echodata")
 paths <- vcf_to_plink(vcf = vcf)
+}
 }

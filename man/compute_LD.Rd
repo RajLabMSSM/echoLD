@@ -39,8 +39,6 @@ compute_LD(
     and \code{x[,j]} only if \code{i} and \code{j} differ by no more
     than \code{depth}
   }
-
-\item{LD_folder}{Locus-specific LD output folder.}
 }
 \description{
 Get LD using \pkg{snpStats} package

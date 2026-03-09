@@ -7,7 +7,22 @@
 #' @param output_dir Path to store UKB_MAF file in.
 #' @param force_new_maf Download UKB_MAF file again.
 #' @param verbose Print messages.
-#' @inheritParams downloadR::downloader
+#' @param download_method Download method to use:
+#' \describe{
+#' \item{\code{"axel"}}{Multi-threaded}
+#' \item{\code{"wget"}}{Single-threaded}
+#' \item{\code{"download.file"}}{Single-threaded}
+#' \item{\code{"internal"}}{Single-threaded
+#' (passed to \link[utils]{download.file})}
+#' \item{\code{"wininet"}}{Single-threaded
+#' (passed to \link[utils]{download.file})}
+#' \item{\code{"libcurl"}}{Single-threaded
+#' (passed to \link[utils]{download.file})}
+#' \item{\code{"curl"}}{Single-threaded
+#' (passed to \link[utils]{download.file})}
+#' }
+#' @param nThread Number of threads to parallelize over.
+#' @param conda_env Conda environment to use.
 #'
 #' @family standardizing functions 
 #' @source \href{http://biobank.ctsu.ox.ac.uk/showcase/field.cgi?id=22801}{UKB}
@@ -18,9 +33,11 @@
 #' @importFrom downloadR downloader
 #' 
 #' @examples
+#' \dontrun{
 #' query_dat<- echodata::BST1
 #' query_dat$MAF <- NULL
 #' dat2 <- echoLD::get_MAF_UKB(query_dat = query_dat)
+#' }
 get_MAF_UKB <- function(query_dat,
                         output_dir = tools::R_user_dir(package = "echoLD",
                                                        which = "cache"),

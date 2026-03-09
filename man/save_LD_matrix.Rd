@@ -6,9 +6,8 @@
 \source{
 \code{
 dat <- echodata::BST1
-LD_matrix <- echodata::BST1_LD_matrix 
+LD_matrix <- echodata::BST1_LD_matrix
 locus_dir <- file.path(tempdir(),echodata::locus_dir)
-
 LD_list <- echoLD:::save_LD_matrix(
     LD_matrix = LD_matrix,
     dat = dat
@@ -39,18 +38,18 @@ save_LD_matrix(
 \item{fillNA}{Value to fill LD matrix NAs with.}
 
 \item{LD_reference}{LD reference to use:
-\itemize{
-\item{"1KGphase1" : }{1000 Genomes Project Phase 1 (genome build: hg19).}
-\item{"1KGphase3" : }{1000 Genomes Project Phase 3 (genome build: hg19).}
-\item{"UKB" : }{Pre-computed LD from a British
+\describe{
+\item{1KGphase1}{1000 Genomes Project Phase 1 (genome build: hg19).}
+\item{1KGphase3}{1000 Genomes Project Phase 3 (genome build: hg19).}
+\item{UKB}{Pre-computed LD from a British
 European-decent subset of UK Biobank.
 \emph{Genome build} : hg19}
-\item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
+\item{<vcf_path>}{User-supplied path to a custom VCF file
 to compute LD matrix from.\cr
 \emph{Accepted formats}: \emph{.vcf} / \emph{.vcf.gz} / \emph{.vcf.bgz}\cr
 \emph{Genome build} : defined by user with \code{target_genome}.}
-\item{"<matrix_path>" : }{User-supplied path to a pre-computed LD matrix   
-\emph{Accepted formats}:  \emph{.rds} / \emph{.rda} / \emph{.csv} / 
+\item{<matrix_path>}{User-supplied path to a pre-computed LD matrix.
+\emph{Accepted formats}: \emph{.rds} / \emph{.rda} / \emph{.csv} /
 \emph{.tsv} / \emph{.txt}\cr
 \emph{Genome build} : defined by user with \code{target_genome}.}
 }}

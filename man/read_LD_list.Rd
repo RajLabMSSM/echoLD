@@ -7,13 +7,13 @@
 read_LD_list(LD_path, query_dat, as_sparse = TRUE, verbose = TRUE)
 }
 \arguments{
+\item{LD_path}{Path to saved LD matrix.}
+
 \item{query_dat}{Query data.frame.}
 
 \item{as_sparse}{Convert the LD matrix to a sparse matrix.}
 
 \item{verbose}{Print messages.}
-
-\item{RDS_path}{Path to saved LD matrix.}
 }
 \value{
 LD list with 3 elements.

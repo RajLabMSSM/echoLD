@@ -52,13 +52,16 @@ test_that("get_LD works", {
     run_tests(LD_custom)
 
     #### UK Biobank ####
-    query_dat_ukb <- data.table::data.table(CHR=10,POS=c(135000001,135001001),
-                                            SNP=c( "rs1234_FAKE"))
-    LD_ukb <- echoLD::get_LD(locus_dir = locus_dir,
-                             query_dat = query_dat_ukb,
-                             subset_common = FALSE,
-                             LD_reference = "UKB")
-    run_tests(LD_ukb, subset_common = FALSE)
+    ## Requires polyfun conda env with pandas
+    if(echoconda::env_exists(conda_env = "echoR_mini")){
+        query_dat_ukb <- data.table::data.table(CHR=10,POS=c(135000001,135001001),
+                                                SNP=c( "rs1234_FAKE"))
+        LD_ukb <- echoLD::get_LD(locus_dir = locus_dir,
+                                 query_dat = query_dat_ukb,
+                                 subset_common = FALSE,
+                                 LD_reference = "UKB")
+        run_tests(LD_ukb, subset_common = FALSE)
+    }
 
     #### Local vcf file ####
     query_dat <- echodata::BST1[seq(1, 50), ]

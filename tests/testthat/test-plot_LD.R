@@ -8,6 +8,7 @@ test_that("plot_LD works", {
                           method = "stats")
     testthat::expect_true(all(c("rowInd","colInd") %in% names(p1)))
     
+    testthat::skip_if_not_installed("gaston")
     p2 <- echoLD::plot_LD(LD_matrix = LD_matrix,
                           query_dat= query_dat,
                           method = "gaston")
