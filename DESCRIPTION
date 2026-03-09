@@ -1,7 +1,7 @@
 Package: echoLD
 Type: Package
 Title: Echoverse Module: LD Downloading and Processing
-Version: 1.99.12
+Version: 1.0.0
 Date: 2026-03-08
 Authors@R: 
     c(person(given = "Brian",
