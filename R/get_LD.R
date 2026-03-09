@@ -196,8 +196,3 @@ get_LD <- function(query_dat,
     }  
     return(LD_list)
 }
-
-load_or_create <- function(...){
-    .Deprecated("get_LD")
-    get_LD(...)
-}
