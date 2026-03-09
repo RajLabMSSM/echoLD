@@ -14,14 +14,9 @@ test_that("get_LD_vcf works", {
     locus_dir <- file.path(tempdir(), locus_dir)
     LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",
         package = "echodata")
-    LD_list <- tryCatch(
-        get_LD_vcf(
-            locus_dir = locus_dir,
-            query_dat = query_dat,
-            LD_reference = LD_reference),
-        error = function(e) {
-            testthat::skip(paste("Local VCF unreadable by Rsamtools:",
-                                 e$message))
-        })
+    LD_list <- get_LD_vcf(
+        locus_dir = locus_dir,
+        query_dat = query_dat,
+        LD_reference = LD_reference)
     run_tests(LD_list = LD_list)
 })
