@@ -1,6 +1,8 @@
 load_ld_r <- function(URL,
                       verbose=TRUE){
-    
+
+    #### Ensure required Python packages are available ####
+    reticulate::py_require(c("numpy", "pandas", "scipy", "requests"))
     reticulate::source_python(
         system.file("tools", "load_ld.py",package = "echoLD"
         ))

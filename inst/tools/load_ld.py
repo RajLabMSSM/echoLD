@@ -28,7 +28,7 @@ def load_ld(ld_prefix, server=True, npz_suffix=""):
         df_ld_snps = pd.read_parquet(snps_filename_parquet)
     elif os.path.exists(snps_filename_gz) | server==True:
         print(snps_filename_gz)
-        df_ld_snps = pd.read_csv(snps_filename_gz, delim_whitespace=True)
+        df_ld_snps = pd.read_csv(snps_filename_gz, sep='\\s+')
     else:
         raise ValueError('couldn\'t find SNPs file %s or %s' % (snps_filename_parquet, snps_filename_gz))
 
