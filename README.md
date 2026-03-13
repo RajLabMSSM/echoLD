@@ -29,9 +29,9 @@ If you use `echoLD`, please cite:
 ## Installation
 
 ``` r
-if(!require("remotes")) install.packages("remotes")
+if(!require("BiocManager")) install.packages("BiocManager")
 
-remotes::install_github("RajLabMSSM/echoLD")
+BiocManager::install("RajLabMSSM/echoLD")
 library(echoLD)
 ```
 
