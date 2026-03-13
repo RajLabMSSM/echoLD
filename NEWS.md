@@ -1,3 +1,18 @@
+# echoLD 1.0.0
+
+## New features
+
+* Remove deprecated `load_or_create()` wrapper.
+
+## Bug fixes
+
+* Fix missing scipy/requests in reticulate Python environment
+  for UKB LD queries.
+* Remove stray 1KG tabix index committed to repo.
+* Skip local VCF tests when Rsamtools can't read bundled VCF.
+* Fix Rd formatting and `\dontrun{}` example guards.
+* Add `Rplots.pdf` and `*.tbi` to `.gitignore`.
+
 # echoLD 0.99.12
 
 ## Bug fixes
