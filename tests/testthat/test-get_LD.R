@@ -53,7 +53,11 @@ test_that("get_LD works", {
 
     #### UK Biobank ####
     ## Requires polyfun conda env with pandas
-    if(echoconda::env_exists(conda_env = "echoR_mini")){
+    conda_available <- tryCatch(
+        echoconda::env_exists(conda_env = "echoR_mini"),
+        error = function(e) FALSE
+    )
+    if(conda_available){
         query_dat_ukb <- data.table::data.table(CHR=10,POS=c(135000001,135001001),
                                                 SNP=c( "rs1234_FAKE"))
         LD_ukb <- echoLD::get_LD(locus_dir = locus_dir,

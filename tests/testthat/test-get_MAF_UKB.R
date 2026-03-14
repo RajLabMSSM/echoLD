@@ -1,9 +1,11 @@
 test_that("get_MAF_UKB works", {
 
-    testthat::skip_if_not(
-      echoconda::env_exists(conda_env = "echoR_mini"),
-      message = "echoR_mini conda env not available"
+    conda_available <- tryCatch(
+        echoconda::env_exists(conda_env = "echoR_mini"),
+        error = function(e) FALSE
     )
+    testthat::skip_if_not(conda_available,
+                          message = "echoR_mini conda env not available")
    query_dat<- echodata::BST1
     query_dat$MAF <- NULL
     run_tests <- function(query_dat, query_dat2){
