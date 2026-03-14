@@ -1,6 +1,6 @@
 ---
 title: ""
-author: "`r rworkflows::use_badges()`"
+author: "`r rworkflows::use_badges(branch = 'main')`"
 output:
   github_document
 ---
