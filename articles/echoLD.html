@@ -4,71 +4,76 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Getting Started • echoLD</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started">
+<style>
+.navbar { background-color: #162038 !important; border-bottom: 2px solid #4ecdc4; }
+.navbar-brand, .nav-link { color: #e8f4f4 !important; }
+.nav-link:hover { color: #2ee8d6 !important; }
+.nav-link.active { color: #2ee8d6 !important; border-bottom: 2px solid #2ee8d6; }
+pre { background-color: #d6e4ee !important; color: #1a2744 !important; border: none !important; border-radius: 12px; margin: 0; padding: 0.8em 1em; }
+code { color: #1a6b68 !important; border: none !important; }
+pre code { color: #1a2744 !important; border: none !important; background: transparent !important; }
+pre code span { border: none !important; background: transparent !important; }
+.table { color: #e8f4f4 !important; }
+.table-striped > tbody > tr:nth-of-type(odd) > * { background-color: rgba(78, 205, 196, 0.05) !important; color: #e8f4f4 !important; }
+.table-striped > tbody > tr:nth-of-type(even) > * { background-color: transparent !important; color: #e8f4f4 !important; }
+.table > thead { border-bottom: 2px solid #4ecdc4; }
+h1, h2, h3, h4, h5, h6 { color: #4ecdc4 !important; }
+a { color: #5bc0be; } a:hover { color: #2ee8d6; }
+.card { background-color: #1e3050; border-color: #2a4060; }
+.footer { background-color: #162038 !important; border-top: 1px solid #2a4060; }
+.page-header { border-bottom: 2px solid #3a8d8c; }
+.sourceCode { background-color: #d6e4ee !important; border: 1px solid #3a8d8c; border-radius: 12px !important; overflow: hidden; }
+.sourceCode code span, .sourceCode code a { border: none !important; outline: none !important; box-shadow: none !important; background: transparent !important; }
+</style>
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">echoLD</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
-      </span>
-    </div>
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../articles/echoLD.html">Get started</a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
-</li>
+    <a class="navbar-brand me-2" href="../index.html">echoLD</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="active nav-item"><a class="nav-link" href="../articles/echoLD.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/RajLabMSSM/echoLD/" class="external-link">
-    <span class="fab fa-github fa-lg"></span>
-
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/RajLabMSSM/echoLD"><span class="fa fa-github"></span></a></li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
 
 
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Getting Started</h1>
+
+<div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
+
+      <h1>Getting Started</h1>
                         <h4 data-toc-skip class="author"><h4>
 <br>
 Authors: <i>Brian Schilder, Jack Humphrey, Towfique Raj</i><br>
@@ -76,192 +81,295 @@ Authors: <i>Brian Schilder, Jack Humphrey, Towfique Raj</i><br>
             
             <h4 data-toc-skip class="date"><h4>
 <br>
-Vignette updated: <i>Mar-15-2026</i><br>
+Vignette updated: <i>Mar-16-2026</i><br>
 </h4></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/RajLabMSSM/echoLD/blob/main/vignettes/echoLD.Rmd" class="external-link"><code>vignettes/echoLD.Rmd</code></a></small>
-      <div class="hidden name"><code>echoLD.Rmd</code></div>
-
+      <div class="d-none name"><code>echoLD.Rmd</code></div>
     </div>
 
     
     
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
+<p><code>echoLD</code> is an <a href="https://github.com/RajLabMSSM/echoverse" class="external-link">echoverse</a> module for
+retrieving and processing linkage disequilibrium (LD) matrices. It
+supports multiple LD reference panels:</p>
+<ul>
+<li>
+<strong>1000 Genomes</strong> Phase 1 and Phase 3 (computed
+on-the-fly from VCF)</li>
+<li>
+<strong>UK Biobank</strong> (pre-computed LD matrices)</li>
+<li>
+<strong>Custom VCF</strong> files supplied by the user</li>
+<li>
+<strong>Pre-computed LD matrices</strong> in <code>.rds</code>,
+<code>.csv</code>, or <code>.tsv</code> format</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RajLabMSSM/echoLD" class="external-link">echoLD</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">query_dat</span> <span class="op">&lt;-</span> <span class="fu">echodata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/echodata/man/BST1.html" class="external-link">BST1</a></span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">100</span><span class="op">)</span>,<span class="op">]</span></span>
-<span><span class="va">locus_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu">echodata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/echodata/man/locus_dir.html" class="external-link">locus_dir</a></span><span class="op">)</span></span></code></pre></div>
-<div class="section level2">
-<h2 id="genomes-phase-1-or-3">1000 Genomes: Phase 1 or 3<a class="anchor" aria-label="anchor" href="#genomes-phase-1-or-3"></a>
-</h2>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RajLabMSSM/echoLD" class="external-link">echoLD</a></span><span class="op">)</span></span></code></pre></div>
+<p>The examples below use bundled data from the <code>echodata</code>
+package: a subset of summary statistics from the <em>BST1</em> locus and
+a pre-computed LD matrix.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">LD_1kgp3</span> <span class="op">&lt;-</span> <span class="fu">echoLD</span><span class="fu">::</span><span class="fu"><a href="../reference/get_LD.html">get_LD</a></span><span class="op">(</span>locus_dir <span class="op">=</span> <span class="va">locus_dir</span>,</span>
-<span>                           query_dat <span class="op">=</span> <span class="va">query_dat</span>,</span>
-<span>                           LD_reference <span class="op">=</span> <span class="st">"1KGphase3"</span><span class="op">)</span> <span class="co"># 1KGphase1</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a>
-</h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">echoLD</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_LD.html">plot_LD</a></span><span class="op">(</span>LD_matrix <span class="op">=</span> <span class="va">LD_1kgp3</span><span class="op">$</span><span class="va">LD</span>,</span>
-<span>                query_dat <span class="op">=</span> <span class="va">LD_1kgp3</span><span class="op">$</span><span class="va">DT</span>,</span>
-<span>                span <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
-</div>
+<code class="sourceCode R"><span><span class="va">query_dat</span> <span class="op">&lt;-</span> <span class="fu">echodata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/echodata/man/BST1.html" class="external-link">BST1</a></span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="va">locus_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu">echodata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/echodata/man/locus_dir.html" class="external-link">locus_dir</a></span><span class="op">)</span></span>
+<span><span class="va">LD_matrix</span> <span class="op">&lt;-</span> <span class="fu">echodata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/echodata/man/BST1_LD_matrix.html" class="external-link">BST1_LD_matrix</a></span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="uk-biobank">UK Biobank<a class="anchor" aria-label="anchor" href="#uk-biobank"></a>
+<h2 id="pre-computed-ld-matrix">Pre-computed LD matrix<a class="anchor" aria-label="anchor" href="#pre-computed-ld-matrix"></a>
 </h2>
-<p><em>WARNING</em>: Takes substantially longer than 1000 Genomes
-methods.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">LD_ukb</span> <span class="op">&lt;-</span> <span class="fu">echoLD</span><span class="fu">::</span><span class="fu"><a href="../reference/get_LD.html">get_LD</a></span><span class="op">(</span>locus_dir <span class="op">=</span> <span class="va">locus_dir</span>,</span>
-<span>                         query_dat <span class="op">=</span> <span class="va">query_dat</span>,</span>
-<span>                         LD_reference <span class="op">=</span> <span class="st">"UKB"</span>, </span>
-<span>                         download_method <span class="op">=</span> <span class="st">"axel"</span>, </span>
-<span>                         nThread <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="plot-1">Plot<a class="anchor" aria-label="anchor" href="#plot-1"></a>
-</h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">echoLD</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_LD.html">plot_LD</a></span><span class="op">(</span>LD_matrix <span class="op">=</span> <span class="va">LD_ukb</span><span class="op">$</span><span class="va">LD</span>, </span>
-<span>                query_dat <span class="op">=</span> <span class="va">LD_ukb</span><span class="op">$</span><span class="va">DT</span>,</span>
-<span>                span <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
-</div>
+<p>If you already have an LD matrix on disk,
+<code><a href="../reference/get_LD_matrix.html">get_LD_matrix()</a></code> reads it in and aligns it with your summary
+statistics.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Write the bundled LD matrix to a temp CSV to demonstrate the workflow</span></span>
+<span><span class="va">LD_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".csv"</span><span class="op">)</span></span>
+<span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">LD_matrix</span>, file <span class="op">=</span> <span class="va">LD_path</span>, row.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">LD_list</span> <span class="op">&lt;-</span> <span class="fu">echoLD</span><span class="fu">::</span><span class="fu"><a href="../reference/get_LD_matrix.html">get_LD_matrix</a></span><span class="op">(</span></span>
+<span>    locus_dir <span class="op">=</span> <span class="va">locus_dir</span>,</span>
+<span>    query_dat <span class="op">=</span> <span class="va">query_dat</span>,</span>
+<span>    LD_reference <span class="op">=</span> <span class="va">LD_path</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Using custom VCF as LD reference panel.</span></span>
+<span><span class="co">#&gt; Previously computed LD_matrix detected. Importing: /tmp/RtmpOpB4Go/file616f43163f38.csv</span></span>
+<span><span class="co">#&gt; LD_reference identified as: table.</span></span>
+<span><span class="co">#&gt; Converting obj to sparseMatrix.</span></span>
+<span><span class="co">#&gt; Checking LD metric (r/r2).</span></span>
+<span><span class="co">#&gt; 45 x 45 LD_matrix (sparse)</span></span>
+<span><span class="co">#&gt; Converting obj to sparseMatrix.</span></span>
+<span><span class="co">#&gt; Saving sparse LD matrix ==&gt; /tmp/RtmpOpB4Go/results/GWAS/Nalls23andMe_2019/BST1/LD/BST1.custom_r_LD.RDS</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="custom-vcf">Custom VCF<a class="anchor" aria-label="anchor" href="#custom-vcf"></a>
 </h2>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">LD_reference</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"BST1.1KGphase3.vcf.bgz"</span>,</span>
+<p>You can compute LD on-the-fly from any VCF file. The
+<code>echodata</code> package ships a small 1000 Genomes Phase 3 VCF for
+the BST1 locus.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">LD_reference</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"BST1.1KGphase3.vcf.bgz"</span>,</span>
 <span>                            package <span class="op">=</span> <span class="st">"echodata"</span><span class="op">)</span></span>
-<span><span class="va">samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"HG00097"</span>,<span class="st">"HG00099"</span>,<span class="st">"HG00100"</span>,<span class="st">"HG00101"</span>,<span class="st">"HG00102"</span><span class="op">)</span></span>
-<span><span class="va">LD_custom</span> <span class="op">&lt;-</span> <span class="fu">echoLD</span><span class="fu">::</span><span class="fu"><a href="../reference/get_LD.html">get_LD</a></span><span class="op">(</span>locus_dir <span class="op">=</span> <span class="va">locus_dir</span>,</span>
-<span>                            query_dat <span class="op">=</span> <span class="va">query_dat</span>, </span>
-<span>                            LD_reference <span class="op">=</span> <span class="va">LD_reference</span><span class="op">)</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="plot-2">Plot<a class="anchor" aria-label="anchor" href="#plot-2"></a>
-</h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">echoLD</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_LD.html">plot_LD</a></span><span class="op">(</span>LD_matrix <span class="op">=</span> <span class="va">LD_custom</span><span class="op">$</span><span class="va">LD</span>, </span>
-<span>                query_dat <span class="op">=</span> <span class="va">LD_custom</span><span class="op">$</span><span class="va">DT</span>,</span>
-<span>                span <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">LD_vcf</span> <span class="op">&lt;-</span> <span class="fu">echoLD</span><span class="fu">::</span><span class="fu"><a href="../reference/get_LD_vcf.html">get_LD_vcf</a></span><span class="op">(</span></span>
+<span>    locus_dir <span class="op">=</span> <span class="va">locus_dir</span>,</span>
+<span>    query_dat <span class="op">=</span> <span class="va">query_dat</span>,</span>
+<span>    LD_reference <span class="op">=</span> <span class="va">LD_reference</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Using custom VCF as LD reference panel.</span></span>
+<span><span class="co">#&gt; ========= echotabix::query =========</span></span>
+<span><span class="co">#&gt; Constructing GRanges query using min/max ranges across one or more chromosomes.</span></span>
+<span><span class="co">#&gt; + as_blocks=TRUE: Will query a single range per chromosome that covers all regions requested (plus anything in between).</span></span>
+<span><span class="co">#&gt; Explicit format: 'vcf'</span></span>
+<span><span class="co">#&gt; Querying VCF tabix file.</span></span>
+<span><span class="co">#&gt; Querying VCF file using: VariantAnnotation</span></span>
+<span><span class="co">#&gt; Checking query chromosome style is correct.</span></span>
+<span><span class="co">#&gt; Chromosome format: 1</span></span>
+<span><span class="co">#&gt; Retrieving data.</span></span>
+<span><span class="co">#&gt; Time difference of 0.3 secs</span></span>
+<span><span class="co">#&gt; Removing 50 / 100 non-overlapping SNPs.</span></span>
+<span><span class="co">#&gt; Saving VCF subset ==&gt; /tmp/RtmpOpB4Go/VCF/RtmpOpB4Go.chr4-14884541-16649679.BST1.1KGphase3.vcf.bgz</span></span>
+<span><span class="co">#&gt; Time difference of 0.2 secs</span></span>
+<span><span class="co">#&gt; Retrieved data with 50 rows across 10 samples.</span></span>
+<span><span class="co">#&gt; echoLD::snpStats:: `MAF` column already present.</span></span>
+<span><span class="co">#&gt; echoLD:snpStats:: Computing pairwise LD between 50 SNPs across 10 individuals (stats = R).</span></span>
+<span><span class="co">#&gt; Time difference of 0 secs</span></span>
+<span><span class="co">#&gt; 50 x 50 LD_matrix (sparse)</span></span>
+<span><span class="co">#&gt; Converting obj to sparseMatrix.</span></span>
+<span><span class="co">#&gt; Saving sparse LD matrix ==&gt; /tmp/RtmpOpB4Go/results/GWAS/Nalls23andMe_2019/BST1/LD/BST1.BST1.1KGphase3.vcf.bgz_LD.RDS</span></span></code></pre></div>
 </div>
+<div class="section level2">
+<h2 id="genomes-remote">1000 Genomes (remote)<a class="anchor" aria-label="anchor" href="#genomes-remote"></a>
+</h2>
+<p>Querying the full 1000 Genomes VCF requires downloading
+chromosome-level VCF files from a remote server. This requires an
+internet connection and can take several minutes.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">LD_1kgp3</span> <span class="op">&lt;-</span> <span class="fu">echoLD</span><span class="fu">::</span><span class="fu"><a href="../reference/get_LD.html">get_LD</a></span><span class="op">(</span></span>
+<span>    locus_dir <span class="op">=</span> <span class="va">locus_dir</span>,</span>
+<span>    query_dat <span class="op">=</span> <span class="va">query_dat</span>,</span>
+<span>    LD_reference <span class="op">=</span> <span class="st">"1KGphase3"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="uk-biobank-remote">UK Biobank (remote)<a class="anchor" aria-label="anchor" href="#uk-biobank-remote"></a>
+</h2>
+<p>Pre-computed LD from a British European-descent subset of UK Biobank.
+<strong>Note:</strong> This takes substantially longer than the 1000
+Genomes methods.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">LD_ukb</span> <span class="op">&lt;-</span> <span class="fu">echoLD</span><span class="fu">::</span><span class="fu"><a href="../reference/get_LD.html">get_LD</a></span><span class="op">(</span></span>
+<span>    locus_dir <span class="op">=</span> <span class="va">locus_dir</span>,</span>
+<span>    query_dat <span class="op">=</span> <span class="va">query_dat</span>,</span>
+<span>    LD_reference <span class="op">=</span> <span class="st">"UKB"</span>,</span>
+<span>    download_method <span class="op">=</span> <span class="st">"axel"</span>,</span>
+<span>    nThread <span class="op">=</span> <span class="fl">10</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="filtering-ld">Filtering LD<a class="anchor" aria-label="anchor" href="#filtering-ld"></a>
+</h2>
+<p>Use <code><a href="../reference/filter_LD.html">filter_LD()</a></code> to remove SNPs below a minimum r2
+threshold.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">LD_list_full</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>LD <span class="op">=</span> <span class="va">LD_matrix</span>, DT <span class="op">=</span> <span class="fu">echodata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/echodata/man/BST1.html" class="external-link">BST1</a></span><span class="op">)</span></span>
+<span><span class="va">LD_list_filt</span> <span class="op">&lt;-</span> <span class="fu">echoLD</span><span class="fu">::</span><span class="fu"><a href="../reference/filter_LD.html">filter_LD</a></span><span class="op">(</span>LD_list <span class="op">=</span> <span class="va">LD_list_full</span>, min_r2 <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">LD_list_filt</span><span class="op">$</span><span class="va">LD</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 3 3</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="sparse-matrix-utilities">Sparse matrix utilities<a class="anchor" aria-label="anchor" href="#sparse-matrix-utilities"></a>
+</h2>
+<p><code>echoLD</code> provides helpers for working with sparse LD
+matrices, which reduce file size substantially.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Convert a dense matrix to sparse format</span></span>
+<span><span class="va">sparse_mat</span> <span class="op">&lt;-</span> <span class="fu">echoLD</span><span class="fu">::</span><span class="fu"><a href="../reference/to_sparse.html">to_sparse</a></span><span class="op">(</span>X <span class="op">=</span> <span class="va">LD_matrix</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Converting obj to sparseMatrix.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">sparse_mat</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "dsCMatrix"</span></span>
+<span><span class="co">#&gt; attr(,"package")</span></span>
+<span><span class="co">#&gt; [1] "Matrix"</span></span>
+<span></span>
+<span><span class="co">## Save to disk</span></span>
+<span><span class="va">sparse_path</span> <span class="op">&lt;-</span> <span class="fu">echoLD</span><span class="fu">::</span><span class="fu"><a href="../reference/saveSparse.html">saveSparse</a></span><span class="op">(</span>LD_matrix <span class="op">=</span> <span class="va">LD_matrix</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Converting obj to sparseMatrix.</span></span>
+<span><span class="co">#&gt; Saving sparse LD matrix ==&gt; /tmp/RtmpOpB4Go/file616f6c69712f.rds</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/file.info.html" class="external-link">file.info</a></span><span class="op">(</span><span class="va">sparse_path</span><span class="op">)</span><span class="op">$</span><span class="va">size</span></span>
+<span><span class="co">#&gt; [1] 22452</span></span>
+<span></span>
+<span><span class="co">## Read it back</span></span>
+<span><span class="va">sparse_read</span> <span class="op">&lt;-</span> <span class="fu">echoLD</span><span class="fu">::</span><span class="fu"><a href="../reference/readSparse.html">readSparse</a></span><span class="op">(</span>LD_path <span class="op">=</span> <span class="va">sparse_path</span><span class="op">)</span></span>
+<span><span class="co">#&gt; LD_reference identified as: r.</span></span>
+<span><span class="co">#&gt; Converting obj to sparseMatrix.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">sparse_read</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 95 95</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="plotting-ld">Plotting LD<a class="anchor" aria-label="anchor" href="#plotting-ld"></a>
+</h2>
+<p>Plot a heatmap of pairwise LD around the lead SNP.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">echoLD</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_LD.html">plot_LD</a></span><span class="op">(</span></span>
+<span>    LD_matrix <span class="op">=</span> <span class="va">LD_matrix</span>,</span>
+<span>    query_dat <span class="op">=</span> <span class="fu">echodata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/echodata/man/BST1.html" class="external-link">BST1</a></span>,</span>
+<span>    span <span class="op">=</span> <span class="fl">10</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="echoLD_files/figure-html/plot_LD-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="session-info">Session Info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<details><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## R Under development (unstable) (2026-03-12 r89607)</span></span>
-<span><span class="co">## Platform: x86_64-pc-linux-gnu</span></span>
-<span><span class="co">## Running under: Ubuntu 24.04.4 LTS</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Matrix products: default</span></span>
-<span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
-<span><span class="co">## LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## locale:</span></span>
-<span><span class="co">##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              </span></span>
-<span><span class="co">##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    </span></span>
-<span><span class="co">##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   </span></span>
-<span><span class="co">##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 </span></span>
-<span><span class="co">##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span></span>
-<span><span class="co">## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## time zone: UTC</span></span>
-<span><span class="co">## tzcode source: system (glibc)</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## attached base packages:</span></span>
-<span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] echoLD_1.0.0     BiocStyle_2.39.0</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##   [1] DBI_1.3.0                   piggyback_0.1.5            </span></span>
-<span><span class="co">##   [3] bitops_1.0-9                rlang_1.1.7                </span></span>
-<span><span class="co">##   [5] magrittr_2.0.4              otel_0.2.0                 </span></span>
-<span><span class="co">##   [7] matrixStats_1.5.0           compiler_4.6.0             </span></span>
-<span><span class="co">##   [9] RSQLite_2.4.6               GenomicFeatures_1.63.1     </span></span>
-<span><span class="co">##  [11] dir.expiry_1.19.0           png_0.1-8                  </span></span>
-<span><span class="co">##  [13] systemfonts_1.3.2           vctrs_0.7.1                </span></span>
-<span><span class="co">##  [15] stringr_1.6.0               pkgconfig_2.0.3            </span></span>
-<span><span class="co">##  [17] crayon_1.5.3                fastmap_1.2.0              </span></span>
-<span><span class="co">##  [19] XVector_0.51.0              Rsamtools_2.27.1           </span></span>
-<span><span class="co">##  [21] rmarkdown_2.30              tzdb_0.5.0                 </span></span>
-<span><span class="co">##  [23] UCSC.utils_1.7.1            ragg_1.5.1                 </span></span>
-<span><span class="co">##  [25] purrr_1.2.1                 bit_4.6.0                  </span></span>
-<span><span class="co">##  [27] xfun_0.56                   aws.s3_0.3.22              </span></span>
-<span><span class="co">##  [29] cachem_1.1.0                downloadR_1.0.0            </span></span>
-<span><span class="co">##  [31] cigarillo_1.1.0             GenomeInfoDb_1.47.2        </span></span>
-<span><span class="co">##  [33] jsonlite_2.0.0              blob_1.3.0                 </span></span>
-<span><span class="co">##  [35] DelayedArray_0.37.0         BiocParallel_1.45.0        </span></span>
-<span><span class="co">##  [37] echoconda_1.0.0             parallel_4.6.0             </span></span>
-<span><span class="co">##  [39] R6_2.6.1                    VariantAnnotation_1.57.1   </span></span>
-<span><span class="co">##  [41] bslib_0.10.0                stringi_1.8.7              </span></span>
-<span><span class="co">##  [43] reticulate_1.45.0           rtracklayer_1.71.3         </span></span>
-<span><span class="co">##  [45] GenomicRanges_1.63.1        jquerylib_0.1.4            </span></span>
-<span><span class="co">##  [47] Rcpp_1.1.1                  Seqinfo_1.1.0              </span></span>
-<span><span class="co">##  [49] bookdown_0.46               SummarizedExperiment_1.41.1</span></span>
-<span><span class="co">##  [51] knitr_1.51                  base64enc_0.1-6            </span></span>
-<span><span class="co">##  [53] R.utils_2.13.0              readr_2.2.0                </span></span>
-<span><span class="co">##  [55] IRanges_2.45.0              splines_4.6.0              </span></span>
-<span><span class="co">##  [57] Matrix_1.7-4                tidyselect_1.2.1           </span></span>
-<span><span class="co">##  [59] abind_1.4-8                 yaml_2.3.12                </span></span>
-<span><span class="co">##  [61] codetools_0.2-20            curl_7.0.0                 </span></span>
-<span><span class="co">##  [63] lattice_0.22-9              tibble_3.3.1               </span></span>
-<span><span class="co">##  [65] Biobase_2.71.0              basilisk.utils_1.23.1      </span></span>
-<span><span class="co">##  [67] KEGGREST_1.51.1             evaluate_1.0.5             </span></span>
-<span><span class="co">##  [69] survival_3.8-6              desc_1.4.3                 </span></span>
-<span><span class="co">##  [71] zip_2.3.3                   xml2_1.5.2                 </span></span>
-<span><span class="co">##  [73] snpStats_1.61.0             Biostrings_2.79.5          </span></span>
-<span><span class="co">##  [75] pillar_1.11.1               BiocManager_1.30.27        </span></span>
-<span><span class="co">##  [77] filelock_1.0.3              MatrixGenerics_1.23.0      </span></span>
-<span><span class="co">##  [79] DT_0.34.0                   stats4_4.6.0               </span></span>
-<span><span class="co">##  [81] generics_0.1.4              RCurl_1.98-1.17            </span></span>
-<span><span class="co">##  [83] S4Vectors_0.49.0            hms_1.1.4                  </span></span>
-<span><span class="co">##  [85] glue_1.8.0                  tools_4.6.0                </span></span>
-<span><span class="co">##  [87] BiocIO_1.21.0               data.table_1.18.2.1        </span></span>
-<span><span class="co">##  [89] openxlsx_4.2.8.1            BSgenome_1.79.1            </span></span>
-<span><span class="co">##  [91] GenomicAlignments_1.47.0    fs_1.6.7                   </span></span>
-<span><span class="co">##  [93] XML_3.99-0.22               grid_4.6.0                 </span></span>
-<span><span class="co">##  [95] tidyr_1.3.2                 echotabix_1.0.1            </span></span>
-<span><span class="co">##  [97] echodata_1.0.0              AnnotationDbi_1.73.0       </span></span>
-<span><span class="co">##  [99] basilisk_1.23.0             restfulr_0.0.16            </span></span>
-<span><span class="co">## [101] cli_3.6.5                   textshaping_1.0.5          </span></span>
-<span><span class="co">## [103] S4Arrays_1.11.1             dplyr_1.2.0                </span></span>
-<span><span class="co">## [105] R.methodsS3_1.8.2           sass_0.4.10                </span></span>
-<span><span class="co">## [107] digest_0.6.39               BiocGenerics_0.57.0        </span></span>
-<span><span class="co">## [109] SparseArray_1.11.11         rjson_0.2.23               </span></span>
-<span><span class="co">## [111] htmlwidgets_1.6.4           memoise_2.0.1              </span></span>
-<span><span class="co">## [113] htmltools_0.5.9             pkgdown_2.2.0              </span></span>
-<span><span class="co">## [115] R.oo_1.27.1                 lifecycle_1.0.5            </span></span>
-<span><span class="co">## [117] httr_1.4.8                  aws.signature_0.6.0        </span></span>
-<span><span class="co">## [119] bit64_4.6.0-1</span></span></code></pre>
+<details><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; R Under development (unstable) (2026-03-12 r89607)</span></span>
+<span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu</span></span>
+<span><span class="co">#&gt; Running under: Ubuntu 24.04.4 LTS</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Matrix products: default</span></span>
+<span><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
+<span><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; locale:</span></span>
+<span><span class="co">#&gt;  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              </span></span>
+<span><span class="co">#&gt;  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    </span></span>
+<span><span class="co">#&gt;  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   </span></span>
+<span><span class="co">#&gt;  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 </span></span>
+<span><span class="co">#&gt;  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span></span>
+<span><span class="co">#&gt; [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; time zone: UTC</span></span>
+<span><span class="co">#&gt; tzcode source: system (glibc)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; attached base packages:</span></span>
+<span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; other attached packages:</span></span>
+<span><span class="co">#&gt; [1] snpStats_1.61.0  Matrix_1.7-4     survival_3.8-6   echoLD_1.0.0    </span></span>
+<span><span class="co">#&gt; [5] BiocStyle_2.39.0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span><span class="co">#&gt;   [1] DBI_1.3.0                   piggyback_0.1.5            </span></span>
+<span><span class="co">#&gt;   [3] bitops_1.0-9                rlang_1.1.7                </span></span>
+<span><span class="co">#&gt;   [5] magrittr_2.0.4              otel_0.2.0                 </span></span>
+<span><span class="co">#&gt;   [7] matrixStats_1.5.0           compiler_4.6.0             </span></span>
+<span><span class="co">#&gt;   [9] RSQLite_2.4.6               GenomicFeatures_1.63.1     </span></span>
+<span><span class="co">#&gt;  [11] dir.expiry_1.19.0           png_0.1-8                  </span></span>
+<span><span class="co">#&gt;  [13] systemfonts_1.3.2           vctrs_0.7.1                </span></span>
+<span><span class="co">#&gt;  [15] stringr_1.6.0               pkgconfig_2.0.3            </span></span>
+<span><span class="co">#&gt;  [17] crayon_1.5.3                fastmap_1.2.0              </span></span>
+<span><span class="co">#&gt;  [19] XVector_0.51.0              Rsamtools_2.27.1           </span></span>
+<span><span class="co">#&gt;  [21] rmarkdown_2.30              tzdb_0.5.0                 </span></span>
+<span><span class="co">#&gt;  [23] UCSC.utils_1.7.1            ragg_1.5.1                 </span></span>
+<span><span class="co">#&gt;  [25] purrr_1.2.1                 bit_4.6.0                  </span></span>
+<span><span class="co">#&gt;  [27] xfun_0.56                   aws.s3_0.3.22              </span></span>
+<span><span class="co">#&gt;  [29] cachem_1.1.0                downloadR_1.0.0            </span></span>
+<span><span class="co">#&gt;  [31] cigarillo_1.1.0             GenomeInfoDb_1.47.2        </span></span>
+<span><span class="co">#&gt;  [33] jsonlite_2.0.0              blob_1.3.0                 </span></span>
+<span><span class="co">#&gt;  [35] DelayedArray_0.37.0         BiocParallel_1.45.0        </span></span>
+<span><span class="co">#&gt;  [37] echoconda_1.0.0             parallel_4.6.0             </span></span>
+<span><span class="co">#&gt;  [39] R6_2.6.1                    VariantAnnotation_1.57.1   </span></span>
+<span><span class="co">#&gt;  [41] bslib_0.10.0                stringi_1.8.7              </span></span>
+<span><span class="co">#&gt;  [43] reticulate_1.45.0           rtracklayer_1.71.3         </span></span>
+<span><span class="co">#&gt;  [45] GenomicRanges_1.63.1        jquerylib_0.1.4            </span></span>
+<span><span class="co">#&gt;  [47] Rcpp_1.1.1                  Seqinfo_1.1.0              </span></span>
+<span><span class="co">#&gt;  [49] bookdown_0.46               SummarizedExperiment_1.41.1</span></span>
+<span><span class="co">#&gt;  [51] knitr_1.51                  base64enc_0.1-6            </span></span>
+<span><span class="co">#&gt;  [53] R.utils_2.13.0              readr_2.2.0                </span></span>
+<span><span class="co">#&gt;  [55] IRanges_2.45.0              splines_4.6.0              </span></span>
+<span><span class="co">#&gt;  [57] tidyselect_1.2.1            abind_1.4-8                </span></span>
+<span><span class="co">#&gt;  [59] yaml_2.3.12                 codetools_0.2-20           </span></span>
+<span><span class="co">#&gt;  [61] curl_7.0.0                  lattice_0.22-9             </span></span>
+<span><span class="co">#&gt;  [63] tibble_3.3.1                Biobase_2.71.0             </span></span>
+<span><span class="co">#&gt;  [65] basilisk.utils_1.23.1       KEGGREST_1.51.1            </span></span>
+<span><span class="co">#&gt;  [67] evaluate_1.0.5              desc_1.4.3                 </span></span>
+<span><span class="co">#&gt;  [69] zip_2.3.3                   xml2_1.5.2                 </span></span>
+<span><span class="co">#&gt;  [71] Biostrings_2.79.5           pillar_1.11.1              </span></span>
+<span><span class="co">#&gt;  [73] BiocManager_1.30.27         filelock_1.0.3             </span></span>
+<span><span class="co">#&gt;  [75] MatrixGenerics_1.23.0       DT_0.34.0                  </span></span>
+<span><span class="co">#&gt;  [77] stats4_4.6.0                generics_0.1.4             </span></span>
+<span><span class="co">#&gt;  [79] RCurl_1.98-1.17             S4Vectors_0.49.0           </span></span>
+<span><span class="co">#&gt;  [81] hms_1.1.4                   glue_1.8.0                 </span></span>
+<span><span class="co">#&gt;  [83] tools_4.6.0                 BiocIO_1.21.0              </span></span>
+<span><span class="co">#&gt;  [85] data.table_1.18.2.1         openxlsx_4.2.8.1           </span></span>
+<span><span class="co">#&gt;  [87] BSgenome_1.79.1             GenomicAlignments_1.47.0   </span></span>
+<span><span class="co">#&gt;  [89] fs_1.6.7                    XML_3.99-0.22              </span></span>
+<span><span class="co">#&gt;  [91] grid_4.6.0                  tidyr_1.3.2                </span></span>
+<span><span class="co">#&gt;  [93] echotabix_1.0.1             echodata_1.0.0             </span></span>
+<span><span class="co">#&gt;  [95] AnnotationDbi_1.73.0        basilisk_1.23.0            </span></span>
+<span><span class="co">#&gt;  [97] restfulr_0.0.16             cli_3.6.5                  </span></span>
+<span><span class="co">#&gt;  [99] textshaping_1.0.5           S4Arrays_1.11.1            </span></span>
+<span><span class="co">#&gt; [101] dplyr_1.2.0                 R.methodsS3_1.8.2          </span></span>
+<span><span class="co">#&gt; [103] sass_0.4.10                 digest_0.6.39              </span></span>
+<span><span class="co">#&gt; [105] BiocGenerics_0.57.0         SparseArray_1.11.11        </span></span>
+<span><span class="co">#&gt; [107] rjson_0.2.23                htmlwidgets_1.6.4          </span></span>
+<span><span class="co">#&gt; [109] memoise_2.0.1               htmltools_0.5.9            </span></span>
+<span><span class="co">#&gt; [111] pkgdown_2.2.0               R.oo_1.27.1                </span></span>
+<span><span class="co">#&gt; [113] lifecycle_1.0.5             httr_1.4.8                 </span></span>
+<span><span class="co">#&gt; [115] aws.signature_0.6.0         bit64_4.6.0-1</span></span></code></pre></div>
 </details><p><br></p>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-      </div>
-
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p></p>
-<p>Developed by Brian Schilder, Jack Humphrey, Towfique Raj.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p>Developed by Brian Schilder, Jack Humphrey, Towfique Raj.</p>
 </div>
 
-<div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+<div class="pkgdown-footer-right">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
-
 
 
 
