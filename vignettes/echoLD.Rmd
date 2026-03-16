@@ -1,88 +1,160 @@
 ---
-title: "Getting Started" 
-author: "<h4>Authors: <i>`r auths <- eval(parse(text = gsub('person','c',read.dcf('../DESCRIPTION', fields = 'Authors@R'))));paste(auths[names(auths)=='given'],auths[names(auths)=='family'], collapse = ', ')`</i></h4>" 
+title: "Getting Started"
+author: "<h4>Authors: <i>`r auths <- eval(parse(text = gsub('person','c',read.dcf('../DESCRIPTION', fields = 'Authors@R'))));paste(auths[names(auths)=='given'],auths[names(auths)=='family'], collapse = ', ')`</i></h4>"
 date: "<h4>Vignette updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
 output:
   BiocStyle::html_document
 vignette: >
-    %\VignetteIndexEntry{templateR} 
+    %\VignetteIndexEntry{echoLD}
     %\usepackage[utf8]{inputenc}
     %\VignetteEngine{knitr::rmarkdown}
 ---
 
-```{r setup}
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction
+
+`echoLD` is an [echoverse](https://github.com/RajLabMSSM/echoverse) module
+for retrieving and processing linkage disequilibrium (LD) matrices.
+It supports multiple LD reference panels:
+
+- **1000 Genomes** Phase 1 and Phase 3 (computed on-the-fly from VCF)
+- **UK Biobank** (pre-computed LD matrices)
+- **Custom VCF** files supplied by the user
+- **Pre-computed LD matrices** in `.rds`, `.csv`, or `.tsv` format
+
+# Setup
+
+```{r load}
 library(echoLD)
+```
 
-query_dat <- echodata::BST1[seq(1,100),]
+The examples below use bundled data from the `echodata` package:
+a subset of summary statistics from the *BST1* locus and a
+pre-computed LD matrix.
+
+```{r example_data}
+query_dat <- echodata::BST1[seq_len(50), ]
 locus_dir <- file.path(tempdir(), echodata::locus_dir)
+LD_matrix <- echodata::BST1_LD_matrix
 ```
 
+# Pre-computed LD matrix
 
-# 1000 Genomes: Phase 1 or 3
+If you already have an LD matrix on disk, `get_LD_matrix()` reads it in
+and aligns it with your summary statistics.
 
-```{r, eval=FALSE}
-LD_1kgp3 <- echoLD::get_LD(locus_dir = locus_dir,
-                           query_dat = query_dat,
-                           LD_reference = "1KGphase3") # 1KGphase1
+```{r get_LD_matrix}
+## Write the bundled LD matrix to a temp CSV to demonstrate the workflow
+LD_path <- tempfile(fileext = ".csv")
+utils::write.csv(LD_matrix, file = LD_path, row.names = TRUE)
+
+LD_list <- echoLD::get_LD_matrix(
+    locus_dir = locus_dir,
+    query_dat = query_dat,
+    LD_reference = LD_path
+)
 ```
-
-## Plot
-
-```{r, eval=FALSE}
-echoLD::plot_LD(LD_matrix = LD_1kgp3$LD,
-                query_dat = LD_1kgp3$DT,
-                span = 20)
-```
-
-
-# UK Biobank
-
-*WARNING*: Takes substantially longer than 1000 Genomes methods.
-
-```{r, eval=FALSE}
-LD_ukb <- echoLD::get_LD(locus_dir = locus_dir,
-                         query_dat = query_dat,
-                         LD_reference = "UKB", 
-                         download_method = "axel", 
-                         nThread = 10)
-```
-
-## Plot
-
-```{r, eval=FALSE}
-echoLD::plot_LD(LD_matrix = LD_ukb$LD, 
-                query_dat = LD_ukb$DT,
-                span = 20)
-```
-
 
 # Custom VCF
 
-```{r, eval=FALSE}
-LD_reference <- system.file("extdata","BST1.1KGphase3.vcf.bgz",
+You can compute LD on-the-fly from any VCF file.
+The `echodata` package ships a small 1000 Genomes Phase 3 VCF
+for the BST1 locus.
+
+```{r get_LD_vcf, eval = requireNamespace("VariantAnnotation", quietly = TRUE) && requireNamespace("snpStats", quietly = TRUE)}
+LD_reference <- system.file("extdata", "BST1.1KGphase3.vcf.bgz",
                             package = "echodata")
-samples <- c("HG00097","HG00099","HG00100","HG00101","HG00102")
-LD_custom <- echoLD::get_LD(locus_dir = locus_dir,
-                            query_dat = query_dat, 
-                            LD_reference = LD_reference)
+LD_vcf <- echoLD::get_LD_vcf(
+    locus_dir = locus_dir,
+    query_dat = query_dat,
+    LD_reference = LD_reference
+)
 ```
 
-## Plot
+# 1000 Genomes (remote)
 
-```{r, eval=FALSE}
-echoLD::plot_LD(LD_matrix = LD_custom$LD, 
-                query_dat = LD_custom$DT,
-                span = 20)
+Querying the full 1000 Genomes VCF requires downloading chromosome-level
+VCF files from a remote server. This requires an internet connection
+and can take several minutes.
+
+```{r get_LD_1kg, eval = FALSE}
+LD_1kgp3 <- echoLD::get_LD(
+    locus_dir = locus_dir,
+    query_dat = query_dat,
+    LD_reference = "1KGphase3"
+)
 ```
 
-# Session Info 
+# UK Biobank (remote)
 
-<details> 
+Pre-computed LD from a British European-descent subset of UK Biobank.
+**Note:** This takes substantially longer than the 1000 Genomes methods.
+
+```{r get_LD_ukb, eval = FALSE}
+LD_ukb <- echoLD::get_LD(
+    locus_dir = locus_dir,
+    query_dat = query_dat,
+    LD_reference = "UKB",
+    download_method = "axel",
+    nThread = 10
+)
+```
+
+# Filtering LD
+
+Use `filter_LD()` to remove SNPs below a minimum r2 threshold.
+
+```{r filter_LD}
+LD_list_full <- list(LD = LD_matrix, DT = echodata::BST1)
+LD_list_filt <- echoLD::filter_LD(LD_list = LD_list_full, min_r2 = 0.2)
+dim(LD_list_filt$LD)
+```
+
+# Sparse matrix utilities
+
+`echoLD` provides helpers for working with sparse LD matrices,
+which reduce file size substantially.
+
+```{r sparse}
+## Convert a dense matrix to sparse format
+sparse_mat <- echoLD::to_sparse(X = LD_matrix)
+class(sparse_mat)
+
+## Save to disk
+sparse_path <- echoLD::saveSparse(LD_matrix = LD_matrix)
+file.info(sparse_path)$size
+
+## Read it back
+sparse_read <- echoLD::readSparse(LD_path = sparse_path)
+dim(sparse_read)
+```
+
+# Plotting LD
+
+Plot a heatmap of pairwise LD around the lead SNP.
+
+```{r plot_LD, fig.width = 7, fig.height = 6}
+echoLD::plot_LD(
+    LD_matrix = LD_matrix,
+    query_dat = echodata::BST1,
+    span = 10
+)
+```
+
+# Session Info
+
+<details>
 
 ```{r Session Info}
 utils::sessionInfo()
 ```
 
-</details>  
+</details>
 
 <br>
