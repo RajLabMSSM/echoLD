@@ -96,3 +96,8 @@ reference:
     desc: Minor allele frequency retrieval.
     contents:
       - get_MAF_UKB
+
+  - title: Bundled data
+    contents:
+      - popDat_1KGphase1
+      - popDat_1KGphase3
